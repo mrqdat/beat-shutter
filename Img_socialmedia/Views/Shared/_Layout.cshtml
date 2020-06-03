@@ -10,12 +10,9 @@
     <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
   
     <style>
-
-       
-
-        body {
-            margin: 0;
-            padding: 0;
+        .container-fluid{
+            margin:0;
+            padding:0;
         }
 
         .nav-item {
@@ -42,7 +39,7 @@
 <body>
     <header>
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white mb-3" style="margin-bottom:0px;">
             <div class="container" style="margin:0;padding:0;max-width:1390px;">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                     <div class="main-nav-bar-logo" title="All stock photo">
@@ -91,7 +88,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

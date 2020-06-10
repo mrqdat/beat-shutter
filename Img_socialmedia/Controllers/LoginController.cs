@@ -8,8 +8,10 @@ namespace Img_socialmedia.Controllers
 {
     public class LoginController : Controller
     {
+         
         public IActionResult Index()
         {
+            ViewBag.showtopbar = false;
             return View();
         }
 

@@ -8,8 +8,12 @@ namespace Img_socialmedia.Models
 {
     public class UserViewModel
     {
+        [Key]
         public string id { get; set; }
+        [Required]
         public string username { get; set; }
+        [Required]
+        public string password { get; set; }
         public string name { get; set; }
         public string frist_name { get; set; }
         public string last_name { get; set; }
@@ -18,7 +22,6 @@ namespace Img_socialmedia.Models
         public string instagram_username { get; set; }
         public string twitter_username { get; set; }
         public int total_like { get; set; }
-        public int total_photos { get; set; }
         public int total_collections { get; set; }
         public int follower_count { get; set; }
         public int following_count { get; set; }

@@ -7,87 +7,108 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="shortcut icon" type="image/x-icon" href="~/shutter.ico" />
-    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
-  
+    <link href="~/css/main.css" rel="stylesheet" />
+    <link href="~/css/util.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/Linearicons-Free-v1.0.0/icon-font.min.css" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animsition/css/animsition.min.css" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css" />
+    <!--===============================================================================================-->
     <style>
-        .container-fluid{
-            margin:0;
-            padding:0;
-        }
 
-        .nav-item {
-            margin-right: 20px;
-            cursor:pointer;
-        }
-
-        .dropdown {
-            background: none;
-            border: none;
-            top: 3px;
-            position: relative;
-        }
-
-        .line {
-            background-color: dimgray;
-            width: 1px;
-            height: 38px;
-            float: left;
-            border: 1px solid silver;
-        }
     </style>
 </head>
 <body>
-    <header>
+    @if (ViewBag.showtopbar ?? true)
+    {
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white mb-3" style="margin-bottom:0px;">
+                <div class="container" style="margin:0;padding:0;max-width:1390px;">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                        <div class="main-nav-bar-logo" title="All stock photo">
+                            <img src="~/shutter.svg" alt="Logo" width="32" style="margin-right:10px;" />Shutter
+                        </div>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse d-sm-inline-flex flex-sm-row-reverse  ">
+                        <ul class="navbar-nav flex-grow-1 justify-content-end">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Explore</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Upload" data-target="#upload-modal" data-toggle="modal">Upload</a>
+                            </li>
+                            <li class="nav-item">
+                                <span class="line"></span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Log in</a>
+                            </li>
+                            @*<li class="nav-item">
+                                    <div class="dropdown">
+                                        <button type="button" class="dropdown" data-toggle="dropdown" style="background: none;border: none; top: 3px;position: relative;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ">
+                                                <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+                                            </svg>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#" asp-controller="Home" asp-action="about">About</a>
+                                            <a class="dropdown-item" href="#" asp-controller="Home" asp-action="bkog">Blog</a>
+                                            <a class="dropdown-item" href="#" asp-controller="Home" asp-action="community">Community</a>
+                                            <a class="dropdown-item" href="#" asp-controller="Home" asp-action="Lisense">Lisense</a>                                        <a class="dropdown-item" href="#" asp-controller="Home" asp-action="help">Help</a>
+                                        </div>
+                                    </div>
+                                </li>*@
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white mb-3" style="margin-bottom:0px;">
-            <div class="container" style="margin:0;padding:0;max-width:1390px;">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <div class="main-nav-bar-logo" title="All stock photo">
-                        <img src="~/shutter.svg" alt="Logo" width="32" style="margin-right:10px;" />Shutter
-                    </div>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse d-sm-inline-flex flex-sm-row-reverse  ">
-                    <ul class="navbar-nav flex-grow-1 justify-content-end">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Explore</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Upload">Upload</a>
-                        </li>
-                        <li class="nav-item">
-                            <span class="line"></span>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Log in</a>
-                        </li>
-                        @*<li class="nav-item">
-                            <div class="dropdown">
-                                <button type="button" class="dropdown" data-toggle="dropdown" style="background: none;border: none; top: 3px;position: relative;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ">
-                                        <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+                            <li class="nav-item" style="margin:7px 25px 14px 0;" hidden=hidden>
+                                <a class="notification" asp-area="" asp-controller="Notification" asp-action="Index">
+                                    <svg class="bi bi-bell-fill" width="1em" height="1em" viewBox="0 0 16 16" color="black" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
                                     </svg>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#" asp-controller="Home" asp-action="about">About</a>
-                                    <a class="dropdown-item" href="#" asp-controller="Home" asp-action="bkog">Blog</a>
-                                    <a class="dropdown-item" href="#" asp-controller="Home" asp-action="community">Community</a>
-                                    <a class="dropdown-item" href="#" asp-controller="Home" asp-action="Lisense">Lisense</a>
-                                    <a class="dropdown-item" href="#" asp-controller="Home" asp-action="help">Help</a>
-                                </div>
+                                </a>
+                            </li>
+                            <li class="nav-item" style="margin-right:0px;">
+                                <a class="btn btn-success text-white" asp-area="" asp-controller="User" asp-action="Index">Join free</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    }
+    @*create modal*@
+    <div class="upload-modal" id="upoad-modal">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                </div>
+
+                <div class="modal-footer">
+                    <div class="modal-footer-control">
+                        <div class=""></div>
+                        <div class="">
+                            <div class="control">
+                                <button class="btn-outline-dark">Cancel</button>
+                                <button class="btn-outline-dark" asp-controller="Post" asp-action="post">Publish your photos</button>
                             </div>
-                        </li>*@
-                        <li class="nav-item" style="margin-right:0px;">
-                            <a class="btn btn-success text-white" asp-area="" asp-controller="Login" asp-action="Index">Join free</a>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </div>
+
     <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -99,10 +120,29 @@
                 &copy; 2020 - Img_socialmedia - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
         </footer>*@
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    
+    <script src="~/lib/jquery/dist/jquery.min.js">
+    </script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="~/js/site.js" asp-append-version="true">
+    </script>
+
     @RenderSection("Scripts", required: false)
+    <section>
+
+        <script type="text/javascript">
+            var prevScrollpos = window.pageYOffset;
+            window.onscroll = function () {
+            var currentScrollPos = window.pageYOffset;
+            if (prevScrollpos > currentScrollPos) {
+            document.getElementByClassName("navbar").style.top = "0";
+            } else {
+            document.getElementByClassName("navbar").style.top = "-50px";
+            }
+            prevScrollpos = currentScrollPos;
+            }
+        </script>
+    </section>
+
 </body>
 </html>

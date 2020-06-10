@@ -29,7 +29,7 @@
     @if (ViewBag.showtopbar ?? true)
     {
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white mb-3" style="margin-bottom:0px;">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white mb-3" >
                 <div class="container" style="margin:0;padding:0;max-width:1390px;">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                         <div class="main-nav-bar-logo" title="All stock photo">
@@ -78,7 +78,7 @@
                                 </a>
                             </li>
                             <li class="nav-item" style="margin-right:0px;">
-                                <a class="btn btn-success text-white" asp-area="" asp-controller="User" asp-action="Index">Join free</a>
+                                <a class="btn btn-success text-white" asp-area="" asp-controller="SignUp" asp-action="Index">Join free</a>
                             </li>
                         </ul>
                     </div>
@@ -110,7 +110,7 @@
     </div>
 
     <div class="container-fluid">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" style="padding-bottom:0px !important;">
             @RenderBody()
         </main>
     </div>
@@ -128,21 +128,8 @@
     </script>
 
     @RenderSection("Scripts", required: false)
-    <section>
+    
 
-        <script type="text/javascript">
-            var prevScrollpos = window.pageYOffset;
-            window.onscroll = function () {
-            var currentScrollPos = window.pageYOffset;
-            if (prevScrollpos > currentScrollPos) {
-            document.getElementByClassName("navbar").style.top = "0";
-            } else {
-            document.getElementByClassName("navbar").style.top = "-50px";
-            }
-            prevScrollpos = currentScrollPos;
-            }
-        </script>
-    </section>
 
 </body>
 </html>

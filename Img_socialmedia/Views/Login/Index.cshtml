@@ -2,8 +2,6 @@
     ViewData["Title"] = "Login";
 }
 
-
-<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
 <div class="limiter" style="height:auto;">
     <div class="container-login100">
         <div class="wrap-login100">
@@ -50,7 +48,7 @@
 
                 <div class="text-center p-t-46 p-b-20">
                     <span class="txt2">
-                        or sign up using
+                        or <a  asp-controller="SignUp" asp-action="Index">sign up</a> using
                     </span>
                 </div>
 
@@ -59,7 +57,7 @@
                         <i class="fa fa-facebook-f" aria-hidden="true"></i>
                     </a>
 
-                    <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
+                    <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5" style="background-color:#f75555">
                         <i class="fa fa-google" aria-hidden="true"></i>
                     </a>
                 </div>

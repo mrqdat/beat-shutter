@@ -4,9 +4,9 @@
 @{
     ViewData["Title"] = "Shutter ";
 }
-    <link rel="stylesheet" href="~/css/site.css" />
-   
-    <style>
+<link rel="stylesheet" href="~/css/site.css" />
+
+<style>
     body {
         margin: 0;
         padding: 0;
@@ -29,8 +29,8 @@
             margin-bottom: 20px;
         }
 
-    .content:hover{
-        opacity:0.7;
+    .content:hover {
+        opacity: 0.7;
     }
 
     .background {
@@ -39,52 +39,34 @@
         position: relative;
     }
 
-    .daily-background img {
+    .bgimage {
+        margin-top:100px;
         width: 100%;
-        height: 100%;
-        overflow: hidden;
-        object-fit: cover;
-        z-index: -1;
+        height: 500px;
+        background: url('images/girl.jpg'), linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));         
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-attachment: fixed;
     }
-
-    .bg_content_centered {
-        display: flex;
-        
-        top: 70px;
-        z-index: 3;
-        max-width: 650px;
-        width: 100%;
-        position: absolute;
+    col-lg-12 col-md-12 col-sm-12 col-xs-12{
+        top:100px;
     }
-
-    .bg_title {
+    .bgimage h1 {
         color: white;
+        text-shadow: 2px 2px #333;
     }
 
-        .search-bar {
-            justify-content: center;
-            align-content: center;
-            display: inline-block;
-            z-index: 1;
+        .bg_search_container{
+            max-width: 750px;
+            height: 70px;
         }
 
-    .search-bar_container {
-        display: inline-block;
-        width: 100%;
-        border: none;
-        border-radius: 5px;
-        vertical-align: middle;
-    }
-
-    .search_action {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-    .content{
-        position:relative;
-    }
-
+        .search-bar{
+            display:flex;
+            height 70px;
+            max-width:750px;
+        }
 
     .btn_love {
         transition: .5s ease;
@@ -98,27 +80,32 @@
     }
 </style>
 
-<header class="background">
-    <div class="daily-background">
-        <img src="~/images/pagoda.jpg" />
-    </div>
-    <div></div>
-    <section class="bg_content_centered">
-        <h1 class="bg_title">All the best free stock photos and images<br />Shared by talented creators</h1>
-        <div class="bg_search_container">
-            <form class="search-bar" method="get" autocomplete="off" action="">
-                <button class="search_action" title="search">
-                    <i class="svg-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
-                    </i>
-                </button>
-                <div class="search-bar_container">
-                    <input class="search" autofocus placeholder="Search for free photos" type="search" required="required" />
+
+<section class="bgimage">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-lg-center">
+                <h1>All the best free stock photos and images<br />Shared by talented creators</h1>
+                <div class="bg_search_container">
+                    <form class="search-bar" method="get" autocomplete="off" action="">
+                        <button class="search_action align-content-lg-center" title="search">
+                            <i class="svg-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
+                            </i>
+                        </button>
+                        <div class="search-bar_container align-content-center">
+                            <input class="search" autofocus placeholder="Search for free photos" type="search" required="required" />
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
-    </section>
-</header>
+    </div>
+</section>
+
+
+
+
 
 <section id="photos">
     <div class="content">

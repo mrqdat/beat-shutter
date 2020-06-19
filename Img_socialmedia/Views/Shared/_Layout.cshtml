@@ -21,7 +21,7 @@
     @if (ViewBag.showtopbar ?? true)
     {
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white mb-3">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white mb-3" style="margin-bottom:0;">
                 <div class="container" style="margin:0;padding:0;max-width:1390px;">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="margin-left:0;">
                         <div class="main-nav-bar-logo" title="All stock photo">
@@ -61,21 +61,8 @@
                                 <li class="nav-item"hidden>
                                     <a class="nav-link " asp-area="" asp-controller="Login" asp-action="Index" >Log in</a>
                                 </li>
-                                @*<li class="nav-item">
-            <div class="dropdown">
-                <button type="button" class="dropdown" data-toggle="dropdown" style="background: none;border: none; top: 3px;position: relative;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ">
-                        <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
-                    </svg>
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#" asp-controller="Home" asp-action="about">About</a>
-                    <a class="dropdown-item" href="#" asp-controller="Home" asp-action="bkog">Blog</a>
-                    <a class="dropdown-item" href="#" asp-controller="Home" asp-action="community">Community</a>
-                    <a class="dropdown-item" href="#" asp-controller="Home" asp-action="Lisense">Lisense</a>                                        <a class="dropdown-item" href="#" asp-controller="Home" asp-action="help">Help</a>
-                </div>
-            </div>
-        </li>*@
+                                
+
 
                                 <li class="nav-item" style="margin:7px 25px 7px 0;" >
                                     <a class="notification" asp-area="" asp-controller="Notification" asp-action="Index">
@@ -104,28 +91,7 @@
             </nav>
         </header>
     }
-    @*create modal*@
-    <div class="upload-modal" id="upoad-modal">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-                <div class="modal-body">
-
-                </div>
-
-                <div class="modal-footer">
-                    <div class="modal-footer-control">
-                        <div class=""></div>
-                        <div class="">
-                            <div class="control">
-                                <button class="btn-outline-dark">Cancel</button>
-                                <button class="btn-outline-dark" asp-controller="Post" asp-action="post">Publish your photos</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <div class="container-fluid">
         <main role="main" class="pb-3" style="padding-bottom:0px !important;">
@@ -147,7 +113,7 @@
 
     @RenderSection("Scripts", required: false)
 
-
+    
 
 </body>
 </html>

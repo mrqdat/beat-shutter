@@ -30,6 +30,7 @@ a {
 }
 
 .nav-search {
+    height:35px;
     display: flex;
     margin-top: 1px;
     background-color: rgb(241, 241, 241);
@@ -38,6 +39,7 @@ a {
 
 .navsearchTerm {
     outline: none;
+    font-size:13px;
     background-color: rgb(241, 241, 241);
     width: 100%;
     padding: 5px;
@@ -58,8 +60,8 @@ a {
     border-radius: 20px 0 0 20px;
 }
 
-    .navsearchButton i {      
-        color:rgb(117, 117, 117);
+    .navsearchButton i {
+        color: rgb(204, 203, 203);
     }
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -211,8 +213,8 @@ body {
     }
 
     #nav-item{
-        width:350px;
-        margin-right:50px;
+        width:300px;
+        margin-right:40px;
     }
    
     .line{
@@ -232,14 +234,22 @@ body {
  
 }
 
+
+@media (max-width: 430px) {
+
+    #nav-item {
+        width: 250px;
+        margin-right: 20px;
+    }
+
+}
+ 
 .content:hover {
     opacity: 0.7;
 }
 
 .bgimage {
-    margin-top:52px;
-    width:100%;
-    height: 600px;
+    height: 540px;
     background: url('../images/girl.jpg'), linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
     background-repeat: no-repeat;
     background-position: center;
@@ -254,7 +264,7 @@ col-lg-12 col-md-12 col-sm-12 col-xs-12 {
 
 .bgimage h1 {
     color: white;
-    padding-top:150px;
+    padding-top:120px;
     margin-bottom:20px;
 }
 
@@ -309,3 +319,29 @@ col-lg-12 col-md-12 col-sm-12 col-xs-12 {
     -ms-transform: translate(-50%, -50%);
     text-align: center;
 }
+
+
+/*vertical menu*/
+.vertical_menu{  
+    z-index:111;
+    margin-top:53px;   
+}
+
+div.scrollmenu {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+    div.scrollmenu a {
+        display: inline-block;
+        color: rgb(117, 117, 117);
+        text-align: center;
+        padding: 15px 24px 10px 20px;
+        text-decoration: none;
+    }
+
+        div.scrollmenu a:hover {
+             border-color: rgb(135, 135, 135);
+        }
+
+

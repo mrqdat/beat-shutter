@@ -1,0 +1,137 @@
+﻿
+@{
+    ViewData["Title"] = "profile";
+}
+
+@{ 
+    ViewBag.showsearchbar = false;
+
+}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-4 pb-5">
+            <!-- Account Sidebar-->
+            <div class="author-card pb-3">
+                <div class="author-card-cover" style="background-image: url(https://demo.createx.studio/createx-html/img/widgets/author/cover.jpg);"> </div>
+                <div class="author-card-profile">
+                    <div class="author-card-avatar">
+                        
+                        <img src="~/images/man.png" alt="Daniel Adams">
+                    </div>
+                    <div class="author-card-details">
+                        <h5 class="author-card-name text-lg">Daniel Adams</h5><span class="author-card-position">Joined February 06, 2017</span>
+                    </div>
+                </div>
+            </div>
+            <div class="wizard">
+                <nav class="list-group list-group-flush">
+
+                    <a class="list-group-item active" href="#">
+                        <i class="fe-icon-user text-muted"></i>Profile Settings
+                    </a>
+                    <a class="list-group-item" href="#">
+                        <i class="fe-icon-map-pin text-muted"></i>Change Email
+                    </a>
+
+                    <a class="list-group-item" href="#">
+                        <i class="fe-icon-map-pin text-muted"></i>Change Password
+                    </a>
+
+
+                    <a class="list-group-item" href="#">
+                        <i class="fe-icon-map-pin text-muted"></i>Close account
+                    </a>
+                </nav>
+            </div>
+        </div>
+        <!-- Profile Settings-->
+        <div class="col-lg-8 pb-5">
+            <form class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-fn">First Name</label>
+                        <input class="form-control" type="text" id="account-fn" value="Daniel" required="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-ln">Last Name</label>
+                        <input class="form-control" type="text" id="account-ln" value="Adams" required="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-email">E-mail Address</label>
+                        <input class="form-control" type="email" id="account-email" value="daniel.adams@example.com" disabled="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-phone">Phone Number</label>
+                        <input class="form-control" type="text" id="account-phone" value="+7 (805) 348 95 72" required="">
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <hr class="mt-2 mb-3">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+                        <div class="custom-control custom-checkbox d-block">
+                            <input class="custom-control-input" type="checkbox" id="subscribe_me" checked="">
+                            <label class="custom-control-label" for="subscribe_me">Subscribe me to Newsletter</label>
+                        </div>
+                        <button class="btn btn-style-1 btn-primary" type="button" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<footer class="page-footer font-small  k pt-4">
+
+    <!-- Footer Elements -->
+    <div class="container">
+
+        <!-- Social buttons -->
+        <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+                <a class="btn-floating btn-fb mx-1">
+                    <i class="fa fa-facebook-f"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-tw mx-1">
+                    <i class="fa fa-twitter"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-gplus mx-1">
+                    <i class="fa fa-google-plus"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-li mx-1">
+                    <i class="fa fa-linkedin"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-dribbble mx-1">
+                    <i class="fa fa-dribbble"> </i>
+                </a>
+            </li>
+        </ul>
+        <!-- Social buttons -->
+
+    </div>
+    <!-- Footer Elements -->
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">
+        © 2020 Copyright:
+        <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->

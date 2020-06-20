@@ -143,6 +143,7 @@
 }
 
 .modal-layo {
+    position:relative;
     display: flex;
     flex-direction: row;
 }
@@ -157,8 +158,13 @@
     left: 0;
     top: 0;
     margin-right: 16px;
-    max-width: 1024px;
+    min-width: 876px;
     flex: 1
+}
+
+.modal-photo-layout{
+    padding-left:20px;
+    padding-right:20px;
 }
 
 .modal-comment {
@@ -167,4 +173,41 @@
     top: 0;
     width: auto;
     margin-top: 30px;
+    min-width:280px;
+    max-width:368px;
+}
+
+.modal-header-textn{
+    padding-top:5px;
+    margin-left:7px;
+}
+
+.btn-hw{
+    height: 32px !important;
+    width: 42px !important;
+}
+
+.user-comment{
+    display:flex;
+    margin-right:20px;
+    margin-bottom:8px;
+}
+
+.user-layout{
+    margin-right:8px;
+}
+
+.comment-content {
+    background: #f2f3f8;
+    max-width: 100%;
+    position: relative;
+    word-break: break-word;
+    box-sizing: border-box;
+    display: inline-block;
+    border-radius: 18px;
+    margin: 0;
+    padding: 4px 5px 5px 5px;
+}
+.c-content{
+    padding:6px;
 }

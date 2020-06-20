@@ -157,7 +157,7 @@ body {
 
 #photos {
     /* Prevent vertical gaps */
-    line-height: 0;
+    //line-height: 0;
     -webkit-column-count: 3;
     -webkit-column-gap: 20px;
     -moz-column-count: 3;
@@ -166,13 +166,6 @@ body {
     column-gap: 20px;
     margin:20px;
 }
-
-    #photos img {
-        /* Just in case there are inline attributes */
-        width: 100% !important;
-        height: auto !important;     
-        padding-top:20px;
-    }
 
 @media (max-width: 1200px) {
     #photos {

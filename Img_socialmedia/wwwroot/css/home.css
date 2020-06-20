@@ -1,4 +1,15 @@
-﻿.photo-content {
+﻿.grid-layout{
+    margin-top:32px;
+    margin-right:22px;
+    margin-left:22px;
+}
+.grid-photos{
+    display:grid;
+    grid-template-columns: auto auto auto;
+    grid-gap:10px;
+}
+
+.photo-content {
     width: 100% !important;
     height: auto !important;
 }
@@ -18,6 +29,10 @@
 
 .img-content {
     position: relative;
+}
+
+.img-rel{
+    position:relative;
 }
 
 .img-content:not(:hover) .i-animation{
@@ -123,3 +138,33 @@
     color: lightgray;
 }
 
+.modal-maxw{
+    max-width:100% !important;
+}
+
+.modal-layo {
+    display: flex;
+    flex-direction: row;
+}
+
+.modal-padd{
+    padding-left:54px !important;
+    padding-right:70px !important;
+}
+
+.modal-photo {
+    position: relative;
+    left: 0;
+    top: 0;
+    margin-right: 16px;
+    max-width: 1024px;
+    flex: 1
+}
+
+.modal-comment {
+    position: relative;
+    right: 0;
+    top: 0;
+    width: auto;
+    margin-top: 30px;
+}

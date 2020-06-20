@@ -167,11 +167,11 @@ body {
     margin:20px;
 }
 
-    #photos img {
+    .photo-content {
         /* Just in case there are inline attributes */
-        width: 100% !important;
-        height: auto !important;     
-        padding-top:20px;
+        width: 100%;
+        height: auto ;   
+       
     }
 
 @media (max-width: 1200px) {

@@ -17,5 +17,20 @@ namespace Img_socialmedia.Controllers
         {
             return View();
         }
+
+        public IActionResult password()
+        {
+            return View();
+        }
+
+        public IActionResult email()
+        {
+            return View();
+        }
+
+        public IActionResult close()
+        {
+            return View();
+        }
     }
 }

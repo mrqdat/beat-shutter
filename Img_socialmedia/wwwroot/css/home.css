@@ -1,12 +1,82 @@
-﻿.grid-layout{
-    margin-top:32px;
-    margin-right:22px;
-    margin-left:22px;
+﻿
+@media (max-width: 767.98px) {
+    .img-icon {
+        display: flex;
+        height: 40px;
+        margin-top: 10px;
+    }
+
+    .img-hover-background {
+        display: none;
+    }
+
+    .img-button-top {
+        right: 42px;
+        z-index:3;
+    }
+
+    .img-button-bottom {
+        position: absolute;
+        width: 100%;
+        left: 0px;
+    }
+
+    .owner-name {
+        color: black !important;
+        font-size: 16px !important;
+    }
+
+    .modal-comment {
+        margin-top: 10px;
+        margin-right: 7px;
+        margin-left: 10px;
+    }
 }
-.grid-photos{
-    display:grid;
-    grid-template-columns: auto auto auto;
-    grid-gap:10px;
+
+@media (min-width: 768px){
+    .grid-photos {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 10px;
+    }
+
+    .img-content:not(:hover) .i-animation {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .img-button-top {
+        top: 12px;
+    }
+
+    .img-button-bottom{
+        bottom:12px;
+    }
+    .modal-layo {
+        display: flex;
+    }
+    .modal-photo {
+        min-width: 876px;
+        margin-right: 16px;
+    }
+
+    .modal-comment {
+        margin-top: 30px;
+        min-width: 280px;
+        max-width: 368px;
+    }
+
+    .modal-photo-layout {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+}
+
+.grid-layout {
+    margin-top: 32px;
+    margin-right: 22px;
+    margin-left: 22px;
 }
 
 .photo-content {
@@ -35,11 +105,6 @@
     position:relative;
 }
 
-.img-content:not(:hover) .i-animation{
-    visibility: hidden;
-    opacity: 0;
-}
-
 .img-hover-background {
     position: absolute;
     top: 0;
@@ -53,7 +118,6 @@
 .img-button-display {
     padding-right: 20px;
     padding-left: 20px;
-    width: 100%;
     display: flex;
     pointer-events: auto;
     height: 32px;
@@ -62,15 +126,12 @@
 .img-button-top {
     position: absolute;
     width: 100%;
-    top: 12px;
 }
 
 .img-button-bottom {
     position: absolute;
     width: 100%;
-    bottom: 12px;
 }
-
 
 .i-animation {
     transition: opacity .1s ease-in-out,visibility .1s ease-in-out;
@@ -128,9 +189,9 @@
     text-decoration: none;
     text-align: center;
     margin-left: 10px;
-    color: white;
     padding-top: 5px;
-    font-size:16px;
+    color: white;
+    font-size: 16px;
 }
 
 .owner-name:hover {
@@ -144,7 +205,6 @@
 
 .modal-layo {
     position:relative;
-    display: flex;
     flex-direction: row;
 }
 
@@ -157,24 +217,12 @@
     position: relative;
     left: 0;
     top: 0;
-    margin-right: 16px;
-    min-width: 876px;
     flex: 1
 }
-
-.modal-photo-layout{
-    padding-left:20px;
-    padding-right:20px;
-}
-
 .modal-comment {
     position: relative;
     right: 0;
     top: 0;
-    width: auto;
-    margin-top: 30px;
-    min-width:280px;
-    max-width:368px;
 }
 
 .modal-header-textn{
@@ -208,6 +256,7 @@
     margin: 0;
     padding: 4px 5px 5px 5px;
 }
+
 .c-content{
     padding:6px;
 }

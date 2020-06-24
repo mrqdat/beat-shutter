@@ -1,17 +1,4 @@
 ﻿
-.search-bar_container {
-    display: inline-block;
-    width: 100%;
-    border: none;
-    border-radius: 5px;
-    vertical-align: middle;
-}
-
-.search_action {
-    display: inline-block;
-    vertical-align: middle;
-}
-
 #background-img-hover {
     position: absolute;
     top: 0;

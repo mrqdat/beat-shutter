@@ -56,7 +56,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" id="upload_modal" data-target="#upload-modal" data-toggle="modal" style="cursor:pointer;">Upload</a>
+                                <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
                             </li>
 
                             <li class="nav-item" hidden>
@@ -71,7 +71,7 @@
 
                             <li class="nav-item" style="margin:7px 25px 7px 0;">
                                 <a class="notification" style="cursor:pointer;">
-                                    <svg class="bi bi-bell-fill" width="34" height="24" viewBox="0 0 16 16"  xmlns="http://www.w3.org/2000/svg">
+                                    <svg class="bi bi-bell-fill" width="34" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
                                     </svg>
                                 </a>
@@ -93,16 +93,38 @@
                             </li>
                         </ul>
                     </div>
-
-
-
                 </div>
-
             </nav>
-        </header>
- 
-    }
 
+            @*
+                upload modal
+            *@
+
+            <div id="myModal" class="modal">
+
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div class="file-upload">
+                        <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
+                        <div class="image-upload-wrap">
+                            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                            <div class="drag-text">
+                                <h3>Drag and drop a file or select add Image</h3>
+                            </div>
+                        </div>
+                        <div class="file-upload-content">
+                            <img class="file-upload-image" src="#" alt="your image" />
+                            <div class="image-title-wrap">
+                                <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </header>
+    }
 
     <div class="container-fluid">
         <main role="main" class="pb-3" style="padding-bottom:0px !important;">
@@ -124,6 +146,60 @@
 
     @RenderSection("Scripts", required: false)
 
-    
+    <script>
+ 
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("upload_modal");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.image-upload-wrap').hide();
+
+                    $('.file-upload-image').attr('src', e.target.result);
+                    $('.file-upload-content').show();
+
+                    $('.image-title').html(input.files[0].name);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+
+            } else {
+                removeUpload();
+            }
+        }
+
+        function removeUpload() {
+            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+            $('.file-upload-content').hide();
+            $('.image-upload-wrap').show();
+        }
+        $('.image-upload-wrap').bind('dragover', function () {
+            $('.image-upload-wrap').addClass('image-dropping');
+        });
+        $('.image-upload-wrap').bind('dragleave', function () {
+            $('.image-upload-wrap').removeClass('image-dropping');
+        });
+
+    </script>
 </body>
 </html>

@@ -58,7 +58,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
                             </li>
-
+                            
                             <li class="nav-item" hidden>
                                 <span class="line"></span>
                             </li>
@@ -67,7 +67,9 @@
                                 <a class="nav-link " asp-area="" asp-controller="Login" asp-action="Index">Log in</a>
                             </li>
 
-
+                            <li class="nav-item" style="margin-right:0px;" hidden>
+                                <a class="btn btn-success text-white" asp-area="" asp-controller="SignUp" asp-action="Index">Join free</a>
+                            </li>
 
                             <li class="nav-item" style="margin:7px 25px 7px 0;">
                                 <a class="notification" style="cursor:pointer;">
@@ -88,9 +90,7 @@
                                 </div>
                             </li>
 
-                            <li class="nav-item" style="margin-right:0px;" hidden>
-                                <a class="btn btn-success text-white" asp-area="" asp-controller="SignUp" asp-action="Index">Join free</a>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -132,11 +132,7 @@
         </main>
     </div>
 
-    @*<footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2020 - Img_socialmedia - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>*@
+  
     <script src="~/lib/jquery/dist/jquery.min.js">
     </script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js">

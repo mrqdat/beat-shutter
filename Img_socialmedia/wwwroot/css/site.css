@@ -88,7 +88,7 @@ a {
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    max-width: 80%;
 }
 
 
@@ -109,7 +109,7 @@ a {
 
 .file-upload {
     background-color: #ffffff;
-    width: 600px;
+    width: 100%;
     margin: 0 auto;
     padding: 20px;
 }
@@ -249,11 +249,6 @@ button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
 }
-
-
-
-
-
 
 
 /* Sticky footer styles
@@ -524,6 +519,7 @@ div.scrollmenu {
  
 
 .author-card {
+    padding-top:20px;
     position: relative;
     padding-bottom: 48px;
     background-color: #fff;
@@ -541,19 +537,19 @@ div.scrollmenu {
         z-index: 5;
     }
 
-        .author-card .author-card-profile .author-card-avatar, .author-card .author-card-profile .author-card-details {
+        .author-card .author-card-profile , .author-card .author-card-profile .author-card-details {
             display: table-cell;
             vertical-align: middle;
         }
 
-        .author-card .author-card-profile .author-card-avatar {
+        .author-card .author-card-profile   {
             width: 155px;
             border-radius: 50%;
             box-shadow: 0 8px 20px 0 rgba(0, 0, 0, .15);
             overflow: hidden;
         }
 
-            .author-card .author-card-profile .author-card-avatar > img {
+            .author-card .author-card-profile   > img {
                 display: block;
                 width: 100%;
             }
@@ -710,22 +706,11 @@ a.list-group-item, .list-group-item-action {
 /*user profile=============================================================*/
 .user_container {
     max-width: 1248px;
-    padding: 0 !important;
+    padding: 0 ;
     background-color: #fff;
-    margin-top:80px;
+    margin-top:85px;
 }
 
-
-
-@media (max-width:800px) {
-   
-
-        header i {
-            right: -90%;
-        }
-}
-
- 
 
 .left {
     display: flex;
@@ -738,15 +723,6 @@ a.list-group-item, .list-group-item-action {
     width: 200px;
     height: 200px;
     border-radius: 100px;
-}
-
-
-
-@media (max-width:990px) {
-    .mt-5{
-        padding: 20px 10px 0px 10px;
-
-    }
 }
 
 .name {

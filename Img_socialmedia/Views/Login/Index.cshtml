@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Security.Claims;
+@{
     ViewData["Title"] = "Login";
 }
 
@@ -6,11 +7,9 @@
     <div class="container-login100">
         <div class="wrap-login100">
             <form class="login100-form validate-form">
-                <span class="login100-form-title p-b-43">
+                <span class="login100-form-title p-b-43 p-t-20">
                     Login to continue
                 </span>
-
-
                 <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                     <input class="input100" type="text" name="email">
                     <span class="focus-input100"></span>
@@ -57,8 +56,8 @@
                         <i class="fa fa-facebook-f" aria-hidden="true"></i>
                     </a>
 
-                    <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5" style="background-color:#f75555">
-                        <i class="fa fa-google" aria-hidden="true"></i>
+                    <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5" >
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
                     </a>
                 </div>
             </form>
@@ -69,73 +68,6 @@
     </div>
 </div>
 <section>
-    <script>
-        (function ($) {
-            "use strict";
 
-            $('.input100').each(function () {
-                $(this).on('blur', function () {
-                    if ($(this).val().trim() != "") {
-                        $(this).addClass('has-val');
-                    }
-                    else {
-                        $(this).removeClass('has-val');
-                    }
-                })
-            })
-
-            var input = $('.validate-input .input100');
-
-            $('.validate-form').on('submit', function () {
-                var check = true;
-
-                for (var i = 0; i < input.length; i++) {
-                    if (validate(input[i]) = = false) {
-                        showValidate(input[i]);
-                        check = false;
-                    }
-                }
-                return check;
-            });
-
-            $('.validate-form .input100').each(function () {
-                $(this).focus(function () {
-                    hideValidate(this);
-                });
-            });
-            @*function validate(input) {
-                if ($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
-                    if ($(input).val().trim().match(^[a-z][a-z0-9_\.]{5,32}+@[a-zA-Z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$)) == null) {
-                        return false;
-                    }
-                }
-                else {
-                    if ($(input).val().trim() = = '') {
-                        return false;
-                    }
-                }
-            }*@
-            function showValidate(input) {
-                var thisAlert = $(input).parent();
-                $(thisAlert).addClass('alert-validate');
-            }
-            function hideValidate(input) {
-                var thisAlert = $(input).parent();
-                $(thisAlert).removeClass('alert-validate');
-            }
-        })(jQuery);
-    </script>
 </section>
-<script src="~/vendor/animsition/js/animsition.js"></script>
-<script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
 
-<script src="~/vendor/bootstrap/js/popper.js"></script>
-
-<!--<script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>-->
-<!--===============================================================================================-->
-<script src="~/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-<script src="~/vendor/daterangepicker/moment.min.js"></script>
-<script src="~/vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-<script src="~/vendor/countdowntime/countdowntime.js"></script>

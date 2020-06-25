@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Principal;
 
 namespace Img_socialmedia.Models
 {
@@ -13,20 +14,19 @@ namespace Img_socialmedia.Models
         [Required]
         public string username { get; set; }
         [Required]
+        [DataType(DataType.Password)]
         public string password { get; set; }
+        [DataType(DataType.Password), Compare(nameof(password))]
+        public string confirm_password { get; set; }
         public string name { get; set; }
-        public string frist_name { get; set; }
+        public string first_name { get; set; }
         public string last_name { get; set; }
+        public string email { get; set; }
+        public string phone { get; set; }
+        public string token_id { get; set; }
+        public string profile_img { get; set; }
         public string bio { get; set; }
-        public string location { get; set; }
-        public string instagram_username { get; set; }
-        public string twitter_username { get; set; }
-        public int total_like { get; set; }
-        public int total_collections { get; set; }
-        public int follower_count { get; set; }
-        public int following_count { get; set; }
-        public int downloads { get; set; }
         [DataType(DataType.Date)]
-        public DateTime update_at { get; set; }
+        public DateTime create_at { get; set; }
     }
 }

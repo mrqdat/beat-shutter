@@ -515,10 +515,10 @@
     Tesst
 </button>
 
-<!-- Modal -->
+<!-- Photo Modal -->
 <div class="modal modal-padd" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-maxw">
-        <div class="modal-content">
+        <div class="modal-content mod3Xp">
             <div class="modal-layo">
                 <div class="modal-photo">
                     <div class="modal-header">
@@ -555,14 +555,20 @@
                             </button>
                         </div>
                     </div>
-                    <div class="modal-body">
-                        <div class="modal-photo-layout">
+                    <div class="modal-body mod5xp">
+                        <div class="">
                             <img class="photo-content" src="/images/pagoda.jpg" alt="">
+                        </div>
+                        <div>
+                            <div class="modal-btn-footer" ">
+                                <button class="btn btn-outline-dark">Share</button>
+                                <button class="btn btn-outline-dark" data-toggle="modal" data-target="#infoPhoto" type="button">Info</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-comment">
-                    <div class="modal-comment">
+                    <div class="user-comment-layout">
                         <div class="user-comment">
                             <div class="user-layout">
                                 <span>
@@ -620,6 +626,14 @@
                                 </span>
                             </span>
                         </div>
+                    </div>
+                    <div>
+                        <form class="form-comment">
+                            <div class="comment-box">
+                                <textarea class="comment-content">Abc</textarea>
+                            </div>
+                            <button class="btn-send">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -1078,6 +1092,27 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+<!-- Detail Info Photo Modal -->
+<div class="modal fade" id="infoPhoto" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
     </div>
 </div>
 <div style="padding-bottom:400px;"></div>

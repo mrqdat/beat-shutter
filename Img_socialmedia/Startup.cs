@@ -40,6 +40,7 @@ namespace Img_socialmedia
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseRouting();

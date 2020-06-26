@@ -261,14 +261,14 @@ iframe {
   min-height: 100vh;
   display: block;
   background-color: #f7f7f7;
-  padding: 30px 55px 55px 55px;
+  padding: 30px 55px 30px 55px;
 }
 
 .login100-form-title {
 	width: 100%;
 	display: block;
 	font-family: Montserrat-Regular;
-	font-size: 18px;
+	font-size: 38px;
 	color: #333333;
 	line-height: 1.2;
 	text-align: center;
@@ -531,7 +531,7 @@ input.input100 {
   .login100-form {
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 70px;
+    padding-top: 50px;
   }
 }
 
@@ -619,4 +619,7 @@ input.input100 {
 
 .login100-form-social-item:hover {
 	color: white;
+}
+.fb-login-button{
+	display:contents;
 }

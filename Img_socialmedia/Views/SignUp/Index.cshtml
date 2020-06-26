@@ -8,23 +8,17 @@
 <div class="limiter" style="height:auto;">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form class="login100-form validate-form" asp-controller="SignUp"  asp-action="signup">
-                
+            <form class="login100-form validate-form" asp-controller="SignUp" asp-action="signup">
+
                 <span class="login100-form-title p-b-20">
-                    <stromg><bold>JOIN SHUTTER</bold></stromg>
+                    <strong>JOIN SHUTTER</strong>
                 </span>
-                <span class="login100-form-title p-b-10" >
+                <span class="login100-form-title p-b-20" style="font-size:18px;">
                     Already have an acount? <a asp-controller="Login" asp-action="Index" style="text-decoration: underline;">Login</a>
                 </span>
 
-                <div class="login100-form-social flex-c-m">
-                    <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-                        <i class="fa fa-facebook-f" aria-hidden="true"></i>
-                    </a>
-
-                    <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5"  >
-                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                    </a>
+                <div class="login100-form-social flex-c-m">                    
+                    <div class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
                 </div>
 
                 <div class="text-center p-t-20 p-b-20">
@@ -33,13 +27,13 @@
                     </span>
                 </div>
 
-                <div class="wrap-input100 validate-input" >
+                <div class="wrap-input100 validate-input">
                     <input asp-for="first_name" class="input100" type="text" name="firstname" required>
                     <span class="focus-input100"></span>
                     <span asp-validation-for="first_name" class="label-input100">First name</span>
                 </div>
 
-                <div class="wrap-input100 validate-input" >
+                <div class="wrap-input100 validate-input">
                     <input asp-for="last_name" class="input100" type="text" name="lastname">
                     <span class="focus-input100"></span>
                     <span asp-validation-for="last_name" class="label-input100">Last Name</span>
@@ -69,19 +63,19 @@
                     <span asp-validation-for="confirm_password" class="label-input100">Confirm password</span>
                 </div>
                 @*<div class="flex-sb-m w-full p-t-3 p-b-32">
-            <div class="contact100-form-checkbox">
-                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                <label class="label-checkbox100" for="ckb1">
-                    Remember me
-                </label>
-            </div>
+                        <div class="contact100-form-checkbox">
+                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                            <label class="label-checkbox100" for="ckb1">
+                                Remember me
+                            </label>
+                        </div>
 
-            <div>
-                <a href="#" class="txt1">
-                    Forgot Password?
-                </a>
-            </div>
-        </div>*@
+                        <div>
+                            <a href="#" class="txt1">
+                                Forgot Password?
+                            </a>
+                        </div>
+                    </div>*@
 
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn" type="submit" value="User">
@@ -90,13 +84,42 @@
                 </div>
             </form>
 
-                <div class="login100-more" style=" background-image: url('images/41971882_696072084101621_3714114531614523392_o.jpg');">
+            <div class="login100-more" style=" background-image: url('images/41971882_696072084101621_3714114531614523392_o.jpg');">
             </div>
         </div>
     </div>
 </div>
-<section>
+@section Scripts
+{
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=1153748928321536&autoLogAppEvents=1" nonce="UgOll85X"></script>
+
     <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1153748928321536',
+                cookie: true,
+                xfbml: true,
+                version: 'v7.0'
+            });
+
+            FB.AppEvents.logPageView();
+
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+
+            //function checkLoginState() {
+            //    FB.getLoginStatus(function (response) {
+            //        $('#authstatus').html("<code>" + JSON.stringify(response, null, 2) + "</code>");
+            //    });
+            //}
         (function ($) {
             "use strict";
 
@@ -153,5 +176,5 @@
             //}
         });
     </script>
-</section>
+}
 

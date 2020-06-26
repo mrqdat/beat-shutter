@@ -8,8 +8,16 @@
         <div class="wrap-login100">
             <form class="login100-form validate-form">
                 <span class="login100-form-title p-b-43 p-t-20">
-                    Login to continue
+                    <strong>Login</strong>
                 </span>
+                <div class="login100-form-social flex-c-m">
+                    <div class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
+                </div>
+                <div class="text-center p-t-46 p-b-20">
+                    <span class="txt2">
+                        or
+                    </span>
+                </div>
                 <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                     <input class="input100" type="text" name="email">
                     <span class="focus-input100"></span>
@@ -40,25 +48,27 @@
 
 
                 <div class="container-login100-form-btn">
-                    <button class="login100-form-btn"  asp-controller="Login" asp-action="Login">
+                    <button class="login100-form-btn" asp-controller="Login" asp-action="Login">
                         Login
                     </button>
                 </div>
 
-                <div class="text-center p-t-46 p-b-20">
-                    <span class="txt2">
-                        or <a  asp-controller="SignUp" asp-action="Index">sign up</a> using
-                    </span>
-                </div>
+
 
                 <div class="login100-form-social flex-c-m">
-                    <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-                        <i class="fa fa-facebook-f" aria-hidden="true"></i>
-                    </a>
 
-                    <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5" >
-                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                    </a>
+                    @*<fb:login-button class="login100-form-social-item flex-c-m bg2 m-r-5" scope="public_profile,email"
+                             onlogin="checkLoginState();">
+                <i class="fa fa-facebook-f" aria-hidden="true"></i>
+            </fb:login-button*@
+
+                </div>
+
+
+                <div class="text-center p-t-46 p-b-20">
+                    <span class="txt2">
+                        Don't have an account? <a asp-controller="SignUp" asp-action="Index"><italic>Join</italic></a>
+                    </span>
                 </div>
             </form>
 
@@ -67,7 +77,37 @@
         </div>
     </div>
 </div>
-<section>
 
-</section>
+@section Scripts
+{
+    @*<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=1153748928321536&autoLogAppEvents=1" nonce="UgOll85X"></script>*@
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1153748928321536',
+                cookie: true,
+                xfbml: true,
+                version: 'v7.0'
+            });
+
+            FB.AppEvents.logPageView();
+
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+
+            //function checkLoginState() {
+            //    FB.getLoginStatus(function (response) {
+            //        $('#authstatus').html("<code>" + JSON.stringify(response, null, 2) + "</code>");
+            //    });
+            //}
+    </script>
+}
 

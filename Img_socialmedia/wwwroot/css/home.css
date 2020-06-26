@@ -305,3 +305,33 @@
 .c-content{
     padding:6px;
 }
+
+#infoPhoto {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1051;
+    overflow: hidden;
+    outline: 0;
+    display:none;
+}
+
+.bgiPhoto {
+    background-color: rgba(0,0,0,.6);
+    cursor: zoom-out;
+}
+
+.iPL30r{
+    padding:16px;
+}
+
+.iPhotoVi{
+    margin-left:16px;
+}
+
+.iPa230x{
+    display:flex;
+    flex-direction:column;
+}

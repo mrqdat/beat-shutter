@@ -15,7 +15,7 @@
 
                 <div id="profile">
                     <div class="dashes"></div>
-                    <label>Click to browse or drag an image here</label>
+                    <label id="lb_img">Click to browse or drag an image here</label>
 
                     <input type="file" id="mediaFile" />
                 </div>
@@ -102,7 +102,7 @@
     <div class="container">
 
         <!-- Social buttons -->
-        <ul class="list-unstyled list-inline text-center">
+        @*<ul class="list-unstyled list-inline text-center">
             <li class="list-inline-item">
                 <a class="btn-floating btn-fb mx-1">
                     <i class="fa fa-facebook-f"> </i>
@@ -113,72 +113,76 @@
                     <i class="fa fa-twitter"> </i>
                 </a>
             </li>
-            
 
-        </ul>
+
+        </ul>*@
         <!-- Social buttons -->
 
     </div>
- 
+
 
 </footer>
-<!-- Footer -->
+ 
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#profile').addClass('dragging').removeClass('dragging');
+        });
 
-<script type="text/javascript">
-    $(function () {
-        $('#profile').addClass('dragging').removeClass('dragging');
-    });
+        $('#profile').on('dragover', function () {
+            $('#profile').addClass('dragging')
+        }).on('dragleave', function () {
+            $('#profile').removeClass('dragging')
+        }).on('drop', function (e) {
+            $('#profile').removeClass('dragging hasImage');
 
-    $('#profile').on('dragover', function () {
-        $('#profile').addClass('dragging')
-    }).on('dragleave', function () {
-        $('#profile').removeClass('dragging')
-    }).on('drop', function (e) {
-        $('#profile').removeClass('dragging hasImage');
+            if (e.originalEvent) {
+                var file = e.originalEvent.dataTransfer.files[0];
+                
+                console.log(file);
+                var reader = new FileReader();
 
-        if (e.originalEvent) {
-            var file = e.originalEvent.dataTransfer.files[0];
-            console.log(file);
-            var reader = new FileReader();
+                //attach event handlers here...
 
-            //attach event handlers here...
-
-            reader.readAsDataURL(file);
-            reader.onload = function (e) {
-                console.log(reader.result);
-                $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+                reader.readAsDataURL(file);
+                reader.onload = function (e) {
+                    console.log(reader.result);
+                    $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+                    $("#lb_img").remove();
+                }
             }
-        }
-    });
+        });
 
-    $('#profile').on('click', function (e) {
-        console.log('clicked')
-        $('#mediaFile').click();
-    });
+        $('#profile').on('click', function (e) {
+            console.log('clicked')
+            $('#mediaFile').click();
+        });
 
-    window.addEventListener("dragover", function (e) {
-        e = e || event;
-        e.preventDefault();
-    }, false);
+        window.addEventListener("dragover", function (e) {
+            e = e || event;
+            e.preventDefault();
+        }, false);
 
-    window.addEventListener("drop", function (e) {
-        e = e || event;
-        e.preventDefault();
-    }, false);
+        window.addEventListener("drop", function (e) {
+            e = e || event;
+            e.preventDefault();
+        }, false);
 
-    $('#mediaFile').change(function (e) {
+        $('#mediaFile').change(function (e) {
 
-        var input = e.target;
-        if (input.files && input.files[0]) {
-            var file = input.files[0];
+            var input = e.target;
+            if (input.files && input.files[0]) {
+                var file = input.files[0];
 
-            var reader = new FileReader();
+                var reader = new FileReader();
 
-            reader.readAsDataURL(file);
-            reader.onload = function (e) {
-                console.log(reader.result);
-                $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+                reader.readAsDataURL(file);
+                reader.onload = function (e) {
+                    console.log(reader.result);
+                    $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+                    
+                }
             }
-        }
-    });
-</script>
+        });
+    </script>
+}

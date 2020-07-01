@@ -16,7 +16,7 @@ namespace Img_socialmedia.Models
         public string aperture { get; set; }
         public string shutter_speed { get; set; }
         public string focal_length { get; set; }
-        public int  ISO { get; set; }
+        public int ISO { get; set; }
         public int width { get; set; }
         public int height { get; set; }
         public string location { get; set; }

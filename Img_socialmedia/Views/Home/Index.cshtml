@@ -5,20 +5,27 @@
     ViewData["Title"] = "Shutter | Free images and photos for every one ";
 }
 
-<div class="vertical_menu">
-    <div class="scrollmenu">
-        <a href="#home">Current events</a>
-        <a href="#news">COVID-19</a>
-        <a href="#contact">Nature</a>
-        <a href="#support">Travel</a>
-        <a href="#friends">Friends</a>
-        <a href="#partners">Health and Wellness</a>
-        <a href="#work">Technology</a>
-        <a href="#blog">architeture</a>
-        <a href="#tools">Art and Culture</a>
-        <a href="#tools">History</a>
+    <div class="vertical_menu">
+        @*<div class="menu col-2">
+            <a href="#tools">Editorial</a>
+            <a href="#tools">Following</a>
+        </div>*@
+        <div class="scrollmenu ">
+            <a href="#home" class="active">Current events</a>
+            <a href="#news">COVID-19</a>
+            <a href="#contact">Nature</a>
+            <a href="#support">Travel</a>
+            <a href="#friends">Friends</a>
+            <a href="#partners">Health and Wellness</a>
+            <a href="#work">Technology</a>
+            <a href="#blog">Architeture</a>
+            <a href="#friends">Friends</a>
+            <a href="#friends">Car</a>
+        </div>
+        @*<div class="viewall col-1">
+            <a href="#tools">View all</a>
+        </div>*@
     </div>
-</div>
 
 <div class="bgimage">
     <div class="container-fluid">
@@ -485,5 +492,27 @@
         </figure>
     </div>
 </div>
-</div>
-<div style="padding-bottom:200px;"></div>
+<button onclick="topFunction()" id="btn_ontop" title="Go to top">
+    <i class="fa fa-2x fa-angle-up" style="color: #747474;"></i>
+</button>
+<div class="loader"></div>
+
+
+    <script>
+        //Get the button
+        var ontop = document.getElementById("btn_ontop");
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                ontop.style.display = "block";
+            } else {
+                ontop.style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>

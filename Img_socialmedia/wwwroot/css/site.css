@@ -251,6 +251,32 @@ button.accept-policy {
 }
 
 
+
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -302,9 +328,10 @@ body {
     display: none;
 }
 
-.notification {
-    color:dimgray;
+ 
 
+.bi{
+    color:rgba(0,0,0,.5);
 }
 .notification:hover{
     color:black;
@@ -488,8 +515,10 @@ col-lg-12 col-md-12 col-sm-12 col-xs-12 {
 
 /*vertical menu*/
 .vertical_menu{  
+    display:flex;
     z-index:111;
-    margin-top:53px;   
+    margin-top:53px;  
+    
 }
 
 div.scrollmenu {
@@ -501,7 +530,7 @@ div.scrollmenu {
         display: inline-block;
         color: rgb(117, 117, 117);
         text-align: center;
-        padding: 15px 24px 10px 20px;
+        padding: 15px 30px 5px 20px;
         text-decoration: none;
     }
 
@@ -509,7 +538,27 @@ div.scrollmenu {
              border-color: rgb(135, 135, 135);
         }
 
+    div.scrollmenu::-webkit-scrollbar {
+        height: 1px;
+        width: 100px;
+        background: #fff;
+    }
 
+/*.menu a {
+    display: inline-block;
+    color: rgb(117, 117, 117);
+    text-align: center;
+    padding: 13px 5px 5px 15px;
+    text-decoration: none;
+}
+
+.viewall a {
+    display: inline-block;
+    color: rgb(117, 117, 117);
+    text-align: center;
+    padding: 13px 5px 5px 15px;
+    text-decoration: none;
+}*/
 
 
 /*user page*/
@@ -542,17 +591,17 @@ div.scrollmenu {
             vertical-align: middle;
         }
 
-        .author-card .author-card-profile   {
-            width: 155px;
-            border-radius: 50%;
-            box-shadow: 0 8px 20px 0 rgba(0, 0, 0, .15);
+        .author-card .author-card-profile    {
+            width: 300px;          
             overflow: hidden;
         }
 
-            .author-card .author-card-profile   > img {
-                display: block;
-                width: 100%;
-            }
+    .author-card .author-card-avatar > img {
+        display: block;
+        width: 60%;    
+        margin: 0 auto;
+        position: relative;
+    }
 
         .author-card .author-card-profile .author-card-details {
             padding-top: 20px;
@@ -826,7 +875,7 @@ a.list-group-item, .list-group-item-action {
 
 .follow {
     position: absolute;
-    right: 8%;
+    right: 3%;
     top: 35px;
     font-size: 11pt;
     background-color: #42b1fa;

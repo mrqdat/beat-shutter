@@ -1,4 +1,4 @@
-﻿
+﻿/*Phone*/
 @media (max-width: 767.98px) {
     .img-icon {
         display: flex;
@@ -31,9 +31,13 @@
         margin-right: 7px;
         margin-left: 10px;
     }
-}
 
-@media (min-width: 768px){
+    .modal-layo {
+        flex-direction: column !important
+    }
+}
+/*Table*/
+@media (min-width: 768px) and (max-width:1023.98px){
     .grid-photos {
         display: grid;
         grid-template-columns: auto auto auto;
@@ -53,25 +57,52 @@
         bottom:12px;
     }
     .modal-layo {
-        display: flex;
+       flex-direction:column !important
+    }
+    .modal-comment{
+        margin-top:10px;
+        margin-right:1em;
+        margin-left:1em;
+    }
+}
+@media(min-width:1024px){
+    .grid-photos {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 10px;
+    }
+
+    .img-content:not(:hover) .i-animation {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .img-button-top {
+        top: 12px;
+    }
+
+    .img-button-bottom {
+        bottom: 12px;
     }
     .modal-photo {
-        min-width: 876px;
         margin-right: 16px;
+        min-width:73%;
+        max-width: 1280px;
     }
 
     .modal-comment {
-        margin-top: 30px;
-        min-width: 280px;
-        max-width: 368px;
+        margin-top: 1em;
+        width:25%;
     }
 
     .modal-photo-layout {
         padding-left: 20px;
         padding-right: 20px;
     }
-
 }
+/*Laptop, PC */
+/*END*/
+
 
 .grid-layout {
     margin-top: 32px;
@@ -204,6 +235,7 @@
 }
 
 .modal-layo {
+    display:flex;
     position:relative;
     flex-direction: row;
 }
@@ -217,7 +249,7 @@
     position: relative;
     left: 0;
     top: 0;
-    flex: 1
+    flex: 1;
 }
 
 .modal-btn-footer { 

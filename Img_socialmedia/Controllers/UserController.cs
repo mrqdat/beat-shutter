@@ -32,5 +32,16 @@ namespace Img_socialmedia.Controllers
         {
             return View();
         }
+
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Logout()
+        //{
+        //    await _signInManager.SignOutAsync();
+        //    _logger.LogInformation(4, "User logged out");
+        //    return RedirectToAction("Index", "Home");
+        //}
+
     }
 }

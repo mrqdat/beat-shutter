@@ -20,7 +20,6 @@ namespace Img_socialmedia.Models
         public int width { get; set; }
         public int height { get; set; }
         public string location { get; set; }
-        public int color_code { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime create_at { get; set; }
     }

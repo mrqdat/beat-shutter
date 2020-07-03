@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Img_socialmedia.Data;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Img_socialmedia
 {
@@ -27,6 +28,7 @@ namespace Img_socialmedia
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
             services.AddAuthentication().AddFacebook(facebookOptions =>
             {
                 facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
@@ -36,15 +38,23 @@ namespace Img_socialmedia
 
             services.AddDbContext<Img_socialmediaContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("Img_socialmediaContext")));
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+            
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, mvc_img img_dbContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Img_socialmediaContext img_dbContext)
         {
             img_dbContext.Database.EnsureCreated();
+
+        
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
             }
             else
             {
@@ -60,13 +70,15 @@ namespace Img_socialmedia
 
             app.UseAuthorization();
 
+            app.UseAuthentication();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
- 
 
+                endpoints.MapRazorPages(); 
             });
         }
     }

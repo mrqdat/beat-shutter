@@ -6,6 +6,10 @@
     "mssql1": {
       "type": "mssql.local",
       "connectionId": "Img_socialmediaContext"
+    },
+    "mssql2": {
+      "type": "mssql.local",
+      "connectionId": "dbShutterContextConnection"
     }
   }
 }

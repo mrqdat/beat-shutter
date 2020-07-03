@@ -1,0 +1,162 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+@{
+    ViewBag.showtopbar = false;
+}
+@*<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h4>Create a new account.</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.ConfirmPassword"></label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h4>Use another service to register.</h4>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                            for details on setting up this ASP.NET application to support logging in via external services.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+</div>*@
+
+<div class="limiter" style="height:auto;">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <span class="login100-form-title p-b-20">
+                    <strong>JOIN SHUTTER</strong>
+                </span>
+                <span class="login100-form-title p-b-20" style="font-size:18px;">
+                    Already have an acount? <a asp-controller="Login" asp-action="Index" style="text-decoration: underline;">Login</a>
+                </span>
+
+                <div class="login100-form-social flex-c-m">
+                    <div class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
+                </div>
+
+                <div class="text-center p-t-20 p-b-20">
+                    <span class="txt2">
+                        Or
+                    </span>
+                </div>
+
+                <div class="wrap-input100 validate-input">
+                    <input asp-for="Input.first_name" class="input100 " type="text" name="firstname" required>
+                    <label class="focus-input100"></label>
+                    <span asp-validation-for="Input.first_name" class="label-input100">First name</span>
+                </div>
+
+                <div class="wrap-input100 validate-input">
+                    <input asp-for="Input.last_name" class="input100  " type="text" name="lastname">
+                    <label  class="focus-input100"></label>
+                    <span asp-validation-for="Input.last_name" class="label-input100">Last Name</span>
+                </div>
+
+                <div class="wrap-input100 validate-input " data-validate="Valid email is required: ex@abc.xyz">
+                    <input asp-for="Input.Email" class="input100 " type="text" name="email">
+                    <label asp-for="Input.Email" class="focus-input100"></label>
+                    <span asp-validation-for="Input.Email" class="label-input100">Email</span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Username is required">
+                    <input asp-for="Input.username" class="input100" type="text" name="Username">
+                    <label  class="focus-input100"></label>
+                    <span asp-validation-for="Input.username" class="label-input100">Username</span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <input asp-for="Input.Password" class="input100 " type="password" name="pass">
+                    <label  class="focus-input100"></label>
+                    <span asp-validation-for="Input.Password" class="label-input100">Password</span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Confirm password doesn't match">
+                    <input asp-for="Input.ConfirmPassword" class="input100" type="password" name="confirm_pass">
+                    <label  class="focus-input100"></label>
+                    <span asp-validation-for="Input.ConfirmPassword" class="label-input100">Confirm password</span>
+                </div>
+
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="submit" value="User">
+                        Join
+                    </button>
+                </div>
+            </form>
+
+            <div class="login100-more" style=" background-image: url('images/41971882_696072084101621_3714114531614523392_o.jpg');">
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=1153748928321536&autoLogAppEvents=1" nonce="UgOll85X"></script>
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1153748928321536',
+                cookie: true,
+                xfbml: true,
+                version: 'v7.0'
+            });
+
+            FB.AppEvents.logPageView();
+
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+}
+

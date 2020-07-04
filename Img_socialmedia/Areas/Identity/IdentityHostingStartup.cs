@@ -19,7 +19,12 @@ namespace Img_socialmedia.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("dbShutterContextConnection")));
 
-                services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                services.AddDefaultIdentity<IdentityUser>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                })
                     .AddEntityFrameworkStores<dbShutterContext>();
             });
         }

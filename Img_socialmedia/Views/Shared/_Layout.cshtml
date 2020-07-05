@@ -60,38 +60,42 @@
                                 <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
                             </li>
 
-                            <li class="nav-item" hidden>
-                                <span class="line"></span>
-                            </li>
 
-                            <li class="nav-item" hidden>
-                                <a class="nav-link " asp-area="" asp-controller="Login" asp-action="Index">Log in</a>
-                            </li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item" style="margin:7px 25px 7px 0;">
+                                    <a class="notification" style="cursor:pointer;">
+                                        <svg class="bi bi-bell-fill" width="34" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+                                        </svg>
+                                    </a>
+                                </li>
 
-                            <li class="nav-item" style="margin-right:0px;" hidden>
-                                <a class="btn btn-success text-white" asp-area="" asp-controller="SignUp" asp-action="Index">Join free</a>
-                            </li>
+                                <li class="nav-item avatar">
+                                    <a href="javascript:void(0);" class="btn-user media align-items-center dropdown-toggle" data-toggle="dropdown">
+                                        <img class="mr-2" src="~/images/man.png" width="32" height="32" alt="avatar">
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-info">
+                                        <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Profile</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="EditProfile">Account setting</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Log out</a>
+                                    </div>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item"  >
+                                    <span class="line"></span>
+                                </li>
 
-                            <li class="nav-item" style="margin:7px 25px 7px 0;">
-                                <a class="notification" style="cursor:pointer;">
-                                    <svg class="bi bi-bell-fill" width="34" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
-                                    </svg>
-                                </a>
-                            </li>
+                                <li class="nav-item" >
+                                    <a class="nav-link " asp-area="" asp-controller="Login" asp-action="Index">Log in</a>
+                                </li>
 
-                            <li class="nav-item avatar">
-                                <a href="javascript:void(0);" class="btn-user media align-items-center dropdown-toggle" data-toggle="dropdown">
-                                    <img class="mr-2" src="~/images/man.png" width="32" height="32" alt="avatar">
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right dropdown-info">
-                                    <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Profile</a>
-                                    <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="EditProfile">Account setting</a>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Log out</a>
-                                </div>
-                            </li>
-
-
+                                <li class="nav-item" style="margin-right:0px;"  >
+                                    <a class="btn btn-success text-white" asp-area="" asp-controller="SignUp" asp-action="Index">Join free</a>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>

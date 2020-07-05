@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
+using Img_socialmedia.Areas.Identity.Data;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -47,14 +48,17 @@ namespace Img_socialmedia.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            public string first_name { get; set; }
+            [DataType(DataType.Text)]
+            public string firstname { get; set; }
             [Required]
-            public string last_name { get; set; }
+            [DataType(DataType.Text)]
+            public string lastname { get; set; }
             [Required]
+            [DataType(DataType.Text)]
             public string username { get; set; }
 
             [Required]
-            [EmailAddress]
+            [EmailAddress]  
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -72,8 +76,15 @@ namespace Img_socialmedia.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("/");
+            }
+
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -82,7 +93,7 @@ namespace Img_socialmedia.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email  };
+                var user = new ApplicationUser { UserName = Input.username, Email = Input.Email, firstname = Input.firstname, lastname = Input.lastname  };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

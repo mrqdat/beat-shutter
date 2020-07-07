@@ -36,20 +36,16 @@ namespace Img_socialmedia
             });
 
 
-            services.AddDbContext<dbShutterContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("dbShutterContextConnection")));
+            //services.AddDbContext<dbShutterContext>(options =>
+            //        options.UseSqlServer(Configuration.GetConnectionString("dbShutterContextConnection")));
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
-            
-          
+                     
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, dbShutterContext img_dbContext)
-        {
-            img_dbContext.Database.EnsureCreated();
-
-        
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {       
 
             if (env.IsDevelopment())
             {

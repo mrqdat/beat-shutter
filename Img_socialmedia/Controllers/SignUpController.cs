@@ -10,7 +10,7 @@ namespace Img_socialmedia.Controllers
 {
     public class SignUpController : Controller
     {
-
+        [HttpGet]
         public IActionResult Index()
         {
             ViewBag.showtopbar = false;

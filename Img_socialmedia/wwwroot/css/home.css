@@ -139,8 +139,7 @@
     display: none;
     position: fixed;
     bottom: 20px;
-    right: 30px;
-    z-index: 99;
+    right: 20px;
     border: none;
     outline: none;
     background-color:rgba(207, 207, 207, 0.28);

@@ -21,7 +21,7 @@ namespace Img_socialmedia.Models
         public string password { get; set; }
 
         [DataType(DataType.Password), Compare(nameof(password))]
-        public string confirm_password { get; set; }
+        public string PasswordConfirm { get; set; }
         public string email { get; set; }
         public string name { get; set; }
         public string first_name { get; set; }

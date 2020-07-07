@@ -55,7 +55,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Explore</a>
                             </li>
-
+                            <li class="nav-item">
+                                <a class="nav-link" asp-route="./about" style="cursor:pointer;">About</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
                             </li>
@@ -84,15 +86,15 @@
                             }
                             else
                             {
-                                <li class="nav-item"  >
+                                <li class="nav-item">
                                     <span class="line"></span>
                                 </li>
 
-                                <li class="nav-item" >
+                                <li class="nav-item">
                                     <a class="nav-link " asp-area="" asp-controller="Login" asp-action="Index">Log in</a>
                                 </li>
 
-                                <li class="nav-item" style="margin-right:0px;"  >
+                                <li class="nav-item" style="margin-right:0px;">
                                     <a class="btn btn-success text-white" asp-area="" asp-controller="SignUp" asp-action="Index">Join free</a>
                                 </li>
                             }
@@ -106,27 +108,28 @@
             *@
 
             <div id="myModal" class="modal">
-
-                <div class="modal-content">
-                    <span class="close">&times;</span>
+                <div class="modal-content">                   
                     <div class="file-upload">
-                        <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
                         <div class="image-upload-wrap">
-                            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" multiple />
                             <div class="drag-text">
                                 <h3>Drag and drop a file or select add Image</h3>
                             </div>
-                        </div>
-                        <div class="file-upload-content">
-                            <img class="file-upload-image" src="#" alt="your image" />
-                            <div class="image-title-wrap">
-                                <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                            <div class="file-upload-content">
+                                <img class="file-upload-image" src="#" alt="your image" />
+                                <div class="image-title-wrap">
+                                    <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                </div>
                             </div>
+                        </div>
+                       
+                        <div class="modal-footer" style="padding:0;">
+                            <button class="close" type="button" data-dismiss="modal">Cancel</button>
+                            <button class="file-upload-btn" type="button" asp-controller="Photo" asp-action="" >Publish to Shutter</button>
                         </div>
                     </div>
                 </div>
             </div>
-
 
         </header>
     }
@@ -174,7 +177,6 @@
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
-                    $('.image-upload-wrap').hide();
 
                     $('.file-upload-image').attr('src', e.target.result);
                     $('.file-upload-content').show();
@@ -192,14 +194,13 @@
         function removeUpload() {
             $('.file-upload-input').replaceWith($('.file-upload-input').clone());
             $('.file-upload-content').hide();
-            $('.image-upload-wrap').show();
         }
         $('.image-upload-wrap').bind('dragover', function () {
             $('.image-upload-wrap').addClass('image-dropping');
         });
-        $('.image-upload-wrap').bind('dragleave', function () {
-            $('.image-upload-wrap').removeClass('image-dropping');
-        });
+        //$('.image-upload-wrap').bind('dragleave', function () {
+        //    $('.image-upload-wrap').removeClass('image-dropping');
+        //});
 
 
 

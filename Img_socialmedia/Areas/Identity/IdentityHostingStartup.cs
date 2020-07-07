@@ -17,7 +17,7 @@ namespace Img_socialmedia.Areas.Identity
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<dbShutterContext>(options =>
                     options.UseSqlServer(
-                        context.Configuration.GetConnectionString("dbShutterContextConnection")));
+                        context.Configuration.GetConnectionString("DefaultConnection")));
 
                 services.AddDefaultIdentity<IdentityUser>(options =>
                 {

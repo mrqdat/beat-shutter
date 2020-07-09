@@ -1,4 +1,4 @@
-﻿
+﻿@model Img_socialmedia.Models.UserViewModel
 @{
     ViewData["Title"] = "Email";
 }
@@ -45,22 +45,17 @@
             <form class="row">                 
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="account-email">E-mail Address</label>
-                        <input class="form-control" type="email" id="account-email" value="">
+                        <label asp-for="Email" for="account-email">E-mail Address</label>
+                        <input asp-for="Email" class="form-control" type="email" id="account-email" value="">
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="account-phone"></label>
-                        <input class="form-control" type="text" id="account-phone" value="" required="">
-                    </div>
-                </div>
+               
 
                 <div class="col-12">
                     <hr class="mt-2 mb-3">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
 
-                        <button class="btn btn-style-1 btn-primary" type="button" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
+                        <button class="btn btn-style-1 btn-primary" type="submit" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
                     </div>
                 </div>
             </form>

@@ -31,7 +31,7 @@ namespace Img_socialmedia.Controllers
         // GET: PhotoViewModels/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
+            if (id.ToString() == null)
             {
                 return NotFound();
             }
@@ -122,7 +122,7 @@ namespace Img_socialmedia.Controllers
         // GET: PhotoViewModels/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
+            if (id.ToString() == null)
             {
                 return NotFound();
             }

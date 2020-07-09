@@ -39,11 +39,11 @@ namespace Img_socialmedia.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public ViewResult Privacy()
         {
             return View();
         }
-        public IActionResult Upload()
+        public ViewResult Upload()
         {
             return View();
         }
@@ -51,6 +51,11 @@ namespace Img_socialmedia.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+       public ViewResult About()
+        {
+            return View();
         }
 
        

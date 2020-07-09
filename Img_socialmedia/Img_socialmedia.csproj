@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\css\ding\" />
+    <Folder Include="Data\" />
     <Folder Include="wwwroot\scss\" />
   </ItemGroup>
 

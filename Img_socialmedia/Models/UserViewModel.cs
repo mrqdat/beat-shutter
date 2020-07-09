@@ -1,34 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using System.Security.Principal;
-using Microsoft.AspNetCore.Identity;
 
 namespace Img_socialmedia.Models
 {
-    public class UserViewModel:IdentityUser
+    public class UserViewModel
     {
+        public UserViewModel()
+        {
+            Collection = new HashSet<CollectionViewModel>();
+            Comment = new HashSet<CommentViewModel>();
+            ExternalLogin = new HashSet<ExternalLoginViewModel>();
+            Notification = new HashSet<NotificationViewModel>();
+        }
         [Key]
-        public string id { get; set; }
+        public int Id { get; set; }
         [Required]
-        public string username { get; set; }
+        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
-        public string password { get; set; }
+        public string Password { get; set; }
 
-        [DataType(DataType.Password), Compare(nameof(password))]
+        [DataType(DataType.Password), Compare(nameof(Password))]
         public string PasswordConfirm { get; set; }
-        public string email { get; set; }
-        public string name { get; set; }
-        public string first_name { get; set; }
-        public string last_name { get; set; }
-        public string phone { get; set; }
+
+        public string Lastname { get; set; }
+        public string Firstname { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string TokenId { get; set; }
+        public string ProfileImg { get; set; }
+        public string Bio { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime create_at { get; set; }
+        public DateTime? CreateAt { get; set; }
+        public int? FollowerCount { get; set; }
+        public string Tags { get; set; }
+
+        public virtual ICollection<CollectionViewModel> Collection { get; set; }
+        public virtual ICollection<CommentViewModel> Comment { get; set; }
+        public virtual ICollection<ExternalLoginViewModel> ExternalLogin { get; set; }
+        public virtual ICollection<NotificationViewModel> Notification { get; set; }
     }
 }

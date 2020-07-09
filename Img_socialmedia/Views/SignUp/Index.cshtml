@@ -28,33 +28,33 @@
                 </div>
 
                 <div class="wrap-input100 validate-input">
-                    <input asp-for="first_name" class="input100" type="text" name="firstname" required>
+                    <input asp-for="Firstname" class="input100" type="text" name="firstname" required>
                     <span class="focus-input100"></span>
-                    <span asp-validation-for="first_name" class="label-input100">First name</span>
+                    <span asp-validation-for="Firstname" class="label-input100">First name</span>
                 </div>
 
                 <div class="wrap-input100 validate-input">
-                    <input asp-for="last_name" class="input100" type="text" name="lastname">
+                    <input asp-for="Lastname" class="input100" type="text" name="lastname">
                     <span class="focus-input100"></span>
-                    <span asp-validation-for="last_name" class="label-input100">Last Name</span>
+                    <span asp-validation-for="Lastname" class="label-input100">Last Name</span>
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                    <input asp-for="email" class="input100" type="text" name="email">
+                    <input asp-for="Email" class="input100" type="text" name="email">
                     <span class="focus-input100"></span>
-                    <span asp-validation-for="email" class="label-input100">Email</span>
+                    <span asp-validation-for="Email" class="label-input100">Email</span>
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Username is required">
-                    <input asp-for="username" class="input100" type="text" name="Username">
+                    <input asp-for="Username" class="input100" type="text" name="Username">
                     <span class="focus-input100"></span>
-                    <span asp-validation-for="username" class="label-input100">Username</span>
+                    <span asp-validation-for="Username" class="label-input100">Username</span>
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Password is required">
-                    <input asp-for="password" class="input100" type="password" name="pass">
+                    <input asp-for="Password" class="input100" type="password" name="pass">
                     <span class="focus-input100"></span>
-                    <span asp-validation-for="password" class="label-input100">Password</span>
+                    <span asp-validation-for="Password" class="label-input100">Password</span>
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Confirm password doesn't match">
@@ -80,7 +80,7 @@
                     </div>*@
 
                 <div class="container-login100-form-btn">
-                    <button class="login100-form-btn" type="submit" value="User">
+                    <button class="login100-form-btn" type="submit" value="User" asp-action="Signup" asp-controller="Account">
                         Join
                     </button>
                 </div>

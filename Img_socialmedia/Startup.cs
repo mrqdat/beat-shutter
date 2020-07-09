@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,6 +12,7 @@ using Img_socialmedia.Data;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Img_socialmedia.Models;
 
 namespace Img_socialmedia
 {
@@ -40,6 +41,11 @@ namespace Img_socialmedia
             //        options.UseSqlServer(Configuration.GetConnectionString("dbShutterContextConnection")));
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+
+            services.AddDbContext<db_shutterContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddSession();
                      
         }
 
@@ -61,9 +67,8 @@ namespace Img_socialmedia
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseAuthentication();

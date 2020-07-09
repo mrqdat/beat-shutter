@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] </title> 
+    <title>@ViewData["Title"] </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="shortcut icon" type="image/x-icon" href="~/shutter.ico" />
@@ -16,9 +17,12 @@
     <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css" />
     <link rel="stylesheet" type="text/css" href="~/vendor/animsition/css/animsition.min.css" />
     <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css" />
-
+    <link rel="stylesheet/scss" type="text/css" href="~/scss/site.scss" />
 </head>
 <body>
+
+
+
     @if (ViewBag.showtopbar ?? true)
     {
         <header>
@@ -48,55 +52,77 @@
                         </button>
                     </div>
                     <div class="navbar-collapse d-sm-inline-flex">
-                        
-                        <ul class="navbar-nav flex-grow-1 justify-content-end ">
 
+                        <ul class="navbar-nav flex-grow-1 justify-content-end ">
 
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Explore</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-route="./about" style="cursor:pointer;">About</a>
+                                <a class="nav-link" asp-controller="Home" asp-action="About" style="cursor:pointer;">About</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
-                            </li>
+                            @{ var userid = Context.Session.GetString("userid");
+                                if (@userid != null)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
+                                    </li>
+
+                                    <li class="nav-item" style="margin:7px 25px 7px 0;">
+                                        <a class="notification dropdown-toggle" data-toggle="popover" title="Notification" data-placement="bottom" aria-haspopup="true" style="cursor:pointer;">
+                                            <span hidden>Notification</span>
+                                            <svg class="bi bi-bell-fill" width="34" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" style="color:dimgray">
+                                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+                                            </svg>
+                                        </a>
+                                        <div style="display:none;width:200px" class="alert_list">
+                                            <ul class="unstyled">
+                                                <li data-alert_id="1" class="alert_li">
+                                                    <a href="#" class="alert_message">User1 liked your post</a> <br />
+                                                    <span class="time">At 13:09</span>
+                                                    <div class="clearfix"></div>
+                                                </li>
+                                                <li data-alert_id="2" class="alert_li">
+                                                    <a href="#">User2 is following you</a> <br />
+                                                    <span class="time">1 hour ago</span>
+                                                    <div class="clearfix"></div>
+                                                </li>
+                                                <li data-alert_id="3" class="alert_li">
+                                                    <a href="#">User1 liked your post </a> <br />
+                                                    <span class="time">1 day ago</span>
+                                                    <div class="clearfix"></div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
 
 
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <li class="nav-item" style="margin:7px 25px 7px 0;">
-                                    <a class="notification" style="cursor:pointer;">
-                                        <svg class="bi bi-bell-fill" width="34" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
-                                        </svg>
-                                    </a>
-                                </li>
+                                    <li class="nav-item avatar">
+                                        <a href="javascript:void(0);" class="btn-user media align-items-center dropdown-toggle" data-toggle="dropdown">
+                                            <img class="mr-2" src="~/images/man.png" width="32" height="32" alt="avatar">
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-info">
+                                            <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Profile</a>
+                                            <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="EditProfile">Account setting</a>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Log out</a>
+                                        </div>
+                                    </li>
+                                }
 
-                                <li class="nav-item avatar">
-                                    <a href="javascript:void(0);" class="btn-user media align-items-center dropdown-toggle" data-toggle="dropdown">
-                                        <img class="mr-2" src="~/images/man.png" width="32" height="32" alt="avatar">
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-info">
-                                        <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Profile</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="EditProfile">Account setting</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Log out</a>
-                                    </div>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <span class="line"></span>
-                                </li>
+                                else
+                                {
+                                    <li class="nav-item">
+                                        <span class="line"></span>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link " asp-area="" asp-controller="Login" asp-action="Index">Log in</a>
-                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " asp-area="" asp-controller="Login" asp-action="Index">Log in</a>
+                                    </li>
 
-                                <li class="nav-item" style="margin-right:0px;">
-                                    <a class="btn btn-success text-white" asp-area="" asp-controller="SignUp" asp-action="Index">Join free</a>
-                                </li>
+                                    <li class="nav-item" style="margin-right:0px;">
+                                        <a class="btn btn-success text-white" asp-area="" asp-controller="SignUp" asp-action="Index">Join free</a>
+                                    </li>
+                                }
                             }
                         </ul>
                     </div>
@@ -108,7 +134,7 @@
             *@
 
             <div id="myModal" class="modal">
-                <div class="modal-content">                   
+                <div class="modal-content">
                     <div class="file-upload">
                         <div class="image-upload-wrap">
                             <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" multiple />
@@ -122,11 +148,11 @@
                                 </div>
                             </div>
                         </div>
-                       
-                        <div class="modal-footer" style="padding:0;">
-                            <button class="close" type="button" data-dismiss="modal">Cancel</button>
-                            <button class="file-upload-btn" type="button" asp-controller="Photo" asp-action="" >Publish to Shutter</button>
-                        </div>
+
+                    </div>
+                    <div class="modal-footer" style="padding:0;">
+                        <button class="close" type="button" data-dismiss="modal">Cancel</button>
+                        <button class="file-upload-btn" type="button" asp-controller="Photo" asp-action="">Publish to Shutter</button>
                     </div>
                 </div>
             </div>
@@ -140,7 +166,6 @@
         </main>
     </div>
 
-  
     <script src="~/lib/jquery/dist/jquery.min.js">
     </script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js">
@@ -151,7 +176,7 @@
     @RenderSection("Scripts", required: false)
 
     <script>
- 
+
         var modal = document.getElementById("myModal");
         var btn = document.getElementById("upload_modal");
         var span = document.getElementsByClassName("close")[0];
@@ -193,7 +218,7 @@
 
         function removeUpload() {
             $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-            $('.file-upload-content').hide();
+            $('.file-upload-content').remove();
         }
         $('.image-upload-wrap').bind('dragover', function () {
             $('.image-upload-wrap').addClass('image-dropping');
@@ -211,10 +236,30 @@
         $(document).ready(function () {
             if ($(window).width() < 600) {
                 $('.navsearchTerm').attr('placeholder', "Search photos");
+                $('bt-header').show();
             }
-            
         });
-        
+
     </script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+
+        $(".notification").popover({
+            'title': 'Notification',
+            'html': true,
+            'placement': 'bottom',
+            'content': $(".alert_list").html()
+        });
+
+        $('.turn_off_alert').live('click', function (event) {
+            var alert = $(this).parent();
+            var alert_id = alert.data("alert_id");
+            alert.hide("fast");
+
+        });
+    </script>
+
 </body>
 </html>

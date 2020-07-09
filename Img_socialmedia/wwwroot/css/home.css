@@ -1,4 +1,120 @@
-﻿
+﻿/*Phone*/
+@media (max-width: 767.98px) {
+    .img-icon {
+        display: flex;
+        height: 40px;
+        margin-top: 10px;
+    }
+
+    .img-hover-background {
+        display: none;
+    }
+
+    .img-button-top {
+        right: 42px;
+        z-index:3;
+    }
+
+    .img-button-bottom {
+        position: absolute;
+        width: 100%;
+        left: 0px;
+    }
+
+    .owner-name {
+        color: black !important;
+        font-size: 16px !important;
+    }
+
+    .modal-comment {
+        margin-top: 10px;
+        margin-right: 7px;
+        margin-left: 10px;
+    }
+
+    .modal-layo {
+        flex-direction: column !important
+    }
+}
+/*Table*/
+@media (min-width: 768px) and (max-width:1023.98px){
+    .grid-photos {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 10px;
+    }
+
+    .img-content:not(:hover) .i-animation {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .img-button-top {
+        top: 12px;
+    }
+
+    .img-button-bottom{
+        bottom:12px;
+    }
+    .modal-layo {
+       flex-direction:column !important
+    }
+    .modal-comment{
+        margin-top:10px;
+        margin-right:1em;
+        margin-left:1em;
+    }
+}
+@media(min-width:1024px){
+    .grid-photos {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 10px;
+    }
+
+    .img-content:not(:hover) .i-animation {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .img-button-top {
+        top: 12px;
+    }
+
+    .img-button-bottom {
+        bottom: 12px;
+    }
+    .modal-photo {
+        margin-right: 16px;
+        min-width:73%;
+        max-width: 1280px;
+    }
+
+    .modal-comment {
+        margin-top: 1em;
+        width:25%;
+    }
+
+    .modal-photo-layout {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+/*Laptop, PC */
+/*END*/
+
+
+.grid-layout {
+    margin-top: 32px;
+    margin-right: 22px;
+    margin-left: 22px;
+}
+
+.photo-content {
+    width: 100% !important;
+    height: auto !important;
+}
+
 #background-img-hover {
     position: absolute;
     top: 0;
@@ -16,9 +132,8 @@
     position: relative;
 }
 
-.img-content:not(:hover) .i-animation{
-    visibility: hidden;
-    opacity: 0;
+.img-rel{
+    position:relative;
 }
 
 .img-hover-background {
@@ -34,7 +149,6 @@
 .img-button-display {
     padding-right: 20px;
     padding-left: 20px;
-    width: 100%;
     display: flex;
     pointer-events: auto;
     height: 32px;
@@ -43,15 +157,12 @@
 .img-button-top {
     position: absolute;
     width: 100%;
-    top: 12px;
 }
 
 .img-button-bottom {
     position: absolute;
     width: 100%;
-    bottom: 12px;
 }
-
 
 .i-animation {
     transition: opacity .1s ease-in-out,visibility .1s ease-in-out;
@@ -98,20 +209,20 @@
 }
 
 .owner-img {
-   width:32px;
-   height:32px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     overflow: hidden;
     background-color: rgba(0,0,0,.1);
 }
 
-#photos img.owner-name {
+.owner-name {
     text-decoration: none;
     text-align: center;
     margin-left: 10px;
-    color: white;
     padding-top: 5px;
-    font-size:16px;
+    color: white;
+    font-size: 16px;
 }
 
 .owner-name:hover {
@@ -119,34 +230,140 @@
     color: lightgray;
 }
 
+.modal-maxw{
+    max-width:100% !important;
+}
 
-/*spinner*/
+.modal-layo {
+    display:flex;
+    position:relative;
+    flex-direction: row;
+}
 
-.loader {
+.modal-padd{
+    padding-left:54px !important;
+    padding-right:70px !important;
+}
+
+.modal-photo {
     position: relative;
-    top:25px;
-    left: 50%;
-    border: 5px solid #a3a3a3;
-    border-radius: 50%;
-    border-top: 5px solid #f7f7f8;
-    width: 40px;
-    height: 40px;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
-    animation: spin 1s linear infinite;
+    left: 0;
+    top: 0;
+    flex: 1;
 }
 
-#btn_ontop {
-    display: none;
+.modal-btn-footer { 
+    float: right;
+    padding: 1rem 1rem 5px 0;
+}
+
+.modal-comment {
+    position: relative;
+    right: 0;
+    top: 0;
+}
+
+.form-comment {
+    display: flex;
+    width: 100%;
+}
+
+.comment-box {
+    margin-top: 9px;
+    width: inherit;
+    /*margin-left: 7px;*/
+}
+
+.comment-content{
+    resize:none;
+    width:100%;
+}
+
+.user-comment-layout{
+    max-height:500px;
+    overflow:auto;
+    overflow-x:hidden;
+}
+
+.mod3Xp{
+    border:0px !important
+}
+
+.mod5xp{
+    padding:0 !important;
+}
+
+.btn-send {
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.btn-send:hover{
+    color:red;
+}
+
+.modal-header-textn {
+    padding-top: 5px;
+    margin-left: 7px;
+}
+
+.btn-hw{
+    height: 32px !important;
+    width: 42px !important;
+}
+
+.user-comment{
+    display:flex;
+    margin-right:20px;
+    margin-bottom:8px;
+}
+
+.user-layout{
+    margin-right:8px;
+}
+
+.comment-content {
+    background: #f2f3f8;
+    max-width: 100%;
+    position: relative;
+    word-break: break-word;
+    box-sizing: border-box;
+    display: inline-block;
+    border-radius: 18px;
+    margin: 0;
+    padding: 4px 5px 5px 5px;
+}
+
+.c-content{
+    padding:6px;
+}
+
+#infoPhoto {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    border: none;
-    outline: none;
-    background-color:rgba(207, 207, 207, 0.28);
-    color: white;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 4px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1051;
+    overflow: hidden;
+    outline: 0;
+    display:none;
 }
 
-   
+.bgiPhoto {
+    background-color: rgba(0,0,0,.6);
+    cursor: zoom-out;
+}
+
+.iPL30r{
+    padding:16px;
+}
+
+.iPhotoVi{
+    margin-left:16px;
+}
+
+.iPa230x{
+    display:flex;
+    flex-direction:column;
+}

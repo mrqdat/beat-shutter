@@ -4,28 +4,38 @@
 @{
     ViewData["Title"] = "Shutter | Free images and photos for every one ";
 }
-
-    <div class="vertical_menu">
-        @*<div class="menu col-2">
-            <a href="#tools">Editorial</a>
-            <a href="#tools">Following</a>
-        </div>*@
-        <div class="scrollmenu ">
-            <a href="#home" class="active">Current events</a>
-            <a href="#news">COVID-19</a>
-            <a href="#contact">Nature</a>
-            <a href="#support">Travel</a>
-            <a href="#friends">Friends</a>
-            <a href="#partners">Health and Wellness</a>
-            <a href="#work">Technology</a>
-            <a href="#blog">Architeture</a>
-            <a href="#friends">Friends</a>
-            <a href="#friends">Car</a>
-        </div>
-        @*<div class="viewall col-1">
-            <a href="#tools">View all</a>
-        </div>*@
+<!-- Style home.css -->
+<!-- Thay icon button = font awesome
+    <i class="fa fa-heart-o" aria-hidden="true"></i> button width 38 height 32
+    <i class="fa fa-heart" aria-hidden="true"></i>
+    <i class="fa fa-plus" aria-hidden="true"></i>
+    <i class="fa fa-download" aria-hidden="true"></i>
+ -->
+<div class="vertical_menu">
+    <div class="scrollmenu">
+        <a href="#home">Home</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+        <a href="#support">Support</a>
+        <a href="#blog">Blog</a>
+        <a href="#tools">Tools</a>
+        <a href="#base">Base</a>
+        <a href="#custom">Custom</a>
+        <a href="#more">More</a>
+        <a href="#logo">Logo</a>
+        <a href="#friends">Friends</a>
+        <a href="#partners">Partners</a>
+        <a href="#people">People</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+        <a href="#support">Support</a>
+        <a href="#blog">Blog</a>
+        <a href="#tools">Tools</a>
+        <a href="#tools">Tools</a>
     </div>
+</div>
 
 <div class="bgimage">
     <div class="container-fluid">
@@ -47,472 +57,1079 @@
     </div>
 </div>
 
-<div id="photos">
-    <div class="img-x">
-        <figure>
-            <div class="img-content">
+<div class="grid-layout">
+    <div class="grid-photos">
+        <div>
+            <div class="img-x">
+                <figure>
+                    <div class="img-content">
 
-                <a class="a-cursor" href="#">
-                    <div>
-                        <img class="photo-content" src="~/images/pagoda.jpg" alt="" />
-                    </div>
-                </a>
-                <div class="img-icon">
-                    <div class="img-hover-background i-animation"></div>
-                    <div class="img-button-top img-button-display i-animation">
-                        <div class="img-button">
-                            <button class="btn btn-light pos-button">
-                                <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                </svg>
-                            </button>
-                            <button class="btn btn-light">
-                                <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                                </svg>
-                            </button>
+                        <a class="a-cursor" href="#">
+                            <div class="img-rel">
+                                <img class="photo-content" src="~/images/pagoda.jpg" alt="" />
+                            </div>
+                        </a>
+                        <div class="img-icon">
+                            <div class="img-hover-background i-animation"></div>
+                            <div class="img-button-top img-button-display i-animation">
+                                <div class="img-button">
+                                    <button class="btn btn-light pos-button">
+                                        <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                        </svg>
+                                    </button>
+                                    <button class="btn btn-light">
+                                        <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="img-button-bottom img-button-display i-animation">
+                                <div class="owner-photo">
+                                    <span>
+                                        <a href="#">
+                                            <img class="owner-img" src="~/images/sunset.png" />
+                                        </a>
+                                    </span>
+                                    <a class="owner-name" href="#">
+                                        Quốc Đạt
+                                    </a>
+                                </div>
+                                <div class="img-button">
+                                    <button class="btn btn-light">
+                                        <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                            <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="img-button-bottom img-button-display i-animation">
-                        <div class="owner-photo">
-                            <span>
-                                <a href="#">
-                                    <img class="owner-img" src="~/images/sunset.png" />
+                </figure>
+            </div>
+            <div class="img-x">
+                <div class="img-content">
+                    <a class="a-cursor" href="#">
+                        <div class="img-rel">
+                            <img class="photo-content" src="~/images/sunset.png" />
+                        </div>
+                    </a>
+                    <div class="img-icon">
+                        <div class="img-hover-background i-animation"></div>
+                        <div class="img-button-top img-button-display i-animation">
+                            <div class="img-button">
+                                <button class="btn btn-light pos-button">
+                                    <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                    </svg>
+                                </button>
+                                <button class="btn btn-light">
+                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="img-button-bottom img-button-display i-animation">
+                            <div class="owner-photo">
+                                <span>
+                                    <a href="#">
+                                        <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                                    </a>
+                                </span>
+                                <a class="owner-name" href="#">
+                                    Quốc Đạt
                                 </a>
-                            </span>
-                            <a class="owner-name" href="#">
-                                Quốc Đạt
-                            </a>
-                        </div>
-                        <div class="img-button">
-                            <button class="btn btn-light">
-                                <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
-                                    <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
-                                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
-                                </svg>
-                            </button>
+                            </div>
+                            <div class="img-button">
+                                <button class="btn btn-light">
+                                    <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                        <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </figure>
-    </div>
-    <div class="img-x">
-        <div class="img-content">
-            <a class="a-cursor" href="#">
-                <div>
-                    <img class="photo-content" src="~/images/sunset.png" />
-                </div>
-            </a>
-            <div class="img-icon">
-                <div class="img-hover-background i-animation"></div>
-                <div class="img-button-top img-button-display i-animation">
-                    <div class="img-button">
-                        <button class="btn btn-light pos-button">
-                            <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                            </svg>
-                        </button>
-                        <button class="btn btn-light">
-                            <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="img-button-bottom img-button-display i-animation">
-                    <div class="owner-photo">
-                        <span>
-                            <a href="#">
-                                <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
-                            </a>
-                        </span>
-                        <a class="owner-name" href="#">
-                            Quốc Đạt
-                        </a>
-                    </div>
-                    <div class="img-button">
-                        <button class="btn btn-light">
-                            <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
-                                <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
-                                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="img-x">
-        <div class="img-content">
-            <a class="a-cursor" href="#">
-                <div>
-                    <img class="photo-content" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
-                </div>
-            </a>
-            <div class="img-icon">
-                <div class="img-hover-background i-animation"></div>
-                <div class="img-button-top img-button-display i-animation">
-                    <div class="img-button">
-                        <button class="btn btn-light pos-button">
-                            <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                            </svg>
-                        </button>
-                        <button class="btn btn-light">
-                            <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="img-button-bottom img-button-display i-animation">
-                    <div class="owner-photo">
-                        <span>
-                            <a href="#">
-                                <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
-                            </a>
-                        </span>
-                        <a class="owner-name" href="#">
-                            Quốc Đạt
-                        </a>
-                    </div>
-                    <div class="img-button">
-                        <button class="btn btn-light">
-                            <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
-                                <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
-                                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="img-x">
-        <div class="img-content">
-            <a class="a-cursor" href="#">
-                <div>
-                    <img class="photo-content" src="~/images/sunset.png" />
-                </div>
-            </a>
-            <div class="img-icon">
-                <div class="img-hover-background i-animation"></div>
-                <div class="img-button-top img-button-display i-animation">
-                    <div class="img-button">
-                        <button class="btn btn-light pos-button">
-                            <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                            </svg>
-                        </button>
-                        <button class="btn btn-light">
-                            <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="img-button-bottom img-button-display i-animation">
-                    <div class="owner-photo">
-                        <span>
-                            <a href="#">
-                                <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
-                            </a>
-                        </span>
-                        <a class="owner-name" href="#">
-                            Quốc Đạt
-                        </a>
-                    </div>
-                    <div class="img-button">
-                        <button class="btn btn-light">
-                            <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
-                                <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
-                                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="img-x">
-        <div class="img-content">
-            <a class="a-cursor" href="#">
-                <div>
-                    <img class="photo-content" src="~/images/unnamed.png" />
-                </div>
-            </a>
-            <div class="img-icon">
-                <div class="img-hover-background i-animation"></div>
-                <div class="img-button-top img-button-display i-animation">
-                    <div class="img-button">
-                        <button class="btn btn-light pos-button">
-                            <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                            </svg>
-                        </button>
-                        <button class="btn btn-light">
-                            <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="img-button-bottom img-button-display i-animation">
-                    <div class="owner-photo">
-                        <span>
-                            <a href="#">
-                                <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
-                            </a>
-                        </span>
-                        <a class="owner-name" href="#">
-                            Quốc Đạt
-                        </a>
-                    </div>
-                    <div class="img-button">
-                        <button class="btn btn-light">
-                            <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
-                                <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
-                                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="img-x">
-        <div class="img-content">
-            <a class="a-cursor" href="#">
-                <div>
-                    <img class="photo-content" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
-                </div>
-            </a>
-            <div class="img-icon">
-                <div class="img-hover-background i-animation"></div>
-                <div class="img-button-top img-button-display i-animation">
-                    <div class="img-button">
-                        <button class="btn btn-light pos-button">
-                            <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                            </svg>
-                        </button>
-                        <button class="btn btn-light">
-                            <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="img-button-bottom img-button-display i-animation">
-                    <div class="owner-photo">
-                        <span>
-                            <a href="#">
-                                <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
-                            </a>
-                        </span>
-                        <a class="owner-name" href="#">
-                            Quốc Đạt
-                        </a>
-                    </div>
-                    <div class="img-button">
-                        <button class="btn btn-light">
-                            <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
-                                <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
-                                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="img-x">
-        <div class="img-content">
-            <a class="a-cursor" href="#">
-                <div>
-                    <img class="photo-content" src="~/images/unnamed.png" />
-                </div>
-            </a>
-            <div class="img-icon">
-                <div class="img-hover-background i-animation"></div>
-                <div class="img-button-top img-button-display i-animation">
-                    <div class="img-button">
-                        <button class="btn btn-light pos-button">
-                            <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                            </svg>
-                        </button>
-                        <button class="btn btn-light">
-                            <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="img-button-bottom img-button-display i-animation">
-                    <div class="owner-photo">
-                        <span>
-                            <a href="#">
-                                <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
-                            </a>
-                        </span>
-                        <a class="owner-name" href="#">
-                            Quốc Đạt
-                        </a>
-                    </div>
-                    <div class="img-button">
-                        <button class="btn btn-light">
-                            <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
-                                <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
-                                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="img-x">
-        <figure>
-            <div class="img-content">
-
-                <a class="a-cursor" href="#">
-                    <div>
-                        <img class="photo-content" src="~/images/pagoda.jpg" alt="" />
-                    </div>
-                </a>
-                <div class="img-icon">
-                    <div class="img-hover-background i-animation"></div>
-                    <div class="img-button-top img-button-display i-animation">
-                        <div class="img-button">
-                            <button class="btn btn-light pos-button">
-                                <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                </svg>
-                            </button>
-                            <button class="btn btn-light">
-                                <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                                </svg>
-                            </button>
+            <div class="img-x">
+                <div class="img-content">
+                    <a class="a-cursor" href="#">
+                        <div class="img-rel">
+                            <img class="photo-content" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
                         </div>
-                    </div>
-                    <div class="img-button-bottom img-button-display i-animation">
-                        <div class="owner-photo">
-                            <span>
-                                <a href="#">
-                                    <img class="owner-img" src="~/images/sunset.png" />
+                    </a>
+                    <div class="img-icon">
+                        <div class="img-hover-background i-animation"></div>
+                        <div class="img-button-top img-button-display i-animation">
+                            <div class="img-button">
+                                <button class="btn btn-light pos-button">
+                                    <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                    </svg>
+                                </button>
+                                <button class="btn btn-light">
+                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="img-button-bottom img-button-display i-animation">
+                            <div class="owner-photo">
+                                <span>
+                                    <a href="#">
+                                        <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                                    </a>
+                                </span>
+                                <a class="owner-name" href="#">
+                                    Quốc Đạt
                                 </a>
-                            </span>
-                            <a class="owner-name" href="#">
-                                Quốc Đạt
-                            </a>
-                        </div>
-                        <div class="img-button">
-                            <button class="btn btn-light">
-                                <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
-                                    <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
-                                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
-                                </svg>
-                            </button>
+                            </div>
+                            <div class="img-button">
+                                <button class="btn btn-light">
+                                    <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                        <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </figure>
-    </div>
-    <div class="img-x">
-        <figure>
-            <div class="img-content">
-
-                <a class="a-cursor" href="#">
-                    <div>
-                        <img class="photo-content" src="~/images/pagoda.jpg" alt="" />
-                    </div>
-                </a>
-                <div class="img-icon">
-                    <div class="img-hover-background i-animation"></div>
-                    <div class="img-button-top img-button-display i-animation">
-                        <div class="img-button">
-                            <button class="btn btn-light pos-button">
-                                <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                </svg>
-                            </button>
-                            <button class="btn btn-light">
-                                <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                                </svg>
-                            </button>
+        </div>
+        <div>
+            <div class="img-x">
+                <div class="img-content">
+                    <a class="a-cursor" href="#">
+                        <div class="img-rel">
+                            <img class="photo-content" src="~/images/sunset.png" />
                         </div>
-                    </div>
-                    <div class="img-button-bottom img-button-display i-animation">
-                        <div class="owner-photo">
-                            <span>
-                                <a href="#">
-                                    <img class="owner-img" src="~/images/sunset.png" />
+                    </a>
+                    <div class="img-icon">
+                        <div class="img-hover-background i-animation"></div>
+                        <div class="img-button-top img-button-display i-animation">
+                            <div class="img-button">
+                                <button class="btn btn-light pos-button">
+                                    <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                    </svg>
+                                </button>
+                                <button class="btn btn-light">
+                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="img-button-bottom img-button-display i-animation">
+                            <div class="owner-photo">
+                                <span>
+                                    <a href="#">
+                                        <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                                    </a>
+                                </span>
+                                <a class="owner-name" href="#">
+                                    Quốc Đạt
                                 </a>
-                            </span>
-                            <a class="owner-name" href="#">
-                                Quốc Đạt
-                            </a>
-                        </div>
-                        <div class="img-button">
-                            <button class="btn btn-light">
-                                <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
-                                    <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
-                                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
-                                </svg>
-                            </button>
+                            </div>
+                            <div class="img-button">
+                                <button class="btn btn-light">
+                                    <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                        <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </figure>
+            <div class="img-x">
+                <div class="img-content">
+                    <a class="a-cursor" href="#">
+                        <div class="img-rel">
+                            <img class="photo-content" src="~/images/unnamed.png" />
+                        </div>
+                    </a>
+                    <div class="img-icon">
+                        <div class="img-hover-background i-animation"></div>
+                        <div class="img-button-top img-button-display i-animation">
+                            <div class="img-button">
+                                <button class="btn btn-light pos-button">
+                                    <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                    </svg>
+                                </button>
+                                <button class="btn btn-light">
+                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="img-button-bottom img-button-display i-animation">
+                            <div class="owner-photo">
+                                <span>
+                                    <a href="#">
+                                        <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                                    </a>
+                                </span>
+                                <a class="owner-name" href="#">
+                                    Quốc Đạt
+                                </a>
+                            </div>
+                            <div class="img-button">
+                                <button class="btn btn-light">
+                                    <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                        <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="img-x">
+                <div class="img-content">
+                    <a class="a-cursor" href="#">
+                        <div class="img-rel">
+                            <img class="photo-content" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                        </div>
+                    </a>
+                    <div class="img-icon">
+                        <div class="img-hover-background i-animation"></div>
+                        <div class="img-button-top img-button-display i-animation">
+                            <div class="img-button">
+                                <button class="btn btn-light pos-button">
+                                    <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                    </svg>
+                                </button>
+                                <button class="btn btn-light">
+                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="img-button-bottom img-button-display i-animation">
+                            <div class="owner-photo">
+                                <span>
+                                    <a href="#">
+                                        <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                                    </a>
+                                </span>
+                                <a class="owner-name" href="#">
+                                    Quốc Đạt
+                                </a>
+                            </div>
+                            <div class="img-button">
+                                <button class="btn btn-light">
+                                    <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                        <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="img-x">
+                <div class="img-content">
+                    <a class="a-cursor" href="#">
+                        <div class="img-rel">
+                            <img class="photo-content" src="~/images/unnamed.png" />
+                        </div>
+                    </a>
+                    <div class="img-icon">
+                        <div class="img-hover-background i-animation"></div>
+                        <div class="img-button-top img-button-display i-animation">
+                            <div class="img-button">
+                                <button class="btn btn-light pos-button">
+                                    <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                    </svg>
+                                </button>
+                                <button class="btn btn-light">
+                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="img-button-bottom img-button-display i-animation">
+                            <div class="owner-photo">
+                                <span>
+                                    <a href="#">
+                                        <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                                    </a>
+                                </span>
+                                <a class="owner-name" href="#">
+                                    Quốc Đạt
+                                </a>
+                            </div>
+                            <div class="img-button">
+                                <button class="btn btn-light">
+                                    <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                        <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="img-x">
+                <figure>
+                    <div class="img-content">
+
+                        <a class="a-cursor" href="#">
+                            <div class="img-rel">
+                                <img class="photo-content" src="~/images/pagoda.jpg" alt="" />
+                            </div>
+                        </a>
+                        <div class="img-icon">
+                            <div class="img-hover-background i-animation"></div>
+                            <div class="img-button-top img-button-display i-animation">
+                                <div class="img-button">
+                                    <button class="btn btn-light pos-button">
+                                        <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                        </svg>
+                                    </button>
+                                    <button class="btn btn-light">
+                                        <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="img-button-bottom img-button-display i-animation">
+                                <div class="owner-photo">
+                                    <span>
+                                        <a href="#">
+                                            <img class="owner-img" src="~/images/sunset.png" />
+                                        </a>
+                                    </span>
+                                    <a class="owner-name" href="#">
+                                        Quốc Đạt
+                                    </a>
+                                </div>
+                                <div class="img-button">
+                                    <button class="btn btn-light">
+                                        <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                            <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+            </div>
+            <div class="img-x">
+                <figure>
+                    <div class="img-content">
+
+                        <a class="a-cursor" href="#">
+                            <div class="img-rel">
+                                <img class="photo-content" src="~/images/pagoda.jpg" alt="" />
+                            </div>
+                        </a>
+                        <div class="img-icon">
+                            <div class="img-hover-background i-animation"></div>
+                            <div class="img-button-top img-button-display i-animation">
+                                <div class="img-button">
+                                    <button class="btn btn-light pos-button">
+                                        <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                        </svg>
+                                    </button>
+                                    <button class="btn btn-light">
+                                        <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="img-button-bottom img-button-display i-animation">
+                                <div class="owner-photo">
+                                    <span>
+                                        <a href="#">
+                                            <img class="owner-img" src="~/images/sunset.png" />
+                                        </a>
+                                    </span>
+                                    <a class="owner-name" href="#">
+                                        Quốc Đạt
+                                    </a>
+                                </div>
+                                <div class="img-button">
+                                    <button class="btn btn-light">
+                                        <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                            <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+            </div>
+        </div>
     </div>
 </div>
-<button onclick="topFunction()" id="btn_ontop" title="Go to top">
-    <i class="fa fa-2x fa-angle-up" style="color: #747474;"></i>
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uPhoto">
+    Tesst
 </button>
-<div class="loader"></div>
 
+<!-- Photo Modal -->
+<div class="modal modal-padd" id="uPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-maxw">
+        <div class="modal-content mod3Xp">
+            <div class="modal-layo">
+                <div class="modal-photo">
+                    <div class="modal-header">
+                        <div>
+                            <div class="owner-photo">
+                                <span>
+                                    <a href="#">
+                                        <img class="owner-img" src="~/images/sunset.png" />
+                                    </a>
+                                </span>
+                                <a href="#" class="modal-header-textn">
+                                    <h6 class="modal-title" id="exampleModalLabel">Modal title</h6>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="float-right">
+                            <button class="btn btn-outline-dark btn-hw pos-button">
+                                <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
+                                </svg>
+                            </button>
+                            <button class="btn btn-outline-dark btn-hw pos-button">
+                                <svg class="bi bi-plus" width="1em" height="1em" margin-bottom: 2px; viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"></path>
+                                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"></path>
+                                </svg>
+                            </button>
+                            <button class="btn btn-outline-dark btn-hw">
+                                <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z"></path>
+                                    <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z"></path>
+                                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-body mod5xp">
+                        <div class="">
+                            <img class="photo-content" src="/images/pagoda.jpg" alt="">
+                        </div>
+                        <div>
+                            <div class="modal-btn-footer" ">
+                                <button class="btn btn-outline-dark">Share</button>
+                                <button class="btn btn-outline-dark" data-toggle="modal" data-target="#infoPhoto" type="button">Info</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="modal-comment">
+                    <div class="user-comment-layout">
+                        <div class="user-comment">
+                            <div class="user-layout">
+                                <span>
+                                    <a href="#">
+                                        <img src="/images/unnamed.png" class="owner-img" />
+                                    </a>
+                                </span>
+                            </div>
+                            <span class="comment-content">
+                                <span class="c-content">
+                                    <a href="#" class="user-name">
+                                        John Cena
+                                    </a>
+                                    <span>
+                                        Em dep lam
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="user-comment">
+                            <div class="user-layout">
+                                <span>
+                                    <a href="#">
+                                        <img src="/images/unnamed.png" class="owner-img" />
+                                    </a>
+                                </span>
 
-    <script>
-        //Get the button
-        var ontop = document.getElementById("btn_ontop");
-        window.onscroll = function () { scrollFunction() };
+                            </div>
+                            <span class="comment-content">
+                                <span class="c-content">
+                                    <a href="#" class="user-name">
+                                        John Cena
+                                    </a>
+                                    <span>
+                                        Trăng lên đỉnh núi trăng tà, tà lăng tà lẳng tà lăng
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="user-comment">
+                            <div class="user-layout">
+                                <span>
+                                    <a href="#">
+                                        <img src="/images/unnamed.png" class="owner-img" />
+                                    </a>
+                                </span>
 
-        function scrollFunction() {
-            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-                ontop.style.display = "block";
-            } else {
-                ontop.style.display = "none";
-            }
-        }
+                            </div>
+                            <span class="comment-content">
+                                <span class="c-content">
+                                    <a href="#" class="user-name">
+                                        John Cena
+                                    </a>
+                                    <span> Yoo!</span>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <form class="form-comment">
+                            <div class="comment-box">
+                                <textarea class="comment-content">Abc</textarea>
+                            </div>
+                            <button class="btn-send">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="modal-footer">
+                    <div class="grid-photos">
+                        <div>
+                            <div class="img-x">
+                                <figure>
+                                    <div class="img-content">
 
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
-    </script>
+                                        <a class="a-cursor" href="#">
+                                            <div class="img-rel">
+                                                <img class="photo-content" src="~/images/pagoda.jpg" alt="" />
+                                            </div>
+                                        </a>
+                                        <div class="img-icon">
+                                            <div class="img-hover-background i-animation"></div>
+                                            <div class="img-button-top img-button-display i-animation">
+                                                <div class="img-button">
+                                                    <button class="btn btn-light pos-button">
+                                                        <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                                        </svg>
+                                                    </button>
+                                                    <button class="btn btn-light">
+                                                        <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="img-button-bottom img-button-display i-animation">
+                                                <div class="owner-photo">
+                                                    <span>
+                                                        <a href="#">
+                                                            <img class="owner-img" src="~/images/sunset.png" />
+                                                        </a>
+                                                    </span>
+                                                    <a class="owner-name" href="#">
+                                                        Quốc Đạt
+                                                    </a>
+                                                </div>
+                                                <div class="img-button">
+                                                    <button class="btn btn-light">
+                                                        <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                                            <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                                            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                            <div class="img-x">
+                                <div class="img-content">
+                                    <a class="a-cursor" href="#">
+                                        <div class="img-rel">
+                                            <img class="photo-content" src="~/images/sunset.png" />
+                                        </div>
+                                    </a>
+                                    <div class="img-icon">
+                                        <div class="img-hover-background i-animation"></div>
+                                        <div class="img-button-top img-button-display i-animation">
+                                            <div class="img-button">
+                                                <button class="btn btn-light pos-button">
+                                                    <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                                    </svg>
+                                                </button>
+                                                <button class="btn btn-light">
+                                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="img-button-bottom img-button-display i-animation">
+                                            <div class="owner-photo">
+                                                <span>
+                                                    <a href="#">
+                                                        <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                                                    </a>
+                                                </span>
+                                                <a class="owner-name" href="#">
+                                                    Quốc Đạt
+                                                </a>
+                                            </div>
+                                            <div class="img-button">
+                                                <button class="btn btn-light">
+                                                    <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                                        <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="img-x">
+                                <div class="img-content">
+                                    <a class="a-cursor" href="#">
+                                        <div class="img-rel">
+                                            <img class="photo-content" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                                        </div>
+                                    </a>
+                                    <div class="img-icon">
+                                        <div class="img-hover-background i-animation"></div>
+                                        <div class="img-button-top img-button-display i-animation">
+                                            <div class="img-button">
+                                                <button class="btn btn-light pos-button">
+                                                    <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                                    </svg>
+                                                </button>
+                                                <button class="btn btn-light">
+                                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="img-button-bottom img-button-display i-animation">
+                                            <div class="owner-photo">
+                                                <span>
+                                                    <a href="#">
+                                                        <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                                                    </a>
+                                                </span>
+                                                <a class="owner-name" href="#">
+                                                    Quốc Đạt
+                                                </a>
+                                            </div>
+                                            <div class="img-button">
+                                                <button class="btn btn-light">
+                                                    <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                                        <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="img-x">
+                                <div class="img-content">
+                                    <a class="a-cursor" href="#">
+                                        <div class="img-rel">
+                                            <img class="photo-content" src="~/images/sunset.png" />
+                                        </div>
+                                    </a>
+                                    <div class="img-icon">
+                                        <div class="img-hover-background i-animation"></div>
+                                        <div class="img-button-top img-button-display i-animation">
+                                            <div class="img-button">
+                                                <button class="btn btn-light pos-button">
+                                                    <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                                    </svg>
+                                                </button>
+                                                <button class="btn btn-light">
+                                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="img-button-bottom img-button-display i-animation">
+                                            <div class="owner-photo">
+                                                <span>
+                                                    <a href="#">
+                                                        <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                                                    </a>
+                                                </span>
+                                                <a class="owner-name" href="#">
+                                                    Quốc Đạt
+                                                </a>
+                                            </div>
+                                            <div class="img-button">
+                                                <button class="btn btn-light">
+                                                    <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                                        <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="img-x">
+                                <div class="img-content">
+                                    <a class="a-cursor" href="#">
+                                        <div class="img-rel">
+                                            <img class="photo-content" src="~/images/unnamed.png" />
+                                        </div>
+                                    </a>
+                                    <div class="img-icon">
+                                        <div class="img-hover-background i-animation"></div>
+                                        <div class="img-button-top img-button-display i-animation">
+                                            <div class="img-button">
+                                                <button class="btn btn-light pos-button">
+                                                    <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                                    </svg>
+                                                </button>
+                                                <button class="btn btn-light">
+                                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="img-button-bottom img-button-display i-animation">
+                                            <div class="owner-photo">
+                                                <span>
+                                                    <a href="#">
+                                                        <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                                                    </a>
+                                                </span>
+                                                <a class="owner-name" href="#">
+                                                    Quốc Đạt
+                                                </a>
+                                            </div>
+                                            <div class="img-button">
+                                                <button class="btn btn-light">
+                                                    <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                                        <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="img-x">
+                                <div class="img-content">
+                                    <a class="a-cursor" href="#">
+                                        <div class="img-rel">
+                                            <img class="photo-content" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                                        </div>
+                                    </a>
+                                    <div class="img-icon">
+                                        <div class="img-hover-background i-animation"></div>
+                                        <div class="img-button-top img-button-display i-animation">
+                                            <div class="img-button">
+                                                <button class="btn btn-light pos-button">
+                                                    <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                                    </svg>
+                                                </button>
+                                                <button class="btn btn-light">
+                                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="img-button-bottom img-button-display i-animation">
+                                            <div class="owner-photo">
+                                                <span>
+                                                    <a href="#">
+                                                        <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                                                    </a>
+                                                </span>
+                                                <a class="owner-name" href="#">
+                                                    Quốc Đạt
+                                                </a>
+                                            </div>
+                                            <div class="img-button">
+                                                <button class="btn btn-light">
+                                                    <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                                        <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="img-x">
+                                <div class="img-content">
+                                    <a class="a-cursor" href="#">
+                                        <div class="img-rel">
+                                            <img class="photo-content" src="~/images/unnamed.png" />
+                                        </div>
+                                    </a>
+                                    <div class="img-icon">
+                                        <div class="img-hover-background i-animation"></div>
+                                        <div class="img-button-top img-button-display i-animation">
+                                            <div class="img-button">
+                                                <button class="btn btn-light pos-button">
+                                                    <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                                    </svg>
+                                                </button>
+                                                <button class="btn btn-light">
+                                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="img-button-bottom img-button-display i-animation">
+                                            <div class="owner-photo">
+                                                <span>
+                                                    <a href="#">
+                                                        <img class="owner-img" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                                                    </a>
+                                                </span>
+                                                <a class="owner-name" href="#">
+                                                    Quốc Đạt
+                                                </a>
+                                            </div>
+                                            <div class="img-button">
+                                                <button class="btn btn-light">
+                                                    <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                                        <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="img-x">
+                                <figure>
+                                    <div class="img-content">
+
+                                        <a class="a-cursor" href="#">
+                                            <div class="img-rel">
+                                                <img class="photo-content" src="~/images/pagoda.jpg" alt="" />
+                                            </div>
+                                        </a>
+                                        <div class="img-icon">
+                                            <div class="img-hover-background i-animation"></div>
+                                            <div class="img-button-top img-button-display i-animation">
+                                                <div class="img-button">
+                                                    <button class="btn btn-light pos-button">
+                                                        <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                                        </svg>
+                                                    </button>
+                                                    <button class="btn btn-light">
+                                                        <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="img-button-bottom img-button-display i-animation">
+                                                <div class="owner-photo">
+                                                    <span>
+                                                        <a href="#">
+                                                            <img class="owner-img" src="~/images/sunset.png" />
+                                                        </a>
+                                                    </span>
+                                                    <a class="owner-name" href="#">
+                                                        Quốc Đạt
+                                                    </a>
+                                                </div>
+                                                <div class="img-button">
+                                                    <button class="btn btn-light">
+                                                        <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                                            <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                                            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                            <div class="img-x">
+                                <figure>
+                                    <div class="img-content">
+
+                                        <a class="a-cursor" href="#">
+                                            <div class="img-rel">
+                                                <img class="photo-content" src="~/images/pagoda.jpg" alt="" />
+                                            </div>
+                                        </a>
+                                        <div class="img-icon">
+                                            <div class="img-hover-background i-animation"></div>
+                                            <div class="img-button-top img-button-display i-animation">
+                                                <div class="img-button">
+                                                    <button class="btn btn-light pos-button">
+                                                        <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                                        </svg>
+                                                    </button>
+                                                    <button class="btn btn-light">
+                                                        <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="img-button-bottom img-button-display i-animation">
+                                                <div class="owner-photo">
+                                                    <span>
+                                                        <a href="#">
+                                                            <img class="owner-img" src="~/images/sunset.png" />
+                                                        </a>
+                                                    </span>
+                                                    <a class="owner-name" href="#">
+                                                        Quốc Đạt
+                                                    </a>
+                                                </div>
+                                                <div class="img-button">
+                                                    <button class="btn btn-light">
+                                                        <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                                            <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                                            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Detail Info Photo Modal -->
+<div class="fade bgiPhoto" id="infoPhoto" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="cursor:auto">
+            <div class="iPL30r">
+                <h2>Info</h2>
+                <span>Publish on: 1/1/2020</span>
+            </div>
+            <div style="display:flex">
+                <div class="iPhotoVi iPa230x">
+                    <span>View</span>
+                    <span>111</span>
+                </div>
+                <div class="iPhotoVi iPa230x">
+                    <span>Total like</span>
+                    <span>1111</span>
+                </div>
+            </div>
+            <hr />
+            <iv style="display:flex">
+                <div class="iPhotoVi iPa230x">
+                    <span>View</span>
+                    <span>111</span>
+                </div>
+                <div class="iPhotoVi iPa230x">
+                    <span>Total like</span>
+                    <span>1111</span>
+                </div>
+                div class="iPhotoVi iPa230x">
+                <span>Total like</span>
+                <span>1111</span>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+<div style="padding-bottom:400px;"></div>

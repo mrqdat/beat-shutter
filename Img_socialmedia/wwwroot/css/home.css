@@ -69,7 +69,7 @@
     .grid-photos {
         display: grid;
         grid-template-columns: auto auto auto;
-        grid-gap: 10px;
+        grid-gap: 20px;
     }
 
     .img-content:not(:hover) .i-animation {
@@ -238,11 +238,12 @@
     display:flex;
     position:relative;
     flex-direction: row;
+    padding-bottom:40px;
 }
 
 .modal-padd{
-    padding-left:54px !important;
-    padding-right:70px !important;
+    padding-left:40px !important;
+    padding-right:40px !important;
 }
 
 .modal-photo {
@@ -344,7 +345,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1051;
+    z-index: 11111;
     overflow: hidden;
     outline: 0;
     display:none;
@@ -366,4 +367,33 @@
 .iPa230x{
     display:flex;
     flex-direction:column;
+}
+
+/*spinner*/
+
+.loader {
+    position: relative;
+    top: 25px;
+    left: 50%;
+    border: 5px solid #a3a3a3;
+    border-radius: 50%;
+    border-top: 5px solid #f7f7f8;
+    width: 40px;
+    height: 40px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 1s linear infinite;
+}
+
+#btn_ontop {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border: none;
+    outline: none;
+    background-color: rgba(207, 207, 207, 0.28);
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
 }

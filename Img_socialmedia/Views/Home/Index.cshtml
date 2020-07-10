@@ -13,7 +13,7 @@
  -->
 <div class="vertical_menu">
     <div class="scrollmenu">
-        <a href="#home">Home</a>
+        <a href="#home">Curent Event</a>
         <a href="#news">News</a>
         <a href="#contact">Contact</a>
         <a href="#about">About</a>
@@ -24,15 +24,7 @@
         <a href="#custom">Custom</a>
         <a href="#more">More</a>
         <a href="#logo">Logo</a>
-        <a href="#friends">Friends</a>
-        <a href="#partners">Partners</a>
-        <a href="#people">People</a>
-        <a href="#work">Work</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
-        <a href="#support">Support</a>
         <a href="#blog">Blog</a>
-        <a href="#tools">Tools</a>
         <a href="#tools">Tools</a>
     </div>
 </div>
@@ -516,7 +508,7 @@
 </button>
 
 <!-- Photo Modal -->
-<div class="modal modal-padd" id="uPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal modal-padd" id="uPhoto" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-maxw">
         <div class="modal-content mod3Xp">
             <div class="modal-layo">
@@ -639,7 +631,9 @@
                 </div>
             </div>
             <div>
+                <div class="text">Related photos</div>
                 <div class="modal-footer">
+
                     <div class="grid-photos">
                         <div>
                             <div class="img-x">
@@ -1097,7 +1091,7 @@
 </div>
 
 <!-- Detail Info Photo Modal -->
-<div class="fade bgiPhoto" id="infoPhoto" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="fade bgiPhoto" id="infoPhoto" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="cursor:auto">
             <div class="iPL30r">
@@ -1115,7 +1109,7 @@
                 </div>
             </div>
             <hr />
-            <iv style="display:flex">
+            <div style="display:flex">
                 <div class="iPhotoVi iPa230x">
                     <span>View</span>
                     <span>111</span>
@@ -1124,12 +1118,39 @@
                     <span>Total like</span>
                     <span>1111</span>
                 </div>
-                div class="iPhotoVi iPa230x">
-                <span>Total like</span>
-                <span>1111</span>
-        </div>
-    </div>
+                <div class="iPhotoVi iPa230x">
+                    <span>Total like</span>
+                    <span>1111</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+
 <div style="padding-bottom:400px;"></div>
+
+<button onclick="topFunction()" id="btn_ontop" title="Go to top">
+    <i class="fa fa-2x fa-angle-up" style="color: #747474;"></i>
+</button>
+<div class="loader"></div>
+
+
+<script>
+        //Get the button
+        var ontop = document.getElementById("btn_ontop");
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                ontop.style.display = "block";
+            } else {
+                ontop.style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+</script>

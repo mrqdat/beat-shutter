@@ -69,8 +69,8 @@ a {
 .modal {
     display: none; 
     position: fixed; 
-    z-index: 11; 
-    padding-top: 80px; 
+    z-index: 1111; 
+    padding-top: 10px; 
     left: 0;
     top: 0;
     width: 100%; 
@@ -88,8 +88,6 @@ a {
     border: 1px solid #888;
     max-width: 95%;
 }
-
-
 
 
 .file-upload {
@@ -389,8 +387,8 @@ body {
     }
 
     #nav-item{
-        width:300px;
-        margin-right:40px;
+        width:339px;
+        margin-right:69px;
     }
    
     .line{
@@ -415,7 +413,7 @@ body {
 
     #nav-item {
         width: 250px;
-        margin-right: 20px;
+        margin-right: 37px;
     }
 
 }

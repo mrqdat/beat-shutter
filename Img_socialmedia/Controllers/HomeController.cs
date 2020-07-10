@@ -16,7 +16,6 @@ namespace Img_socialmedia.Controllers
     {
 
         private readonly IConfiguration configuration;
-        private readonly ILogger<HomeController> _logger;
 
         public HomeController(IConfiguration config)
         {

@@ -12,6 +12,7 @@ namespace Img_socialmedia.Models
             Comment = new HashSet<CommentViewModel>();
             ExternalLogin = new HashSet<ExternalLoginViewModel>();
             Notification = new HashSet<NotificationViewModel>();
+            FullName = Firstname + " " + Lastname;
         }
         [Key]
         public int Id { get; set; }
@@ -26,8 +27,13 @@ namespace Img_socialmedia.Models
         [DataType(DataType.Password), Compare(nameof(Password))]
         public string PasswordConfirm { get; set; }
 
-        public string Lastname { get; set; }
+       
         public string Firstname { get; set; }
+        [StringLength(100)]
+        public string Lastname { get; set; }
+
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
         public string TokenId { get; set; }

@@ -1,8 +1,12 @@
 ﻿using Img_socialmedia.Data;
 using Img_socialmedia.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
@@ -16,12 +20,12 @@ namespace Img_socialmedia.Controllers
     public class PhotosController : Controller
     {
         private readonly db_shutterContext _context;
-
-        public PhotosController(db_shutterContext context)
+        private readonly IWebHostEnvironment webHostEnvironment;
+        public PhotosController(db_shutterContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            webHostEnvironment = hostEnvironment; 
         }
-
         // GET: PhotoViewModels
         public IActionResult  Index()
         {
@@ -153,6 +157,69 @@ namespace Img_socialmedia.Controllers
             return _context.Photo.Any(e => e.Id == id);
         }
 
+      
+        public async Task<IActionResult> photoUpload(List<IFormFile> files)
+        {
+
+            //var newFileName = string.Empty;
+
+            //if (HttpContext.Request.Form.Files != null)
+            //{
+            //    var fileName = string.Empty;
+            //    string PathDB = string.Empty;
+
+            //    var files = HttpContext.Request.Form.Files;
+
+            //    foreach (var file in files)
+            //    {
+            //        if (file.Length > 0)
+            //        {
+
+            //            fileName = ContentDispositionHeaderValue
+            //                    .Parse(file.ContentDisposition)
+            //                    .FileName
+            //                    .Trim('"');
+
+            //            var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+            //            var FileExtension = Path.GetExtension(fileName);
+
+            //            newFileName = myUniqueFileName + FileExtension;
+
+            //            fileName = Path.Combine(webHostEnvironment.WebRootPath, "images") + $@"\{newFileName}";
+
+            //            PathDB = newFileName;
+
+            //            using (FileStream fs = System.IO.File.Create(fileName))
+            //            {
+            //                file.CopyTo(fs);
+            //                fs.Flush();
+            //            }
+            //        }
+            //    }
+
+
+            //}
+            long size = files.Sum(f => f.Length);
+
+            var filePaths = new List<string>();
+            foreach (var formFile in files)
+            {
+                if (formFile.Length > 0)
+                {
+                    // full path to file in temp location
+                    var filePath = Path.GetTempFileName(); //we are using Temp file name just for the example. Add your own file path.
+                    filePaths.Add(filePath);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(stream);
+                    }
+                }
+            }
+
+            return Ok(new { count = files.Count, size, filePaths });
+        }
 
         public ActionResult reading_metadata()
         {

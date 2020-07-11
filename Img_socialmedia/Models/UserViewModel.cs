@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -38,6 +39,7 @@ namespace Img_socialmedia.Models
         public string Phone { get; set; }
         public string TokenId { get; set; }
         public string ProfileImg { get; set; }
+        [StringLength(1000)]
         public string Bio { get; set; }
 
         [DataType(DataType.Date)]

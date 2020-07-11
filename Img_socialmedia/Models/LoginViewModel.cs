@@ -18,6 +18,9 @@ namespace Img_socialmedia.Models
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
         public string password { get; set; }
 
+        public bool RememberMe { get; set; }
 
+
+        public string ReturnUrl { get; set; }
     }
 }

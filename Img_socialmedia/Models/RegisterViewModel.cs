@@ -20,7 +20,7 @@ namespace Img_socialmedia.Models
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
         public string password { get; set; }
 
-        [DataType(DataType.Password), ]
+        [DataType(DataType.Password)]
         [Compare("password", ErrorMessage ="Password confirm does not match.")]
         public string confirm_password { get; set; }
 

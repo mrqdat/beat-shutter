@@ -40,12 +40,15 @@ namespace Img_socialmedia
             //services.AddDbContext<dbShutterContext>(options =>
             //        options.UseSqlServer(Configuration.GetConnectionString("dbShutterContextConnection")));
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
 
             services.AddDbContext<db_shutterContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddSession();
+
+
                      
         }
 
@@ -70,6 +73,7 @@ namespace Img_socialmedia
             app.UseSession();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseCookiePolicy();
 
             app.UseAuthentication();
 
@@ -79,7 +83,9 @@ namespace Img_socialmedia
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+                endpoints.MapControllers();
                 endpoints.MapRazorPages(); 
+
             });
         }
     }

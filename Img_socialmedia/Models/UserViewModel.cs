@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Img_socialmedia.Models
 {
@@ -13,9 +13,10 @@ namespace Img_socialmedia.Models
             Comment = new HashSet<CommentViewModel>();
             ExternalLogin = new HashSet<ExternalLoginViewModel>();
             Notification = new HashSet<NotificationViewModel>();
-            FullName = Firstname + " " + Lastname;
+        
         }
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         public string Username { get; set; }
@@ -25,22 +26,25 @@ namespace Img_socialmedia.Models
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
         public string Password { get; set; }
 
-        [DataType(DataType.Password), Compare(nameof(Password))]
-        public string PasswordConfirm { get; set; }
+        //[DataType(DataType.Password)]
+        //[Compare("Password", ErrorMessage = "Password confirm does not match.")]
+        //public string PasswordConfirm { get; set; }
 
-       
+        [StringLength(100)]
         public string Firstname { get; set; }
         [StringLength(100)]
         public string Lastname { get; set; }
 
-        [Display(Name = "Full Name")]
-        public string FullName { get; set; }
+        [Required(ErrorMessage = "The email field is required.")]
+        [EmailAddress(ErrorMessage = "The email field is not valid email address")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
         public string Email { get; set; }
-        public string Phone { get; set; }
+         
         public string TokenId { get; set; }
         public string ProfileImg { get; set; }
         [StringLength(1000)]
         public string Bio { get; set; }
+        
 
         [DataType(DataType.Date)]
         public DateTime? CreateAt { get; set; }

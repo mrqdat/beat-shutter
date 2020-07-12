@@ -13,6 +13,7 @@ using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Img_socialmedia.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Img_socialmedia
 {
@@ -36,7 +37,7 @@ namespace Img_socialmedia
                 facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
             });
 
-
+            services.AddMvc();
             //services.AddDbContext<dbShutterContext>(options =>
             //        options.UseSqlServer(Configuration.GetConnectionString("dbShutterContextConnection")));
 
@@ -48,8 +49,6 @@ namespace Img_socialmedia
 
             services.AddSession();
 
-
-                     
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

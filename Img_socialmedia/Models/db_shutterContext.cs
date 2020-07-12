@@ -286,9 +286,7 @@ namespace Img_socialmedia.Models
             {
                 entity.ToTable("user");
 
-                entity.HasIndex(e => e.Phone)
-                    .HasName("unique_phone")
-                    .IsUnique();
+               
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
@@ -321,12 +319,6 @@ namespace Img_socialmedia.Models
                     .HasColumnName("password")
                     .HasMaxLength(50)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Phone)
-                    .HasColumnName("phone")
-                    .HasMaxLength(15)
-                    .IsUnicode(false)
-                    .IsFixedLength();
 
                 entity.Property(e => e.ProfileImg)
                     .HasColumnName("profile_img")

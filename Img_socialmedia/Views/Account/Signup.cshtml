@@ -14,7 +14,7 @@
                     <strong>JOIN SHUTTER</strong>
                 </span>
                 <span class="login100-form-title p-b-20" style="font-size:18px;">
-                    Already have an acount? <a asp-controller="Login" asp-action="Index" style="text-decoration: underline;">Login</a>
+                    Already have an acount? <a asp-controller="Account" asp-action="Login" style="text-decoration: underline;">Login</a>
                 </span>
 
                 <div class="login100-form-social flex-c-m">
@@ -86,13 +86,14 @@
                 </div>
             </form>
 
-            <div class="login100-more" style=" background-image: url('images/41971882_696072084101621_3714114531614523392_o.jpg');">
+            <div class="login100-more" style=" background-image: url('/images/41971882_696072084101621_3714114531614523392_o.jpg');">
             </div>
         </div>
     </div>
 </div>
 @section Scripts
 {
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=1153748928321536&autoLogAppEvents=1" nonce="UgOll85X"></script>
 
     <script>

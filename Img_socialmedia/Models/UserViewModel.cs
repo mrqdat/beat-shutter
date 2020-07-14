@@ -43,8 +43,7 @@ namespace Img_socialmedia.Models
         public string TokenId { get; set; }
         public string ProfileImg { get; set; }
         [StringLength(1000)]
-        public string Bio { get; set; }
-        
+        public string Bio { get; set; }        
 
         [DataType(DataType.Date)]
         public DateTime? CreateAt { get; set; }

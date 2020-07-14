@@ -20,7 +20,7 @@ namespace Img_socialmedia.Controllers
             _signInManager = signInManager;
         }
 
-        public IActionResult Login()
+        public ActionResult Login()
         {
 
             return View();
@@ -46,9 +46,6 @@ namespace Img_socialmedia.Controllers
             }
         }
 
-
-
-
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Signup()
@@ -57,12 +54,10 @@ namespace Img_socialmedia.Controllers
             return View();
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Signup(UserViewModel model)
         {
-
             //if (ModelState.IsValid)
             //{
             //    var result = await _signInManager.PasswordSignInAsync(

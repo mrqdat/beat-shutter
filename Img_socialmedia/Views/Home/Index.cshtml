@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<PPUModel>
+
+@{
     Layout = "_Layout";
 }
 @{
@@ -552,7 +554,7 @@
                             <img class="photo-content" src="/images/pagoda.jpg" alt="">
                         </div>
                         <div>
-                            <div class="modal-btn-footer" ">
+                            <div class="modal-btn-footer">
                                 <button class="btn btn-outline-dark">Share</button>
                                 <button class="btn btn-outline-dark" data-toggle="modal" data-target="#infoPhoto" type="button">Info</button>
                             </div>
@@ -1127,8 +1129,23 @@
     </div>
 </div>
 
-
 <div style="padding-bottom:400px;"></div>
+<button id="TestButton"></button>
+<div id="test">
+    @foreach (var item in Model)
+    {
+    <div>
+        @Html.DisplayFor(modelItem => item.userP.Id)
+
+        @Html.DisplayFor(modelItem => item.photoP.Url)
+
+        @Html.DisplayFor(modelItem => item.postP.CreateAt)
+    </div>
+    }
+</div>
+
+
+
 
 <button onclick="topFunction()" id="btn_ontop" title="Go to top">
     <i class="fa fa-2x fa-angle-up" style="color: #747474;"></i>
@@ -1137,20 +1154,63 @@
 
 
 <script>
-        //Get the button
-        var ontop = document.getElementById("btn_ontop");
-        window.onscroll = function () { scrollFunction() };
+    //Get the button
+    var ontop = document.getElementById("btn_ontop");
+    window.onscroll = function () { scrollFunction() };
 
-        function scrollFunction() {
-            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-                ontop.style.display = "block";
-            } else {
-                ontop.style.display = "none";
-            }
+    function scrollFunction() {
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            ontop.style.display = "block";
+        } else {
+            ontop.style.display = "none";
         }
+    }
 
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
 </script>
+
+<script type="text/javascript">
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() > $(document).height() - 800) {
+            var timingCallAjax = this.setTimeout(AJAXLoadPhoto, 2000);
+        }
+        else {
+            clearTimeout(timingCallAjax);
+        }
+    });
+
+    function AJAXLoadPhoto() {
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("TestA")",
+                success: function (msg) {
+                    msg.forEach(function (item, index) {
+                        var photo = item["id"]["photo"];
+                        $("#test").append("<div>" + item["id"] + "<br>" + item.user["id"] + "</div>");
+                    });
+                },
+                error: function (req, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+    }   
+    
+
+    $("#TestButton").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("ReadingMetadata")",
+            success: function (msg) {
+                alert(msg);
+            },
+            error: function (req, status, error) {
+                alert(error);
+            }
+        })
+    });
+</script>   

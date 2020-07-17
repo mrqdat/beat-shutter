@@ -18,13 +18,21 @@
     <link rel="stylesheet" type="text/css" href="~/vendor/animsition/css/animsition.min.css" />
     <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css" />
     <link rel="stylesheet/scss" type="text/css" href="~/scss/site.scss" />
+
+    <script src="~/lib/jquery/dist/jquery.min.js">
+    </script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="~/js/site.js" asp-append-version="true">
+    </script>
+
 </head>
 <body>
 
-@using Microsoft.AspNetCore.Identity
+    @using Microsoft.AspNetCore.Identity
 
-    @inject SignInManager<UserViewModel> _signInManager;
-    @inject UserManager<UserViewModel> _userManager;
+    @*@inject SignInManager<UserViewModel> _signInManager;
+        @inject UserManager<UserViewModel> _userManager;*@
     @if (ViewBag.showtopbar ?? true)
     {
         <header>
@@ -172,13 +180,6 @@
             @RenderBody()
         </main>
     </div>
-
-    <script src="~/lib/jquery/dist/jquery.min.js">
-    </script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js">
-    </script>
-    <script src="~/js/site.js" asp-append-version="true">
-    </script>
 
     @RenderSection("Scripts", required: false)
 

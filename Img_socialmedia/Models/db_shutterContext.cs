@@ -274,12 +274,17 @@ namespace Img_socialmedia.Models
                 entity.Property(e => e.TotalLike).HasColumnName("total_like");
 
                 entity.Property(e => e.TotalViews).HasColumnName("total_views");
-
+                entity.Property(e => e.UserId).HasColumnName("user_id");
                 entity.HasOne(d => d.Photo)
                     .WithMany(p => p.Post)
                     .HasForeignKey(d => d.PhotoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_post_photo");
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Post)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_post_user");
             });
 
             modelBuilder.Entity<UserViewModel>(entity =>

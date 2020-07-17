@@ -13,7 +13,7 @@ namespace Img_socialmedia.Models
             Comment = new HashSet<CommentViewModel>();
             ExternalLogin = new HashSet<ExternalLoginViewModel>();
             Notification = new HashSet<NotificationViewModel>();
-            FullName = Firstname + " " + Lastname;
+            Post = new HashSet<PostViewModel>();
         }
         [Key]
         public int Id { get; set; }
@@ -24,17 +24,9 @@ namespace Img_socialmedia.Models
         [DataType(DataType.Password)]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
         public string Password { get; set; }
-
-        [DataType(DataType.Password), Compare(nameof(Password))]
-        public string PasswordConfirm { get; set; }
-
-       
         public string Firstname { get; set; }
         [StringLength(100)]
         public string Lastname { get; set; }
-
-        [Display(Name = "Full Name")]
-        public string FullName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
         public string TokenId { get; set; }
@@ -51,5 +43,6 @@ namespace Img_socialmedia.Models
         public virtual ICollection<CommentViewModel> Comment { get; set; }
         public virtual ICollection<ExternalLoginViewModel> ExternalLogin { get; set; }
         public virtual ICollection<NotificationViewModel> Notification { get; set; }
+        public virtual ICollection<PostViewModel> Post { get; set; }
     }
 }

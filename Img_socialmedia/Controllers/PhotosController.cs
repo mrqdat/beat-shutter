@@ -126,12 +126,21 @@ namespace Img_socialmedia.Controllers
         }
 
         // GET: PhotoViewModels/Delete/5
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete(int id)
         {
+            if (id.ToString() == null)
+            {
+                return NotFound();
+            }
 
-            string[] filePaths = System.IO.Directory.GetFiles("C:\\Users\\QDat\\source\\repos\\beta-shutter\\Img_socialmedia\\wwwroot\\images\\drone.jpg");
+            var photoViewModel = await _context.Photo
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (photoViewModel == null)
+            {
+                return NotFound();
+            }
 
-            return View(new PhotoViewModel());
+            return View(photoViewModel);
         }
 
         // POST: PhotoViewModels/Delete/5

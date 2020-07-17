@@ -1,5 +1,6 @@
 ﻿using Img_socialmedia.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -12,28 +13,24 @@ namespace Img_socialmedia.Controllers
         private readonly db_shutterContext _context;
         private readonly SignInManager<IdentityUser> _signInManager;
 
-
-        db_shutterContext db = new db_shutterContext();
         public AccountController(db_shutterContext context, SignInManager<IdentityUser> signInManager)
         {
             _context = context;
             _signInManager = signInManager;
         }
 
-        public ActionResult Login()
-        {
-
-            return View();
-        }
-
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Validate(UserViewModel model)
         {
-            var user = db.User.Where(u => u.Email == model.Email);
+            var user = _context.User.Where(u => u.Email == model.Email);
             if (user.Any())
             {
                 if (user.Where(u => u.Password == model.Password).Any())
                 {
-                    return Json(new { status = true, message = "login successfully" });
+                    HttpContext.Response.Cookies.Append("username", "aadfdsfds");
+                    return Json(new { status = true, message = "login successfully" });                                       
                 }
                 else
                 {
@@ -46,6 +43,12 @@ namespace Img_socialmedia.Controllers
             }
         }
 
+        public ActionResult Login()
+        {
+
+            return View();
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Signup()
@@ -56,7 +59,7 @@ namespace Img_socialmedia.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Signup(UserViewModel model)
+        public async Task<IActionResult> Signup(UserViewModel model)
         {
             //if (ModelState.IsValid)
             //{
@@ -91,9 +94,14 @@ namespace Img_socialmedia.Controllers
             //    }
 
             //}
-            _context.Add(model);
-            _context.SaveChanges();
-            return RedirectToAction("Login", "Account");
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(model);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Login", "Account");
+            }
+            return View(model);
         }
 
         [ValidateAntiForgeryToken]
@@ -101,6 +109,27 @@ namespace Img_socialmedia.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult fb_Login(string name, string email)
+        {
+
+           HttpContext.Session.SetString("UserName", email);
+            return Json(new { success = "True" });
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult fb_Logout()
+        {
+
+            HttpContext.Session.Remove("username");
+            return Json(new { success = "True" });
+
         }
     }
 }

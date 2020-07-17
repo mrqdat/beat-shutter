@@ -12,17 +12,17 @@ namespace Img_socialmedia.Models
             Collection = new HashSet<CollectionViewModel>();
             Comment = new HashSet<CommentViewModel>();
             ExternalLogin = new HashSet<ExternalLoginViewModel>();
-            Notification = new HashSet<NotificationViewModel>();
-        
+            Notification = new HashSet<NotificationViewModel>();        
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
         [Required]
         public string Username { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
+        //[DataType(DataType.Password)]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
         public string Password { get; set; }
 

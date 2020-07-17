@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNetCore.Http;
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -21,9 +20,10 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
+
     @if (ViewBag.showtopbar ?? true)
     {
         <header>
@@ -36,15 +36,16 @@
                     </a>
                     @if (ViewBag.showsearchbar ?? true)
                     {
-
-                        <div id="nav-item" class="nav-item justify-content-start">
-                            <div class="nav-search">
-                                <button type="submit" class="navsearchButton">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                                <input type="text" class="navsearchTerm" placeholder="Search for free photo and images">
+                        <form asp-controller="Search" asp-action="Index">
+                            <div id="nav-item" class="nav-item justify-content-start">
+                                <div class="nav-search">
+                                    <button type="submit" class="navsearchButton">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <input type="text" class="navsearchTerm" placeholder="Search for free photo and images" name="searchstring">
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     }
                     <div style="display:flex;">
                         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-label="Toggle navigation" style="border:none;">
@@ -61,68 +62,69 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" id="upload_modal" style="cursor:pointer;" >Upload</a>
+                                <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
                             </li>
-                            @{ var userid = Context.Session.GetString("userid");
-                                if (@userid != null)
-                                {
-                                    <li class="nav-item" style="margin:7px 25px 7px 0;">
-                                        <a class="notification dropdown-toggle" data-toggle="popover" title="Notification" data-placement="bottom" aria-haspopup="true" style="cursor:pointer;">
-                                            <span hidden>Notification</span>
-                                            <svg class="bi bi-bell-fill" width="34" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" style="color:dimgray">
-                                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
-                                            </svg>
-                                        </a>
-                                        <div style="display:none;width:200px" class="alert_list">
-                                            <ul class="unstyled">
-                                                <li data-alert_id="1" class="alert_li">
-                                                    <a href="#" class="alert_message">User1 liked your post</a> <br />
-                                                    <span class="time">At 13:09</span>
-                                                    <div class="clearfix"></div>
-                                                </li>
-                                                <li data-alert_id="2" class="alert_li">
-                                                    <a href="#">User2 is following you</a> <br />
-                                                    <span class="time">1 hour ago</span>
-                                                    <div class="clearfix"></div>
-                                                </li>
-                                                <li data-alert_id="3" class="alert_li">
-                                                    <a href="#">User1 liked your post </a> <br />
-                                                    <span class="time">1 day ago</span>
-                                                    <div class="clearfix"></div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
 
 
-                                    <li class="nav-item avatar">
-                                        <a href="javascript:void(0);" class="btn-user media align-items-center dropdown-toggle" data-toggle="dropdown">
-                                            <img class="mr-2" src="~/images/man.png" width="32" height="32" alt="avatar">
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-info">
-                                            <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Profile</a>
-                                            <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="EditProfile">Account setting</a>
-                                            <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
-                                        </div>
-                                    </li>
-                                }
+                            @if (string.IsNullOrEmpty(ViewBag.username)==false)
+                            {
+                                <li class="nav-item" style="margin:7px 25px 7px 0;">
+                                    <a class="notification dropdown-toggle" data-toggle="popover" title="Notification" data-placement="bottom" aria-haspopup="true" style="cursor:pointer;">
+                                        <span hidden>Notification</span>
+                                        <svg class="bi bi-bell-fill" width="34" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" style="color:dimgray">
+                                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+                                        </svg>
+                                    </a>
+                                    <div style="display:none;width:200px" class="alert_list">
+                                        <ul class="unstyled">
+                                            <li data-alert_id="1" class="alert_li">
+                                                <a href="#" class="alert_message">User1 liked your post</a> <br />
+                                                <span class="time">At 13:09</span>
+                                                <div class="clearfix"></div>
+                                            </li>
+                                            <li data-alert_id="2" class="alert_li">
+                                                <a href="#">User2 is following you</a> <br />
+                                                <span class="time">1 hour ago</span>
+                                                <div class="clearfix"></div>
+                                            </li>
+                                            <li data-alert_id="3" class="alert_li">
+                                                <a href="#">User1 liked your post </a> <br />
+                                                <span class="time">1 day ago</span>
+                                                <div class="clearfix"></div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
 
-                                else
-                                {
 
-                                    <li class="nav-item">
-                                        <span class="line"></span>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link " asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
-                                    </li>
-
-                                    <li class="nav-item" style="margin-right:0px;">
-                                        <a class="btn btn-success text-white" asp-area="" asp-controller="SignUp" asp-action="Account">Join free</a>
-                                    </li>
-                                }
+                                <li class="nav-item avatar">
+                                    <a href="javascript:void(0);" class="btn-user media align-items-center dropdown-toggle" data-toggle="dropdown">
+                                        <img class="mr-2" src="~/images/man.png" width="32" height="32" alt="avatar">
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-info">
+                                        <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Profile</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="EditProfile">Account setting</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
+                                    </div>
+                                </li>
                             }
+
+                            else
+                            {
+
+                                <li class="nav-item">
+                                    <span class="line"></span>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link " asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
+                                </li>
+
+                                <li class="nav-item" style="margin-right:0px;">
+                                    <a class="btn btn-success text-white" asp-area="" asp-controller="Account" asp-action="SignUp">Join free</a>
+                                </li>
+                            }
+
                         </ul>
                     </div>
                 </div>
@@ -131,18 +133,18 @@
             @*
                 upload modal
             *@
-
+            @model PhotoViewModel 
             <div id="myModal" class="modal">
                 <div class="modal-content">
                     <form method="post" enctype="multipart/form-data" asp-controller="Photos" asp-action="photoUpload">
                         <div class="file-upload">
                             <div class="image-upload-wrap">
-                                <input class="file-upload-input custom-file-input" type='file' onchange="readURL(this);" accept="image/*" />
+                                <input class="file-upload-input custom-file-input" name="img_url" type='file' onchange="readURL(this);" accept="image/*" />
                                 <div class="drag-text">
                                     <h3>Drag and drop a file or select add Image</h3>
                                 </div>
                                 <div class="file-upload-content">
-                                    <img class="file-upload-image" src="#" alt="your image" />
+                                    <img class="file-upload-image" src="#" alt="your image" asp-append-version="true"/>
                                     <div class="image-title-wrap">
                                         <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
                                     </div>
@@ -169,12 +171,13 @@
     </div>
 
     @RenderSection("Scripts", required: false)
+
+
 </body>
 
 </html>
 
 @section Scripts{
-  
     <script>
 
         var modal = document.getElementById("myModal");
@@ -224,9 +227,7 @@
             $('.image-upload-wrap').removeClass('image-dropping');
         });
 
-    </script>
 
-    <script>
 
         $(document).ready(function () {
             if ($(window).width() < 600) {
@@ -235,8 +236,6 @@
             }
         });
 
-    </script>
-    <script>
         $(document).ready(function () {
             $('[data-toggle="popover"]').popover();
         });
@@ -248,9 +247,5 @@
             'content': $(".alert_list").html()
         });
 
-                //$('.turn_off_alert').on('click', function (event) {
-                //    var alert = $(this).parent();
-
-                //});
     </script>
 }

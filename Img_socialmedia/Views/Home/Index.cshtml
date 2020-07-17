@@ -1,16 +1,9 @@
-﻿@{
-    Layout = "_Layout";
-}
+﻿@model PhotoViewModel
+
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Shutter | Free images and photos for every one ";
 }
-<!-- Style home.css -->
-<!-- Thay icon button = font awesome
-    <i class="fa fa-heart-o" aria-hidden="true"></i> button width 38 height 32
-    <i class="fa fa-heart" aria-hidden="true"></i>
-    <i class="fa fa-plus" aria-hidden="true"></i>
-    <i class="fa fa-download" aria-hidden="true"></i>
- -->
 <div class="vertical_menu">
     <div class="scrollmenu">
         <a href="#home">Curent Event</a>
@@ -498,6 +491,59 @@
                 </figure>
             </div>
         </div>
+        @*@foreach (var photo in Model )
+        {
+            <div class="img-x">
+                <figure>
+                    <div class="img-content">
+                        <a class="a-cursor" href="#">
+                            <div class="img-rel">
+                                <img class="photo-content" src="~/images/@Url.Content(Model.Url)" asp-append-version="true" />
+                            </div>
+                        </a>
+                        <div class="img-icon">
+                            <div class="img-hover-background i-animation"></div>
+                            <div class="img-button-top img-button-display i-animation">
+                                <div class="img-button">
+                                    <button class="btn btn-light pos-button">
+                                        <svg class="bi bi-heart pos-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                        </svg>
+                                    </button>
+                                    <button class="btn btn-light">
+                                        <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="img-button-bottom img-button-display i-animation">
+                                <div class="owner-photo">
+                                    <span>
+                                        <a href="#">
+                                            <img class="owner-img" src="~/images/sunset.png" />
+                                        </a>
+                                    </span>
+                                    <a class="owner-name" href="#">
+                                        Quốc Đạt
+                                    </a>
+                                </div>
+                                <div class="img-button">
+                                    <button class="btn btn-light">
+                                        <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                            <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+            </div>
+        }*@
     </div>
 </div>
 
@@ -1096,7 +1142,7 @@
         <div class="modal-content" style="cursor:auto">
             <div class="iPL30r">
                 <h2>Info</h2>
-                <span>Publish on: 1/1/2020</span>
+                <span></span>
             </div>
             <div style="display:flex">
                 <div class="iPhotoVi iPa230x">

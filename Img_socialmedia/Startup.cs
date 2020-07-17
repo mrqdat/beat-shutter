@@ -57,8 +57,7 @@ namespace Img_socialmedia
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                
+                app.UseDeveloperExceptionPage();               
             }
             else
             {
@@ -73,7 +72,6 @@ namespace Img_socialmedia
             app.UseRouting();
             app.UseAuthorization();
             app.UseCookiePolicy();
-
             app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>

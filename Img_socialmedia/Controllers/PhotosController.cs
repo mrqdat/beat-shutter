@@ -14,6 +14,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MetadataExtractor;
+using MetadataExtractor.Formats.Exif;
 
 namespace Img_socialmedia.Controllers
 {
@@ -124,21 +126,12 @@ namespace Img_socialmedia.Controllers
         }
 
         // GET: PhotoViewModels/Delete/5
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete()
         {
-            if (id.ToString() == null)
-            {
-                return NotFound();
-            }
 
-            var photoViewModel = await _context.Photo
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (photoViewModel == null)
-            {
-                return NotFound();
-            }
+            string[] filePaths = System.IO.Directory.GetFiles("C:\\Users\\QDat\\source\\repos\\beta-shutter\\Img_socialmedia\\wwwroot\\images\\drone.jpg");
 
-            return View(photoViewModel);
+            return View(new PhotoViewModel());
         }
 
         // POST: PhotoViewModels/Delete/5
@@ -158,67 +151,25 @@ namespace Img_socialmedia.Controllers
         }
 
       
-        public async Task<IActionResult> photoUpload(List<IFormFile> files)
+        public ActionResult read_metadata(string url, PhotoViewModel model)
         {
 
-            //var newFileName = string.Empty;
-
-            //if (HttpContext.Request.Form.Files != null)
-            //{
-            //    var fileName = string.Empty;
-            //    string PathDB = string.Empty;
-
-            //    var files = HttpContext.Request.Form.Files;
-
-            //    foreach (var file in files)
-            //    {
-            //        if (file.Length > 0)
-            //        {
-
-            //            fileName = ContentDispositionHeaderValue
-            //                    .Parse(file.ContentDisposition)
-            //                    .FileName
-            //                    .Trim('"');
-
-            //            var myUniqueFileName = Convert.ToString(Guid.NewGuid());
-
-            //            var FileExtension = Path.GetExtension(fileName);
-
-            //            newFileName = myUniqueFileName + FileExtension;
-
-            //            fileName = Path.Combine(webHostEnvironment.WebRootPath, "images") + $@"\{newFileName}";
-
-            //            PathDB = newFileName;
-
-            //            using (FileStream fs = System.IO.File.Create(fileName))
-            //            {
-            //                file.CopyTo(fs);
-            //                fs.Flush();
-            //            }
-            //        }
-            //    }
-
-
-            //}
-            long size = files.Sum(f => f.Length);
-
-            var filePaths = new List<string>();
-            foreach (var formFile in files)
+            var directories = ImageMetadataReader.ReadMetadata(model.Url);
+            
+            foreach(var dir in directories)
             {
-                if (formFile.Length > 0)
+                foreach (var tag in dir.Tags)
                 {
-                    // full path to file in temp location
-                    var filePath = Path.GetTempFileName(); //we are using Temp file name just for the example. Add your own file path.
-                    filePaths.Add(filePath);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await formFile.CopyToAsync(stream);
-                    }
+                    model.Width = ExifDirectoryBase.TagExifImageWidth;
+                    model.Height = ExifDirectoryBase.TagExifImageHeight;
+                    model.Aperture = Convert.ToString(ExifDirectoryBase.TagAperture);
+                    model.Iso = ExifDirectoryBase.TagIsoEquivalent;
+                    model.FocalLength = ExifDirectoryBase.TagFocalLength;
+                    model.ShutterSpeed = Convert.ToString(ExifDirectoryBase.TagShutterSpeed);
+                    model.Location = Convert.ToString(ExifDirectoryBase.TagSubjectLocation);
                 }
             }
-
-            return Ok(new { count = files.Count, size, filePaths });
+            return View();
         }
 
         public ActionResult reading_metadata()
@@ -241,7 +192,6 @@ namespace Img_socialmedia.Controllers
                 string data;
                 string model;
                 string version;
-
 
                 DateTime datetaken;
 
@@ -268,3 +218,4 @@ namespace Img_socialmedia.Controllers
         }
     }
 }
+// preate proc 

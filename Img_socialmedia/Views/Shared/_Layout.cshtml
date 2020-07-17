@@ -133,13 +133,13 @@
             @*
                 upload modal
             *@
-            @model PhotoViewModel 
-            <div id="myModal" class="modal">
+           
+            <div id="myModal">
                 <div class="modal-content">
-                    <form method="post" enctype="multipart/form-data" asp-controller="Photos" asp-action="photoUpload">
+                    <form method="post" enctype="multipart/form-data" asp-controller="Photos" asp-action="Create">
                         <div class="file-upload">
                             <div class="image-upload-wrap">
-                                <input class="file-upload-input custom-file-input" name="img_url" type='file' onchange="readURL(this);" accept="image/*" />
+                                <input class="file-upload-input custom-file-input" name="files" type='file' onchange="readURL(this);" accept="image/*" />
                                 <div class="drag-text">
                                     <h3>Drag and drop a file or select add Image</h3>
                                 </div>
@@ -186,17 +186,17 @@
 
         btn.onclick = function () {
             modal.style.display = "block";
-        }
+        };
 
         span.onclick = function () {
             modal.style.display = "none";
-        }
+        };
 
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        }
+        };
 
         function readURL(input) {
             if (input.files && input.files[0]) {
@@ -214,7 +214,7 @@
             } else {
                 removeUpload();
             }
-        }
+        };
 
         function removeUpload() {
             $('.file-upload-input').replaceWith($('.file-upload-input').clone());

@@ -134,7 +134,7 @@
                 upload modal
             *@
            
-            <div id="myModal">
+            <div id="myModal" style="">
                 <div class="modal-content">
                     <form method="post" enctype="multipart/form-data" asp-controller="Photos" asp-action="Create">
                         <div class="file-upload">
@@ -179,14 +179,17 @@
 
 @section Scripts{
     <script>
-
         var modal = document.getElementById("myModal");
         var btn = document.getElementById("upload_modal");
         var span = document.getElementsByClassName("close")[0];
 
-        btn.onclick = function () {
-            modal.style.display = "block";
+        btn.onC = function () {
+            console.log("asd");
+            
         };
+        $("#upload_modal").onclick(function () {
+            modal.style.display = "block";
+        });
 
         span.onclick = function () {
             modal.style.display = "none";

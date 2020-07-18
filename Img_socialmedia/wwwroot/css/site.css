@@ -67,7 +67,7 @@ a {
 /*upload modal=========================================*/
 
 #myModal {
-    display: block; 
+    display:block; 
     position: fixed; 
     z-index: 11111; 
     padding-top: 10px; 

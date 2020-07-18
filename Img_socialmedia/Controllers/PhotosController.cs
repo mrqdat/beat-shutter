@@ -18,6 +18,7 @@ using MetadataExtractor;
 using MetadataExtractor.Formats.Exif;
 using Microsoft.Extensions.FileProviders;
 using System.Reflection.Metadata;
+using MetadataExtractor.Formats.Jpeg;
 
 namespace Img_socialmedia.Controllers
 {
@@ -204,13 +205,14 @@ namespace Img_socialmedia.Controllers
                     }
 
                     var directories = ImageMetadataReader.ReadMetadata(filePath);
-                    model.Url = newFileName;
-                    //model.na
-                    model.Aperture = Convert.ToString(ExifDirectoryBase.TagAperture);
-                    model.Iso = ExifDirectoryBase.TagIsoEquivalent;
-                    model.ShutterSpeed = Convert.ToString(ExifDirectoryBase.TagShutterSpeed);
-                    model.FocalLength = ExifDirectoryBase.TagFocalLength;
-                    model.CreateAt =Convert.ToDateTime( ExifDirectoryBase.TagDateTimeOriginal);
+                    //model.Url = newFileName;
+                    ////model.CameraModel = JpegMetadataReader.ReadMetadata().;
+                    //model.Aperture = Convert.ToString(ExifDirectoryBase.TagAperture);
+                    ////model.Iso = directories;
+                    //model.ShutterSpeed = Convert.ToString(ExifDirectoryBase.TagShutterSpeed);
+                    //model.FocalLength = ExifDirectoryBase.TagFocalLength;
+                    //model.Location = Convert.ToString(ExifDirectoryBase.TagSubjectLocation);
+                    //model.CreateAt = Convert.ToDateTime(ExifDirectoryBase.TagDateTimeOriginal);
                     return Ok(directories);
                 }
             }

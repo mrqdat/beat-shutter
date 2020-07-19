@@ -14,6 +14,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MetadataExtractor;
+using MetadataExtractor.Formats.Exif;
+using Microsoft.Extensions.FileProviders;
+using System.Reflection.Metadata;
+using MetadataExtractor.Formats.Jpeg;
 
 namespace Img_socialmedia.Controllers
 {
@@ -24,10 +29,10 @@ namespace Img_socialmedia.Controllers
         public PhotosController(db_shutterContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
-            webHostEnvironment = hostEnvironment; 
+            webHostEnvironment = hostEnvironment;
         }
         // GET: PhotoViewModels
-        public IActionResult  Index()
+        public IActionResult Index()
         {
             return View();
         }
@@ -40,7 +45,7 @@ namespace Img_socialmedia.Controllers
                 return NotFound();
             }
 
-            var photoViewModel = await _context.Photo 
+            var photoViewModel = await _context.Photo
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (photoViewModel == null)
             {
@@ -59,18 +64,20 @@ namespace Img_socialmedia.Controllers
         // POST: PhotoViewModels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,url,camera_model,aperture,shutter_speed,focal_length,ISO,width,height,location,create_at")] PhotoViewModel photoViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(photoViewModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(photoViewModel);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(string img_url, PhotoViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+                 
+
+        //        _context.Add(model);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(model);
+        //}
 
         // GET: PhotoViewModels/Edit/5
         public async Task<IActionResult> Edit(string id)
@@ -157,114 +164,65 @@ namespace Img_socialmedia.Controllers
             return _context.Photo.Any(e => e.Id == id);
         }
 
-      
-        public async Task<IActionResult> photoUpload(List<IFormFile> files)
+
+        public ActionResult read_metadata(string filepath)
         {
 
-            //var newFileName = string.Empty;
+            var directories = ImageMetadataReader.ReadMetadata(filepath);
 
-            //if (HttpContext.Request.Form.Files != null)
-            //{
-            //    var fileName = string.Empty;
-            //    string PathDB = string.Empty;
+            foreach (var dir in directories)
+            {
 
-            //    var files = HttpContext.Request.Form.Files;
-
-            //    foreach (var file in files)
-            //    {
-            //        if (file.Length > 0)
-            //        {
-
-            //            fileName = ContentDispositionHeaderValue
-            //                    .Parse(file.ContentDisposition)
-            //                    .FileName
-            //                    .Trim('"');
-
-            //            var myUniqueFileName = Convert.ToString(Guid.NewGuid());
-
-            //            var FileExtension = Path.GetExtension(fileName);
-
-            //            newFileName = myUniqueFileName + FileExtension;
-
-            //            fileName = Path.Combine(webHostEnvironment.WebRootPath, "images") + $@"\{newFileName}";
-
-            //            PathDB = newFileName;
-
-            //            using (FileStream fs = System.IO.File.Create(fileName))
-            //            {
-            //                file.CopyTo(fs);
-            //                fs.Flush();
-            //            }
-            //        }
-            //    }
-
-
-            //}
+            }
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(List<IFormFile> files, PhotoViewModel model)
+        {
             long size = files.Sum(f => f.Length);
+
 
             var filePaths = new List<string>();
             foreach (var formFile in files)
             {
                 if (formFile.Length > 0)
                 {
-                    // full path to file in temp location
-                    var filePath = Path.GetTempFileName(); //we are using Temp file name just for the example. Add your own file path.
-                    filePaths.Add(filePath);
+                    var filename = Path.GetFileName(formFile.FileName);
 
+                    var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                    var fileExtension = Path.GetExtension(filename);
+
+                    var newFileName = String.Concat(myUniqueFileName, fileExtension);
+
+                    var filePath = new PhysicalFileProvider(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "images")).Root + $@"\{ newFileName}";
+                    // full path to file in temp location
+                    //var filePath = Path.GetTempFileName(); //we are using Temp file name just for the example. Add your own file path.
+                    filePaths.Add(filePath);
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await formFile.CopyToAsync(stream);
                     }
+
+                    var directories = ImageMetadataReader.ReadMetadata(filePath);
+                    //model.Url = newFileName;
+                    ////model.CameraModel = JpegMetadataReader.ReadMetadata().;
+                    //model.Aperture = Convert.ToString(ExifDirectoryBase.TagAperture);
+                    ////model.Iso = directories;
+                    //model.ShutterSpeed = Convert.ToString(ExifDirectoryBase.TagShutterSpeed);
+                    //model.FocalLength = ExifDirectoryBase.TagFocalLength;
+                    //model.Location = Convert.ToString(ExifDirectoryBase.TagSubjectLocation);
+                    //model.CreateAt = Convert.ToDateTime(ExifDirectoryBase.TagDateTimeOriginal);
+                    return Ok(directories);
                 }
             }
 
-            return Ok(new { count = files.Count, size, filePaths });
-        }
+            // process uploaded files
+            // Don't rely on or trust the FileName property without validation.
 
-        public ActionResult reading_metadata()
-        {
-
-            string file = @"C:\Users\QDat\source\repos\Img_sharing\Img_socialmedia\wwwroot\images\hoa.png";
-
-            FileInfo info = new FileInfo(file);
-            long filesize = info.Length;
-
-            FileStream fileStream = new FileStream(file, FileMode.Open, FileAccess.Read);
-            Image image = Image.FromStream(fileStream, false, false);
-
-            int width = image.Width;
-            int height = image.Height;
-
-            try
-            {
-                PropertyItem item;
-                string data;
-                string model;
-                string version;
-
-
-                DateTime datetaken;
-
-                item = image.GetPropertyItem(0x9000);
-                version = Encoding.UTF8.GetString(item.Value);
-
-                item = image.GetPropertyItem(0x0110);
-                model = Encoding.UTF8.GetString(item.Value, 0, item.Value.Length - 1);
-
-                item = image.GetPropertyItem(0x9003);
-                data = Encoding.UTF8.GetString(item.Value, 0, item.Value.Length - 1);
-                datetaken = DateTime.ParseExact(data, "yyyy:MM:dd HH:mm:ss", CultureInfo.InvariantCulture);
-
-
-                //item = image.GetPropertyItem(0x011A);
-                //width = Encoding.UTF8.GetString(item.Value,);
-            }
-            catch
-            {
-
-            }
-
+            // return Ok(new { count = files.Count, size, filePaths });
             return View();
         }
     }
 }
+// preate proc 

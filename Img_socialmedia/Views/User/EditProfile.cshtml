@@ -1,26 +1,23 @@
 ﻿@model Img_socialmedia.Models.UserViewModel
 @{
     ViewData["Title"] = "Edit Profile";
-}
-
-@{
     ViewBag.showsearchbar = false;
 }
+
 
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-4 pb-5">
             <!-- Account Sidebar-->
             <div class="author-card pb-3">
-
-                <div id="profile">
-                    <div class="dashes"></div>
-                    <label id="lb_img">Click to browse or drag an image here</label>
-
-                    <input type="file" id="mediaFile" />
-                </div>
-                @*<img src="~/images/man.png" alt="Daniel Adams">*@
-
+                <form>
+                    <div id="profile">
+                        <div class="dashes"></div>
+                        <label id="lb_img">Click to browse or drag an image here</label>
+                        <input type="file" id="mediaFile" accept="image/*" />
+                    </div>
+                    @*<img src="~/images/man.png" alt="Daniel Adams">*@
+                </form>
                 <div class="author-card-details">
                     <h5 class="author-card-name text-lg">Daniel Adams</h5><span class="author-card-position">Joined February 06, 2017</span>
                 </div>
@@ -70,15 +67,15 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label   for="account-phone">Phone Number</label>
-                        <input   class="form-control" type="text" id="account-phone" value="+7 (805) 348 95 72" required="">
+                        <label for="account-phone">Phone Number</label>
+                        <input class="form-control" type="text" id="account-phone" value="+7 (805) 348 95 72" required="">
                     </div>
                 </div>
 
                 <div class="col-md-12">
                     <div class="form-group">
                         <label asp-for="Bio" for="account-phone">Bio</label>
-                        <input asp-for="Bio" class="form-control" type="text" id="bio" value="" required="" style="height:100px;">
+                        <input asp-for="Bio" class="form-control" type="text" id="bio" value="" style="height:100px;">
                     </div>
                 </div>
 
@@ -122,7 +119,7 @@
 
 </footer>
 
-@section scripts{
+@section Scripts{
     <script type="text/javascript">
         $(function () {
             $('#profile').addClass('dragging').removeClass('dragging');

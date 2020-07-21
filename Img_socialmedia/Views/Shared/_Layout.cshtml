@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNetCore.Http;
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -17,27 +16,19 @@
     <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css" />
     <link rel="stylesheet" type="text/css" href="~/vendor/animsition/css/animsition.min.css" />
     <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css" />
-    <link rel="stylesheet/scss" type="text/css" href="~/scss/site.scss" />
-
-    <script src="~/lib/jquery/dist/jquery.min.js">
-    </script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js">
-    </script>
-    <script src="~/js/site.js" asp-append-version="true">
-    </script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script scr="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 </head>
 <body>
 
-    @using Microsoft.AspNetCore.Identity
-
-    @*@inject SignInManager<UserViewModel> _signInManager;
-        @inject UserManager<UserViewModel> _userManager;*@
     @if (ViewBag.showtopbar ?? true)
     {
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white mb-3" style="margin-bottom:0;min-width:370px;">
-                <div class="container" style="margin:0;padding:0;max-width:1280px;">
+                <div class="container" style="margin:0;padding:0;max-width:100%;">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="margin-left:0;">
                         <div class="main-nav-bar-logo" title="All stock photo">
                             <img src="~/shutter.svg" alt="Logo" width="35" />
@@ -45,15 +36,16 @@
                     </a>
                     @if (ViewBag.showsearchbar ?? true)
                     {
-
-                        <div id="nav-item" class="nav-item justify-content-start">
-                            <div class="nav-search">
-                                <button type="submit" class="navsearchButton">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                                <input type="text" class="navsearchTerm" placeholder="Search for free photo and images">
+                        <form asp-controller="Search" asp-action="Index">
+                            <div id="nav-item" class="nav-item justify-content-start">
+                                <div class="nav-search">
+                                    <button type="submit" class="navsearchButton">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <input type="text" class="navsearchTerm" placeholder="Search for free photo and images" name="searchstring">
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     }
                     <div style="display:flex;">
                         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-label="Toggle navigation" style="border:none;">
@@ -61,9 +53,7 @@
                         </button>
                     </div>
                     <div class="navbar-collapse d-sm-inline-flex" id="navbar">
-
                         <ul class="navbar-nav flex-grow-1 justify-content-end ">
-
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Explore</a>
                             </li>
@@ -74,68 +64,67 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
                             </li>
-                            @{ var userid = Context.Session.GetString("userid");
-                                if (@userid != null)
-                                {
 
 
-                                    <li class="nav-item" style="margin:7px 25px 7px 0;">
-                                        <a class="notification dropdown-toggle" data-toggle="popover" title="Notification" data-placement="bottom" aria-haspopup="true" style="cursor:pointer;">
-                                            <span hidden>Notification</span>
-                                            <svg class="bi bi-bell-fill" width="34" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" style="color:dimgray">
-                                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
-                                            </svg>
-                                        </a>
-                                        <div style="display:none;width:200px" class="alert_list">
-                                            <ul class="unstyled">
-                                                <li data-alert_id="1" class="alert_li">
-                                                    <a href="#" class="alert_message">User1 liked your post</a> <br />
-                                                    <span class="time">At 13:09</span>
-                                                    <div class="clearfix"></div>
-                                                </li>
-                                                <li data-alert_id="2" class="alert_li">
-                                                    <a href="#">User2 is following you</a> <br />
-                                                    <span class="time">1 hour ago</span>
-                                                    <div class="clearfix"></div>
-                                                </li>
-                                                <li data-alert_id="3" class="alert_li">
-                                                    <a href="#">User1 liked your post </a> <br />
-                                                    <span class="time">1 day ago</span>
-                                                    <div class="clearfix"></div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
+                            @if (string.IsNullOrEmpty(ViewBag.username) == false)
+                            {
+                                <li class="nav-item" style="margin:7px 25px 7px 0;">
+                                    <a class="notification dropdown-toggle" data-toggle="popover" title="Notification" data-placement="bottom" aria-haspopup="true" style="cursor:pointer;">
+                                        <span hidden>Notification</span>
+                                        <svg class="bi bi-bell-fill" width="34" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" style="color:dimgray">
+                                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+                                        </svg>
+                                    </a>
+                                    <div style="display:none;width:200px" class="alert_list">
+                                        <ul class="unstyled">
+                                            <li data-alert_id="1" class="alert_li">
+                                                <a href="#" class="alert_message">User1 liked your post</a> <br />
+                                                <span class="time">At 13:09</span>
+                                                <div class="clearfix"></div>
+                                            </li>
+                                            <li data-alert_id="2" class="alert_li">
+                                                <a href="#">User2 is following you</a> <br />
+                                                <span class="time">1 hour ago</span>
+                                                <div class="clearfix"></div>
+                                            </li>
+                                            <li data-alert_id="3" class="alert_li">
+                                                <a href="#">User1 liked your post </a> <br />
+                                                <span class="time">1 day ago</span>
+                                                <div class="clearfix"></div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
 
 
-                                    <li class="nav-item avatar">
-                                        <a href="javascript:void(0);" class="btn-user media align-items-center dropdown-toggle" data-toggle="dropdown">
-                                            <img class="mr-2" src="~/images/man.png" width="32" height="32" alt="avatar">
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-info">
-                                            <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Profile</a>
-                                            <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="EditProfile">Account setting</a>
-                                            <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
-                                        </div>
-                                    </li>
-                                }
-
-                                else
-                                {
-
-                                    <li class="nav-item">
-                                        <span class="line"></span>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link " asp-area="" asp-controller="Login" asp-action="Index">Log in</a>
-                                    </li>
-
-                                    <li class="nav-item" style="margin-right:0px;">
-                                        <a class="btn btn-success text-white" asp-area="" asp-controller="SignUp" asp-action="Index">Join free</a>
-                                    </li>
-                                }
+                                <li class="nav-item avatar">
+                                    <a href="javascript:void(0);" class="btn-user media align-items-center dropdown-toggle" data-toggle="dropdown">
+                                        <img class="mr-2" src="~/images/man.png" width="32" height="32" alt="avatar">
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-info">
+                                        <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Profile</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="EditProfile">Account setting</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
+                                    </div>
+                                </li>
                             }
+
+                            else
+                            {
+
+                                <li class="nav-item">
+                                    <span class="line"></span>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link " asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
+                                </li>
+
+                                <li class="nav-item" style="margin-right:0px;">
+                                    <a class="btn btn-success text-white" asp-area="" asp-controller="Account" asp-action="SignUp">Join free</a>
+                                </li>
+                            }
+
                         </ul>
                     </div>
                 </div>
@@ -147,31 +136,37 @@
 
             <div id="myModal" class="modal">
                 <div class="modal-content">
-                    <form method="post" enctype="multipart/form-data" asp-controller="Photos" asp-action="photoUpload">
+                    <form method="post" enctype="multipart/form-data" asp-controller="Photos" asp-action="Create">
                         <div class="file-upload">
+                            <input class="file-upload-input custom-file-input" name="files" type='file' onchange="readURL(this);" accept="image/*" />
                             <div class="image-upload-wrap">
-                                <input class="file-upload-input custom-file-input" type='file' @*onchange="readURL(this);"*@ accept="image/*" />
                                 <div class="drag-text">
                                     <h3>Drag and drop a file or select add Image</h3>
                                 </div>
                                 <div class="file-upload-content">
-                                    <img class="file-upload-image" src="#" alt="your image" />
-                                    <div class="image-title-wrap">
-                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                    <div class="image" style="position: relative;">
+                                        <img class="file-upload-image img-responsive" src="#" alt="your image" asp-append-version="true" />
+                                        <div class="image-title-wrap">
+                                            <button type="button" class="remove-image fa fa-remove" onclick="removeUpload()"></button>
+                                        </div>
                                     </div>
+                                    <div class="image-tag">
+                                        <input class="image-tag-name" type="text" name="tag" value="" placeholder="Add your tags!" />
+                                    </div>
+                                    <div class="image-tag">
+                                        <input class="image-location" type="text" name="loaction" value="" placeholder="Add location" />
+                                    </div>
+
                                 </div>
                             </div>
-
                         </div>
                         <div class="modal-footer" style="padding:0;">
                             <button class="close" type="button" data-dismiss="modal">Cancel</button>
-                            <button class="file-upload-btn" type="submit">Publish to Shutter</button>
+                            <button class="file-upload-btn">Publish to Shutter</button>
                         </div>
                     </form>
                 </div>
-
             </div>
-
         </header>
     }
 
@@ -183,98 +178,91 @@
 
     @RenderSection("Scripts", required: false)
 
-    <script>
+     
+<script>
 
-        $(document).ready(function () {
-            $(".custom-file-input").on("change", function () {
-                var filename = $(this).val().split("\\").pop();
-                $(this).next(".image-title").html(filename);
-            })
-
-        });
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("upload_modal");
+    var span = document.getElementsByClassName("close")[0];
 
 
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
 
-        var modal = document.getElementById("myModal");
-        var btn = document.getElementById("upload_modal");
-        var span = document.getElementsByClassName("close")[0];
+    span.onclick = function () {
+        modal.style.display = "none";
+    };
 
-        btn.onclick = function () {
-            modal.style.display = "block";
-        }
-
-        span.onclick = function () {
+    window.onclick = function (event) {
+        if (event.target == modal) {
             modal.style.display = "none";
         }
+    };
 
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+
+                $('.file-upload-image').attr('src', e.target.result);
+                $('.file-upload-content').show();
+                $('.image-title').html(input.files[0].name);
+            };
+            reader.readAsDataURL(input.files[0]);
+
+        } else {
+            removeUpload();
         }
+    };
+
+    function removeUpload() {
+        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-content').hide();
+    }
+    $('.image-upload-wrap').bind('dragover', function () {
+        $('.image-upload-wrap').addClass('image-dropping');
+    });
+    $('.image-upload-wrap').bind('dragleave', function () {
+        $('.image-upload-wrap').removeClass('image-dropping');
+    });
 
 
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-
-                    $('.file-upload-image').attr('src', e.target.result);
-                    $('.file-upload-content').show();
-                    $('.image-title').html(input.files[0].name);
-                };
-                reader.readAsDataURL(input.files[0]);
-
-            } else {
-                removeUpload();
-            }
+    $(document).ready(function () {
+        if ($(window).width() < 600) {
+            $('.navsearchTerm').attr('placeholder', "Search photos");
+            $('bt-header').show();
         }
+    });
 
-        function removeUpload() {
-            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-            $('.file-upload-content').hide();
-        }
-        $('.image-upload-wrap').bind('dragover', function () {
-            $('.image-upload-wrap').addClass('image-dropping');
-        });
-        $('.image-upload-wrap').bind('dragleave', function () {
-            $('.image-upload-wrap').removeClass('image-dropping');
-        });
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+
+    $(".notification").popover({
+        'title': 'Notification',
+        'html': true,
+        'placement': 'bottom',
+        'content': $(".alert_list").html()
+    });
 
 
+    $('.image-tag-name').on('focusout', function () {
+        var txt = this.value.replace(/[^a-zA-Z0-9\+\-\.\#]/g, ''); // allowed characters list
+        if (txt) $(this).before('<span class="tag">' + txt +'</span>');
+        this.value = "";
 
-    </script>
+    }).on('keyup', function (e) {
+        // comma|space (add more keyCodes delimited with | pipe)
+        if (/(188|32)/.test(e.which)) $(this).trigger('focusout');
+    });
 
-    <script>
-
-        $(document).ready(function () {
-            if ($(window).width() < 600) {
-                $('.navsearchTerm').attr('placeholder', "Search photos");
-                $('bt-header').show();
-            }
-        });
-
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('[data-toggle="popover"]').popover();
-        });
-
-        $(".notification").popover({
-            'title': 'Notification',
-            'html': true,
-            'placement': 'bottom',
-            'content': $(".alert_list").html()
-        });
-
-        $('.turn_off_alert').on('click', function (event) {
-            var alert = $(this).parent();
-
-        });
-    </script>
-
+    $('.image-tag').on('click', '.tag', function () {
+        $(this).remove();
+    });
+</script>
+    
 </body>
 </html>

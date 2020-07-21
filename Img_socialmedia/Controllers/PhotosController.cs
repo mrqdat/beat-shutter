@@ -56,10 +56,10 @@ namespace Img_socialmedia.Controllers
         }
 
         // GET: PhotoViewModels/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
         // POST: PhotoViewModels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -189,7 +189,7 @@ namespace Img_socialmedia.Controllers
                 {
                     var filename = Path.GetFileName(formFile.FileName);
 
-                    var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+                    var myUniqueFileName = Convert.ToString(Guid.NewGuid())+ " - shutter";
 
                     var fileExtension = Path.GetExtension(filename);
 
@@ -204,7 +204,7 @@ namespace Img_socialmedia.Controllers
                         await formFile.CopyToAsync(stream);
                     }
 
-                    var directories = ImageMetadataReader.ReadMetadata(filePath);
+                    //var directories = ImageMetadataReader.ReadMetadata(filePath);
                     //model.Url = newFileName;
                     ////model.CameraModel = JpegMetadataReader.ReadMetadata().;
                     //model.Aperture = Convert.ToString(ExifDirectoryBase.TagAperture);
@@ -213,8 +213,9 @@ namespace Img_socialmedia.Controllers
                     //model.FocalLength = ExifDirectoryBase.TagFocalLength;
                     //model.Location = Convert.ToString(ExifDirectoryBase.TagSubjectLocation);
                     //model.CreateAt = Convert.ToDateTime(ExifDirectoryBase.TagDateTimeOriginal);
-                    return Ok(directories);
+                    return RedirectToAction("Index", "Home");
                 }
+                
             }
 
             // process uploaded files

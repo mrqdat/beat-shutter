@@ -49,7 +49,7 @@ namespace Img_socialmedia.Models
         public DateTime? CreateAt { get; set; }
         public int? FollowerCount { get; set; }
         public string Tags { get; set; }
-
+        public virtual IEnumerable<PostViewModel> Post { get; set; }
         public virtual ICollection<CollectionViewModel> Collection { get; set; }
         public virtual ICollection<CommentViewModel> Comment { get; set; }
         public virtual ICollection<ExternalLoginViewModel> ExternalLogin { get; set; }

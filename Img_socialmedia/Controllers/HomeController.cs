@@ -13,6 +13,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 using System.Globalization;
+using Microsoft.EntityFrameworkCore;
 
 namespace Img_socialmedia.Controllers
 {
@@ -38,13 +39,19 @@ namespace Img_socialmedia.Controllers
             var result = from photo in shutterContext.Photo
                          join post in shutterContext.Post on photo.Id equals post.PhotoId
                          join user in shutterContext.User on post.UserId equals user.Id
-                         select new PPUModel()
+                         select new PostViewModel
                          {
-                             photoP = photo,
-                             postP = post,
-                             userP = user
+                             Id = post.Id,
+                             PhotoId = photo.Id,
+                             TotalLike = post.TotalLike,
+                             TotalViews = post.TotalViews,
+                             CreateAt = post.CreateAt,
+                             Tags = post.Tags,
+                             UserId = user.Id,
+                             User = user,
+                             Photo = photo,
                          };
-                        
+
             return View(result.ToList());
         }
 
@@ -89,30 +96,30 @@ namespace Img_socialmedia.Controllers
         }
        
         [HttpGet]
-       public PostViewModel GetDetailPhoto(int? id)
+       public List<PostViewModel> GetDetailPhoto(int? id)
        {
-            //var result = from photo in shutterContext.Photo
-            //             join post in shutterContext.Post on photo.Id equals post.PhotoId
-            //             join user in shutterContext.User on post.UserId equals user.Id
-            //             join comment in shutterContext.Comment on post.Id equals comment.PostId into commentGroup
-            //             where post.Id == id
-            //             select new PostViewModel
-            //             {
-            //                 Id = post.Id,
-            //                 PhotoId = photo.Id,
-            //                 TotalLike = post.TotalLike,
-            //                 TotalViews = post.TotalViews,
-            //                 CreateAt = post.CreateAt,
-            //                 Tags = post.Tags,
-            //                 UserId = user.Id,
-            //                 User = user,
-            //                 Photo = photo,
-            //                 Comment = commentGroup,
-            //             };
+            var result = from photo in shutterContext.Photo
+                         join post in shutterContext.Post on photo.Id equals post.PhotoId
+                         join user in shutterContext.User on post.UserId equals user.Id
+                         where post.Id == id
+                         select new PostViewModel
+                         {
+                             Id = post.Id,
+                             PhotoId = photo.Id,
+                             TotalLike = post.TotalLike,
+                             TotalViews = post.TotalViews,
+                             CreateAt = post.CreateAt,
+                             Tags = post.Tags,
+                             UserId = user.Id,
+                             User = user,
+                             Photo = photo,
+                         };
+            var nah = shutterContext.Post.Include(d => d.Comment)
+                                         .Include(p=>p.Photo)
+                                         .ToList();
+            //.Where(b=>b.Id == id)
 
-           
-
-            return result.First();
+            return nah;
         }
     }
 }

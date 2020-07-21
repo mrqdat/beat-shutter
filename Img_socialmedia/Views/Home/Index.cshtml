@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PPUModel>
+﻿@model IEnumerable<PostViewModel>
 
 @{
     Layout = "_Layout";
@@ -1135,11 +1135,11 @@
     @foreach (var item in Model)
     {
     <div>
-        @Html.DisplayFor(modelItem => item.userP.Id)
+        @Html.DisplayFor(modelItem => item.Id)
 
-        @Html.DisplayFor(modelItem => item.photoP.Url)
+        @Html.DisplayFor(modelItem => item.Photo.Id)
 
-        @Html.DisplayFor(modelItem => item.postP.CreateAt)
+        @Html.DisplayFor(modelItem => item.User.Firstname)
     </div>
     }
 </div>

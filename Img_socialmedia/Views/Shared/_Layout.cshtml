@@ -20,7 +20,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script scr="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 </head>
 <body>
 
@@ -66,7 +66,7 @@
                             </li>
 
 
-                            @if (string.IsNullOrEmpty(ViewBag.username)==false)
+                            @if (string.IsNullOrEmpty(ViewBag.username) == false)
                             {
                                 <li class="nav-item" style="margin:7px 25px 7px 0;">
                                     <a class="notification dropdown-toggle" data-toggle="popover" title="Notification" data-placement="bottom" aria-haspopup="true" style="cursor:pointer;">
@@ -133,34 +133,40 @@
             @*
                 upload modal
             *@
-           
-            <div id="myModal" style="">
+
+            <div id="myModal" class="modal">
                 <div class="modal-content">
                     <form method="post" enctype="multipart/form-data" asp-controller="Photos" asp-action="Create">
                         <div class="file-upload">
+                            <input class="file-upload-input custom-file-input" name="files" type='file' onchange="readURL(this);" accept="image/*" />
                             <div class="image-upload-wrap">
-                                <input class="file-upload-input custom-file-input" name="files" type='file' onchange="readURL(this);" accept="image/*" />
                                 <div class="drag-text">
                                     <h3>Drag and drop a file or select add Image</h3>
                                 </div>
                                 <div class="file-upload-content">
-                                    <img class="file-upload-image" src="#" alt="your image" asp-append-version="true"/>
-                                    <div class="image-title-wrap">
-                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                    <div class="image" style="position: relative;">
+                                        <img class="file-upload-image img-responsive" src="#" alt="your image" asp-append-version="true" />
+                                        <div class="image-title-wrap">
+                                            <button type="button" class="remove-image fa fa-remove" onclick="removeUpload()"></button>
+                                        </div>
                                     </div>
+                                    <div class="image-tag">
+                                        <input class="image-tag-name" type="text" name="tag" value="" placeholder="Add your tags!" />
+                                    </div>
+                                    <div class="image-tag">
+                                        <input class="image-location" type="text" name="loaction" value="" placeholder="Add location" />
+                                    </div>
+
                                 </div>
                             </div>
-
                         </div>
                         <div class="modal-footer" style="padding:0;">
                             <button class="close" type="button" data-dismiss="modal">Cancel</button>
-                            <button class="file-upload-btn" type="submit">Publish to Shutter</button>
+                            <button class="file-upload-btn">Publish to Shutter</button>
                         </div>
                     </form>
                 </div>
-
             </div>
-
         </header>
     }
 
@@ -172,83 +178,91 @@
 
     @RenderSection("Scripts", required: false)
 
+     
+<script>
 
-</body>
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("upload_modal");
+    var span = document.getElementsByClassName("close")[0];
 
-</html>
 
-@section Scripts{
-    <script>
-        var modal = document.getElementById("myModal");
-        var btn = document.getElementById("upload_modal");
-        var span = document.getElementsByClassName("close")[0];
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
 
-        btn.onC = function () {
-            console.log("asd");
-            
-        };
-        $("#upload_modal").onclick(function () {
-            modal.style.display = "block";
-        });
+    span.onclick = function () {
+        modal.style.display = "none";
+    };
 
-        span.onclick = function () {
+    window.onclick = function (event) {
+        if (event.target == modal) {
             modal.style.display = "none";
-        };
-
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        };
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-
-                    $('.file-upload-image').attr('src', e.target.result);
-                    $('.file-upload-content').show();
-                    $('.image-title').html(input.files[0].name);
-                };
-                reader.readAsDataURL(input.files[0]);
-
-            } else {
-                removeUpload();
-            }
-        };
-
-        function removeUpload() {
-            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-            $('.file-upload-content').hide();
         }
-        $('.image-upload-wrap').bind('dragover', function () {
-            $('.image-upload-wrap').addClass('image-dropping');
-        });
-        $('.image-upload-wrap').bind('dragleave', function () {
-            $('.image-upload-wrap').removeClass('image-dropping');
-        });
+    };
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+
+                $('.file-upload-image').attr('src', e.target.result);
+                $('.file-upload-content').show();
+                $('.image-title').html(input.files[0].name);
+            };
+            reader.readAsDataURL(input.files[0]);
+
+        } else {
+            removeUpload();
+        }
+    };
+
+    function removeUpload() {
+        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-content').hide();
+    }
+    $('.image-upload-wrap').bind('dragover', function () {
+        $('.image-upload-wrap').addClass('image-dropping');
+    });
+    $('.image-upload-wrap').bind('dragleave', function () {
+        $('.image-upload-wrap').removeClass('image-dropping');
+    });
 
 
+    $(document).ready(function () {
+        if ($(window).width() < 600) {
+            $('.navsearchTerm').attr('placeholder', "Search photos");
+            $('bt-header').show();
+        }
+    });
 
-        $(document).ready(function () {
-            if ($(window).width() < 600) {
-                $('.navsearchTerm').attr('placeholder', "Search photos");
-                $('bt-header').show();
-            }
-        });
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
 
-        $(document).ready(function () {
-            $('[data-toggle="popover"]').popover();
-        });
+    $(".notification").popover({
+        'title': 'Notification',
+        'html': true,
+        'placement': 'bottom',
+        'content': $(".alert_list").html()
+    });
 
-        $(".notification").popover({
-            'title': 'Notification',
-            'html': true,
-            'placement': 'bottom',
-            'content': $(".alert_list").html()
-        });
 
-    </script>
-}
+    $('.image-tag-name').on('focusout', function () {
+        var txt = this.value.replace(/[^a-zA-Z0-9\+\-\.\#]/g, ''); // allowed characters list
+        if (txt) $(this).before('<span class="tag">' + txt +'</span>');
+        this.value = "";
+
+    }).on('keyup', function (e) {
+        // comma|space (add more keyCodes delimited with | pipe)
+        if (/(188|32)/.test(e.which)) $(this).trigger('focusout');
+    });
+
+    $('.image-tag').on('click', '.tag', function () {
+        $(this).remove();
+    });
+</script>
+    
+</body>
+</html>

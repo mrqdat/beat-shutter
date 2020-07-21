@@ -67,7 +67,7 @@ a {
 /*upload modal=========================================*/
 
 #myModal {
-    display:block; 
+    display:none; 
     position: fixed; 
     z-index: 11111; 
     padding-top: 10px; 
@@ -95,7 +95,7 @@ a {
     padding: 10px;
     z-index: 1111;
     border: 1px dashed rgb(137, 137, 137);
-    height:450px;
+    min-height:450px;
 }
 
 .file-upload-btn {
@@ -140,8 +140,8 @@ a {
     position: absolute;
     margin: 0;
     padding: 0;
+    height:18%;
     width: 100%;
-    height: 50%;
     outline: none;
     opacity: 0;
     cursor: pointer;
@@ -151,15 +151,19 @@ a {
     height:100px;
 }
 
-    .image-dropping,
-    .image-upload-wrap:hover {
-
-     
-    }
-
 .image-title-wrap {
-    padding: 0 15px 15px 15px;
-    color: #222;
+    position: absolute;
+    top: 23px;
+    right: 37%;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.image-title-wrap:hover {
+    background:rgba(212, 212, 212, 0.95);
 }
 
 .drag-text {
@@ -173,26 +177,55 @@ a {
     }
 
 .file-upload-image {
-    max-height: 300px;
     max-width: 300px;
     margin: auto;
-    padding: 20px;
+    padding-top: 20px;
+}
+
+.image-tag {
+    border: 1px solid #d1d1d1;
+    margin: auto;
+    max-width: 300px;
+}
+.image-tag-name {
+    width:100%;
+}
+.image-location{
+    width:100%;
+}
+
+.image-tag span.tag {
+    cursor: pointer;
+    display: block;
+    float: left;
+    background: #e5e5e5;
+    padding: 5px 10px;
+    padding-right: 30px;
+    margin: 4px;
+    font-size: 10px;
+}
+
+        .image-tag span.tag:hover {
+            opacity: 0.7;
+        }
+
+        .image-tag span.tag:after {
+            position: absolute;
+            padding: 0 12px;
+        }
+
+.image-tag input {
+    border: 0;
+    padding: 7px;
+  
 }
 
 .remove-image {
     margin: 0;
     color: #fff;
-    background: #cd4535;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    transition: all .2s ease;
-    text-transform: uppercase;
-    font-size:15px;
 }
 
     .remove-image:hover {
-        background: #c13b2a;
         color: #ffffff;
         transition: all .2s ease;
         cursor: pointer;
@@ -327,7 +360,7 @@ body {
 }
 
 
-#photos {
+#grid-layout {
     /* Prevent vertical gaps */
     line-height: 0;
     -webkit-column-count: 3;
@@ -346,8 +379,32 @@ body {
        
     }
 
+    /*like button*/
+.heart {
+    cursor: pointer;
+    color: #aaa;
+    transition: .2s;
+}
+
+    .heart:hover {
+        color: #666;
+    }
+
+    .heart:before {
+        font-family: fontawesome;
+        content: '\f004';
+        font-style: normal;
+    }
+
+i.press {
+    animation: size .4s;
+    color: rgb(235, 48, 48);
+}
+
+
+
 @media (max-width: 1200px) {
-    #photos {
+    #grid-layout {
         -moz-column-count: 3;
         -webkit-column-count: 3;
         column-count: 3;
@@ -362,7 +419,7 @@ body {
 }
 
 @media (max-width: 900px) {
-    #photos {
+    #grid-layout {
         -moz-column-count: 2;
         -webkit-column-count: 2;
         column-count: 2;
@@ -375,7 +432,7 @@ body {
 }
 
 @media (max-width: 575px) {    
-    #photos {
+    #grid-layout {
         -moz-column-count: 1;
         -webkit-column-count: 1;
         column-count: 1;

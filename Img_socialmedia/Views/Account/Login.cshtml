@@ -50,7 +50,7 @@
 
 
                 <div class="container-login100-form-btn">
-                    <input class="login100-form-btn" type="submit" value="Login" onclick="validate()">
+                    <button class="login100-form-btn" type="button" value="Login" onclick="validate()"></button>
                 </div>
 
 
@@ -81,7 +81,7 @@
 {
 
     @*<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=1153748928321536&autoLogAppEvents=1" nonce="UgOll85X"></script>*@
-        <script type="text/javascript">
+<script type="text/javascript">
             window.fbAsyncInit = function () {
                 FB.init({
                     appId: '1153748928321536',
@@ -139,30 +139,31 @@
 
 
             function validate() {
-                debugger
                 $.ajax(
                 {
                     type: "POST",
-                    url: '@Url.Action("Validate", "Account")',
+                    url: "@Url.Action("Validate", "Account")",
                     data: {
-                        email: $('#email').val(),
-                        password: $('#password').val()
+                        email: $("#email").val(),
+                        password: $("#password").val()
                     },
-                    error: function (result) {
-                        alert("There is a Problem, Try Again!");
-                    },
+                    dataType: "JSON",
                     success: function (result) {
                         console.log(result);
                         if (result.status == true) {
-                            window.location.href = '@Url.Action("Index", "Home")';
+                            window.location.href = "@Url.Action("Index", "Home")";
                         }
                         else {
                             alert(result.message);
                         }
+                    },
+                    error: function (result) {
+                        alert("There is a Problem, Try Again!");
+                        console.log(result);
                     }
                 });
             }
-        </script>
+</script>
 }
 
 

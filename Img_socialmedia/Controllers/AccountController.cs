@@ -21,16 +21,17 @@ namespace Img_socialmedia.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Validate(UserViewModel model)
+        //[ValidateAntiForgeryToken]
+        public IActionResult Validate(string email, string password)
         {
-            var user = _context.User.Where(u => u.Email == model.Email);
+            //return Json(new { status = true, message = "login successfully" });
+            var user = _context.User.Where(u => u.Email == email);
             if (user.Any())
             {
-                if (user.Where(u => u.Password == model.Password).Any())
+                if (user.First().Password == password)
                 {
                     HttpContext.Response.Cookies.Append("username", "aadfdsfds");
-                    return Json(new { status = true, message = "login successfully" });                                       
+                    return Json(new { status = true, message = "login successfully" });
                 }
                 else
                 {
@@ -43,11 +44,14 @@ namespace Img_socialmedia.Controllers
             }
         }
 
+        
         public ActionResult Login()
         {
 
             return View();
         }
+   
+
 
         [HttpGet]
         [AllowAnonymous]

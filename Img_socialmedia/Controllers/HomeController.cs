@@ -14,17 +14,16 @@ using System.IO;
 using System.Text;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
-
 namespace Img_socialmedia.Controllers
 {
-    
+
     public class HomeController : Controller
     {
 
         private readonly IConfiguration configuration;
         private readonly db_shutterContext shutterContext;
 
-        public HomeController(IConfiguration config,db_shutterContext context)
+        public HomeController(IConfiguration config, db_shutterContext context)
         {
             this.configuration = config;
             shutterContext = context;
@@ -69,12 +68,12 @@ namespace Img_socialmedia.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-       public ViewResult About()
+        public ViewResult About()
         {
             return View();
         }
 
-       public IEnumerable<PostViewModel> TestA()
+        public IEnumerable<PostViewModel> TestA()
         {
             var result = from photo in shutterContext.Photo
                          join post in shutterContext.Post on photo.Id equals post.PhotoId
@@ -92,31 +91,40 @@ namespace Img_socialmedia.Controllers
                              Photo = photo,
                          };
 
-            return result.ToList();               
+            return result.ToList();
         }
-       
+
         [HttpGet]
-       public List<PostViewModel> GetDetailPhoto(int? id)
-       {
-            var result = from photo in shutterContext.Photo
-                         join post in shutterContext.Post on photo.Id equals post.PhotoId
-                         join user in shutterContext.User on post.UserId equals user.Id
-                         where post.Id == id
-                         select new PostViewModel
-                         {
-                             Id = post.Id,
-                             PhotoId = photo.Id,
-                             TotalLike = post.TotalLike,
-                             TotalViews = post.TotalViews,
-                             CreateAt = post.CreateAt,
-                             Tags = post.Tags,
-                             UserId = user.Id,
-                             User = user,
-                             Photo = photo,
-                         };
+        public List<PostViewModel> GetDetailPhoto(int? id)
+        {
+            //var result = from photo in shutterContext.Photo
+            //             join post in shutterContext.Post on photo.Id equals post.PhotoId
+            //             join user in shutterContext.User on post.UserId equals user.Id
+            //             where post.Id == id
+            //             select new PostViewModel
+            //             {
+            //                 Id = post.Id,
+            //                 PhotoId = photo.Id,
+            //                 TotalLike = post.TotalLike,
+            //                 TotalViews = post.TotalViews,
+            //                 CreateAt = post.CreateAt,
+            //                 Tags = post.Tags,
+            //                 UserId = user.Id,
+            //                 User = user,
+            //                 Photo = photo,
+            //};
             var nah = shutterContext.Post.Include(d => d.Comment)
-                                         .Include(p=>p.Photo)
+                                         .ThenInclude(e => e.User)
+                                         .Include(p => p.Photo)
+                                         .Where(b=>b.Id==id)
                                          .ToList();
+
+            //var aa = shutterContext.Post.FromSqlRaw("SELECT post.*,comment.[user_id] as commentuser, [user].firstname,[user].lastname " +
+            //                                       "FROM post " +
+            //                                       "INNER JOIN dbo.[user] ON post.user_id = dbo.[user].id " +
+            //                                       "INNER JOIN comment on post.id = comment.post_id " +
+            //                                       "INNER JOIN PHOTO on post.photo_id = photo.id ").ToList();
+       
             //.Where(b=>b.Id == id)
 
             return nah;

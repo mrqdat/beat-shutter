@@ -38,6 +38,7 @@ namespace Img_socialmedia
             });
 
             services.AddMvc();
+           
             //services.AddDbContext<dbShutterContext>(options =>
             //        options.UseSqlServer(Configuration.GetConnectionString("dbShutterContextConnection")));
 

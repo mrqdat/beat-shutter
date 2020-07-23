@@ -212,6 +212,7 @@ a {
         .image-tag span.tag:after {
             position: absolute;
             padding: 0 12px;
+            content:"x";
         }
 
 .image-tag input {

@@ -177,7 +177,7 @@ namespace Img_socialmedia.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(List<IFormFile> files, PhotoViewModel model)
+        public async Task<IActionResult> Create(List<IFormFile> files, PhotoViewModel model, PostViewModel postmodel)
         {
             long size = files.Sum(f => f.Length);
 
@@ -187,9 +187,13 @@ namespace Img_socialmedia.Controllers
             {
                 if (formFile.Length > 0)
                 {
+                    var image_tags = Request.Form["tag"].ToString();
+
+                    var Location = Request.Form["location"].ToString();
+
                     var filename = Path.GetFileName(formFile.FileName);
 
-                    var myUniqueFileName = Convert.ToString(Guid.NewGuid())+ " - shutter";
+                    var myUniqueFileName = Convert.ToString(Guid.NewGuid())+ "-shutter";
 
                     var fileExtension = Path.GetExtension(filename);
 
@@ -198,7 +202,13 @@ namespace Img_socialmedia.Controllers
                     var filePath = new PhysicalFileProvider(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "images")).Root + $@"\{ newFileName}";
                     // full path to file in temp location
                     //var filePath = Path.GetTempFileName(); //we are using Temp file name just for the example. Add your own file path.
-                    filePaths.Add(filePath);
+                    filePaths.Add(newFileName);
+                    model.Url = newFileName;
+                    model.Location = Location;
+                              
+                    _context.Add(model);
+                   // _context.Add(postmodel);
+                    await _context.SaveChangesAsync();
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await formFile.CopyToAsync(stream);

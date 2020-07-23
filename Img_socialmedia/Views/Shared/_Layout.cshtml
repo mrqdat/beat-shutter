@@ -20,7 +20,12 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script scr="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+    <script scr="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta property="og:url" content="https://localhost:44340/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Your Website Title" />
+    <meta property="og:description" content="Your description" />
+    <meta property="og:image" content="https://localhost:44340/path/image.jpg" />
 </head>
 <body>
 
@@ -133,7 +138,7 @@
             @*
                 upload modal
             *@
-
+             
             <div id="myModal" class="modal">
                 <div class="modal-content">
                     <form method="post" enctype="multipart/form-data" asp-controller="Photos" asp-action="Create">
@@ -151,10 +156,10 @@
                                         </div>
                                     </div>
                                     <div class="image-tag">
-                                        <input class="image-tag-name" type="text" name="tag" value="" placeholder="Add your tags!" />
+                                        <input   class="image-tag-name" type="text"  value="" placeholder="Add your tags!" />
                                     </div>
                                     <div class="image-tag">
-                                        <input class="image-location" type="text" name="loaction" value="" placeholder="Add location" />
+                                        <input   class="image-location" type="text" name="location" value="" placeholder="Add location" />
                                     </div>
 
                                 </div>
@@ -162,7 +167,7 @@
                         </div>
                         <div class="modal-footer" style="padding:0;">
                             <button class="close" type="button" data-dismiss="modal">Cancel</button>
-                            <button class="file-upload-btn">Publish to Shutter</button>
+                            <button class="file-upload-btn" type="submit">Publish to Shutter</button>
                         </div>
                     </form>
                 </div>

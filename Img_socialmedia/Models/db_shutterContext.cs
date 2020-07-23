@@ -337,11 +337,11 @@ namespace Img_socialmedia.Models
                     .HasColumnName("token_id")
                     .IsUnicode(false);
 
-                entity.Property(e => e.Username)
-                    .IsRequired()
-                    .HasColumnName("username")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                //entity.Property(e => e.Username)
+                //    .IsRequired()
+                //    .HasColumnName("username")
+                //    .HasMaxLength(50)
+                //    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -30,7 +30,10 @@ namespace Img_socialmedia.Controllers
             {
                 if (user.First().Password == password)
                 {
-                    HttpContext.Response.Cookies.Append("username", "aadfdsfds");
+                    string username = user.First().Firstname + " " + user.First().Lastname;
+                    HttpContext.Session.SetInt32("userid", user.First().Id);
+                    HttpContext.Session.SetString("username", username);
+
                     return Json(new { status = true, message = "login successfully" });
                 }
                 else
@@ -108,10 +111,9 @@ namespace Img_socialmedia.Controllers
             return View(model);
         }
 
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
+        public IActionResult Logout()
         {
-            await _signInManager.SignOutAsync();
+            HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
 

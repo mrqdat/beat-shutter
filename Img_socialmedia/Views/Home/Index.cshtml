@@ -561,14 +561,14 @@
             </div>
         </div>
     </div>
-    @*@foreach (var photo in Model )
+    @foreach (var photo in Model )
         {
             <div class="img-x">
                 <figure>
                     <div class="img-content">
                         <a class="a-cursor" href="#">
                             <div class="img-rel">
-                                <img class="photo-content" src="~/images/@Url.Content(Model.Url)" asp-append-version="true" />
+                                <img class="photo-content" src="@Url.Content(photo.Photo.Url)" asp-append-version="true" />
                             </div>
                         </a>
                         <div class="img-icon">
@@ -589,12 +589,12 @@
                             <div class="img-button-bottom img-button-display i-animation">
                                 <div class="owner-photo">
                                     <span>
-                                        <a href="#">
-                                            <img class="owner-img" src="~/images/sunset.png" />
+                                        <a href="/User/Details/@photo.UserId">
+                                            <img class="owner-img" src="@Url.Content(photo.User.ProfileImg)" asp-append-version="true"/>
                                         </a>
                                     </span>
-                                    <a class="owner-name" href="#">
-                                        Quốc Đạt
+                                    <a class="owner-name" href="/User/Details/@photo.UserId">
+                                        @(photo.User.Firstname + " " + photo.User.Lastname)
                                     </a>
                                 </div>
                                 <div class="img-button">
@@ -611,7 +611,7 @@
                     </div>
                 </figure>
             </div>
-        }*@
+        }
 </div>
 
 <!-- Button trigger modal -->

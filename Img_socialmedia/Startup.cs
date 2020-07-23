@@ -51,6 +51,9 @@ namespace Img_socialmedia
                             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
             services.AddSession();
+            services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
+
+
 
         }
 

@@ -15,8 +15,9 @@
                         <div class="dashes"></div>
                         <label id="lb_img">Click to browse or drag an image here</label>
                         <input type="file" id="mediaFile" accept="image/*" />
+
                     </div>
-                    @*<img src="~/images/man.png" alt="Daniel Adams">*@
+                    <!--<img src="~/images/man.png" alt="Daniel Adams">-->
                 </form>
                 <div class="author-card-details">
                     <h5 class="author-card-name text-lg">Daniel Adams</h5><span class="author-card-position">Joined February 06, 2017</span>
@@ -46,43 +47,43 @@
         </div>
         <!-- Profile Settings-->
         <div class="col-lg-8 pb-5">
-            <form class="row">
+            <form class="row" asp-route="Edit">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="Firstname" for="account-fn">First Name</label>
-                        <input asp-for="Firstname" class="form-control" type="text" id="account-fn" value="Daniel" required="">
+                        <input asp-for="Firstname" class="form-control" type="text" id="account-fn" name="firstname" value="@Model.Firstname" required="">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="Lastname" for="account-ln">Last Name</label>
-                        <input asp-for="Lastname" class="form-control" type="text" id="account-ln" value="Adams" required="">
+                        <input asp-for="Lastname" class="form-control" type="text" id="account-ln" name="lastname" value="@Model.Lastname" required="">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="Email" for="account-email">E-mail Address</label>
-                        <input asp-for="Email" class="form-control" type="email" id="account-email" value="daniel.adams@example.com" disabled="">
+                        <input asp-for="Email" class="form-control" type="email" id="account-email" name="email" value="@Model.Email" disabled="">
                     </div>
-                </div>
+                </div> 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-phone">Phone Number</label>
-                        <input class="form-control" type="text" id="account-phone" value="+7 (805) 348 95 72" required="">
+                        <input asp-for="Phone" class="form-control" type="text" id="account-phone" value="@Model.Phone" name="phone" required="">
                     </div>
                 </div>
 
                 <div class="col-md-12">
                     <div class="form-group">
                         <label asp-for="Bio" for="account-phone">Bio</label>
-                        <input asp-for="Bio" class="form-control" type="text" id="bio" value="" style="height:100px;">
+                        <input asp-for="Bio" class="form-control" type="text" id="bio" value="@Model.Bio" name="Bio" style="height:100px;">
                     </div>
                 </div>
 
                 <div class="col-12">
                     <hr class="mt-2 mb-3">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <button class="btn btn-style-1 btn-primary" type="submit" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
+                        <button class="btn btn-style-1 btn-primary" type="submit" >Update Profile</button>
                     </div>
                 </div>
             </form>

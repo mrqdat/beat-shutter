@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Img_socialmedia.Data;
 using Img_socialmedia.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Img_socialmedia.Controllers
 {
@@ -16,7 +17,7 @@ namespace Img_socialmedia.Controllers
 
         public UserController(db_shutterContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
         public async Task<IActionResult> Index()
@@ -50,11 +51,7 @@ namespace Img_socialmedia.Controllers
 
             return View("Index", user);
         }
-
-        public IActionResult editprofile()
-        {
-            return View();
-        }
+       
 
         public IActionResult password()
         {
@@ -80,7 +77,7 @@ namespace Img_socialmedia.Controllers
         // POST: Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,username,password,PasswordConfirm,email,name,first_name,last_name,phone,create_at")] UserViewModel userViewModel)
         {
@@ -93,20 +90,46 @@ namespace Img_socialmedia.Controllers
             return View(userViewModel);
         }
 
-        // GET: Users/Edit/5
-        public async Task<IActionResult> Edit(string id)
+       
+        public async Task<IActionResult> editprofile(int id)
         {
-            if (id == null)
+            int sessionID;
+            try
+            {
+                sessionID = (int)HttpContext.Session.GetInt32("userid");
+            }
+            catch
             {
                 return NotFound();
             }
+            if (!String.IsNullOrEmpty(sessionID.ToString()))
+            {
+                if (sessionID == id)
+                {
+                    if (id.ToString() == null)
+                    {
+                        return NotFound();
+                    }
 
-            var userViewModel = await _context.User.FindAsync(id);
-            if (userViewModel == null)
-            {
-                return NotFound();
+                    var user = await _context.User
+                        .Include(p => p.Post)
+                            .ThenInclude(photo => photo.Photo)
+                        .FirstOrDefaultAsync(m => m.Id == id);
+                    if (user == null)
+                    {
+                        return NotFound();
+                    }
+                    return View("editprofile", user);
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
-            return View(userViewModel);
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         // POST: Users/Edit/5
@@ -114,32 +137,36 @@ namespace Img_socialmedia.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,username,password,PasswordConfirm,email,name,first_name,last_name,phone,create_at")] UserViewModel userViewModel)
+        public async Task<IActionResult> editprofile(int id, [Bind("id,firstname,lastname,phone,bio")] UserViewModel userViewModel)
         {
-            if (id != userViewModel.Id)
+            int sessionID = (int)HttpContext.Session.GetInt32("userid");
+            if (!String.IsNullOrEmpty(sessionID.ToString()))
             {
-                return NotFound();
-            }
+                if (id != userViewModel.Id)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(userViewModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(userViewModel.Id))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(userViewModel);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!UserExists(userViewModel.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(userViewModel);
         }

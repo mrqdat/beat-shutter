@@ -104,7 +104,7 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-info">
                                         <a class="dropdown-item" href="/User/Details/@Context.Session.GetInt32("userid")">Profile</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="EditProfile">Account setting</a>
+                                        <a class="dropdown-item" href="/User/editprofile/@Context.Session.GetInt32("userid")">Account setting</a>
                                         <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
                                     </div>
                                 </li>

@@ -36,7 +36,9 @@ namespace Img_socialmedia.Models
         [EmailAddress(ErrorMessage = "The email field is not valid email address")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
         public string Email { get; set; }
-         
+        [StringLength(12)]
+        [RegularExpression("^[0-9]*$")]
+        public string Phone { get; set; }
         public string TokenId { get; set; }
         public string ProfileImg { get; set; }
         [StringLength(1000)]

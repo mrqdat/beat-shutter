@@ -639,7 +639,7 @@
                             </div>
                         </div>
                         <div class="float-right">
-                            <button class="btn btn-light btn-hw pos-button modal-btns">
+                            <button class="btn btn-light btn-hw pos-button modal-btns like">
                                 <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
                             </button>
                             <button class="btn btn-light btn-hw pos-button modal-btns" data-target="#collection_modal" data-toggle="modal">
@@ -1236,9 +1236,9 @@
         <div class="modal-content" style="cursor: auto;min-height: 400px;">  
             <div class="collection-content">
                 <div class="collection">
-                    <div class=collection-bg style="background-image: url('./images/f686c873-8cc3-4963-b74c-65d76401d22a-shutter.jpg');"></div>
+                    <div class=collection-bg style="background-image: url('/images/f686c873-8cc3-4963-b74c-65d76401d22a-shutter.jpg');"></div>
                     <div class="collection-all">
-                        <div class="colletion-list">
+                        <div class="collection-list">
                             <div class="collection-list-item">
                                 <h3>Add to Collection</h3>
                                 <button class="btn create-item" id="create-item">
@@ -1265,18 +1265,16 @@
                         <div class="collection-create">
                             <div class="">
                                 <h3>Create new collection</h3>
-                                <form asp-action="" asp-controller=""  method="post">
+                                <form asp-controller="Post" asp-action="add_collection" method="post">
                                     <div class="create-item">
-                                        <input type="text" name="collection_name" value="" required/>
+                                        <input id="col-name" type="text" name="collection_name" value="" placeholder="collection name" required/>
                                     </div>
                                     <div class="create-item">
-                                        <input type="text" name="collection_discription" value="" />
+                                        <input id="col-des" type="text" name="collection_description"  value="" placeholder="description"  />
                                     </div>
-                                    <div>
-                                        <button class="btn"><u>Create</u></button>
-                                    </div>
-                                    <div>
+                                    <div style="display:flex;">                                
                                         <button class="btn craete-cancel"><u>Cancel</u></button>
+                                        <button class="btn create"><u>Create</u></button>   
                                     </div>
                                 </form>
                             </div>
@@ -1336,6 +1334,7 @@
     var ontop = document.getElementById("btn_ontop");
     window.onscroll = function () { scrollFunction() };
 
+   
     function scrollFunction() {
         if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
             ontop.style.display = "block";
@@ -1349,13 +1348,48 @@
         document.documentElement.scrollTop = 0;
     }
 
-    $('#create-item').on('click', function () {
-        $('collection-list').hide();
-        $('collection-create').show();
+
+
+    $('.craete-cancel').click(function () {
+        $('.collection-list').show();
+        $('.collection-create').hide();
     });
 
-    $('craete-cancel').on('click', function () {
-        $('collection-list').show();
-        $('collection-create').hide()
+    $('#create-item').click(function () {
+        $('.collection-list').hide();
+        $('.collection-create').show();
     });
+
+
+
+    @*//like
+
+    $(document).on('click', 'button.like', function () {
+        $.ajax(
+        {
+            type: "GET",
+            url: @Url.Action(""),
+            success: function () {
+
+            }
+        });
+    });
+
+     *@
+    //add new collecion
+
+    @*$(document).on('click','button.create', function () {
+        $.ajax({
+            type: "POST",
+            url:'@Url.Action("add_collection", "Post")',      
+            success: function (result ) {
+                //$(".item-detail").appendTo($('.collection-item'));
+                
+                //$('.collection-list').show();
+                //$('.collection-create').hide();
+                alert('asalfajhflka');
+            }
+        });
+    });*@
+
 </script>

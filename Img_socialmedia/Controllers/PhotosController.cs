@@ -177,7 +177,7 @@ namespace Img_socialmedia.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(List<IFormFile> files, PhotoViewModel model, PostViewModel postmodel)
+        public async Task<IActionResult> Create(List<IFormFile> files, PhotoViewModel model)
         {
             long size = files.Sum(f => f.Length);
 

@@ -31,14 +31,14 @@ namespace Img_socialmedia
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
-            //services.AddAuthentication().AddFacebook(facebookOptions =>
-            //{
-            //    facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
-            //    facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-            //});
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            });
 
             services.AddMvc();
-           
+
             //services.AddDbContext<dbShutterContext>(options =>
             //        options.UseSqlServer(Configuration.GetConnectionString("dbShutterContextConnection")));
 
@@ -49,13 +49,9 @@ namespace Img_socialmedia
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
-                            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);
+                            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddSession();
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

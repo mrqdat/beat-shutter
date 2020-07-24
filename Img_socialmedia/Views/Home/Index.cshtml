@@ -1238,7 +1238,7 @@
                 <div class="collection">
                     <div class=collection-bg style="background-image: url('./images/f686c873-8cc3-4963-b74c-65d76401d22a-shutter.jpg');"></div>
                     <div class="collection-all">
-                        <div class="colletion-list">
+                        <div class="collection-list">
                             <div class="collection-list-item">
                                 <h3>Add to Collection</h3>
                                 <button class="btn create-item" id="create-item">
@@ -1267,16 +1267,14 @@
                                 <h3>Create new collection</h3>
                                 <form asp-action="" asp-controller=""  method="post">
                                     <div class="create-item">
-                                        <input type="text" name="collection_name" value="" required/>
+                                        <input class="col-name" type="text" name="collection_name" value="" placeholder="Collection name" required/>
                                     </div>
                                     <div class="create-item">
-                                        <input type="text" name="collection_discription" value="" />
+                                        <input class="col-des" type="text" name="collection_discription" placeholder="Description" value="" />
                                     </div>
-                                    <div>
-                                        <button class="btn"><u>Create</u></button>
-                                    </div>
-                                    <div>
+                                    <div class=collection-action>
                                         <button class="btn craete-cancel"><u>Cancel</u></button>
+                                        <button class="btn"><u>Create</u></button>
                                     </div>
                                 </form>
                             </div>
@@ -1350,12 +1348,14 @@
     }
 
     $('#create-item').on('click', function () {
-        $('collection-list').hide();
-        $('collection-create').show();
+        $('.collection-list').hide();
+        $('.collection-create').show();
     });
 
-    $('craete-cancel').on('click', function () {
-        $('collection-list').show();
-        $('collection-create').hide()
+    $('.craete-cancel').on('click', function () {
+        $('.collection-list').show();
+        $('.collection-create').hide();
     });
+
+
 </script>

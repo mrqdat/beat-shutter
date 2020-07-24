@@ -487,6 +487,17 @@
 .addto{
     margin:auto;
 }
+
+.col-name
+{
+    width:100%;
+    padding: 10px;
+}
+
+.col-des {
+    width: 100%;
+    padding: 10px;
+}
 /*======                        ================end collection modal*/
 
 

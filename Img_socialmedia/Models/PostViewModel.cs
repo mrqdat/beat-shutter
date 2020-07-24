@@ -17,9 +17,10 @@ namespace Img_socialmedia.Models
         public int? TotalViews { get; set; }
         public DateTime? CreateAt { get; set; }
         public string Tags { get; set; }
-
+        public int UserId { get; set; }
+        public virtual UserViewModel User { get; set; }
         public virtual PhotoViewModel Photo { get; set; }
-        public virtual ICollection<CommentViewModel> Comment { get; set; }
-        public virtual ICollection<NotificationViewModel> Notification { get; set; }
+        public virtual IEnumerable<CommentViewModel> Comment { get; set; }
+        public virtual IEnumerable<NotificationViewModel> Notification { get; set; }
     }
 }

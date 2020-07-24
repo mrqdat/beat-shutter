@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -21,11 +22,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script scr="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <meta property="og:url" content="https://localhost:44340/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Your Website Title" />
-    <meta property="og:description" content="Your description" />
-    <meta property="og:image" content="https://localhost:44340/path/image.jpg" />
 </head>
 <body>
 
@@ -71,7 +67,7 @@
                             </li>
 
 
-                            @if (string.IsNullOrEmpty(ViewBag.username) == false)
+                            @if (!string.IsNullOrEmpty(Context.Session.GetString("username")))
                             {
                                 <li class="nav-item" style="margin:7px 25px 7px 0;">
                                     <a class="notification dropdown-toggle" data-toggle="popover" title="Notification" data-placement="bottom" aria-haspopup="true" style="cursor:pointer;">
@@ -107,7 +103,7 @@
                                         <img class="mr-2" src="~/images/man.png" width="32" height="32" alt="avatar">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-info">
-                                        <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Profile</a>
+                                        <a class="dropdown-item" href="/User/Details/@Context.Session.GetInt32("userid")">Profile</a>
                                         <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="EditProfile">Account setting</a>
                                         <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
                                     </div>
@@ -138,7 +134,7 @@
             @*
                 upload modal
             *@
-             
+
             <div id="myModal" class="modal">
                 <div class="modal-content">
                     <form method="post" enctype="multipart/form-data" asp-controller="Photos" asp-action="Create">
@@ -156,10 +152,10 @@
                                         </div>
                                     </div>
                                     <div class="image-tag">
-                                        <input   class="image-tag-name" type="text"  value="" placeholder="Add your tags!" />
+                                        <input class="image-tag-name" type="text" name="tag" value="" placeholder="Add your tags!" />
                                     </div>
                                     <div class="image-tag">
-                                        <input   class="image-location" type="text" name="location" value="" placeholder="Add location" />
+                                        <input class="image-location" type="text" name="loaction" value="" placeholder="Add location" />
                                     </div>
 
                                 </div>
@@ -167,7 +163,7 @@
                         </div>
                         <div class="modal-footer" style="padding:0;">
                             <button class="close" type="button" data-dismiss="modal">Cancel</button>
-                            <button class="file-upload-btn" type="submit">Publish to Shutter</button>
+                            <button class="file-upload-btn">Publish to Shutter</button>
                         </div>
                     </form>
                 </div>
@@ -183,91 +179,91 @@
 
     @RenderSection("Scripts", required: false)
 
-     
-<script>
 
-    var modal = document.getElementById("myModal");
-    var btn = document.getElementById("upload_modal");
-    var span = document.getElementsByClassName("close")[0];
+    <script>
+
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("upload_modal");
+        var span = document.getElementsByClassName("close")[0];
 
 
-    btn.onclick = function () {
-        modal.style.display = "block";
-    }
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
 
-    span.onclick = function () {
-        modal.style.display = "none";
-    };
-
-    window.onclick = function (event) {
-        if (event.target == modal) {
+        span.onclick = function () {
             modal.style.display = "none";
+        };
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+
+                    $('.file-upload-image').attr('src', e.target.result);
+                    $('.file-upload-content').show();
+                    $('.image-title').html(input.files[0].name);
+                };
+                reader.readAsDataURL(input.files[0]);
+
+            } else {
+                removeUpload();
+            }
+        };
+
+        function removeUpload() {
+            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+            $('.file-upload-content').hide();
         }
-    };
-
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-
-                $('.file-upload-image').attr('src', e.target.result);
-                $('.file-upload-content').show();
-                $('.image-title').html(input.files[0].name);
-            };
-            reader.readAsDataURL(input.files[0]);
-
-        } else {
-            removeUpload();
-        }
-    };
-
-    function removeUpload() {
-        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-        $('.file-upload-content').hide();
-    }
-    $('.image-upload-wrap').bind('dragover', function () {
-        $('.image-upload-wrap').addClass('image-dropping');
-    });
-    $('.image-upload-wrap').bind('dragleave', function () {
-        $('.image-upload-wrap').removeClass('image-dropping');
-    });
+        $('.image-upload-wrap').bind('dragover', function () {
+            $('.image-upload-wrap').addClass('image-dropping');
+        });
+        $('.image-upload-wrap').bind('dragleave', function () {
+            $('.image-upload-wrap').removeClass('image-dropping');
+        });
 
 
-    $(document).ready(function () {
-        if ($(window).width() < 600) {
-            $('.navsearchTerm').attr('placeholder', "Search photos");
-            $('bt-header').show();
-        }
-    });
+        $(document).ready(function () {
+            if ($(window).width() < 600) {
+                $('.navsearchTerm').attr('placeholder', "Search photos");
+                $('bt-header').show();
+            }
+        });
 
-    $(document).ready(function () {
-        $('[data-toggle="popover"]').popover();
-    });
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
 
-    $(".notification").popover({
-        'title': 'Notification',
-        'html': true,
-        'placement': 'bottom',
-        'content': $(".alert_list").html()
-    });
+        $(".notification").popover({
+            'title': 'Notification',
+            'html': true,
+            'placement': 'bottom',
+            'content': $(".alert_list").html()
+        });
 
 
-    $('.image-tag-name').on('focusout', function () {
-        var txt = this.value.replace(/[^a-zA-Z0-9\+\-\.\#]/g, ''); // allowed characters list
-        if (txt) $(this).before('<span class="tag">' + txt +'</span>');
-        this.value = "";
+        $('.image-tag-name').on('focusout', function () {
+            var txt = this.value.replace(/[^a-zA-Z0-9\+\-\.\#]/g, ''); // allowed characters list
+            if (txt) $(this).before('<span class="tag">' + txt + '</span>');
+            this.value = "";
 
-    }).on('keyup', function (e) {
-        // comma|space (add more keyCodes delimited with | pipe)
-        if (/(188|32)/.test(e.which)) $(this).trigger('focusout');
-    });
+        }).on('keyup', function (e) {
+            // comma|space (add more keyCodes delimited with | pipe)
+            if (/(188|32)/.test(e.which)) $(this).trigger('focusout');
+        });
 
-    $('.image-tag').on('click', '.tag', function () {
-        $(this).remove();
-    });
-</script>
-    
+        $('.image-tag').on('click', '.tag', function () {
+            $(this).remove();
+        });
+    </script>
+
 </body>
 </html>

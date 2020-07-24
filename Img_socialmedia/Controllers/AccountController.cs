@@ -21,16 +21,20 @@ namespace Img_socialmedia.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Validate(UserViewModel model)
+        //[ValidateAntiForgeryToken]
+        public IActionResult Validate(string email, string password)
         {
-            var user = _context.User.Where(u => u.Email == model.Email);
+            //return Json(new { status = true, message = "login successfully" });
+            var user = _context.User.Where(u => u.Email == email);
             if (user.Any())
             {
-                if (user.Where(u => u.Password == model.Password).Any())
+                if (user.First().Password == password)
                 {
-                    HttpContext.Response.Cookies.Append("username", "aadfdsfds");
-                    return Json(new { status = true, message = "login successfully" });                                       
+                    string username = user.First().Firstname + " " + user.First().Lastname;
+                    HttpContext.Session.SetInt32("userid", user.First().Id);
+                    HttpContext.Session.SetString("username", username);
+
+                    return Json(new { status = true, message = "login successfully" });
                 }
                 else
                 {
@@ -43,11 +47,14 @@ namespace Img_socialmedia.Controllers
             }
         }
 
+        
         public ActionResult Login()
         {
 
             return View();
         }
+   
+
 
         [HttpGet]
         [AllowAnonymous]
@@ -104,10 +111,9 @@ namespace Img_socialmedia.Controllers
             return View(model);
         }
 
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
+        public IActionResult Logout()
         {
-            await _signInManager.SignOutAsync();
+            HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
 

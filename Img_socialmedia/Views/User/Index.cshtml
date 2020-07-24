@@ -1,4 +1,4 @@
-﻿
+﻿@model UserViewModel
 @{
     ViewData["Title"] = "Profile";
     ViewBag.showsearchbar = false;
@@ -14,7 +14,7 @@
 
                     </div>
                     <div class="info_edit">
-                        <h4 class="name">Jane Doe</h4>
+                        <h4 class="name">@(Model.Firstname+" "+Model.Lastname )</h4>
                         <a class="info_link" asp-controller="User" asp-action="editprofile" alt="edit your profile">
                             <i class="fa fa-edit"></i>
                         </a>
@@ -33,7 +33,7 @@
                             <p class="desc-stat">Uploads</p>
                         </div>
                     </div>
-                    <p class="desc">Hi ! My name is Jane Doe. I'm a UI/UX Designer from Paris, in France. I really enjoy photography and mountains.</p>
+                    <p class="desc">@Model.Bio</p>
                     <div class="social">
                         <i class="fa fa-facebook-square" aria-hidden="true"></i>
                         <i class="fa fa-twitter-square" aria-hidden="true"></i>
@@ -50,24 +50,30 @@
                     </ul>
 
                     <div class="row gallery">
-                        <div class="col-md-4">
-                            <img src="https://images.pexels.com/photos/1036371/pexels-photo-1036371.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
-                        </div>
-                        <div class="col-md-4">
-                            <img src="https://images.pexels.com/photos/861034/pexels-photo-861034.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
-                        </div>
-                        <div class="col-md-4">
-                            <img src="https://images.pexels.com/photos/113338/pexels-photo-113338.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
-                        </div>
-                        <div class="col-md-4">
-                            <img src="https://images.pexels.com/photos/5049/forest-trees-fog-foggy.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
-                        </div>
-                        <div class="col-md-4">
-                            <img src="https://images.pexels.com/photos/428431/pexels-photo-428431.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
-                        </div>
-                        <div class="col-md-4">
-                            <img src="https://images.pexels.com/photos/50859/pexels-photo-50859.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
-                        </div>
+                        @foreach (var item in Model.Post)
+                        {
+                            <div class="col-md-4">
+                                <img src="@item.Photo.Url" />
+                            </div>
+                        }
+                        <!--    <div class="col-md-4">
+            <img src="https://images.pexels.com/photos/1036371/pexels-photo-1036371.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
+        </div>
+        <div class="col-md-4">
+            <img src="https://images.pexels.com/photos/861034/pexels-photo-861034.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
+        </div>
+        <div class="col-md-4">
+            <img src="https://images.pexels.com/photos/113338/pexels-photo-113338.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
+        </div>
+        <div class="col-md-4">
+            <img src="https://images.pexels.com/photos/5049/forest-trees-fog-foggy.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
+        </div>
+        <div class="col-md-4">
+            <img src="https://images.pexels.com/photos/428431/pexels-photo-428431.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
+        </div>
+        <div class="col-md-4">
+            <img src="https://images.pexels.com/photos/50859/pexels-photo-50859.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
+        </div> -->
                     </div>
                 </div>
             </div>

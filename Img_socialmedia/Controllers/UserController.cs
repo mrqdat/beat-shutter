@@ -19,8 +19,8 @@ namespace Img_socialmedia.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
-        {
+        public async Task<IActionResult> Index()
+        {       
             return View();
         }
 
@@ -39,14 +39,16 @@ namespace Img_socialmedia.Controllers
                 return NotFound();
             }
 
-            var userViewModel = await _context.User
+            var user = await _context.User
+                .Include(p=>p.Post)
+                    .ThenInclude(photo=>photo.Photo)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (userViewModel == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(userViewModel);
+            return View("Index", user);
         }
 
         public IActionResult editprofile()

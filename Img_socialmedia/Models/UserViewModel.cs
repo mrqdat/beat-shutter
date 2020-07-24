@@ -19,9 +19,6 @@ namespace Img_socialmedia.Models
         public int Id { get; set; }
 
         [Required]
-        public string Username { get; set; }
-
-        [Required]
         //[DataType(DataType.Password)]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
         public string Password { get; set; }
@@ -49,7 +46,7 @@ namespace Img_socialmedia.Models
         public DateTime? CreateAt { get; set; }
         public int? FollowerCount { get; set; }
         public string Tags { get; set; }
-
+        public virtual IEnumerable<PostViewModel> Post { get; set; }
         public virtual ICollection<CollectionViewModel> Collection { get; set; }
         public virtual ICollection<CommentViewModel> Comment { get; set; }
         public virtual ICollection<ExternalLoginViewModel> ExternalLogin { get; set; }

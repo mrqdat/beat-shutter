@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,12 +12,11 @@ namespace Img_socialmedia.Controllers
     public class AccountController : Controller
     {
         private readonly db_shutterContext _context;
-        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AccountController(db_shutterContext context, SignInManager<IdentityUser> signInManager)
+        public AccountController(db_shutterContext context)
         {
             _context = context;
-            _signInManager = signInManager;
+
         }
 
         [HttpPost]
@@ -34,16 +34,28 @@ namespace Img_socialmedia.Controllers
                     HttpContext.Session.SetInt32("userid", user.First().Id);
                     HttpContext.Session.SetString("username", username);
 
-                    return Json(new { status = true, message = "login successfully" });
+                    return Json(new 
+                    { 
+                        status = true,
+                        message = "login successfully" 
+                    });
                 }
                 else
                 {
-                    return Json(new { status = false, message = "valid password" });
+                    return Json(new 
+                    { 
+                        status = false, 
+                        message = "valid password" 
+                    });
                 }
             }
             else
             {
-                return Json(new { status = false, message = "isvalid email" });
+                return Json(new 
+                { 
+                    status = false,
+                    message = "isvalid email" 
+                });
             }
         }
 

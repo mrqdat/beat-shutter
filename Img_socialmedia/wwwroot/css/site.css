@@ -82,7 +82,7 @@ a {
 .modal-content {
     background-color: #fefefe;
     margin: auto;
-    padding: 10px;
+    padding: 4px;
     border: 1px solid #888;
     max-width: 95%;
 }
@@ -140,7 +140,7 @@ a {
     position: absolute;
     margin: 0;
     padding: 0;
-    height:18%;
+    height:90px;
     width: 100%;
     outline: none;
     opacity: 0;
@@ -148,7 +148,7 @@ a {
 }
 
 .image-upload-wrap {   
-    height:100px;
+    height:100%;
 }
 
 .image-title-wrap {
@@ -380,6 +380,9 @@ body {
        
     }
 
+.photo-main{
+    height:500px;
+}
     /*like button*/
 .heart {
     cursor: pointer;
@@ -1007,7 +1010,7 @@ lb_upload {
 
 #mediaFile {
     position: absolute;
-    top: -1000px;
+    display:none;
 }
 
 #profile {

@@ -22,6 +22,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script scr="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
 </head>
 <body>
 
@@ -249,11 +250,13 @@
             'content': $(".alert_list").html()
         });
 
-
+        var val = "";
         $('.image-tag-name').on('focusout', function () {
-            var txt = this.value.replace(/[^a-zA-Z0-9\+\-\.\#]/g, ''); // allowed characters list
+            var txt = this.value.replace(/[^a-zA-Z0-9\+\-\.\#]/g, ''); // allowed characters list          
+            debugger
             if (txt) $(this).before('<span class="tag">' + txt + '</span>');
-            this.value = "";
+            this.value = "";        
+            val = val + ',' + txt;
 
         }).on('keyup', function (e) {
             // comma|space (add more keyCodes delimited with | pipe)

@@ -4,14 +4,16 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Img_socialmedia.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 
 namespace Img_socialmedia.Controllers
 {
     public class PostController : Controller
     {
 
-        db_shutterContext db = new db_shutterContext();
+       
         public IActionResult Index()
         {
             return View();
@@ -22,12 +24,6 @@ namespace Img_socialmedia.Controllers
             
             return View();
         }
-
-        //public JsonResult getAllPost(string q)
-        //{
-            
-            
-        //    return View();
-        //}
+        
     }
 }

@@ -176,6 +176,7 @@ namespace Img_socialmedia.Controllers
             }
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(List<IFormFile> files, PhotoViewModel model, PostViewModel postmodel)
         {
@@ -222,7 +223,7 @@ namespace Img_socialmedia.Controllers
                     //model.ShutterSpeed = Convert.ToString(ExifDirectoryBase.TagShutterSpeed);
                     //model.FocalLength = ExifDirectoryBase.TagFocalLength;
                     //model.Location = Convert.ToString(ExifDirectoryBase.TagSubjectLocation);
-                    //model.CreateAt = Convert.ToDateTime(ExifDirectoryBase.TagDateTimeOriginal);
+                   // model.CreateAt = Convert.ToDateTime(ExifDirectoryBase.TagDateTimeOriginal);
                     return RedirectToAction("Index", "Home");
                 }
                 

@@ -14,8 +14,7 @@
                     <div id="profile">
                         <div class="dashes"></div>
                         <label id="lb_img">Click to browse or drag an image here</label>
-                        <input type="file" id="mediaFile" accept="image/*" />
-
+                        <input type="file" id="mediaFile" accept="image/*" value="" onchange=""/>
                     </div>
                     <!--<img src="~/images/man.png" alt="Daniel Adams">-->
                 </form>
@@ -86,6 +85,7 @@
                         <button class="btn btn-style-1 btn-primary" type="submit" >Update Profile</button>
                     </div>
                 </div>
+               
             </form>
         </div>
     </div>
@@ -134,11 +134,14 @@
             $('#profile').removeClass('dragging hasImage');
 
             if (e.originalEvent) {
+                
                 var file = e.originalEvent.dataTransfer.files[0];
-
+                debugger
+                alert(file.name);
                 console.log(file);
+                $('#mediaFile').attr('value', file.name);
                 var reader = new FileReader();
-
+                 
                 //attach event handlers here...
 
                 reader.readAsDataURL(file);
@@ -148,10 +151,12 @@
                     $("#lb_img").remove();
                 }
             }
+            
         });
 
-        $('#profile').on('click', function (e) {
-            console.log('clicked')
+        
+
+        $('#profile').click(function () {
             $('#mediaFile').click();
         });
 
@@ -165,21 +170,24 @@
             e.preventDefault();
         }, false);
 
-        $('#mediaFile').change(function (e) {
 
-            var input = e.target;
-            if (input.files && input.files[0]) {
-                var file = input.files[0];
-
-                var reader = new FileReader();
-
-                reader.readAsDataURL(file);
-                reader.onload = function (e) {
-                    console.log(reader.result);
-                    $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
-
-                }
-            }
-        });
+      
+        
+        //function readfichier(e) {
+        //    if (window.FileReader) {
+        //        var file = e.target.files[0];
+        //        var reader = new FileReader();
+        //        if (file && file.type.match('image.*')) {
+        //            reader.readAsDataURL(file);
+        //        } else {
+        //            $('#profile').css('background-image','')
+                     
+        //        }
+        //        reader.onloadend = function (e) {
+        //            $('#profile').css('background-image', reader.result);
+                     
+        //        }
+        //    }
+        //}
     </script>
 }

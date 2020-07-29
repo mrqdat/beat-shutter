@@ -36,22 +36,22 @@ namespace Img_socialmedia.Controllers
         public IActionResult Index()
         {
             var result = (from photo in shutterContext.Photo
-                         join post in shutterContext.Post on photo.Id equals post.PhotoId
-                         join user in shutterContext.User on post.UserId equals user.Id
-                         select new PostViewModel
-                         {
-                             Id = post.Id,
-                             PhotoId = photo.Id,
-                             TotalLike = post.TotalLike,
-                             TotalViews = post.TotalViews,
-                             CreateAt = post.CreateAt,
-                             Tags = post.Tags,
-                             UserId = user.Id,
-                             User = user,
-                             Photo = photo,
-                         }).Take(15);
+                          join post in shutterContext.Post on photo.Id equals post.PhotoId
+                          join user in shutterContext.User on post.UserId equals user.Id
+                          select new PostViewModel
+                          {
+                              Id = post.Id,
+                              PhotoId = photo.Id,
+                              TotalLike = post.TotalLike,
+                              TotalViews = post.TotalViews,
+                              CreateAt = post.CreateAt,
+                              Tags = post.Tags,
+                              UserId = user.Id,
+                              User = user,
+                              Photo = photo,
+                          }).Take(15);
 
-            return View(result.ToList());
+            return View( );
         }
 
         public ViewResult Privacy()

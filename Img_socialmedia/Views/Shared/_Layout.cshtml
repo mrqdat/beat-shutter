@@ -22,6 +22,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script scr="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
 </head>
 <body>
 
@@ -249,16 +250,28 @@
             'content': $(".alert_list").html()
         });
 
-
+        
         $('.image-tag-name').on('focusout', function () {
-            var txt = this.value.replace(/[^a-zA-Z0-9\+\-\.\#]/g, ''); // allowed characters list
+            var txt = this.value.replace(/[^a-zA-Z0-9\+\-\.\#]/g, ''); // allowed characters list          
             if (txt) $(this).before('<span class="tag">' + txt + '</span>');
-            this.value = "";
-
+            this.value = "";        
         }).on('keyup', function (e) {
             // comma|space (add more keyCodes delimited with | pipe)
             if (/(188|32)/.test(e.which)) $(this).trigger('focusout');
         });
+
+        //$(document).ready(function () {
+        //    var val = "";
+        //    var a;
+        //    debugger
+        //    $(".file-upload-btn").click(function () {
+        //        $(".tag").each(function () {
+        //            a = $(this).text();
+        //            val = val + ', ' + a;
+        //        });
+        //        $('.image-tag-name').attr('value', val);
+        //    });
+        //});
 
         $('.image-tag').on('click', '.tag', function () {
             $(this).remove();

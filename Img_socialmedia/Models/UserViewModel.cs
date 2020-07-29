@@ -20,7 +20,7 @@ namespace Img_socialmedia.Models
 
         [Required]
         //[DataType(DataType.Password)]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,15}$", ErrorMessage ="The password must have 6 - 15 characters")]
         public string Password { get; set; }
 
         //[DataType(DataType.Password)]
@@ -37,7 +37,7 @@ namespace Img_socialmedia.Models
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
         public string Email { get; set; }
         [StringLength(12)]
-        [RegularExpression("^[0-9]*$")]
+        [RegularExpression("^[0-9]*$",ErrorMessage = "Phone include only number, max length 12")]
         public string Phone { get; set; }
         public string TokenId { get; set; }
         public string ProfileImg { get; set; }

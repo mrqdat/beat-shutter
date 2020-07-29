@@ -1220,7 +1220,7 @@
 </div>
 
 
-<div style="padding-bottom:400px;"></div>
+<div class=" test" style="padding-bottom:400px;"></div>
 
 <button onclick="topFunction()" id="btn_ontop" title="Go to top">
     <i class="fa fa-2x fa-angle-up" style="color: #747474;"></i>
@@ -1249,11 +1249,13 @@
 </script>
 <script type="text/javascript">
     $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height() > $(document).height() - 800) {
-            var timingCallAjax = this.setTimeout(AJAXLoadPhoto, 2000);
+        if ($(window).scrollTop() + $(window).height() +1 >= $(document).height()) {
+            AJAXLoadPhoto();      
         }
         else {
-            clearTimeout(timingCallAjax);
+            console.log($(window).height());
+            console.log($(window).scrollTop());
+            console.log($(document).height());
         }
     });
 
@@ -1264,8 +1266,11 @@
                 url: "@Url.Action("TestA")",
                 success: function (msg) {
                     msg.forEach(function (item, index) {
-                        var photo = item["id"]["photo"];
-                        $("#test").append("<div>" + item["id"] + "<br>" + item.user["id"] + "</div>");
+                        //var photo = item["photo"].id;
+                        //$(".test").append(
+                        //    "<div>" + item["id"] + "<br>" + item.user["id"] + photo +"</div>"
+                        //);
+                        AppendToGrid(item);
                     });
                 },
                 error: function (req, status, error) {
@@ -1274,7 +1279,56 @@
             });
         });
     }
-
+    function AppendToGrid(item) {
+        $("#grid-layout").append( 
+            "<div class='img-x'>" +
+                "<div class='img-content'>" + 
+                    "<a class='a-cursor' href='/Post/"+item["id"]+"'>" + //link to photo
+                        "<div class='img-rel'>" +
+                            "<img class='photo-content' src='"+item["photo"].url+"' alt='' />" + //photo url photo tags
+                        "</div>" +
+                    "</a>" +
+                   "<div class='img-icon'>" +
+                        "<div class='img-hover-background i-animation'></div>" +
+                        "<div class='img-button-top img-button-display i-animation'>" +
+                           " <div class='img-button'>" +
+                                "<button class='btn btn-light pos-button'> "+ //xu ly nut like
+                                    "<i class='heart'></i>" +
+                                "</button>" +
+                                "<button class='btn btn-light'>" +
+                                    "<svg class='bi bi-plus' width='1em' height='1em' viewBox='2 4 12 12' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>" +
+                                        "<path fill-rule='evenodd' d='M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z' /> "+
+                                        "<path fill-rule='evenodd' d='M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z' />" +
+                                    "</svg>" + //them vao collection
+                                "</button>" +
+                           "</div>" +
+                        "</div>" +
+                        "<div class='img-button-bottom img-button-display i-animation'>" +
+                            "<div class='owner-photo'>" + 
+                                "<span>" +
+                                    "<a href='/User/Details/"+item["user"].id+"'>" + //link ID nguoi dang
+                                        "<img class='owner-img' src='"+item["user"].profileimg+"' />" + //url photo nguoi dang
+                                   " </a>" +
+                                "</span>" + 
+                                "<a class='owner-name' href='/User/Details/" + item['user'].id +"'>" + //link ID
+                                     (item["user"].lastname +" "+ item["user"].firstname) + //Ten nguoi dang
+                                " </a>" +
+                           " </div>" +
+                            "<div class='img-button'>" +
+                                "<button class='btn btn-light'>" +
+                                    "<svg class='bi bi-download' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>" +
+                                        "<path fill-rule='evenodd' d='M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z' /> "+
+                                        "<path fill-rule='evenodd' d='M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z' />" +
+                                        "<path fill-rule='evenodd' d='M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z' />" +
+                                   "</svg>" + //Xu ly nut download
+                                "</button>" +
+                            "</div>" +
+                        "</div>" +
+                    "</div>" +
+                "</div>" +
+            "</div>"
+        );
+    }
 
     $("#TestButton").click(function () {
         $.ajax({

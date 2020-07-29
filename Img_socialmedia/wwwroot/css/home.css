@@ -369,7 +369,7 @@
 
 .loader {
     position: relative;
-    top: 25px;
+    bottom: 25px;
     left: 50%;
     border: 5px solid #a3a3a3;
     border-radius: 50%;

@@ -204,7 +204,11 @@ namespace Img_socialmedia.Controllers
                         await formFile.CopyToAsync(stream);
                     }
 
+                    Image image = Image.FromFile(filePath);
+                    var directories = Encoding.UTF8.GetString(image.GetPropertyItem(0x010F).Value);
+                    
                     //var directories = ImageMetadataReader.ReadMetadata(filePath);
+                    return Ok(directories);
                     //model.Url = newFileName;
                     ////model.CameraModel = JpegMetadataReader.ReadMetadata().;
                     //model.Aperture = Convert.ToString(ExifDirectoryBase.TagAperture);
@@ -213,7 +217,7 @@ namespace Img_socialmedia.Controllers
                     //model.FocalLength = ExifDirectoryBase.TagFocalLength;
                     //model.Location = Convert.ToString(ExifDirectoryBase.TagSubjectLocation);
                     //model.CreateAt = Convert.ToDateTime(ExifDirectoryBase.TagDateTimeOriginal);
-                    return RedirectToAction("Index", "Home");
+                   // return RedirectToAction("Index", "Home");
                 }
                 
             }

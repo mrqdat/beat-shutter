@@ -14,9 +14,10 @@ namespace Img_socialmedia.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public ActionResult createCollection(string colname, string coldes,  CollectionViewModel model)
+        public IActionResult createCollection(string colname, string coldes, CollectionViewModel model)
         {
             var userid = HttpContext.Session.GetInt32("userid");
+
             if(userid == null)
             {
                 return RedirectToAction("Login", "Account");
@@ -31,8 +32,12 @@ namespace Img_socialmedia.Controllers
                     _context.Add(model);
                     _context.SaveChanges();
                 }
-            }
-            return PartialView();
+                return Json(new
+                {
+                    status = true,
+                    message = "success"
+                });
+            }           
         }
     }
 }

@@ -188,7 +188,7 @@ namespace Img_socialmedia.Controllers
             {
                 if (formFile.Length > 0)
                 {
-                    var image_tags = Request.Form["tag"].ToString();
+                    //var image_tags = Request.
 
                     var Location = Request.Form["location"].ToString();
 

@@ -250,18 +250,28 @@
             'content': $(".alert_list").html()
         });
 
-        var val = "";
+        
         $('.image-tag-name').on('focusout', function () {
             var txt = this.value.replace(/[^a-zA-Z0-9\+\-\.\#]/g, ''); // allowed characters list          
-            debugger
             if (txt) $(this).before('<span class="tag">' + txt + '</span>');
             this.value = "";        
-            val = val + ',' + txt;
-
         }).on('keyup', function (e) {
             // comma|space (add more keyCodes delimited with | pipe)
             if (/(188|32)/.test(e.which)) $(this).trigger('focusout');
         });
+
+        //$(document).ready(function () {
+        //    var val = "";
+        //    var a;
+        //    debugger
+        //    $(".file-upload-btn").click(function () {
+        //        $(".tag").each(function () {
+        //            a = $(this).text();
+        //            val = val + ', ' + a;
+        //        });
+        //        $('.image-tag-name').attr('value', val);
+        //    });
+        //});
 
         $('.image-tag').on('click', '.tag', function () {
             $(this).remove();

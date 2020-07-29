@@ -1041,7 +1041,7 @@
                             <div class="comment-box">
                                 <textarea class="comment-content">Abc</textarea>
                             </div>
-                            <button class="btn-send">Submit</button>
+                            <button class="btn btn-send" type="button">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -1551,6 +1551,7 @@
                                     <h6>Create a new collection</h6>                                  
                                 </button>
                                 <ul class="collection-item">
+                                    
                                     <li class="item-detail">
                                         <button class="btn" style="display:flex;width:100%;">
                                             <div class="item-name">
@@ -1689,21 +1690,22 @@
 
     $(document).ready(function () {
         $('.crebtn').on('click', function () {
-            var colname = $('#newcollection').serialize();
-
-            $('.collection-item').append($('.item-detail'));
-            $('.collection-list').show();
-            $('.collection-create').hide();
-            @*$.ajax({
+   
+            debugger
+            $.ajax({
                 type: "POST",
                 url: "@Url.Action("createCollection", "Collection")",
-                dataType: "json",
-                data: colname,
-                dataType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: JSON.stringify({
+                    colname : $('.colname').val(),
+                    coldes : $('.coldes').val()
+                }),
+                dataType: 'application/json; charset=UTF-8',
                 success: function () {
-                    $(".item-detail").insertAfter(".collection-item");
+                    $("<p></p>").insertAfter(".collection-item");
+                    $('.collection-list').show();
+                    $('.collection-create').hide();
                 }
-            });*@
+            });
         });
     });
 

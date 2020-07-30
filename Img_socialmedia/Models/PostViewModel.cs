@@ -18,6 +18,8 @@ namespace Img_socialmedia.Models
         public DateTime? CreateAt { get; set; }
         public string Tags { get; set; }
         public int UserId { get; set; }
+        public virtual string Username { get; set; }
+        public virtual string UserImg { get; set; }
         public virtual UserViewModel User { get; set; }
         public virtual PhotoViewModel Photo { get; set; }
         public virtual IEnumerable<CommentViewModel> Comment { get; set; }

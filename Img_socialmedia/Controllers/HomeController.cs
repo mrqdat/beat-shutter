@@ -38,7 +38,7 @@ namespace Img_socialmedia.Controllers
         public IActionResult Index()
         {
             var result = (from photo in shutterContext.Photo
-                         join post in shutterContext.Post on photo.Id equals post.PhotoId
+                        join post in shutterContext.Post on photo.Id equals post.PhotoId
                          join user in shutterContext.User on post.UserId equals user.Id
                          select new PostViewModel
                          {
@@ -49,8 +49,7 @@ namespace Img_socialmedia.Controllers
                              CreateAt = post.CreateAt,
                              Tags = post.Tags,
                              UserId = user.Id,
-                             UserImg = user.ProfileImg,
-                             Username = user.Lastname + " " + user.Firstname,
+                             User = user,
                              Photo = photo,
                          }).Take(15);
 

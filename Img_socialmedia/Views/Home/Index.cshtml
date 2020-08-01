@@ -865,12 +865,19 @@
         $('.com').click(function () {
             $('.modal-comment').animate({
                 width: "toggle",
-                duration:500
+                duration: 500
             });
 
         });
-</script>
-<script type="text/javascript">
+        $('.com-m').click(function () {
+            $('.modal-comment').animate({
+                width: "toggle",
+                duration: 500
+            });
+
+        });
+    });
+
     $(window).scroll(function () {
         if ($(window).scrollTop() + $(window).height() +1 >= $(document).height()) {
             AJAXLoadPhoto();      
@@ -902,6 +909,7 @@
             });
         });
     }
+
     function AppendToGrid(item) {
         $("#grid-layout").append( 
             "<div class='img-x'>" +
@@ -953,23 +961,24 @@
         );
     }
 
-    $(document).ready(function () {
-        $('.crebtn').on('click', function () {
-   
-            debugger
-            $.ajax({
-                type: "POST",
-                url: "@Url.Action("createCollection", "Collection")",
-                data: JSON.stringify({
-                    colname : $('.colname').val(),
-                    coldes : $('.coldes').val()
-                }),
-                dataType: 'application/json; charset=UTF-8',
-                success: function () {
-                    $("<p></p>").insertAfter(".collection-item");
-                    $('.collection-list').show();
-                    $('.collection-create').hide();
-                }
+        $(document).ready(function () {
+            $('.crebtn').on('click', function () {
+
+                debugger
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("createCollection", "Collection")",
+                    data: JSON.stringify({
+                        colname: $('.colname').val(),
+                        coldes: $('.coldes').val()
+                    }),
+                    dataType: 'application/json; charset=UTF-8',
+                    success: function () {
+                        $("<p></p>").insertAfter(".collection-item");
+                        $('.collection-list').show();
+                        $('.collection-create').hide();
+                    }
+                });
             });
         });
     function AJAXLoadPost() { }

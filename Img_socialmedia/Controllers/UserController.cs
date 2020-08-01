@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Img_socialmedia.Data;
 using Img_socialmedia.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Img_socialmedia.Controllers
 {
@@ -20,7 +21,7 @@ namespace Img_socialmedia.Controllers
             this._context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {       
             return View();
         }
@@ -77,7 +78,7 @@ namespace Img_socialmedia.Controllers
         // POST: Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,username,password,PasswordConfirm,email,name,first_name,last_name,phone,create_at")] UserViewModel userViewModel)
         {
@@ -137,20 +138,24 @@ namespace Img_socialmedia.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> editprofile(int id, [Bind("id,firstname,lastname,phone,bio")] UserViewModel userViewModel)
+        public async Task<IActionResult> editprofile(int id, [Bind("Id,Firstname,Lastname,Email,Password,Phone,Bio")] UserViewModel userViewModel)
         {
             int sessionID = (int)HttpContext.Session.GetInt32("userid");
-            if (!String.IsNullOrEmpty(sessionID.ToString()))
+            if (sessionID == id)
             {
+               
                 if (id != userViewModel.Id)
                 {
+                    //return Ok(userViewModel.Id + " " + id + " " + userViewModel.Firstname + " " + userViewModel.Bio + " " + userViewModel.Lastname + " " + userViewModel.Phone);
                     return NotFound();
                 }
-
+               // var errors = ModelState.Values.SelectMany(v => v.Errors);
+               // return Ok(errors);            
                 if (ModelState.IsValid)
-                {
+                {                  
                     try
                     {
+                        
                         _context.Update(userViewModel);
                         await _context.SaveChangesAsync();
                     }
@@ -165,8 +170,11 @@ namespace Img_socialmedia.Controllers
                             throw;
                         }
                     }
-                    return RedirectToAction(nameof(Index));
                 }
+            }
+            else
+            {
+                //
             }
             return View(userViewModel);
         }

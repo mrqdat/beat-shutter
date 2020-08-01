@@ -176,9 +176,8 @@ namespace Img_socialmedia.Controllers
             }
             return View();
         }
-
         [HttpPost]
-        public async Task<IActionResult> Create(List<IFormFile> files, PhotoViewModel model, PostViewModel postmodel)
+        public async Task<IActionResult> Create(List<IFormFile> files, PhotoViewModel model)
         {
             long size = files.Sum(f => f.Length);
 
@@ -188,13 +187,9 @@ namespace Img_socialmedia.Controllers
             {
                 if (formFile.Length > 0)
                 {
-                    //var image_tags = Request.
-
-                    var Location = Request.Form["location"].ToString();
-
                     var filename = Path.GetFileName(formFile.FileName);
 
-                    var myUniqueFileName = Convert.ToString(Guid.NewGuid())+ "-shutter";
+                    var myUniqueFileName = Convert.ToString(Guid.NewGuid())+ " - shutter";
 
                     var fileExtension = Path.GetExtension(filename);
 
@@ -203,19 +198,17 @@ namespace Img_socialmedia.Controllers
                     var filePath = new PhysicalFileProvider(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "images")).Root + $@"\{ newFileName}";
                     // full path to file in temp location
                     //var filePath = Path.GetTempFileName(); //we are using Temp file name just for the example. Add your own file path.
-                    filePaths.Add(newFileName);
-                    model.Url = newFileName;
-                    model.Location = Location;
-                              
-                    _context.Add(model);
-                   // _context.Add(postmodel);
-                    await _context.SaveChangesAsync();
+                    filePaths.Add(filePath);
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await formFile.CopyToAsync(stream);
                     }
 
+                    Image image = Image.FromFile(filePath);
+                    var directories = Encoding.UTF8.GetString(image.GetPropertyItem(0x010F).Value);
+                    
                     //var directories = ImageMetadataReader.ReadMetadata(filePath);
+                    return Ok(directories);
                     //model.Url = newFileName;
                     ////model.CameraModel = JpegMetadataReader.ReadMetadata().;
                     //model.Aperture = Convert.ToString(ExifDirectoryBase.TagAperture);
@@ -223,8 +216,8 @@ namespace Img_socialmedia.Controllers
                     //model.ShutterSpeed = Convert.ToString(ExifDirectoryBase.TagShutterSpeed);
                     //model.FocalLength = ExifDirectoryBase.TagFocalLength;
                     //model.Location = Convert.ToString(ExifDirectoryBase.TagSubjectLocation);
-                   // model.CreateAt = Convert.ToDateTime(ExifDirectoryBase.TagDateTimeOriginal);
-                    return RedirectToAction("Index", "Home");
+                    //model.CreateAt = Convert.ToDateTime(ExifDirectoryBase.TagDateTimeOriginal);
+                   // return RedirectToAction("Index", "Home");
                 }
                 
             }

@@ -23,6 +23,8 @@ namespace Img_socialmedia.Controllers
         private readonly IConfiguration configuration;
         private readonly db_shutterContext shutterContext;
 
+        public object Id { get; private set; }
+
         public HomeController(IConfiguration config, db_shutterContext context)
         {
             this.configuration = config;
@@ -36,22 +38,22 @@ namespace Img_socialmedia.Controllers
         public IActionResult Index()
         {
             var result = (from photo in shutterContext.Photo
-                          join post in shutterContext.Post on photo.Id equals post.PhotoId
-                          join user in shutterContext.User on post.UserId equals user.Id
-                          select new PostViewModel
-                          {
-                              Id = post.Id,
-                              PhotoId = photo.Id,
-                              TotalLike = post.TotalLike,
-                              TotalViews = post.TotalViews,
-                              CreateAt = post.CreateAt,
-                              Tags = post.Tags,
-                              UserId = user.Id,
-                              User = user,
-                              Photo = photo,
-                          }).Take(15);
+                        join post in shutterContext.Post on photo.Id equals post.PhotoId
+                         join user in shutterContext.User on post.UserId equals user.Id
+                         select new PostViewModel
+                         {
+                             Id = post.Id,
+                             PhotoId = photo.Id,
+                             TotalLike = post.TotalLike,
+                             TotalViews = post.TotalViews,
+                             CreateAt = post.CreateAt,
+                             Tags = post.Tags,
+                             UserId = user.Id,
+                             User = user,
+                             Photo = photo,
+                         }).Take(15);
 
-            return View( );
+            return View(result.ToList());
         }
 
         public ViewResult Privacy()
@@ -87,47 +89,59 @@ namespace Img_socialmedia.Controllers
                              CreateAt = post.CreateAt,
                              Tags = post.Tags,
                              UserId = user.Id,
-                             User = user,
+                             UserImg = user.ProfileImg,
+                             Username= user.Lastname +" " + user.Firstname,
                              Photo = photo,
+                             
                          };
 
             return result.ToList();
         }
 
         [HttpGet]
-        public List<PostViewModel> GetDetailPhoto(int? id)
+        public PostViewModel GetDetailPhoto(int? id)
         {
-            //var result = from photo in shutterContext.Photo
-            //             join post in shutterContext.Post on photo.Id equals post.PhotoId
-            //             join user in shutterContext.User on post.UserId equals user.Id
-            //             where post.Id == id
-            //             select new PostViewModel
-            //             {
-            //                 Id = post.Id,
-            //                 PhotoId = photo.Id,
-            //                 TotalLike = post.TotalLike,
-            //                 TotalViews = post.TotalViews,
-            //                 CreateAt = post.CreateAt,
-            //                 Tags = post.Tags,
-            //                 UserId = user.Id,
-            //                 User = user,
-            //                 Photo = photo,
-            //};
-            var nah = shutterContext.Post.Include(d => d.Comment)
-                                         .ThenInclude(e => e.User)
-                                         .Include(p => p.Photo)
-                                         .Where(b=>b.Id==id)
-                                         .ToList();
+            var result = from photo in shutterContext.Photo
+                         join post in shutterContext.Post on photo.Id equals post.PhotoId
+                         join user in shutterContext.User on post.UserId equals user.Id
+                         where post.Id == id
+                         select new PostViewModel
+                         {
+                             Id = post.Id,
+                             PhotoId = photo.Id,
+                             TotalLike = post.TotalLike,
+                             TotalViews = post.TotalViews,
+                             CreateAt = post.CreateAt,
+                             Tags = post.Tags,
+                             UserId = user.Id,
+                             UserImg = user.ProfileImg,
+                             Comment = (from comment in shutterContext.Comment
+                                        where comment.PostId == id
+                                        select new CommentViewModel
+                                        {
+                                            Id = comment.Id,
+                                            PostId = post.Id,
+                                            Contents = comment.Contents,
+                                            UserId = comment.UserId,
+                                            UserImg = shutterContext.User.Where(u => u.Id == comment.UserId).Select(u => u.ProfileImg).FirstOrDefault(),
+                                            Username = shutterContext.User.Where(u => u.Id == comment.UserId).Select(u => (u.Lastname + " " + u.Firstname)).FirstOrDefault(),
+                                            CreateAt = comment.CreateAt            
+                                        }
+                                       ).ToList(),
 
+                              Username = user.Lastname + " " + user.Firstname,
+                             Photo = photo
+                             
+                         };
+            return result.First();
             //var aa = shutterContext.Post.FromSqlRaw("SELECT post.*,comment.[user_id] as commentuser, [user].firstname,[user].lastname " +
             //                                       "FROM post " +
             //                                       "INNER JOIN dbo.[user] ON post.user_id = dbo.[user].id " +
             //                                       "INNER JOIN comment on post.id = comment.post_id " +
             //                                       "INNER JOIN PHOTO on post.photo_id = photo.id ").ToList();
-       
+
             //.Where(b=>b.Id == id)
 
-            return nah;
         }
     }
 }

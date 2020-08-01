@@ -1,5 +1,4 @@
 ﻿@using Img_socialmedia.Models
-
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Shutter | Free images and photos for every one ";
@@ -7,7 +6,6 @@
 <div class="vertical_menu">
     <div class="scrollmenu">
         <a href="#home">Curent Event</a>
-        <a href="#news">News</a>
         <a href="#contact">Nature</a>
         <a href="#about">Friend</a>
         <a href="#support">Animals</a>
@@ -33,7 +31,7 @@
                             <button type="submit" class="searchButton">
                                 <i class="fa fa-search"></i>
                             </button>
-                            <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                            <input type="text" class="searchTerm" placeholder="What are you looking for?" asp-action="Index" asp-controller="Search">
                         </div>
                     </div>
                 </div>
@@ -46,9 +44,56 @@
     <div class="img-x">
         <div class="img-content">
 
+            <a class="a-cursor"  >
+                <div class="img-rel">
+                    <img class="photo-content" src="~/images/aff65970-e12b-4855-a1b0-b905ffd2fa8f - shutter.jpg" alt="" data-toggle="modal" data-target="#uPhoto"/>
+                </div>
+            </a>
+            <div class="img-icon">
+                <div class="img-hover-background i-animation"></div>
+                <div class="img-button-top img-button-display i-animation">
+                    <div class="img-button">
+                        <button class="btn btn-light pos-button">
+                            <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+                        </button>
+                        <button class="btn btn-light pos-button" id="btn-col" data-toggle="modal" data-target="#collection_modal">
+                            <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="img-button-bottom img-button-display i-animation">
+                    <div class="owner-photo">
+                        <span>
+                            <a href="#">
+                                <img class="owner-img" src="~/images/sunset.png" />
+                            </a>
+                        </span>
+                        <a class="owner-name" href="#">
+                            Quốc Đạt
+                        </a>
+                    </div>
+                    <div class="img-button">
+                        <button class="btn btn-light">
+                            <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="img-x">
+        <div class="img-content">
+
             <a class="a-cursor" href="#">
                 <div class="img-rel">
-                    <img class="photo-content" src="~/images/aff65970-e12b-4855-a1b0-b905ffd2fa8f - shutter.jpg" alt="" />
+                    <img class="photo-content" src="~/images/4.jpg" alt="" data-toggle="modal" data-target="#uPhoto"/>
                 </div>
             </a>
             <div class="img-icon">
@@ -92,56 +137,9 @@
     </div>
     <div class="img-x">
         <div class="img-content">
-
             <a class="a-cursor" href="#">
                 <div class="img-rel">
-                    <img class="photo-content" src="~/images/4.jpg" alt="" />
-                </div>
-            </a>
-            <div class="img-icon">
-                <div class="img-hover-background i-animation"></div>
-                <div class="img-button-top img-button-display i-animation">
-                    <div class="img-button">
-                        <button class="btn btn-light pos-button">
-                            <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
-                        </button>
-                        <button class="btn btn-light pos-button" data-toggle="modal" data-target="#collection_modal">
-                            <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="img-button-bottom img-button-display i-animation">
-                    <div class="owner-photo">
-                        <span>
-                            <a href="#">
-                                <img class="owner-img" src="~/images/sunset.png" />
-                            </a>
-                        </span>
-                        <a class="owner-name" href="#">
-                            Quốc Đạt
-                        </a>
-                    </div>
-                    <div class="img-button">
-                        <button class="btn btn-light">
-                            <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
-                                <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
-                                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="img-x">
-        <div class="img-content">
-            <a class="a-cursor" href="#">
-                <div class="img-rel">
-                    <img class="photo-content" src="~/images/sunset.png" />
+                    <img class="photo-content" src="~/images/sunset.png" data-toggle="modal" data-target="#uPhoto"/>
                 </div>
             </a>
             <div class="img-icon">
@@ -187,7 +185,7 @@
         <div class="img-content">
             <a class="a-cursor" href="#">
                 <div class="img-rel">
-                    <img class="photo-content" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                    <img class="photo-content" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" data-toggle="modal" data-target="#uPhoto"/>
                 </div>
             </a>
             <div class="img-icon">
@@ -233,7 +231,7 @@
         <div class="img-content">
             <a class="a-cursor" href="#">
                 <div class="img-rel">
-                    <img class="photo-content" src="~/images/unnamed.png" />
+                    <img class="photo-content" src="~/images/unnamed.png" data-toggle="modal" data-target="#uPhoto"/>
                 </div>
             </a>
             <div class="img-icon">
@@ -279,7 +277,7 @@
         <div class="img-content">
             <a class="a-cursor" href="#">
                 <div class="img-rel">
-                    <img class="photo-content" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" />
+                    <img class="photo-content" src="~/images/41948621_696072174101612_1586256878407516160_o.jpg" data-toggle="modal" data-target="#uPhoto"/>
                 </div>
             </a>
             <div class="img-icon">
@@ -325,7 +323,7 @@
         <div class="img-content">
             <a class="a-cursor" href="#">
                 <div class="img-rel">
-                    <img class="photo-content" src="~/images/7ac60223-d259-4577-8f1a-f9a5275691f8.jpg" />
+                    <img class="photo-content" src="~/images/7ac60223-d259-4577-8f1a-f9a5275691f8.jpg" data-toggle="modal" data-target="#uPhoto"/>
                 </div>
             </a>
             <div class="img-icon">
@@ -372,7 +370,7 @@
             <div class="img-content">
                 <a class="a-cursor" href="#">
                     <div class="img-rel">
-                        <img class="photo-content" src="~/images/drone.jpg" alt="" />
+                        <img class="photo-content" src="~/images/drone.jpg" alt="" data-toggle="modal" data-target="#uPhoto"/>
                     </div>
                 </a>
                 <div class="img-icon">
@@ -421,7 +419,7 @@
 
                 <a class="a-cursor" href="#">
                     <div class="img-rel">
-                        <img class="photo-content" src="~/images/d8173e03-4e2a-4037-a8fc-4391bf0111e3 - shutter.jpg" alt="" />
+                        <img class="photo-content" src="~/images/d8173e03-4e2a-4037-a8fc-4391bf0111e3 - shutter.jpg" alt="" data-toggle="modal" data-target="#uPhoto"/>
                     </div>
                 </a>
                 <div class="img-icon">
@@ -469,7 +467,7 @@
             <div class="img-content">
                 <a class="a-cursor" href="#">
                     <div class="img-rel">
-                        <img class="photo-content" src="~/images/pagoda.jpg" alt="" />
+                        <img class="photo-content" src="~/images/pagoda.jpg" alt="" data-toggle="modal" data-target="#uPhoto"/>
                     </div>
                 </a>
                 <div class="img-icon">
@@ -517,7 +515,7 @@
             <div class="img-content">
                 <a class="a-cursor" href="#">
                     <div class="img-rel">
-                        <img class="photo-content" src="~/images/windows.jpg" alt="" />
+                        <img class="photo-content" src="~/images/windows.jpg" alt="" data-toggle="modal" data-target="#uPhoto"/>
                     </div>
                 </a>
                 <div class="img-icon">
@@ -564,7 +562,7 @@
         <div class="img-content">
             <a class="a-cursor" href="#">
                 <div class="img-rel">
-                    <img class="photo-content" src="~/images/598a33e8-0647-47ff-be2d-0305b24122ce.jpg" />
+                    <img class="photo-content" src="~/images/598a33e8-0647-47ff-be2d-0305b24122ce.jpg" data-toggle="modal" data-target="#uPhoto"/>
                 </div>
             </a>
             <div class="img-icon">
@@ -612,7 +610,7 @@
         <div class="img-content">
             <a class="a-cursor" href="#">
                 <div class="img-rel">
-                    <img class="photo-content" src="~/images/dc4919b5-a2ec-474c-8459-32d07fd05085 - shutter.jpg" />
+                    <img class="photo-content" src="~/images/dc4919b5-a2ec-474c-8459-32d07fd05085 - shutter.jpg" data-toggle="modal" data-target="#uPhoto"/>
                 </div>
             </a>
             <div class="img-icon">
@@ -660,7 +658,7 @@
         <div class="img-content">
             <a class="a-cursor" href="#">
                 <div class="img-rel">
-                    <img class="photo-content" src="~/images/b8b7e3c4-b5da-489d-af91-7019f4ed14e9 - shutter.jpg" />
+                    <img class="photo-content" src="~/images/b8b7e3c4-b5da-489d-af91-7019f4ed14e9 - shutter.jpg" data-toggle="modal" data-target="#uPhoto"/>
                 </div>
             </a>
             <div class="img-icon">
@@ -708,7 +706,7 @@
         <div class="img-content">
             <a class="a-cursor" href="#">
                 <div class="img-rel">
-                    <img class="photo-content" src="~/images/bf96d841-1a17-46b2-847c-73e469e2e089.jpg" />
+                    <img class="photo-content" src="~/images/bf96d841-1a17-46b2-847c-73e469e2e089.jpg" data-toggle="modal" data-target="#uPhoto"/>
                 </div>
             </a>
             <div class="img-icon">
@@ -756,7 +754,7 @@
         <div class="img-content">
             <a class="a-cursor" href="#">
                 <div class="img-rel">
-                    <img class="photo-content" src="~/images/5.jpg" />
+                    <img class="photo-content" src="~/images/5.jpg" data-toggle="modal" data-target="#uPhoto"/>
                 </div>
             </a>
             <div class="img-icon">
@@ -804,7 +802,7 @@
         <div class="img-content">
             <a class="a-cursor" href="#">
                 <div class="img-rel">
-                    <img class="photo-content" src="~/images/c206b77d-f4a9-4f89-96e0-25cc5737b7a7 - shutter.jpg" />
+                    <img class="photo-content" src="~/images/c206b77d-f4a9-4f89-96e0-25cc5737b7a7 - shutter.jpg" data-toggle="modal" data-target="#uPhoto"/>
                 </div>
             </a>
             <div class="img-icon">
@@ -902,9 +900,7 @@
 </div>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uPhoto">
-    Tesst
-</button>
+ 
 
 <!-- Photo Modal -->
 
@@ -922,7 +918,7 @@
                         <div>
                             <div class="owner-photo">
                                 <span>
-                                    <a href="#">
+                                    <a >
                                         <img class="owner-img" src="~/images/sunset.png" />
                                     </a>
                                 </span>
@@ -932,10 +928,10 @@
                             </div>
                         </div>
                         <div class="float-right">
-                            <button class="btn btn-light btn-hw pos-button modal-btns" title="like this photo">
+                            <button class="btn btn-light btn-hw pos-button modal-btns" id="btn-like" title="like this photo">
                                 <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
                             </button>
-                            <button class="btn btn-light btn-hw pos-button modal-btns" data-target="#collection_modal" data-toggle="modal" title="add to collection">
+                            <button class="btn btn-light btn-hw pos-button modal-btns" id="btn-col" data-target="#collection_modal" data-toggle="modal" title="add to collection">
                                 <svg class="bi bi-plus" width="1em" height="1em" margin-bottom: 2px; viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"></path>
                                     <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"></path>
@@ -969,7 +965,7 @@
                         </div>
                     </div>
                     <div class="com">
-                        <button class="slide-toggle" style="padding:4px;">
+                        <button class="slide-toggle" id="btn-com" style="padding:4px;">
                             <img class="toggle" id="comment-panel" src="~/images/comment.png" width="25" height="25" />
                         </button>
                     </div>
@@ -1537,7 +1533,7 @@
 </div>
 
 @* collection modal *@
-<div class="fade bgiPhoto" id="collection_modal" role="dialog" aria-hidden="true">
+<div class="fade bgiPhoto" id="collection_modal" role="dialog" aria-hidden="true" style="overflow-y:auto;">
     <div class="modal-dialog" role="document" style=" ">
         <div class="modal-content" style="cursor: auto;min-height: 400px;">  
             <div class="collection-content">
@@ -1551,21 +1547,22 @@
                                     <h6>Create a new collection</h6>                                  
                                 </button>
                                 <ul class="collection-item">
+                                   
+                                        <li class="item-detail">
+                                            <button class="btn" style="display:flex;width:100%;">
+                                                <div class="item-name">
+                                                    <span>7 photos</span>
+                                                    <h6>portrail</h6>
+                                                </div>
+                                                <div class="addto" title="add to collection">
+                                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                    </svg>
+                                                </div>
+                                            </button>
+                                        </li>
                                     
-                                    <li class="item-detail">
-                                        <button class="btn" style="display:flex;width:100%;">
-                                            <div class="item-name">
-                                                <span>7 photos</span>
-                                                <h6>Portrait</h6>
-                                            </div>
-                                            <div class="addto" title="add to collection">
-                                                <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                                                </svg>
-                                            </div>
-                                        </button>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -1689,25 +1686,106 @@
 
 
     $(document).ready(function () {
+
+        ///   create collection
         $('.crebtn').on('click', function () {
-   
-            debugger
             $.ajax({
                 type: "POST",
                 url: "@Url.Action("createCollection", "Collection")",
-                data: JSON.stringify({
+                data:{
                     colname : $('.colname').val(),
                     coldes : $('.coldes').val()
-                }),
-                dataType: 'application/json; charset=UTF-8',
+                },
                 success: function () {
-                    $("<p></p>").insertAfter(".collection-item");
                     $('.collection-list').show();
                     $('.collection-create').hide();
+                    //('[class="item-detail"]').insertAfter(".collection-item");
+
+                    //console.log(result["success"]);
+                }
+            });
+        });
+
+
+
+
+
+
+        ////like photos
+        $('#btn-like').on('click', function () {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("like", "Post")",
+                success: function () {
+
+                }
+
+            });
+        });
+
+        $('#btn-like').on('click', function () {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("dislike", "Post")",
+                success: function (result) {
+
+                }
+
+            });
+        });
+
+        //loadcommet
+        $('#btn-com').on('click', function () {
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("loadcomment", "Comment")",
+                success: function () {
+
+                }
+
+            });
+        });
+
+        //comment
+        $('#btn-send').on('click', function () {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("comment", "Comment")",
+                success: function () {
+
                 }
             });
         });
     });
+
+
+     /// display collection
+    $(document).ready(function () {
+   
+        $('#btn-col').on('click', function () {
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("getCollection", "Collection")",
+                success: function (result) {
+                    alert(result);
+                    //    var html = "";
+                    //    $.each(result, function (item) {
+                    //        html += '<li class="item-detail"><button class="btn" style="display:flex;width:100%;"><div class="item-name">'
+                    //        html +=  '<span>7 photos</span>'
+                    //        html += '<h6>'+item.Name+'</h6></div><div class="addto" title="add to collection"><svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" /><path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" /></svg></div></button></li>';
+                    //    });
+                    //    $('.collection-item').html(html);
+                    //},
+                }
+            });
+        });
+    });
+
+    $('.photo-content').on('click', function () {
+        var imgurl = $(this).attr('src');
+        $('.photo-main').attr('src', imgurl);
+    });
+
 
 
 </script>

@@ -260,18 +260,17 @@
             if (/(188|32)/.test(e.which)) $(this).trigger('focusout');
         });
 
-        //$(document).ready(function () {
-        //    var val = "";
-        //    var a;
-        //    debugger
-        //    $(".file-upload-btn").click(function () {
-        //        $(".tag").each(function () {
-        //            a = $(this).text();
-        //            val = val + ', ' + a;
-        //        });
-        //        $('.image-tag-name').attr('value', val);
-        //    });
-        //});
+        $(document).ready(function () {
+            var val = "";
+            var a;
+            $(".file-upload-btn").click(function () {
+                $(".tag").each(function () {
+                    a = $(this).text();
+                    val = val + ', ' + a;
+                });
+                $('.image-tag-name').attr('value', val);
+            });
+        });
 
         $('.image-tag').on('click', '.tag', function () {
             $(this).remove();

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Img_socialmedia.Models;
 using Microsoft.AspNetCore.Http;
+using System.Collections.ObjectModel;
 
 namespace Img_socialmedia.Controllers
 {
@@ -12,17 +13,19 @@ namespace Img_socialmedia.Controllers
     {
         private readonly db_shutterContext _context;
 
-        [HttpPost]
-        [AutoValidateAntiforgeryToken]
-        public IActionResult createCollection(string colname, string coldes, CollectionViewModel model)
+        //public IActionResult createCollection()
+        //{
+        //    return View();
+        //}
+
+
+        public IActionResult createCollection(string colname, string coldes)
         {
             var userid = HttpContext.Session.GetInt32("userid");
-
-            if(userid == null)
+            if (userid != null)
             {
-                return RedirectToAction("Login", "Account");
-            }
-            else { 
+                
+                CollectionViewModel model = new CollectionViewModel();
                 if (ModelState.IsValid)
                 {
                     model.Name = colname;
@@ -32,12 +35,34 @@ namespace Img_socialmedia.Controllers
                     _context.Add(model);
                     _context.SaveChanges();
                 }
-                return Json(new
+                else
                 {
-                    status = true,
-                    message = "success"
-                });
-            }           
+                    return Json(new { success = "false", message = "fail" });
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            return Json("success");            
+        }
+
+
+        public IActionResult getCollection()
+        {
+            var userid = HttpContext.Session.GetInt32("userid");
+            if(userid != null)
+            {
+                var result = (from colname in _context.Collection
+                              join user in _context.User on colname.UserId equals userid
+                              join coldetail in _context.CollectionDetail on colname.Id equals coldetail.CollectionId
+                              select colname).ToList();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            return View();
         }
     }
 }

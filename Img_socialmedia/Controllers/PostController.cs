@@ -25,5 +25,14 @@ namespace Img_socialmedia.Controllers
             return View();
         }
         
+        public   ActionResult like()
+        {
+            return View();
+        }
+
+        public    ActionResult dislike()
+        {
+            return View();
+        }
     }
 }

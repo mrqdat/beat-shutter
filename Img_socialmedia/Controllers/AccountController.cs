@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.SignalR;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace Img_socialmedia.Controllers
 {
     public class AccountController : Controller
@@ -31,6 +32,7 @@ namespace Img_socialmedia.Controllers
                 if (user.First().Password == password)
                 {
                     string username = user.First().Firstname + " " + user.First().Lastname;
+                    HttpContext.Response.Cookies.Append("username", username);
                     HttpContext.Session.SetInt32("userid", user.First().Id);
                     HttpContext.Session.SetString("username", username);
 

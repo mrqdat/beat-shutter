@@ -66,8 +66,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="account-phone">Phone Number</label>
-                        <input   class="form-control" type="text" id="account-phone"   name="Phone" required="">
+                        <label asp-for="Phone" for="account-phone">Phone Number</label>
+                        <input asp-for="Phone"  class="form-control" type="text" id="account-phone"   name="Phone" required="">
                     </div>
                 </div>
 
@@ -94,7 +94,7 @@
                
             </form>
             <span asp-validation-for="Email" class="text-danger"></span>
-            <span   class="text-danger"></span>
+            <span asp-validation-for="Phone"  class="text-danger"></span>
             <span asp-validation-for="Firstname" class="text-danger"></span>
             <span asp-validation-for="Lastname" class="text-danger"></span>
         </div>

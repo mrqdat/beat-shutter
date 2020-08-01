@@ -38,6 +38,7 @@ namespace Img_socialmedia.Models
         public string Email { get; set; }
         [StringLength(12)]
         [RegularExpression("^[0-9]*$",ErrorMessage = "Phone include only number, max length 12")]
+        public string Phone { get; set; }
         public string TokenId { get; set; }
         public string ProfileImg { get; set; }
         [StringLength(1000)]

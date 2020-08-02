@@ -48,7 +48,7 @@ namespace Img_socialmedia.Controllers
         }
 
 
-        public IActionResult getCollection()
+        public ActionResult getCollection()
         {
             var userid = HttpContext.Session.GetInt32("userid");
             if(userid != null)

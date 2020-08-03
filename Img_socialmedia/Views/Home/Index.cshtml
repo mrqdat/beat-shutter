@@ -1,4 +1,4 @@
-﻿@using Img_socialmedia.Models
+﻿@model IEnumerable<PostViewModel>
 
 @{
     Layout = "_Layout";
@@ -43,57 +43,57 @@
 </div>
 
 <div id="grid-layout">
-    @foreach (var photo in Model )
-        {
-            <div class="img-x">
-                <figure>
-                    <div class="img-content">
-                        <a class="a-cursor" href="#">
-                            <div class="img-rel">
-                                <img class="photo-content" src="~/images/@Url.Content(Model.Url)" asp-append-version="true" />
+    @foreach (var photo in Model)
+    {
+        <div class="img-x">
+            <figure>
+                <div class="img-content">
+                    <a class="a-cursor" href="javaascript:AJAXLoadPost(@photo.Id)">
+                        <div class="img-rel">
+                            <img class="photo-content" src="@Url.Content(photo.Photo.Url)" asp-append-version="true" />
+                        </div>
+                    </a>
+                    <div class="img-icon">
+                        <div class="img-hover-background i-animation"></div>
+                        <div class="img-button-top img-button-display i-animation">
+                            <div class="img-button">
+                                <button class="btn btn-light pos-button">
+                                    <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+                                </button>
+                                <button class="btn btn-light">
+                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                    </svg>
+                                </button>
                             </div>
-                        </a>
-                        <div class="img-icon">
-                            <div class="img-hover-background i-animation"></div>
-                            <div class="img-button-top img-button-display i-animation">
-                                <div class="img-button">
-                                    <button class="btn btn-light pos-button">
-                                        <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
-                                    </button>
-                                    <button class="btn btn-light">
-                                        <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="img-button-bottom img-button-display i-animation">
-                                <div class="owner-photo">
-                                    <span>
-                                        <a href="/User/Details/@photo.UserId">
-                                            <img class="owner-img" src="@Url.Content(photo.UserImg)" asp-append-version="true"/>
-                                        </a>
-                                    </span>
-                                    <a class="owner-name" href="/User/Details/@photo.UserId">
-                                        @photo.Username
+                        </div>
+                        <div class="img-button-bottom img-button-display i-animation">
+                            <div class="owner-photo">
+                                <span>
+                                    <a href="/User/Details/@photo.UserId">
+                                        <img class="owner-img" src="@Url.Content(photo.UserImg)" asp-append-version="true" />
                                     </a>
-                                </div>
-                                <div class="img-button">
-                                    <button class="btn btn-light">
-                                        <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
-                                            <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
-                                            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
-                                        </svg>
-                                    </button>
-                                </div>
+                                </span>
+                                <a class="owner-name" href="/User/Details/@photo.UserId">
+                                    @photo.Username
+                                </a>
+                            </div>
+                            <div class="img-button">
+                                <button class="btn btn-light">
+                                    <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                        <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                    </svg>
+                                </button>
                             </div>
                         </div>
                     </div>
-                </figure>
-            </div>
-        }
+                </div>
+            </figure>
+        </div>
+    }
 </div>
 
 <!-- Button trigger modal -->
@@ -733,7 +733,7 @@
 @* collection modal *@
 <div class="fade bgiPhoto" id="collection_modal" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document" style=" ">
-        <div class="modal-content" style="cursor: auto;min-height: 400px;">  
+        <div class="modal-content" style="cursor: auto;min-height: 400px;">
             <div class="collection-content">
                 <div class="collection">
                     <div class=collection-bg style="background-image: url('./images/f686c873-8cc3-4963-b74c-65d76401d22a-shutter.jpg');"></div>
@@ -742,10 +742,10 @@
                             <div class="collection-list-item">
                                 <h3>Add to Collection</h3>
                                 <button class="btn create-item" id="create-item">
-                                    <h6>Create a new collection</h6>                                  
+                                    <h6>Create a new collection</h6>
                                 </button>
                                 <ul class="collection-item">
-                                    
+
                                     <li class="item-detail">
                                         <button class="btn" style="display:flex;width:100%;">
                                             <div class="item-name">
@@ -768,7 +768,7 @@
                                 <h3>Create new collection</h3>
                                 <form id="newcollection" method="post">
                                     <div class="create-item">
-                                        <input class="colname" type="text" name="colname" value="" placeholder="Collection name" required/>
+                                        <input class="colname" type="text" name="colname" value="" placeholder="Collection name" required />
                                     </div>
                                     <div class="create-item">
                                         <input class="coldes" type="text" name="coldes" placeholder="Description" value="" />
@@ -781,7 +781,7 @@
                             </div>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
     </div>
@@ -851,29 +851,26 @@
     $('#create-item').on('click', function () {
         $('.collection-list').hide();
         $('.collection-create').show();
-
-
     });
 
     $('.craete-cancel').on('click', function () {
         $('.collection-list').show();
         $('.collection-create').hide();
-
     });
 
     $(document).ready(function () {
         $('.com').click(function () {
             $('.modal-comment').animate({
                 width: "toggle",
-                duration:500
+                duration: 500
             });
-
         });
+    });
 </script>
 <script type="text/javascript">
     $(window).scroll(function () {
         if ($(window).scrollTop() + $(window).height() +1 >= $(document).height()) {
-            AJAXLoadPhoto();      
+            AJAXLoadPhoto();
         }
         else {
             console.log($(window).height());
@@ -903,9 +900,9 @@
         });
     }
     function AppendToGrid(item) {
-        $("#grid-layout").append( 
+        $("#grid-layout").append(
             "<div class='img-x'>" +
-                "<div class='img-content'>" + 
+                "<div class='img-content'>" +
                     "<a class='a-cursor' href='/Post/"+item["id"]+"'>" + //link to photo
                         "<div class='img-rel'>" +
                             "<img class='photo-content' src='"+item["photo"].url+"' alt='' />" + //photo url photo tags
@@ -927,12 +924,12 @@
                            "</div>" +
                         "</div>" +
                         "<div class='img-button-bottom img-button-display i-animation'>" +
-                            "<div class='owner-photo'>" + 
+                            "<div class='owner-photo'>" +
                                 "<span>" +
                                     "<a href='/User/Details/"+item["userId"]+"'>" + //link ID nguoi dang
                                         "<img class='owner-img' src='"+item["userImg"]+"' />" + //url photo nguoi dang
                                    " </a>" +
-                                "</span>" + 
+                                "</span>" +
                                 "<a class='owner-name' href='/User/Details/" + item["userId"].id +"'>" + //link ID
                                      item["username"] + //Ten nguoi dang
                                 " </a>" +
@@ -953,26 +950,17 @@
         );
     }
 
-    $(document).ready(function () {
-        $('.crebtn').on('click', function () {
-   
-            debugger
-            $.ajax({
-                type: "POST",
-                url: "@Url.Action("createCollection", "Collection")",
-                data: JSON.stringify({
-                    colname : $('.colname').val(),
-                    coldes : $('.coldes').val()
-                }),
-                dataType: 'application/json; charset=UTF-8',
-                success: function () {
-                    $("<p></p>").insertAfter(".collection-item");
-                    $('.collection-list').show();
-                    $('.collection-create').hide();
-                }
-            });
+    function AJAXLoadPost(postid) {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetDetailPhoto")",
+            data: id = postid,
+            success: function (result) {
+                alert(result["id"] + "A");
+                console.log(result["id"] + "a");
+            }
         });
-    function AJAXLoadPost() { }
+    }
 
     $("#TestButton").click(function () {
         $.ajax({

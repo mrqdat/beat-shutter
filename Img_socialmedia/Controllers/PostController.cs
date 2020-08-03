@@ -24,6 +24,11 @@ namespace Img_socialmedia.Controllers
             
             return View();
         }
+
+        public string CommentPost()
+        {
+            return "a";
+        }
         
     }
 }

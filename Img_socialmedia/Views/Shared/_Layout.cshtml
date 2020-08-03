@@ -64,7 +64,14 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
+                                @if (Context.Session.GetInt32("userid").HasValue)
+                                {
+                                    <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link" href="#" style="cursor:pointer" >Upload</a>
+                                }
                             </li>
 
 
@@ -153,10 +160,10 @@
                                         </div>
                                     </div>
                                     <div class="image-tag">
-                                        <input class="image-tag-name" type="text" name="tag" value="" placeholder="Add your tags!" />
+                                        <input class="image-tag-name" type="text" name="tags" value="" placeholder="Add your tags!" />
                                     </div>
                                     <div class="image-tag">
-                                        <input class="image-location" type="text" name="loaction" value="" placeholder="Add location" />
+                                        <input class="image-location" type="text" name="location" value="" placeholder="Add location" />
                                     </div>
 
                                 </div>
@@ -181,7 +188,7 @@
     @RenderSection("Scripts", required: false)
 
 
-    <script>
+<script>
 
         var modal = document.getElementById("myModal");
         var btn = document.getElementById("upload_modal");
@@ -250,33 +257,57 @@
             'content': $(".alert_list").html()
         });
 
-        
+
         $('.image-tag-name').on('focusout', function () {
-            var txt = this.value.replace(/[^a-zA-Z0-9\+\-\.\#]/g, ''); // allowed characters list          
+            var txt = this.value.replace(/[^a-zA-Z0-9\+\-\.\#]/g, ''); // allowed characters list
             if (txt) $(this).before('<span class="tag">' + txt + '</span>');
-            this.value = "";        
+            this.value = "";
         }).on('keyup', function (e) {
             // comma|space (add more keyCodes delimited with | pipe)
             if (/(188|32)/.test(e.which)) $(this).trigger('focusout');
         });
 
-        //$(document).ready(function () {
-        //    var val = "";
-        //    var a;
-        //    debugger
-        //    $(".file-upload-btn").click(function () {
-        //        $(".tag").each(function () {
-        //            a = $(this).text();
-        //            val = val + ', ' + a;
-        //        });
-        //        $('.image-tag-name').attr('value', val);
-        //    });
-        //});
+        $(document).ready(function () {
+            var val = "";
+            var a;
+            debugger
+            $(".file-upload-btn").click(function (e) {
+                $(".tag").each(function () {
+                    a = $(this).text();
+                    val = val + ", " + a;
+                });
+                console.log(val);
+                alert(val);
+                $('.image-tag-name').attr("value", val);
+            });
+        });
 
         $('.image-tag').on('click', '.tag', function () {
             $(this).remove();
         });
-    </script>
+        $('.crebtn').click( function () {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("createCollection", "Collection")",
+                dataType:"json",
+                data: JSON.stringify({
+                    colname: $('.colname').val(),
+                    coldes: $('.coldes').val()
+                }),           
+                success: function (item) {
+                    //console.log(item["success"] + " " + item["message"]);
+                    $('<p>s</p>').insertAfter(".collection-item")
+                    $('.collection-list').show();
+                    $('.collection-create').hide();
+                },
+                error: function (req, status, error) {
+                    console.log(error);
+                    console.log(req);
+                    console.log(status);
+                }
+            });
+        });
+</script>
 
 </body>
 </html>

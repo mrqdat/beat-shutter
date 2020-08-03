@@ -22,7 +22,7 @@ namespace Img_socialmedia.Models
         public int? Height { get; set; }
         public string Location { get; set; }
         public DateTime? CreateAt { get; set; }
-        public int? FocalLength { get; set; }
+        public string FocalLength { get; set; }
 
         public virtual ICollection<CollectionDetailViewModel> CollectionDetail { get; set; }
         public virtual ICollection<PostViewModel> Post { get; set; }

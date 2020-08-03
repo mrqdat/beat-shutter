@@ -1,4 +1,5 @@
 ﻿@model Img_socialmedia.Models.UserViewModel
+@using Microsoft.AspNetCore.Http
 @{
     ViewData["Title"] = "Edit Profile";
     ViewBag.showsearchbar = false;
@@ -10,12 +11,12 @@
         <div class="col-lg-4 pb-5">
             <!-- Account Sidebar-->
             <div class="author-card pb-3">
-                    <div id="profile">
-                        <div class="dashes"></div>
-                        <label id="lb_img">Click to browse or drag an image here</label>
-                        <input type="file" id="mediaFile" accept="image/*" value="" onchange=""/>
-                    </div>
-                    <!--<img src="~/images/man.png" alt="Daniel Adams">-->
+                <div id="profile">
+                    <div class="dashes"></div>
+                    <label id="lb_img">Click to browse or drag an image here</label>
+                    <input type="file" id="mediaFile" accept="image/*" value="" onchange="" />
+                </div>
+                <!--<img src="~/images/man.png" alt="Daniel Adams">-->
                 <div class="author-card-details">
                     <h5 class="author-card-name text-lg">@(Model.Firstname + " " + Model.Lastname)</h5><span>Joined at @Model.CreateAt.ToString()</span>
                 </div>
@@ -67,7 +68,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="Phone" for="account-phone">Phone Number</label>
-                        <input asp-for="Phone"  class="form-control" type="text" id="account-phone"   name="Phone" required="">
+                        <input asp-for="Phone" class="form-control" type="text" id="account-phone" name="Phone" required="">
                     </div>
                 </div>
 
@@ -82,7 +83,7 @@
                     <div class="form-group">
                         <label>Tags</label>
                         <input asp-for="Tags" class="form-control" type="text" name="Tags" value="@Model.Tags" />
-                        <input asp-for="CreateAt" name="CreateAt" type="datetime" value="@Model.CreateAt" readonly="readonly" style="display:none;"/>
+                        <input asp-for="CreateAt" name="CreateAt" type="datetime" value="@Model.CreateAt" readonly="readonly" style="display:none;" />
                     </div>
                 </div>
                 <div class="col-12">
@@ -91,10 +92,10 @@
                         <button class="btn btn-style-1 btn-primary" type="submit">Update Profile</button>
                     </div>
                 </div>
-               
+
             </form>
             <span asp-validation-for="Email" class="text-danger"></span>
-            <span asp-validation-for="Phone"  class="text-danger"></span>
+            <span asp-validation-for="Phone" class="text-danger"></span>
             <span asp-validation-for="Firstname" class="text-danger"></span>
             <span asp-validation-for="Lastname" class="text-danger"></span>
         </div>
@@ -144,14 +145,13 @@
             $('#profile').removeClass('dragging hasImage');
 
             if (e.originalEvent) {
-                
+
                 var file = e.originalEvent.dataTransfer.files[0];
                 debugger
-                alert(file.name);
                 console.log(file);
                 $('#mediaFile').attr('value', file.name);
                 var reader = new FileReader();
-                 
+
                 //attach event handlers here...
 
                 reader.readAsDataURL(file);
@@ -161,10 +161,10 @@
                     $("#lb_img").remove();
                 }
             }
-            
+
         });
 
-        
+
 
         $('#profile').click(function () {
             $('#mediaFile').click();
@@ -181,23 +181,23 @@
         }, false);
 
 
-      
-        
-        //function readfichier(e) {
-        //    if (window.FileReader) {
-        //        var file = e.target.files[0];
-        //        var reader = new FileReader();
-        //        if (file && file.type.match('image.*')) {
-        //            reader.readAsDataURL(file);
-        //        } else {
-        //            $('#profile').css('background-image','')
-                     
-        //        }
-        //        reader.onloadend = function (e) {
-        //            $('#profile').css('background-image', reader.result);
-                     
-        //        }
-        //    }
-        //}
+
+
+            //function readfichier(e) {
+            //    if (window.FileReader) {
+            //        var file = e.target.files[0];
+            //        var reader = new FileReader();
+            //        if (file && file.type.match('image.*')) {
+            //            reader.readAsDataURL(file);
+            //        } else {
+            //            $('#profile').css('background-image','')
+
+            //        }
+            //        reader.onloadend = function (e) {
+            //            $('#profile').css('background-image', reader.result);
+
+            //        }
+            //    }
+            //}
     </script>
 }

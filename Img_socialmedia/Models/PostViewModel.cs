@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Img_socialmedia.Models
 {
@@ -18,7 +19,9 @@ namespace Img_socialmedia.Models
         public DateTime? CreateAt { get; set; }
         public string Tags { get; set; }
         public int UserId { get; set; }
+        [NotMapped]
         public virtual string Username { get; set; }
+        [NotMapped]
         public virtual string UserImg { get; set; }
         public virtual UserViewModel User { get; set; }
         public virtual PhotoViewModel Photo { get; set; }

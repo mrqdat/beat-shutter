@@ -187,9 +187,13 @@ namespace Img_socialmedia.Controllers
             {
                 if (formFile.Length > 0)
                 {
+
+                    var location = Request.Form["location"].ToString();
+                    var tag = Request.Form["tag"].ToString();
+
                     var filename = Path.GetFileName(formFile.FileName);
 
-                    var myUniqueFileName = Convert.ToString(Guid.NewGuid())+ " - shutter";
+                    var myUniqueFileName = Convert.ToString(Guid.NewGuid())+ "-shutter";
 
                     var fileExtension = Path.GetExtension(filename);
 
@@ -204,29 +208,26 @@ namespace Img_socialmedia.Controllers
                         await formFile.CopyToAsync(stream);
                     }
 
-                    Image image = Image.FromFile(filePath);
-                    var directories = Encoding.UTF8.GetString(image.GetPropertyItem(0x010F).Value);
+                    //Image image = Image.FromFile(filePath);
+                    //var directories = Encoding.UTF8.GetString(image.GetPropertyItem(0x010F).Value);
                     
                     //var directories = ImageMetadataReader.ReadMetadata(filePath);
-                    return Ok(directories);
-                    //model.Url = newFileName;
-                    ////model.CameraModel = JpegMetadataReader.ReadMetadata().;
-                    //model.Aperture = Convert.ToString(ExifDirectoryBase.TagAperture);
-                    ////model.Iso = directories;
-                    //model.ShutterSpeed = Convert.ToString(ExifDirectoryBase.TagShutterSpeed);
-                    //model.FocalLength = ExifDirectoryBase.TagFocalLength;
-                    //model.Location = Convert.ToString(ExifDirectoryBase.TagSubjectLocation);
-                    //model.CreateAt = Convert.ToDateTime(ExifDirectoryBase.TagDateTimeOriginal);
-                   // return RedirectToAction("Index", "Home");
+                    //return Ok(directories);
+                    model.Url = newFileName;
+                    model.Location = location;
+                    _context.Add(model);
+                    await _context.SaveChangesAsync();
+                    
                 }
                 
+
             }
 
             // process uploaded files
             // Don't rely on or trust the FileName property without validation.
 
             // return Ok(new { count = files.Count, size, filePaths });
-            return View();
+            return RedirectToAction("Index", "User");
         }
     }
 }

@@ -18,13 +18,14 @@ namespace Img_socialmedia.Controllers
         //    return View();
         //}
 
-
+        [HttpPost]
         public IActionResult createCollection(string colname, string coldes)
         {
             var userid = HttpContext.Session.GetInt32("userid");
             if (userid != null)
             {
-                
+                // var colname = Request.Form["colname"].ToString();
+                // var coldes = Request.Form["coldes"].ToString();
                 CollectionViewModel model = new CollectionViewModel();
                 if (ModelState.IsValid)
                 {
@@ -37,14 +38,26 @@ namespace Img_socialmedia.Controllers
                 }
                 else
                 {
-                    return Json(new { success = "false", message = "fail" });
+                    return Json(new 
+                    { 
+                        result = "false",
+                        message = "fail" 
+                    });
                 }
             }
             else
             {
-                return RedirectToAction("Login", "Account");
+                return Json(new 
+                { 
+                    result = "Redirect",
+                    url = Url.Action("Login", "Account") 
+                });
             }
-            return Json("success");            
+            return Json(new
+            {  
+                result = "success",
+                message = "success"
+            });            
         }
 
 

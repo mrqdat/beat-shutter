@@ -12,7 +12,8 @@ namespace Img_socialmedia.Models
             Collection = new HashSet<CollectionViewModel>();
             Comment = new HashSet<CommentViewModel>();
             ExternalLogin = new HashSet<ExternalLoginViewModel>();
-            Notification = new HashSet<NotificationViewModel>();        
+            Notification = new HashSet<NotificationViewModel>();
+            //string Username = Firstname + Lastname;
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -31,7 +32,7 @@ namespace Img_socialmedia.Models
         public string Firstname { get; set; }
         [StringLength(100)]
         public string Lastname { get; set; }
-
+        
         [Required(ErrorMessage = "The email field is required.")]
         [EmailAddress(ErrorMessage = "The email field is not valid email address")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]

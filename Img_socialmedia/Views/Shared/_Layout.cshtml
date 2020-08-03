@@ -22,7 +22,12 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script scr="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- 
+    <meta property="og:url" content="https://localhost:44340/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="dream" />
+    <meta property="og:description" content="little girl" />
+    <meta property="og:image" content="https://localhost:44340/images/41971882_696072084101621_3714114531614523392_o.jpg" />
+
 </head>
 <body>
 
@@ -63,13 +68,13 @@
                                 <a class="nav-link" asp-controller="Home" asp-action="About" style="cursor:pointer;">About</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
-                            </li>
 
 
                             @if (!string.IsNullOrEmpty(Context.Session.GetString("username")))
                             {
+                                <li class="nav-item">
+                                    <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
+                                </li>
                                 <li class="nav-item" style="margin:7px 25px 7px 0;">
                                     <a class="notification dropdown-toggle" data-toggle="popover" title="Notification" data-placement="bottom" aria-haspopup="true" style="cursor:pointer;">
                                         <span hidden>Notification</span>
@@ -156,7 +161,7 @@
                                         <input class="image-tag-name" type="text" name="tag" value="" placeholder="Add your tags!" />
                                     </div>
                                     <div class="image-tag">
-                                        <input class="image-location" type="text" name="loaction" value="" placeholder="Add location" />
+                                        <input class="image-location" type="text" name="location" value="" placeholder="Add location" />
                                     </div>
 
                                 </div>
@@ -270,7 +275,6 @@
                 });
                 
                 $('.image-tag-name').attr('value', val);
-                alert(val);
             });
         });
 

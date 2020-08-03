@@ -563,7 +563,7 @@ col-lg-12 col-md-12 col-sm-12 col-xs-12 {
 .vertical_menu{  
     display:flex;
     z-index:111;
-    margin-top:53px;  
+    margin-top:50px;  
     
 }
 
@@ -1072,9 +1072,6 @@ lb_upload {
     color: white;
 }
 
-.container {
-   
-}
 
     .container::after, .row::after {
         content: "";
@@ -1151,3 +1148,6 @@ a.alert_message {
 
 
 /*=============================================bottom nav*/
+.crebtn{
+    float: right;
+}

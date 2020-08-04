@@ -1,5 +1,5 @@
 ﻿@using Img_socialmedia.Models
-
+@model IEnumerable<PostViewModel> 
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Shutter | Free images and photos for every one ";
@@ -50,7 +50,7 @@
                 <div class="img-content">
                     <a class="a-cursor" href="#">
                         <div class="img-rel">
-                            <img class="photo-content" src="~/images/@(photo.url)" asp-append-version="true" />
+                            <img class="photo-content" src="~/images/@(photo.Photo.Url)" asp-append-version="true" />
                         </div>
                     </a>
                     <div class="img-icon">

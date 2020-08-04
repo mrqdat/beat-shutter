@@ -35,19 +35,29 @@ namespace Img_socialmedia.Controllers
                     HttpContext.Response.Cookies.Append("username", username);
                     HttpContext.Session.SetInt32("userid", user.First().Id);
                     HttpContext.Session.SetString("username", username);
-
-                    return Json(new 
+                    if (username == "ad min")
+                    {
+                        return Json(new
+                        {
+                            status = true,
+                            name = "admin"
+                        });
+                    }
+                    else 
                     { 
-                        status = true,
-                        message = "login successfully" 
-                    });
+                        return Json(new
+                        {
+                            status = true,
+                            name = "user"
+                        });
+                    }
                 }
                 else
                 {
                     return Json(new 
                     { 
                         status = false, 
-                        message = "valid password" 
+                        message = "invalid password" 
                     });
                 }
             }
@@ -82,39 +92,7 @@ namespace Img_socialmedia.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Signup(UserViewModel model)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    var result = await _signInManager.PasswordSignInAsync(
-            //        model.Email, model.Password, model.Rememberme, false);
-
-
-            //    if (result.Succeeded)
-            //    {
-            //        return RedirectToAction("index", "Home");
-            //    }
-
-            //    ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
-            //}
-
-            //ViewBag.showtopbar = false;
-            //if (ModelState.IsValid) 
-            //{ 
-            //    var user = new UserViewModel
-            //    {
-            //        Firstname = model.first_name,
-            //        Lastname = model.last_name,
-            //        Username = model.username,                   
-
-            //    };
-
-            //    var result = await _userManager.CreateAsync(user, model.password);
-            //    if (result.Succeeded)
-            //    {
-            //        await _signInManager.SignInAsync(user, isPersistent: false);
-            //        return RedirectToAction(nameof(HomeController.Index), "Home");
-            //    }
-
-            //}
+             
 
             if (ModelState.IsValid)
             {

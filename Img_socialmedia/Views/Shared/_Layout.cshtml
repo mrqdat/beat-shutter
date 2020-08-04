@@ -271,7 +271,7 @@
             $(".file-upload-btn").click(function () {
                 $(".tag").each(function () {
                     a = $(this).text();
-                    val = val + ', ' + a;
+                    val = val + '' + a;
                 });
                 
                 $('.image-tag-name').attr('value', val);

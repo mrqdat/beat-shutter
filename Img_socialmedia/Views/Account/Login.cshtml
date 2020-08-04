@@ -151,7 +151,11 @@
                     success: function (result) {
                         console.log(result);
                         if (result.status == true) {
-                            window.location.href = "@Url.Action("Index", "Home")";
+                            if (result.name == "user")
+                                window.location.href = "@Url.Action("Index", "Home")";
+                            else {
+                                window.location.href = "@Url.Action("Index", "Admin")";
+                            }
                         }
                         else {
                             alert(result.message);

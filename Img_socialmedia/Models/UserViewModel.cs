@@ -21,7 +21,7 @@ namespace Img_socialmedia.Models
 
         [Required]
         //[DataType(DataType.Password)]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,15}$", ErrorMessage ="The password must have 6 - 15 characters")]
+ 
         public string Password { get; set; }
 
         //[DataType(DataType.Password)]

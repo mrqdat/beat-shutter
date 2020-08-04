@@ -50,7 +50,10 @@ namespace Img_socialmedia
 
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
                             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            services.AddSession();
+            services.AddSession(option=>
+            {
+                option.IdleTimeout = TimeSpan.FromHours(1);
+            });
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
         }
 

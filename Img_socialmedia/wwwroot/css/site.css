@@ -1151,3 +1151,20 @@ a.alert_message {
 .crebtn{
     float: right;
 }
+
+
+/*=======================================postmain*/
+
+.post-main{
+
+    padding-top:55px;
+}
+
+.post-content {
+    z-index: 11111 !important;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 4px;
+    max-width: 97%;
+}
+/*=======================================      end postmain*/

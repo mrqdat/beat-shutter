@@ -13,6 +13,10 @@ namespace Img_socialmedia.Controllers
     {
         private readonly db_shutterContext _context;
 
+        public CollectionController(db_shutterContext context){
+            _context = context;
+        }
+
         //public IActionResult createCollection()
         //{
         //    return View();

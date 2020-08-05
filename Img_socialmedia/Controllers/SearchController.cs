@@ -12,6 +12,10 @@ namespace Img_socialmedia.Controllers
     public class SearchController : Controller
     {
         private readonly db_shutterContext _context;
+
+        public SearchController(db_shutterContext context){
+            _context = context;
+        }
         public async Task<IActionResult> Index(string searchString)
         {
             var data = from m in _context.Post select m;

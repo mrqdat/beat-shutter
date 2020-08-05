@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Img_socialmedia.Models;
 using Microsoft.AspNetCore.Identity;
+using Img_socialmedia.Hubs;
 
 namespace Img_socialmedia
 {
@@ -29,6 +30,7 @@ namespace Img_socialmedia
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddAuthentication().AddFacebook(facebookOptions =>

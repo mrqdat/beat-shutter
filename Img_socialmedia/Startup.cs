@@ -87,6 +87,12 @@ namespace Img_socialmedia
                 endpoints.MapRazorPages(); 
 
             });
+
+            //Page not found khi nhap sai duong dan~.
+            //app.Run(async context => {
+            //    context.Response.StatusCode = StatusCodes.Status404NotFound;
+            //    await context.Response.WriteAsync("Page not found");
+            //});
         }
     }
 }

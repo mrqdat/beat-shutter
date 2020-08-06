@@ -99,7 +99,7 @@ namespace Img_socialmedia.Controllers
         }
 
         [HttpGet]
-        public PostViewModel GetDetailPhoto(int? id)
+        public PostViewModel GetDetailPhoto(int id)
         {
             var result = from photo in shutterContext.Photo
                          join post in shutterContext.Post on photo.Id equals post.PhotoId

@@ -64,14 +64,7 @@
                             </li>
 
                             <li class="nav-item">
-                                @if (Context.Session.GetInt32("userid").HasValue)
-                                {
                                     <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
-                                }
-                                else
-                                {
-                                    <a class="nav-link" href="#" style="cursor:pointer" >Upload</a>
-                                }
                             </li>
 
 
@@ -197,7 +190,8 @@
 
         btn.onclick = function () {
             modal.style.display = "block";
-        }
+        };
+
 
         span.onclick = function () {
             modal.style.display = "none";
@@ -274,7 +268,7 @@
             $(".file-upload-btn").click(function (e) {
                 $(".tag").each(function () {
                     a = $(this).text();
-                    val = val + ", " + a;
+                    val = val + " " + a;
                 });
                 console.log(val);
                 alert(val);

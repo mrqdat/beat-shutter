@@ -1,0 +1,83 @@
+﻿@model IEnumerable<UserViewModel>
+@{
+    Layout = "_admin";
+    ViewData["Title"] = "Shutter - Admin dashboard";
+}
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">Dashboard</h1>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    All User
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Lastname</th>
+                                    <th>Firstname</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Day joined</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var user in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelitem => user.Id)
+                                        </td>
+                                        <td>
+                                            @user.Lastname
+                                        </td>
+                                        <td>
+                                            @user.Firstname
+                                        </td>
+                                        <td>
+                                            @user.Phone
+                                        </td>
+                                        <td>
+                                            @user.Email
+                                        </td>
+                                        <td>
+                                            @user.CreateAt
+                                        </td>
+                                    </tr>                                           
+                                }
+                            </tbody>    
+                             
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; shutter</div>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    &middot;
+                    <a href="#">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            $('#dash').addClass("active");
+        });
+
+    </script>
+}

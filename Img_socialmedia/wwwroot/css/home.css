@@ -323,6 +323,9 @@
     padding-right: 40px;
 }
 
+.modal-padd::-webkit-scrollbar{
+    widows: 1px;
+}
 
 .modal-photo {
     position: relative;
@@ -368,7 +371,7 @@
     border-radius: 50%;
     border-bottom-color: transparent;
     border-left-color: transparent;
-    transform: rotate(226deg);
+    transform: rotate(225deg);
     background: #fff;
 }
 
@@ -530,8 +533,7 @@
     display: none;
 }
 
-.collection-bg {
-}
+ 
 
 .collection-content {     
     margin: 10px;

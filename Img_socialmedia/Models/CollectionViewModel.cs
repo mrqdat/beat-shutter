@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Img_socialmedia.Models
 {
+    [NotMapped]
     public partial class CollectionViewModel
     {
         public CollectionViewModel()

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Img_socialmedia.Models;
 using Microsoft.AspNetCore.Http;
 using System.Collections.ObjectModel;
+using System.Dynamic;
 
 namespace Img_socialmedia.Controllers
 {
@@ -13,7 +14,7 @@ namespace Img_socialmedia.Controllers
     {
         private readonly db_shutterContext _context;
 
-        public CollectionController(db_shutterContext context){
+        public CollectionController(db_shutterContext context) {
             _context = context;
         }
 
@@ -21,6 +22,7 @@ namespace Img_socialmedia.Controllers
         //{
         //    return View();
         //}
+
 
         [HttpPost]
         public IActionResult createCollection(string colname, string coldes)
@@ -31,6 +33,7 @@ namespace Img_socialmedia.Controllers
                 // var colname = Request.Form["colname"].ToString();
                 // var coldes = Request.Form["coldes"].ToString();
                 CollectionViewModel model = new CollectionViewModel();
+                CollectionDetailViewModel collectionDetail = new CollectionDetailViewModel();
                 if (ModelState.IsValid)
                 {
                     model.Name = colname;
@@ -64,22 +67,24 @@ namespace Img_socialmedia.Controllers
             });            
         }
 
-
-        public ActionResult getCollection()
+        [HttpGet]
+        public ActionResult getCollection( )
         {
             var userid = HttpContext.Session.GetInt32("userid");
-            if(userid != null)
-            {
-                var result = (from colname in _context.Collection
-                              join user in _context.User on colname.UserId equals userid
-                              join coldetail in _context.CollectionDetail on colname.Id equals coldetail.CollectionId
-                              select colname).ToList();
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            var result = (from col in _context.Collection 
+                          where  col.UserId == userid
+                          select col).ToList();
+            
+            return View(result);
+        }
+        [HttpGet]
+        public ActionResult addtoCollection()
+        {
+            var userid = HttpContext.Session.GetInt32("userid");
+            CollectionDetailViewModel detailViewModel = new CollectionDetailViewModel();
+
             return View();
         }
+        
     }
 }

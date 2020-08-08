@@ -16,8 +16,7 @@ namespace Img_socialmedia.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public int? UserId { get; set; }
-        public DateTime? CreateAt { get; set; }
-
+        public DateTime CreateAt { get; set; }
         public virtual UserViewModel User { get; set; }
         public virtual ICollection<CollectionDetailViewModel> CollectionDetail { get; set; }
     }

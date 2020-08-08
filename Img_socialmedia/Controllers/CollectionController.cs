@@ -67,16 +67,7 @@ namespace Img_socialmedia.Controllers
             });            
         }
 
-        [HttpGet]
-        public ActionResult getCollection( )
-        {
-            var userid = HttpContext.Session.GetInt32("userid");
-            var result = (from col in _context.Collection 
-                          where  col.UserId == userid
-                          select col).ToList();
-            
-            return View(result);
-        }
+       
         [HttpGet]
         public ActionResult addtoCollection()
         {
@@ -84,7 +75,7 @@ namespace Img_socialmedia.Controllers
             CollectionDetailViewModel detailViewModel = new CollectionDetailViewModel();
 
             return View();
-        }
+        }        
         
     }
 }

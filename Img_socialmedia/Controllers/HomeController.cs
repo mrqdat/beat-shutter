@@ -14,6 +14,7 @@ using System.IO;
 using System.Text;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 namespace Img_socialmedia.Controllers
 {
 
@@ -52,8 +53,8 @@ namespace Img_socialmedia.Controllers
                              User = user,
                              Photo = photo,
                          }).Take(15);
-
-            return View(result.ToList());
+           
+            return View(result);
         }
 
         public ViewResult Privacy()
@@ -142,6 +143,25 @@ namespace Img_socialmedia.Controllers
 
             //.Where(b=>b.Id == id)
 
+        }
+
+
+         [HttpGet]
+        public IEnumerable<CollectionViewModel> getCollection( )
+        {
+            var userid = HttpContext.Session.GetInt32("userid");
+            var result = (from col in shutterContext.Collection 
+                          where  col.UserId == userid
+                          select col).ToList();
+            
+            return result;
+        }
+        public ActionResult member(){
+
+            member mb = new member();
+            mb.collectionView = getCollection();
+            //mb.postView = Index();
+            return View();
         }
         
     }

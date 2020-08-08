@@ -728,12 +728,12 @@
                                 </button>
                                 <ul class="collection-item">
                                      
-                                 @foreach(var item in Model) { 
+                                     
                                         <li class="item-detail">
                                             <button class="btn" id="thiscollection" style="display:flex;width:100%;">
                                                 <div class="item-name">
                                                     <span>7 photos</span>
-                                                    <h6></h6>
+                                                    <h6 id="collectionName" Name="collectionName"></h6>
                                                 </div>
                                                 <div class="addto" title="add to collection">
                                                     <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -743,7 +743,7 @@
                                                 </div>
                                             </button>
                                         </li>
-                                    }
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -894,7 +894,7 @@
         $(document).ready(function () {
             $.ajax({
                 type: "GET",
-                url: "@Url.Action("TestA","Home")",
+                url: "@Url.Action("TestA")",
                 success: function (msg) {
                     msg.forEach(function (item, index) {
                         //var photo = item["photo"].id;

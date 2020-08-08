@@ -1,6 +1,6 @@
 ﻿@using Img_socialmedia.Models
 @model IEnumerable<PostViewModel>
- 
+
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Shutter | Free images and photos for every one ";
@@ -22,7 +22,7 @@
         <a href="#tools">Architecture</a>
     </div>
 </div>
-
+ 
 <div class="bgimage">
     <div class="container-fluid">
         <div class="row" style="margin-right:0;">
@@ -727,23 +727,23 @@
                                     <h6>Create a new collection</h6>
                                 </button>
                                 <ul class="collection-item">
-                                     
-                                     
-                                        <li class="item-detail">
-                                            <button class="btn" id="thiscollection" style="display:flex;width:100%;">
-                                                <div class="item-name">
-                                                    <span>7 photos</span>
-                                                    <h6 id="collectionName" Name="collectionName"></h6>
-                                                </div>
-                                                <div class="addto" title="add to collection">
-                                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                                                    </svg>
-                                                </div>
-                                            </button>
-                                        </li>
-                                    
+
+
+                                    <li class="item-detail">
+                                        <button class="btn" id="thiscollection" style="display:flex;width:100%;">
+                                            <div class="item-name">
+                                                <span>7 photos</span>
+                                                <h6 id="collectionName" Name="collectionName"></h6>
+                                            </div>
+                                            <div class="addto" title="add to collection">
+                                                <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -811,10 +811,10 @@
 <button onclick="topFunction()" id="btn_ontop" title="Go to top">
     <i class="fa fa-2x fa-angle-up" style="color: #747474;"></i>
 </button>
-<div class="loader" ></div>
+<div class="loader"></div>
 @section Scripts{
 
-    <script src="~/js/chat.js"></script> 
+    <script src="~/js/chat.js"></script>
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <script>
         (function (d, s, id) {
@@ -879,11 +879,11 @@
 
     $(window).scroll(function () {
         if ($(window).scrollTop() + $(window).height() + 1 >= $(document).height()) {
-   
+
             AJAXLoadPhoto();
         }
         else {
- 
+
             console.log($(window).height());
             console.log($(window).scrollTop());
             console.log($(document).height());
@@ -999,7 +999,7 @@
                                         '</button>'+
                                         '</li >').insertAfter('.collection-item');
                                 });
-                               
+
                                 $('.collection-list').show();
                                 $('.collection-create').hide();
                             }

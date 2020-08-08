@@ -13,9 +13,13 @@
 
   <ItemGroup>
     <Compile Remove="Data\**" />
+    <Compile Remove="Hub\**" />
     <Content Remove="Data\**" />
+    <Content Remove="Hub\**" />
     <EmbeddedResource Remove="Data\**" />
+    <EmbeddedResource Remove="Hub\**" />
     <None Remove="Data\**" />
+    <None Remove="Hub\**" />
   </ItemGroup>
 
   <ItemGroup>

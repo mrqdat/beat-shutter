@@ -52,8 +52,16 @@ namespace Img_socialmedia.Controllers
                              UserId = user.Id,
                              User = user,
                              Photo = photo,
-                         }).Take(15);
-           
+                            
+                         }).Take(15).ToList();
+            if (HttpContext.Session.GetInt32("userid").HasValue)
+            {
+
+                var userid = HttpContext.Session.GetInt32("userid");
+                var c = (from col in shutterContext.Collection
+                              select col).First();
+                ViewBag.Collections = c;
+            }
             return View(result);
         }
 
@@ -156,13 +164,7 @@ namespace Img_socialmedia.Controllers
             
             return result;
         }
-        public ActionResult member(){
-
-            member mb = new member();
-            mb.collectionView = getCollection();
-            //mb.postView = Index();
-            return View();
-        }
+        
         
     }
 }

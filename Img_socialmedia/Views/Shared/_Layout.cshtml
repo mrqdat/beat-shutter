@@ -67,12 +67,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Home" asp-action="About" style="cursor:pointer;">About</a>
                             </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
-                            </li>
-
-
                             @if (!string.IsNullOrEmpty(Context.Session.GetString("username")))
                             {
                                 <li class="nav-item">
@@ -272,7 +266,6 @@
         $(document).ready(function () {
             var val = "";
             var a;
-            debugger
             $(".file-upload-btn").click(function (e) {
                 $(".tag").each(function () {
                     a = $(this).text();

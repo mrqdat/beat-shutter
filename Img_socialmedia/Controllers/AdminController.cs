@@ -20,8 +20,12 @@ namespace Img_socialmedia.Controllers
         }
         public IActionResult report()
         {
-            return View();
+
+            var postReport = _context.Post.ToList();
+            return View(postReport);
         }
+
+         
     }
 
 }

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<PostViewModel>
+@{
     Layout = "_admin";
     ViewData["Title"] = "Shutter - Admin dashboard";
 }
@@ -6,27 +7,33 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid">
-            <h1 class="mt-4">Dashboard</h1>
+            <h1 class="mt-4">Report dashboard</h1>
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table mr-1"></i>
-                    DataTable Example
+                     
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>ID</th>
+                                    <th>User ID</th>
+                                    <th>Triggered By</th>
+                                    <th>Time</th>
                                 </tr>
                             </thead>
                             <tbody>
-
+                                @foreach(var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td>@item.UserId</td>
+                                        <td>@item.Username</td>
+                                        <td>@item.CreateAt</td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>

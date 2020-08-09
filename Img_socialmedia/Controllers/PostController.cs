@@ -25,14 +25,9 @@ namespace Img_socialmedia.Controllers
             return View();
         }
 
-        public IActionResult getreport()
-        {
-            
-            return View();
-        }
-       
         public IActionResult report()
         {
+
             return View();
             
         }

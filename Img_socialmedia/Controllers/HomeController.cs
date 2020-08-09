@@ -14,6 +14,7 @@ using System.IO;
 using System.Text;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 namespace Img_socialmedia.Controllers
 {
 
@@ -38,22 +39,30 @@ namespace Img_socialmedia.Controllers
         public IActionResult Index()
         {
             var result = (from photo in shutterContext.Photo
-                          join post in shutterContext.Post on photo.Id equals post.PhotoId
-                          join user in shutterContext.User on post.UserId equals user.Id
-                          select new PostViewModel
-                          {
-                              Id = post.Id,
-                              PhotoId = photo.Id,
-                              TotalLike = post.TotalLike,
-                              TotalViews = post.TotalViews,
-                              CreateAt = post.CreateAt,
-                              Tags = post.Tags,
-                              UserId = user.Id,
-                              User = user,
-                              Photo = photo,
-                          }).Take(15);
+                        join post in shutterContext.Post on photo.Id equals post.PhotoId
+                         join user in shutterContext.User on post.UserId equals user.Id
+                         select new PostViewModel
+                         {
+                             Id = post.Id,
+                             PhotoId = photo.Id,
+                             TotalLike = post.TotalLike,
+                             TotalViews = post.TotalViews,
+                             CreateAt = post.CreateAt,
+                             Tags = post.Tags,
+                             UserId = user.Id,
+                             User = user,
+                             Photo = photo,
+                            
+                         }).Take(15).ToList();
+            if (HttpContext.Session.GetInt32("userid").HasValue)
+            {
 
-            return View(result.ToList());
+                var userid = HttpContext.Session.GetInt32("userid");
+                var c = (from col in shutterContext.Collection
+                              select col).First();
+                ViewBag.Collections = c;
+            }
+            return View(result);
         }
 
         public ViewResult Privacy()
@@ -157,5 +166,19 @@ namespace Img_socialmedia.Controllers
             //.Where(b=>b.Id == id)
 
         }
+
+
+         [HttpGet]
+        public IEnumerable<CollectionViewModel> getCollection( )
+        {
+            var userid = HttpContext.Session.GetInt32("userid");
+            var result = (from col in shutterContext.Collection 
+                          where  col.UserId == userid
+                          select col).ToList();
+            
+            return result;
+        }
+        
+        
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Img_socialmedia.Data;
 using Img_socialmedia.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Img_socialmedia.Controllers
@@ -15,7 +16,7 @@ namespace Img_socialmedia.Controllers
     public class UserController : Controller
     {
         private readonly db_shutterContext _context;
-
+     
         public UserController(db_shutterContext context)
         {
             this._context = context;

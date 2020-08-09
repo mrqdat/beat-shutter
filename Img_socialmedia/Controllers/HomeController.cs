@@ -108,7 +108,7 @@ namespace Img_socialmedia.Controllers
         }
 
         [HttpGet]
-        public PostViewModel GetDetailPhoto(int? id)
+        public PostViewModel GetDetailPhoto(int id)
         {
             var result = from photo in shutterContext.Photo
                          join post in shutterContext.Post on photo.Id equals post.PhotoId
@@ -134,13 +134,27 @@ namespace Img_socialmedia.Controllers
                                             UserId = comment.UserId,
                                             UserImg = shutterContext.User.Where(u => u.Id == comment.UserId).Select(u => u.ProfileImg).FirstOrDefault(),
                                             Username = shutterContext.User.Where(u => u.Id == comment.UserId).Select(u => (u.Lastname + " " + u.Firstname)).FirstOrDefault(),
-                                            CreateAt = comment.CreateAt            
+                                            CreateAt = comment.CreateAt
                                         }
                                        ).ToList(),
-
-                              Username = user.Lastname + " " + user.Firstname,
-                             Photo = photo
-                             
+                             Username = user.Lastname + " " + user.Firstname,
+                             Photo = photo,
+                             RelatedPost = (from pp in shutterContext.Photo
+                                            join p in shutterContext.Post on pp.Id equals p.PhotoId
+                                            join u in shutterContext.User on p.UserId equals u.Id
+                                            select new PostViewModel
+                                            {
+                                                Id = p.Id,
+                                                PhotoId = pp.Id,
+                                                TotalLike = p.TotalLike,
+                                                TotalViews = p.TotalViews,
+                                                CreateAt = p.CreateAt,
+                                                Tags = p.Tags,
+                                                UserId = u.Id,
+                                                UserImg = u.ProfileImg,
+                                                Username = u.Lastname + " " + u.Firstname,
+                                                Photo = pp,
+                                            }).Take(15).ToList()
                          };
             return result.First();
             //var aa = shutterContext.Post.FromSqlRaw("SELECT post.*,comment.[user_id] as commentuser, [user].firstname,[user].lastname " +

@@ -25,6 +25,8 @@ namespace Img_socialmedia.Models
         public virtual string UserImg { get; set; }
         [NotMapped]
         public IEnumerable<CollectionViewModel> Collections{get;set;}
+        [NotMapped]
+        public bool hasReported { get; set; }
         public virtual UserViewModel User { get; set; }
         public virtual PhotoViewModel Photo { get; set; }
         public virtual IEnumerable<CommentViewModel> Comment { get; set; }

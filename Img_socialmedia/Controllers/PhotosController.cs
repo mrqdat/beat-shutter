@@ -1,25 +1,17 @@
-﻿ using Img_socialmedia.Data;
+﻿using Img_socialmedia.Data;
 using Img_socialmedia.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Net.Http.Headers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using MetadataExtractor;
-using MetadataExtractor.Formats.Exif;
 using Microsoft.Extensions.FileProviders;
-using System.Reflection.Metadata;
-using MetadataExtractor.Formats.Jpeg;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace Img_socialmedia.Controllers
 {
@@ -188,8 +180,13 @@ namespace Img_socialmedia.Controllers
                 {
                     if (formFile.Length > 0)
                     {
+                        var extensions = Path.GetExtension(formFile.FileName);
+                        if(!extensions.Contains(".jpg") || !extensions.Contains(".png"))
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
                         var filename = Path.GetFileName(formFile.FileName);
-                        var myUniqueFileName = Convert.ToString(Guid.NewGuid()) + " - shutter";
+                        var myUniqueFileName = Convert.ToString(Guid.NewGuid()) + "_" + HttpContext.Session.GetInt32("userid");
                         var fileExtension = Path.GetExtension(filename);
                         var newFileName = String.Concat(myUniqueFileName, fileExtension);
                         var filePath = new PhysicalFileProvider(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "images")).Root + $@"\{ newFileName}";

@@ -27,13 +27,6 @@ namespace Img_socialmedia.Controllers
             return View();
         }
 
-
-        // GET: Users
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(await _context.User.ToListAsync());
-        //}
-
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int id)
         {
@@ -213,15 +206,5 @@ namespace Img_socialmedia.Controllers
         {
             return _context.User.Any(e => e.Id == id);
         }
-
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Logout()
-        //{
-        //    await _signInManager.SignOutAsync();
-        //    _logger.LogInformation(4, "User logged out");
-        //    return RedirectToAction("Index", "Home");
-        //}
     }
 }

@@ -85,7 +85,10 @@ namespace Img_socialmedia.Controllers
         [AllowAnonymous]
         public IActionResult Signup()
         {
-
+            if (HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 

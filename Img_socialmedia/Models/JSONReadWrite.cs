@@ -96,6 +96,7 @@ namespace Img_socialmedia.Models
             using (var streamWriter = File.CreateText(path))
             {
                 streamWriter.Write(jSONString);
+                streamWriter.Close();
             }
         }
     }

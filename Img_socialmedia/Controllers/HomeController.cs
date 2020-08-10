@@ -14,6 +14,9 @@ using System.IO;
 using System.Text;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json.Linq;
+
 namespace Img_socialmedia.Controllers
 {
 
@@ -51,9 +54,25 @@ namespace Img_socialmedia.Controllers
                               UserId = user.Id,
                               User = user,
                               Photo = photo,
-                          }).Take(15);
-
-            return View(result.ToList());
+                          }).Take(15).ToList();
+            if (HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                string filename = HttpContext.Session.GetInt32("userid").ToString() + ".json";
+                JSONReadWrite j = new JSONReadWrite();
+                JArray jsonArray = JArray.Parse("[" + j.Read(filename, "json") + "]");
+                foreach (var b in jsonArray)
+                {
+                    foreach(var p in result)
+                    {
+                        if (Convert.ToInt32(b["id"]).Equals(p.Id))
+                        {
+                            p.Liked = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            return View(result);
         }
 
         public ViewResult Privacy()

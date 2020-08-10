@@ -78,21 +78,21 @@ namespace Img_socialmedia.Controllers
                 return View("Error");
             }
             bool liked = false;
-            //if (HttpContext.Session.GetInt32("userid").HasValue)
-            //{
-            //    string filename = HttpContext.Session.GetInt32("userid").ToString() + ".json";
-            //    JSONReadWrite j = new JSONReadWrite();
-            //    JArray jsonArray = JArray.Parse("[" + j.Read(filename,"json") + "]");
-            //    var a = JObject.Parse(jsonArray[0].ToString());
-            //    foreach(var a in jsonArray)
-            //    {  ,
-            //        if (Convert.ToInt32(a["id"][i]).Equals(id))
-            //        {
-            //            liked = true;
-            //        }
-            //    }
-                
-            //}
+            if (HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                string filename = HttpContext.Session.GetInt32("userid").ToString() + ".json";
+                JSONReadWrite j = new JSONReadWrite();
+                JArray jsonArray = JArray.Parse("[" + j.Read(filename, "json") + "]");
+                //var a = JObject.Parse(jsonArray[0].ToString());
+                foreach (var b in jsonArray)
+                {
+                    if (Convert.ToInt32(b["id"]).Equals(id))
+                    {
+                        liked = true;
+                        break;
+                    }
+                }
+            }
             result.TotalViews += 1;
             shutterContext.Post.Update(result);
             shutterContext.SaveChangesAsync();
@@ -153,12 +153,20 @@ namespace Img_socialmedia.Controllers
             JSONReadWrite j = new JSONReadWrite();
             int a= j.IsFileExist(filename, jsonStr);
             if (a == 0) {
+                var total = shutterContext.Post.Find(id);
+                total.TotalLike = total.TotalLike + 1;
+                shutterContext.SaveChanges();
                 return Json(new { status = true }) ;
             }
             else
             {
+                var total = shutterContext.Post.Find(id);
+                total.TotalLike = total.TotalLike -1;
+                shutterContext.SaveChanges();
                 return Json(new { status = false });
             }
         }
+
+        
     }
 }

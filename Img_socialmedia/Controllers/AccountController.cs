@@ -1,6 +1,7 @@
 ﻿using Img_socialmedia.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -35,7 +36,7 @@ namespace Img_socialmedia.Controllers
                     HttpContext.Response.Cookies.Append("username", username);
                     HttpContext.Session.SetInt32("userid", user.First().Id);
                     HttpContext.Session.SetString("username", username);
-                    if (username == "ad min")
+                    if (username == "admin ")
                     {
                         return Json(new
                         {
@@ -44,12 +45,12 @@ namespace Img_socialmedia.Controllers
                         });
                     }
                     else 
-                    { 
+                    {
                         return Json(new
                         {
                             status = true,
-                            name = "user"
-                        });
+                            name = "user"                           
+                        }) ;
                     }
                 }
                 else

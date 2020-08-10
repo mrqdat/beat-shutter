@@ -72,6 +72,14 @@ namespace Img_socialmedia.Controllers
                     }
                 }
             }
+            if (HttpContext.Session.GetInt32("userid").HasValue)
+            {
+
+                var userid = HttpContext.Session.GetInt32("userid");
+                var c = (from col in shutterContext.Collection
+                         select col).First();
+                ViewBag.Collections = c;
+            }
             return View(result);
         }
 
@@ -176,5 +184,19 @@ namespace Img_socialmedia.Controllers
             //.Where(b=>b.Id == id)
 
         }
+
+
+         [HttpGet]
+        public IEnumerable<CollectionViewModel> getCollection( )
+        {
+            var userid = HttpContext.Session.GetInt32("userid");
+            var result = (from col in shutterContext.Collection 
+                          where  col.UserId == userid
+                          select col).ToList();
+            
+            return result;
+        }
+        
+        
     }
 }

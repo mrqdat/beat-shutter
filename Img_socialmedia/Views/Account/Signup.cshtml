@@ -16,7 +16,6 @@
                 <span class="login100-form-title p-b-20" style="font-size:18px;">
                     Already have an acount? <a asp-controller="Account" asp-action="Login" style="text-decoration: underline;">Login</a>
                 </span>
-
                 <div class="login100-form-social flex-c-m">
                     <div class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
                 </div>
@@ -44,12 +43,12 @@
                     <span class="focus-input100"></span>
                     <span asp-validation-for="Email" class="label-input100">Email</span>
                 </div>
-                
-             <!--   <div class="wrap-input100 validate-input" data-validate="Username is required">
-                    <input asp-for="Username" class="input100" type="text" name="Username">
-                    <span class="focus-input100"></span>
-                    <span asp-validation-for="Username" class="label-input100">Username</span>
-                </div>-->
+
+                <!--   <div class="wrap-input100 validate-input" data-validate="Username is required">
+           <input asp-for="Username" class="input100" type="text" name="Username">
+           <span class="focus-input100"></span>
+           <span asp-validation-for="Username" class="label-input100">Username</span>
+       </div>-->
 
                 <div class="wrap-input100 validate-input" data-validate="Password is required">
                     <input asp-for="Password" class="input100" type="password" name="Password">
@@ -79,6 +78,7 @@
             </div>
         </div>*@
 
+                <span class="text-danger">@ViewBag.ErrorMessage</span>
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn" type="submit" value="User">
                         Join

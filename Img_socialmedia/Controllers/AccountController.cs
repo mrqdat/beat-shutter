@@ -96,7 +96,12 @@ namespace Img_socialmedia.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Signup(UserViewModel model)
         {
-             
+            var result = _context.User.Where(m => m.Email.Equals(model.Email)).First();
+            if (result != null)
+            {
+                ViewBag.ErrorMessage = "Email have been used, please choose another";
+                return View(model);
+            }
 
             if (ModelState.IsValid)
             {

@@ -1,4 +1,4 @@
-﻿@model Img_socialmedia.Models.member
+﻿@model Img_socialmedia.Models.UserViewModel
  
 @{
     ViewData["Title"] = "Profile";
@@ -15,7 +15,7 @@
 
                 </div>
                 <div class="info_edit">
-                    <h4 class="name">@Model.userView.Firstname+""+@Model.userView.Lastname)</h4>
+                    <h4 class="name">@(Model.Firstname+""+Model.Lastname)</h4>
                     <a class="info_link" asp-action="editprofile" asp-controller="User"  alt="edit your profile">
                         <i class="fa fa-edit"></i>
                     </a>
@@ -30,7 +30,7 @@
                         <p class="desc-stat">Colection</p>
                     </div>
                 </div>
-                <p class="desc">@Model.userView.Bio</p>
+                <p class="desc">@Model.Bio</p>
                 <div class="social">
                     @*<i class="fa fa-facebook-square" aria-hidden="true"></i>
                     <i class="fa fa-twitter-square" aria-hidden="true"></i>*@
@@ -48,7 +48,7 @@
                     <div class="tab-content">
                         <div id="galery" class="tab-pane fade in active">
                             <div class="row gallery info_edit ">
-                                @foreach (var item in Model.postView)
+                                @foreach (var item in Model.Post)
                                 {
                                     <div class="col-md-4">
                                         <img src="@item.Photo.Url" />
@@ -59,7 +59,7 @@
                         </div>
                         <div id="collection" class="tab-pane fade">
                             <div class="row gallery info_edit ">
-                                @foreach (var item in Model.collectionView)
+                                @foreach (var item in Model.Collection)
                                 {
                                     
                                 }

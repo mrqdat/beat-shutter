@@ -28,14 +28,16 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-lg-center">
                 <div class="text-lg-center">
                     <h1>All the best free stock photos and images<br />Shared by talented creators</h1>
-                    <div class="wrap">
-                        <div class="search">
-                            <button type="submit" class="searchButton">
-                                <i class="fa fa-search"></i>
-                            </button>
-                            <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                    <form asp-controller="Post" asp-action="Search" method="get">
+                        <div class="wrap">
+                            <div class="search">
+                                <button type="submit" class="searchButton">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <input type="text" name="tags" class="searchTerm" placeholder="What are you looking for?">
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -43,69 +45,176 @@
 </div>
 
 <div id="grid-layout">
-    @foreach (var photo in Model)
-    {
-        <div class="img-x">
-            <figure>
-                <div class="img-content">
-                    <a class="a-cursor" asp-route="PostDetail" asp-route-id="@photo.Id">
-                        @*onclick="AJAXLoadPost(@photo.Id)"*@
-                        <div class="img-rel">
-                            <img class="photo-content" src="@Url.Content(photo.Photo.Url)" asp-append-version="true" />
-                        </div>
-                    </a>
-                    <div class="img-icon">
-                        <div class="img-hover-background i-animation"></div>
-                        <div class="img-button-top img-button-display i-animation">
-                            <div class="img-button">
-                                @if (photo.Liked)
-                                {
-                                    <a class="btn btn-danger btn-hw pos-button modal-btns" style="color:white;" title="like this photo" @*onclick="LikedPost(this,@Model.Id)"*@ onclick="ChangeLike(this,@photo.Id)">
-                                        @*The <a> + xu ly like*@
-                                        <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
-                                    </a>
-                                }
-                                else
-                                {
-                                    <a class="btn btn-light btn-hw pos-button modal-btns" title="like this photo" @*onclick="LikedPost(this,@Model.Id)"*@ onclick="ChangeLike(this,@photo.Id)">
-                                        @*The <a> + xu ly like*@
-                                        <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
-                                    </a>
-                                }
-                                <button class="btn btn-light">
-                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="img-button-bottom img-button-display i-animation">
-                            <div class="owner-photo">
-                                <span>
-                                    <a href="/User/Details/@photo.UserId">
-                                        <img class="owner-img" src="@Url.Content(photo.UserImg)" asp-append-version="true" />
-                                    </a>
-                                </span>
-                                <a class="owner-name" href="/User/Details/@photo.UserId">
-                                    @photo.Username
+    <div class="grid-photos">
+        <div id="col01">
+            @foreach (var related in Model)
+            {
+                @if (@related.Id % 3 == 0)
+                {
+                    <div class="img-x">
+                        <figure>
+                            <div class="img-content">
+                                <a class="a-cursor" asp-controller="Post" asp-route-id="@related.Id" asp-action="Index">
+                                    <div class="img-rel">
+                                        <img class="photo-content" src="@related.Photo.Url" asp-append-version="true" alt="@related.Tags" />
+                                    </div>
                                 </a>
+                                <div class="img-icon">
+                                    <div class="img-hover-background i-animation"></div>
+                                    <div class="img-button-top img-button-display i-animation">
+                                        <div class="img-button">
+                                            <button class="btn btn-light pos-button">
+                                                <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span> @*Like*@
+                                            </button>
+                                            <button class="btn btn-light">
+                                                <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="img-button-bottom img-button-display i-animation">
+                                        <div class="owner-photo">
+                                            <span>
+                                                <a asp-controller="User" asp-action="Details" asp-route-id="@related.UserId">
+                                                    <img class="owner-img" src="@(related.UserImg??"/images/man.png")" asp-append-version="true" />
+                                                </a>
+                                            </span>
+                                            <a class="owner-name" asp-controller="User" asp-action="Details" asp-route-id="@related.UserId">
+                                                @related.Username
+                                            </a>
+                                        </div>
+                                        <div class="img-button">
+                                            <a class="btn btn-light" href="@related.Photo.Url" download>
+                                                <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                                    <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="img-button">
-                                <button class="btn btn-light">
-                                    <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
-                                        <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
-                                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
+                        </figure>
                     </div>
-                </div>
-            </figure>
+                }
+            }
         </div>
-    }
+        <div id="col02">
+            @foreach (var related in Model)
+            {
+                @if (@related.Id % 3 == 1)
+                {
+                    <div class="img-x">
+                        <figure>
+                            <div class="img-content">
+                                <a class="a-cursor" asp-controller="Post" asp-route-id="@related.Id" asp-action="Index">
+                                    <div class="img-rel">
+                                        <img class="photo-content" src="@related.Photo.Url" asp-append-version="true" alt="@related.Tags" />
+                                    </div>
+                                </a>
+                                <div class="img-icon">
+                                    <div class="img-hover-background i-animation"></div>
+                                    <div class="img-button-top img-button-display i-animation">
+                                        <div class="img-button">
+                                            <button class="btn btn-light pos-button">
+                                                <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span> @*Like*@
+                                            </button>
+                                            <button class="btn btn-light">
+                                                <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="img-button-bottom img-button-display i-animation">
+                                        <div class="owner-photo">
+                                            <span>
+                                                <a asp-controller="User" asp-action="Details" asp-route-id="@related.UserId">
+                                                    <img class="owner-img" src="@(related.UserImg??"/images/man.png")" asp-append-version="true" />
+                                                </a>
+                                            </span>
+                                            <a class="owner-name" asp-controller="User" asp-action="Details" asp-route-id="@related.UserId">
+                                                @related.Username
+                                            </a>
+                                        </div>
+                                        <div class="img-button">
+                                            <a class="btn btn-light" href="@related.Photo.Url" download>
+                                                <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                                    <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                }
+            }
+        </div>
+        <div id="col03">
+            @foreach (var related in Model)
+            {
+                @if (@related.Id % 3 == 2)
+                {
+                    <div class="img-x">
+                        <figure>
+                            <div class="img-content">
+                                <a class="a-cursor" asp-controller="Post" asp-route-id="@related.Id" asp-action="Index">
+                                    <div class="img-rel">
+                                        <img class="photo-content" src="@related.Photo.Url" asp-append-version="true" alt="@related.Tags" />
+                                    </div>
+                                </a>
+                                <div class="img-icon">
+                                    <div class="img-hover-background i-animation"></div>
+                                    <div class="img-button-top img-button-display i-animation">
+                                        <div class="img-button">
+                                            <button class="btn btn-light pos-button">
+                                                <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span> @*Like*@
+                                            </button>
+                                            <button class="btn btn-light">
+                                                <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="img-button-bottom img-button-display i-animation">
+                                        <div class="owner-photo">
+                                            <span>
+                                                <a asp-controller="User" asp-action="Details" asp-route-id="@related.UserId">
+                                                    <img class="owner-img" src="@(related.UserImg??"/images/man.png")" asp-append-version="true" />
+                                                </a>
+                                            </span>
+                                            <a class="owner-name" asp-controller="User" asp-action="Details" asp-route-id="@related.UserId">
+                                                @related.Username
+                                            </a>
+                                        </div>
+                                        <div class="img-button">
+                                            <a class="btn btn-light" href="@related.Photo.Url" download>
+                                                <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                                    <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                }
+            }
+        </div>
+    </div>
 </div>
 
 
@@ -255,20 +364,23 @@
 
         }
     });
-
+    var pageSize = 1;
     function AJAXLoadPhoto() {
         $(document).ready(function () {
             $.ajax({
                 type: "GET",
-                url: "@Url.Action("TestA")",
+                url: "@Url.Action("TestB")",
+                data: { page: pageSize },
                 success: function (msg) {
-                    msg.forEach(function (item, index) {
-                        //var photo = item["photo"].id;
-                        //$(".test").append(
-                        //    "<div>" + item["id"] + "<br>" + item.user["id"] + photo +"</div>"
-                        //);
-                        AppendToGrid(item);
-                    });
+                    if (msg != null) {
+                        pageSize++;
+                        msg.forEach(function (item, index) {
+                            AppendToGrid(item);
+                        });
+                    }
+                    else {
+
+                    }
                 },
                 error: function (req, status, error) {
                     console.log(error);

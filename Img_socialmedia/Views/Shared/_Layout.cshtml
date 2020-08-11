@@ -43,13 +43,13 @@
                     </a>
                     @if (ViewBag.showsearchbar ?? true)
                     {
-                        <form asp-controller="Search" asp-action="Index">
+                        <form asp-controller="Post" asp-action="Search" method="get">
                             <div id="nav-item" class="nav-item justify-content-start">
                                 <div class="nav-search">
-                                    <button type="submit" class="navsearchButton">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                    <input type="text" class="navsearchTerm" placeholder="Search for free photo and images" name="searchstring">
+                                        <button type="submit" class="navsearchButton">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                        <input type="text" class="navsearchTerm" placeholder="Search for free photo and images" name="tags">
                                 </div>
                             </div>
                         </form>

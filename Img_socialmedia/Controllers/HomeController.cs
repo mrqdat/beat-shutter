@@ -124,6 +124,38 @@ namespace Img_socialmedia.Controllers
 
             return result.ToList();
         }
+        public IEnumerable<PostViewModel> TestB(int page)
+        {
+            var data = shutterContext.Post.ToList();
+            int start = (int)(page - 1) * 1;
+            int totalPage = data.Count();
+            
+            if (start < totalPage)
+            {
+            var result = (from photo in shutterContext.Photo
+                         join post in shutterContext.Post on photo.Id equals post.PhotoId
+                         join user in shutterContext.User on post.UserId equals user.Id
+                         select new PostViewModel
+                         {
+                             Id = post.Id,
+                             PhotoId = photo.Id,
+                             TotalLike = post.TotalLike,
+                             TotalViews = post.TotalViews,
+                             CreateAt = post.CreateAt,
+                             Tags = post.Tags,
+                             UserId = user.Id,
+                             UserImg = user.ProfileImg,
+                             Username = user.Lastname + " " + user.Firstname,
+                             Photo = photo,
+
+                         }).Skip(start).Take(1);
+                return result.ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         [HttpGet]
         public PostViewModel GetDetailPhoto(int id)

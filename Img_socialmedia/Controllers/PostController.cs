@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -167,6 +168,70 @@ namespace Img_socialmedia.Controllers
             }
         }
 
-        
+        [HttpGet]
+        public IActionResult Search(string tags)
+        {
+            if (string.IsNullOrEmpty(tags))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var result = (from photo in shutterContext.Photo
+                          join post in shutterContext.Post on photo.Id equals post.PhotoId
+                          join user in shutterContext.User on post.UserId equals user.Id
+                          where post.Tags.Contains(tags)
+                          select new PostViewModel
+                          {
+                              Id = post.Id,
+                              PhotoId = photo.Id,
+                              TotalLike = post.TotalLike,
+                              TotalViews = post.TotalViews,
+                              CreateAt = post.CreateAt,
+                              Tags = post.Tags,
+                              UserId = user.Id,
+                              User = user,
+                              Photo = photo,
+                          }).Take(15).ToList();
+            if(result == null)
+            {
+                var result2 = (from photo in shutterContext.Photo
+                               join post in shutterContext.Post on photo.Id equals post.PhotoId
+                               join user in shutterContext.User on post.UserId equals user.Id
+                               orderby Guid.NewGuid()
+                               select new PostViewModel
+                               {
+                                   Id = post.Id,
+                                   PhotoId = photo.Id,
+                                   TotalLike = post.TotalLike,
+                                   TotalViews = post.TotalViews,
+                                   CreateAt = post.CreateAt,
+                                   Tags = post.Tags,
+                                   UserId = user.Id,
+                                   User = user,
+                                   Photo = photo,
+                               }).Take(15).ToList();
+                return View(result2);
+            }
+            else if (result.Count < 15)
+            {
+                var result3 = (from photo in shutterContext.Photo
+                               join post in shutterContext.Post on photo.Id equals post.PhotoId
+                               join user in shutterContext.User on post.UserId equals user.Id
+                               orderby Guid.NewGuid()
+                               select new PostViewModel
+                               {
+                                   Id = post.Id,
+                                   PhotoId = photo.Id,
+                                   TotalLike = post.TotalLike,
+                                   TotalViews = post.TotalViews,
+                                   CreateAt = post.CreateAt,
+                                   Tags = post.Tags,
+                                   UserId = user.Id,
+                                   User = user,
+                                   Photo = photo,
+                               }).Take(15-result.Count).ToList();
+                result.AddRange(result3);
+            }
+            return View(result);
+        }
     }
 }

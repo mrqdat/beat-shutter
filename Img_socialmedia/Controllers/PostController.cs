@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Img_socialmedia.Models;
 using Microsoft.AspNetCore.Http;
@@ -9,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
+using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -19,9 +20,11 @@ namespace Img_socialmedia.Controllers
     public class PostController : Controller
     {
         private db_shutterContext shutterContext;
-        public PostController(db_shutterContext db_ShutterContext)
+        private readonly IHostEnvironment hostEnvironment;
+        public PostController(db_shutterContext db_ShutterContext, IHostEnvironment _hostEnvironment)
         {
             shutterContext = db_ShutterContext;
+            hostEnvironment = _hostEnvironment;
         }
 
         [Route("post/{id}",Name = "PostDetail")]
@@ -79,21 +82,21 @@ namespace Img_socialmedia.Controllers
                 return View("Error");
             }
             bool liked = false;
-            if (HttpContext.Session.GetInt32("userid").HasValue)
-            {
-                string filename = HttpContext.Session.GetInt32("userid").ToString() + ".json";
-                JSONReadWrite j = new JSONReadWrite();
-                JArray jsonArray = JArray.Parse("[" + j.Read(filename, "json") + "]");
-                //var a = JObject.Parse(jsonArray[0].ToString());
-                foreach (var b in jsonArray)
-                {
-                    if (Convert.ToInt32(b["id"]).Equals(id))
-                    {
-                        liked = true;
-                        break;
-                    }
-                }
-            }
+            //if (HttpContext.Session.GetInt32("userid").HasValue)
+            //{
+            //    string filename = HttpContext.Session.GetInt32("userid").ToString() + ".json";
+            //    JSONReadWrite j = new JSONReadWrite();
+            //    JArray jsonArray = JArray.Parse("[" + j.Read(filename,"json") + "]");
+            //    var a = JObject.Parse(jsonArray[0].ToString());
+            //    foreach(var a in jsonArray)
+            //    {  ,
+            //        if (Convert.ToInt32(a["id"][i]).Equals(id))
+            //        {
+            //            liked = true;
+            //        }
+            //    }
+                
+            //}
             result.TotalViews += 1;
             shutterContext.Post.Update(result);
             shutterContext.SaveChangesAsync();
@@ -154,84 +157,38 @@ namespace Img_socialmedia.Controllers
             JSONReadWrite j = new JSONReadWrite();
             int a= j.IsFileExist(filename, jsonStr);
             if (a == 0) {
-                var total = shutterContext.Post.Find(id);
-                total.TotalLike = total.TotalLike + 1;
-                shutterContext.SaveChanges();
                 return Json(new { status = true }) ;
             }
             else
             {
-                var total = shutterContext.Post.Find(id);
-                total.TotalLike = total.TotalLike -1;
-                shutterContext.SaveChanges();
                 return Json(new { status = false });
             }
         }
-
-        [HttpGet]
-        public IActionResult Search(string tags)
+        [HttpPost]
+        public ActionResult report(int id)
         {
-            if (string.IsNullOrEmpty(tags))
+            if(HttpContext.Session.GetInt32("userid").HasValue)
             {
-                return RedirectToAction("Index", "Home");
+                var userid = HttpContext.Session.GetInt32("userid");
+                PostViewModel rp = new PostViewModel();
+                rp.Id = id;
+                rp.hasban = true;
+                rp.triggeredBy = userid;
+                shutterContext.SaveChanges();
+                //string data = JsonConvert.SerializeObject(rp);
+                //System.IO.File.WriteAllText(@"~/rp/report.json", data);
+
+                return Json(new
+                {
+                    status = true
+                });
             }
-            var result = (from photo in shutterContext.Photo
-                          join post in shutterContext.Post on photo.Id equals post.PhotoId
-                          join user in shutterContext.User on post.UserId equals user.Id
-                          where post.Tags.Contains(tags)
-                          select new PostViewModel
-                          {
-                              Id = post.Id,
-                              PhotoId = photo.Id,
-                              TotalLike = post.TotalLike,
-                              TotalViews = post.TotalViews,
-                              CreateAt = post.CreateAt,
-                              Tags = post.Tags,
-                              UserId = user.Id,
-                              User = user,
-                              Photo = photo,
-                          }).Take(15).ToList();
-            if(result == null)
-            {
-                var result2 = (from photo in shutterContext.Photo
-                               join post in shutterContext.Post on photo.Id equals post.PhotoId
-                               join user in shutterContext.User on post.UserId equals user.Id
-                               orderby Guid.NewGuid()
-                               select new PostViewModel
-                               {
-                                   Id = post.Id,
-                                   PhotoId = photo.Id,
-                                   TotalLike = post.TotalLike,
-                                   TotalViews = post.TotalViews,
-                                   CreateAt = post.CreateAt,
-                                   Tags = post.Tags,
-                                   UserId = user.Id,
-                                   User = user,
-                                   Photo = photo,
-                               }).Take(15).ToList();
-                return View(result2);
-            }
-            else if (result.Count < 15)
-            {
-                var result3 = (from photo in shutterContext.Photo
-                               join post in shutterContext.Post on photo.Id equals post.PhotoId
-                               join user in shutterContext.User on post.UserId equals user.Id
-                               orderby Guid.NewGuid()
-                               select new PostViewModel
-                               {
-                                   Id = post.Id,
-                                   PhotoId = photo.Id,
-                                   TotalLike = post.TotalLike,
-                                   TotalViews = post.TotalViews,
-                                   CreateAt = post.CreateAt,
-                                   Tags = post.Tags,
-                                   UserId = user.Id,
-                                   User = user,
-                                   Photo = photo,
-                               }).Take(15-result.Count).ToList();
-                result.AddRange(result3);
-            }
-            return View(result);
+            else{
+                return Json(new{
+                    status = false
+                });
+            }          
+        
         }
     }
 }

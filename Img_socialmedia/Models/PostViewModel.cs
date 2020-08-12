@@ -25,6 +25,12 @@ namespace Img_socialmedia.Models
         public string UserImg { get; set; }
         [NotMapped]
         public bool Liked { get; set; }
+        
+        public bool hasban { get; set; }
+ 
+        public int? triggeredBy { get; set; }
+        [NotMapped]
+        public string note { get; set; }
         public virtual UserViewModel User { get; set; }
         public virtual PhotoViewModel Photo { get; set; }
         public virtual IEnumerable<CommentViewModel> Comment { get; set; }

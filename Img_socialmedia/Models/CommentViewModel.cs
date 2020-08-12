@@ -11,7 +11,7 @@ namespace Img_socialmedia.Models
         public string Contents { get; set; }
         public int UserId { get; set; }
         public int PostId { get; set; }
-        public DateTime? CreateAt { get; set; }
+        public DateTime CreateAt { get; set; }
         [NotMapped]
         public string UserImg { get; set; }
         [NotMapped]

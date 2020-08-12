@@ -168,7 +168,9 @@
 /*Laptop, PC */
 /*END*/
 
-
+.comment-time{
+    font-size:8px;
+}
 .btn-footer {
     width:100%;
     margin-left:20px;

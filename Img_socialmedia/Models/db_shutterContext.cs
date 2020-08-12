@@ -314,8 +314,6 @@ namespace Img_socialmedia.Models
                     .HasColumnName("firstname")
                     .HasMaxLength(70);
 
-                entity.Property(e => e.FollowerCount).HasColumnName("follower_count");
-
                 entity.Property(e => e.Lastname)
                     .HasColumnName("lastname")
                     .HasMaxLength(70);

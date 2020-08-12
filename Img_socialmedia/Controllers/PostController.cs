@@ -190,5 +190,36 @@ namespace Img_socialmedia.Controllers
             }          
         
         }
+
+        [HttpPost]
+        public IActionResult Comment(int id,string content)
+        {
+            var post = shutterContext.Post.Find(id);
+            if (post == null)
+            {
+                return View("Error");
+            }
+            if (!HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                return View("Error");
+            }
+            if (string.IsNullOrEmpty(content))
+            {
+                return View("Index",post);
+            }
+
+            CommentViewModel comment = new CommentViewModel
+            {
+                PostId=post.Id,
+                UserId=HttpContext.Session.GetInt32("userid").Value,
+                Contents = content,
+                CreateAt=DateTime.Now,
+            };
+
+            shutterContext.Add(comment);
+            shutterContext.SaveChanges(); 
+            var url = Url.Action("Index", "Post", new { id = id});
+            return Redirect(url);
+        }
     }
 }

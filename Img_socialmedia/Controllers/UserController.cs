@@ -32,7 +32,7 @@ namespace Img_socialmedia.Controllers
         {
             if (id.ToString() == null)
             {
-                return NotFound();
+                return View("Error");;
             }
 
             var user = await _context.User
@@ -41,26 +41,80 @@ namespace Img_socialmedia.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
-                return NotFound();
+                return View("Error");;
             }
 
             return View("Index", user);
         }
        
-
+        [HttpGet]
         public IActionResult password()
         {
-            return View();
+            if (!HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                return View("Error");
+            }
+            var user = _context.User.Find(HttpContext.Session.GetInt32("userid").Value);
+            return View(user);
+        }
+
+        [HttpPost]
+        public IActionResult password(string Password, string NewPassword, string ConfirmPassword)
+        {
+            if (!HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                return View("Error");
+            }
+
+            var user = _context.User.Find(HttpContext.Session.GetInt32("userid").Value);
+
+            if (string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(NewPassword) || string.IsNullOrEmpty(ConfirmPassword))
+            {
+                ModelState.AddModelError("", "Password, new password, confirm password must not null or empty");
+                return View(user);
+            }
+
+            if (!user.Password.Equals(Password))
+            {
+                ModelState.AddModelError("", "Password invalid");
+                return View(user);
+            }
+
+            if(NewPassword.Length<8 || NewPassword.Length > 15)
+            {
+                ModelState.AddModelError("", "New password must have 8 - 15 char");
+                return View(user);
+            }
+
+            if (NewPassword.Equals(ConfirmPassword))
+            {
+                user.Password = NewPassword;
+                _context.SaveChanges();
+                return View("editprofile",user);
+            }
+
+            ModelState.AddModelError("", "New password & confirm password don't match");
+            return View(user);
         }
 
         public IActionResult email()
         {
-            return View();
+            if (!HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                return View("Error");
+            }
+            var user = _context.User.Find(HttpContext.Session.GetInt32("userid").Value);
+            return View(user);
         }
 
         public IActionResult close()
         {
-            return View();
+            if (!HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                return View("Error");
+            }
+            var user = _context.User.Find(HttpContext.Session.GetInt32("userid").Value);
+            return View(user);
         }
 
         // GET: Users/Create
@@ -69,9 +123,6 @@ namespace Img_socialmedia.Controllers
             return View();
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,username,password,PasswordConfirm,email,name,first_name,last_name,phone,create_at")] UserViewModel userViewModel)
@@ -85,7 +136,7 @@ namespace Img_socialmedia.Controllers
             return View(userViewModel);
         }
 
-       
+        [HttpGet]
         public async Task<IActionResult> editprofile(int id)
         {
             int sessionID;
@@ -95,7 +146,7 @@ namespace Img_socialmedia.Controllers
             }
             catch
             {
-                return NotFound();
+                return View("Error");
             }
             if (!String.IsNullOrEmpty(sessionID.ToString()))
             {
@@ -103,7 +154,7 @@ namespace Img_socialmedia.Controllers
                 {
                     if (id.ToString() == null)
                     {
-                        return NotFound();
+                        return View("Error");
                     }
 
                     var user = await _context.User
@@ -112,13 +163,13 @@ namespace Img_socialmedia.Controllers
                         .FirstOrDefaultAsync(m => m.Id == id);
                     if (user == null)
                     {
-                        return NotFound();
+                        return View("Error");;
                     }
                     return View("editprofile", user);
                 }
                 else
                 {
-                    return NotFound();
+                    return View("Error");;
                 }
             }
             else
@@ -141,7 +192,7 @@ namespace Img_socialmedia.Controllers
                 if (id != userViewModel.Id)
                 {
                     //return Ok(userViewModel.Id + " " + id + " " + userViewModel.Firstname + " " + userViewModel.Bio + " " + userViewModel.Lastname + " " + userViewModel.Phone);
-                    return NotFound();
+                    return View("Error");;
                 }
                // var errors = ModelState.Values.SelectMany(v => v.Errors);
                // return Ok(errors);            
@@ -157,7 +208,7 @@ namespace Img_socialmedia.Controllers
                     {
                         if (!UserExists(userViewModel.Id))
                         {
-                            return NotFound();
+                            return View("Error");;
                         }
                         else
                         {
@@ -178,14 +229,14 @@ namespace Img_socialmedia.Controllers
         {
             if (id.ToString() == null)
             {
-                return NotFound();
+                return View("Error");;
             }
 
             var userViewModel = await _context.User
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (userViewModel == null)
             {
-                return NotFound();
+                return View("Error");;
             }
 
             return View(userViewModel);

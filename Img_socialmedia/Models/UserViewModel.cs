@@ -46,8 +46,7 @@ namespace Img_socialmedia.Models
         public string Bio { get; set; }        
 
         [DataType(DataType.Date)]
-        public DateTime? CreateAt { get; set; }
-        public int? FollowerCount { get; set; }
+        public DateTime CreateAt { get; set; }
         public string Tags { get; set; }
         public virtual IEnumerable<PostViewModel> Post { get; set; }
         public virtual ICollection<CollectionViewModel> Collection { get; set; }

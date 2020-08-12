@@ -53,7 +53,9 @@
                     </div>
                     <div class="modal-body mod5xp">
                         <div class="mdbody">
-                            <img class="photo-main" src="@Model.Photo.Url" alt="@Model.Tags" asp-append-version="true">
+                            <a href="@Url.Content(Model.Photo.Url)" style="cursor:zoom-in" target="_blank">
+                                <img class="photo-main" src="@Model.Photo.Url" alt="@Model.Tags" asp-append-version="true">
+                            </a>
                         </div>
                         <div>
                             <div class="modal-btn-footer">
@@ -93,7 +95,7 @@
                                         <a asp-route-id="@comment.UserId" asp-action="Details" asp-controller="User" class="user-name">
                                             @comment.Username
                                         </a>
-                                        <span class="comment-time">@comment.CreateAt</span><br />
+                                        <span class="comment-time">@comment.CreateAt.ToString("dd/MM/yyyy h:m")</span><br />
                                         <span>
                                             @comment.Contents
                                         </span>
@@ -104,23 +106,28 @@
 
                     </div>
                     <div>
-                        <form class="form-comment">
-                            @if (Context.Session.GetInt32("userid").HasValue)
-                            {
+
+                        @if (Context.Session.GetInt32("userid").HasValue)
+                        {
+                            <form class="form-comment" asp-action="Comment" asp-controller="Post">
+                                <input asp-for="Id" hidden readonly/>
                                 <div class="comment-box">
-                                    <textarea class="comment-content" name="contents" value=""></textarea>
+                                    <textarea class="comment-content" name="content"></textarea>
                                 </div>
                                 <button class="btn btn-send" type="submit">Submit</button>
-                            }
-                            else
-                            {
-                                <div class="comment-box">
-                                    <textarea class="comment-content" name="contents" disabled></textarea>
-                                </div>
-                                <button class="btn btn-send" type="button" disabled>Submit</button>
-                            }
+                            </form>
+                        }
+                        else
+                        { 
+                        <form class="form-comment">
+                            
+                            <div class="comment-box">
+                                <textarea class="comment-content" name="content" disabled></textarea>
+                            </div>
+                            <button class="btn btn-send" type="button" disabled>Submit</button>
                         </form>
-                    </div>
+                        }
+                        </div>
                 </div>
             </div>
             <div>

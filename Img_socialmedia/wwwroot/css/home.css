@@ -17,6 +17,7 @@
 
     .mdbody {
         border-right: none;
+        height:auto;
     }
 
     .com {
@@ -349,6 +350,10 @@
 .f{
      float:right;
  }
+
+ .l{
+     float:left;
+ }
 .modal-comment {
     position: relative;
     right: 0;
@@ -455,7 +460,7 @@
 }
 
 .comment-content {
-    background: #f2f3f8;
+    background: #d3d3d4;
     max-width: 100%;
     position: relative;
     word-break: break-word;

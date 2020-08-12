@@ -67,11 +67,12 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Home" asp-action="About" style="cursor:pointer;">About</a>
                             </li>
-                            @if (!string.IsNullOrEmpty(Context.Session.GetString("username")))
-                            {
-                                <li class="nav-item">
+                            <li class="nav-item">
                                     <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
                                 </li>
+                            @if (!string.IsNullOrEmpty(Context.Session.GetString("username")))
+                            {
+                                
                                 <li class="nav-item" style="margin:7px 25px 7px 0;">
                                     <a class="notification dropdown-toggle" data-toggle="popover" title="Notification" data-placement="bottom" aria-haspopup="true" style="cursor:pointer;">
                                         <span hidden>Notification</span>
@@ -254,31 +255,38 @@
         });
 
 
-        $('.image-tag-name').on('focusout', function () {
-            var txt = this.value.replace(/[^a-zA-Z0-9\+\-\.\#]/g, ''); // allowed characters list
-            if (txt) $(this).before('<span class="tag">' + txt + '</span>');
-            this.value = "";
-        }).on('keyup', function (e) {
-            // comma|space (add more keyCodes delimited with | pipe)
-            if (/(188|32)/.test(e.which)) $(this).trigger('focusout');
-        });
+        
 
         $(document).ready(function () {
+            
             var val = "";
             var a;
-            $(".file-upload-btn").click(function (e) {
+            $('.image-tag-name').on('focusout', function () {
+                var txt = this.value.replace(/[^a-zA-Z0-9\+\-\.\#]/g, ''); // allowed characters list
+                if (txt) $(this).before('<span class="tag">' + txt + '</span>');
+                this.value = "";
+            }).on('keyup', function (e) {
+                // comma|space (add more keyCodes delimited with | pipe)
+                if (/(188|32)/.test(e.which))                    
+                    $(this).trigger('focusout');
+                
+            });
+            $('.file-upload-btn').on('click', function () {
                 $(".tag").each(function () {
                     a = $(this).text();
-                    val = val + " " + a;
+                    val = val + "," + a;
                 });
-                
+               
                 $('.image-tag-name').attr('value', val);
+                alert(val);
             });
+            
         });
 
         $('.image-tag').on('click', '.tag', function () {
             $(this).remove();
         });
+
         $('.crebtn').click( function () {
             $.ajax({
                 type: "POST",
@@ -290,7 +298,7 @@
                 }),           
                 success: function (item) {
                     //console.log(item["success"] + " " + item["message"]);
-                    $('<p>s</p>').insertAfter(".collection-item")
+                    $('<p></p>').insertAfter(".collection-item")
                     $('.collection-list').show();
                     $('.collection-create').hide();
                 },

@@ -54,14 +54,7 @@ namespace Img_socialmedia.Controllers
                              Photo = photo,
                             
                          }).Take(15).ToList();
-            if (HttpContext.Session.GetInt32("userid").HasValue)
-            {
-
-                var userid = HttpContext.Session.GetInt32("userid");
-                var c = (from col in shutterContext.Collection
-                              select col).First();
-                ViewBag.Collections = c;
-            }
+         
             return View(result);
         }
 

@@ -189,7 +189,7 @@ namespace Img_socialmedia.Controllers
                     if (formFile.Length > 0)
                     {
                         var filename = Path.GetFileName(formFile.FileName);
-                        var myUniqueFileName = Convert.ToString(Guid.NewGuid()) + " - shutter";
+                        var myUniqueFileName = Convert.ToString(Guid.NewGuid()) + "-shutter";
                         var fileExtension = Path.GetExtension(filename);
                         var newFileName = String.Concat(myUniqueFileName, fileExtension);
                         var filePath = new PhysicalFileProvider(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "images")).Root + $@"\{ newFileName}";

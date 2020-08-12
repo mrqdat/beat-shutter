@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Img_socialmedia.Models;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace Img_socialmedia.Controllers
 {
@@ -20,9 +22,20 @@ namespace Img_socialmedia.Controllers
         }
         public IActionResult report()
         {
+            
+            var result  = _context.Post.Where(u => u.hasban==false).ToList();
+            return View(result);
+        //    var path = Path.Combine(Directory.GetCurrentDirectory(),$"wwwroot\\{"rp\\report.json"}");
+        //     var json = System.IO.File.ReadAllText(path);
+            
+        //     ReportViewModel rp = JsonConvert.DeserializeObject<ReportViewModel>(json);
+        //     using(StreamReader file = System.IO.File.OpenText(path))
+        //     {
+        //         JsonSerializer serializer = new JsonSerializer();
+        //         ReportViewModel reppo = (ReportViewModel) serializer.Deserialize(file,typeof(ReportViewModel));
+        //     }
 
-            var postReport = _context.Post.ToList();
-            return View(postReport);
+        //     return Json(reppo);
         }
 
          

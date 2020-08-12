@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Img_socialmedia.Models;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -18,9 +20,11 @@ namespace Img_socialmedia.Controllers
     public class PostController : Controller
     {
         private db_shutterContext shutterContext;
-        public PostController(db_shutterContext db_ShutterContext)
+        private readonly IHostEnvironment hostEnvironment;
+        public PostController(db_shutterContext db_ShutterContext, IHostEnvironment _hostEnvironment)
         {
             shutterContext = db_ShutterContext;
+            hostEnvironment = _hostEnvironment;
         }
 
         [Route("post/{id}",Name = "PostDetail")]
@@ -159,6 +163,32 @@ namespace Img_socialmedia.Controllers
             {
                 return Json(new { status = false });
             }
+        }
+        [HttpPost]
+        public ActionResult report(int id)
+        {
+            if(HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                var userid = HttpContext.Session.GetInt32("userid");
+                PostViewModel rp = new PostViewModel();
+                rp.Id = id;
+                rp.hasban = true;
+                rp.triggeredBy = userid;
+                shutterContext.SaveChanges();
+                //string data = JsonConvert.SerializeObject(rp);
+                //System.IO.File.WriteAllText(@"~/rp/report.json", data);
+
+                return Json(new
+                {
+                    status = true
+                });
+            }
+            else{
+                return Json(new{
+                    status = false
+                });
+            }          
+        
         }
     }
 }

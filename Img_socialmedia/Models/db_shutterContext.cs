@@ -270,7 +270,8 @@ namespace Img_socialmedia.Models
                 entity.Property(e => e.Tags)
                     .HasColumnName("tags")
                     .IsUnicode(false);
-
+                entity.Property(e => e.hasban).HasColumnName("hasban");
+                entity.Property(e => e.triggeredBy).HasColumnName("triggeredBy");
                 entity.Property(e => e.TotalLike).HasColumnName("total_like");
 
                 entity.Property(e => e.TotalViews).HasColumnName("total_views");

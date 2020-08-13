@@ -58,16 +58,18 @@ namespace Img_socialmedia.Controllers
             if (HttpContext.Session.GetInt32("userid").HasValue)
             {
                 string filename = HttpContext.Session.GetInt32("userid").ToString() + ".json";
-                JSONReadWrite j = new JSONReadWrite();
-                JArray jsonArray = JArray.Parse("[" + j.Read(filename, "json") + "]");
-                foreach (var b in jsonArray)
-                {
-                    foreach(var p in result)
+                if (System.IO.File.Exists(filename)){ 
+                    JSONReadWrite j = new JSONReadWrite();
+                    JArray jsonArray = JArray.Parse("[" + j.Read(filename, "json") + "]");
+                    foreach (var b in jsonArray)
                     {
-                        if (Convert.ToInt32(b["id"]).Equals(p.Id))
+                        foreach(var p in result)
                         {
-                            p.Liked = true;
-                            break;
+                            if (Convert.ToInt32(b["id"]).Equals(p.Id))
+                            {
+                                p.Liked = true;
+                                break;
+                            }
                         }
                     }
                 }

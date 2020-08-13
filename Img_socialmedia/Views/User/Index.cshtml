@@ -15,7 +15,7 @@
 
                 </div>
                 <div class="info_edit">
-                    <h4 class="name">@(Model.Firstname+""+Model.Lastname)</h4>
+                    <h4 class="name">@(Model.Firstname+" "+Model.Lastname)</h4>
                     <a class="info_link" asp-action="editprofile" asp-controller="User"  alt="edit your profile">
                         <i class="fa fa-edit"></i>
                     </a>
@@ -37,7 +37,7 @@
 
                 </div>
             </div>
-            <div class="container">
+            
                 <div class="right col-lg-8">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#galery">Photos</a></li>
@@ -54,19 +54,10 @@
                                         <img src="@item.Photo.Url" />
                                     </div>
                                 }
-                                asdasd
+                                 
                             </div>
                         </div>
-                        <div id="collection" class="tab-pane fade">
-                            <div class="row gallery info_edit ">
-                                @foreach (var item in Model.Collection)
-                                {
-                                    
-                                }
-
-                            </div>
-                        </div>
-
+                       
                     </div>
                 </div>
                 @*<span class="follow">Follow</span>*@
@@ -76,20 +67,8 @@
                     <li><a data-toggle="tab" href="#collection">Collections </a></li>
 
                 </ul>*@
-                @*<div class="tab-content">
-                    
-                    <div id="collection" class="row gallery info_edit tab-pane fade in active">
-                        @foreach (var item in Model.Post)
-                        {
-                            <div class="col-md-4">
-                                <img src="@item.Photo.Url" />
-                            </div>
-                        }
-
-                    </div>
-
-                </div>*@
-            </div>
+                
+             
         </div>
     </main>
 </div>

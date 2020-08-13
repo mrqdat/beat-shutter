@@ -67,12 +67,12 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Home" asp-action="About" style="cursor:pointer;">About</a>
                             </li>
-                            <li class="nav-item">
-                                    <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
-                                </li>
+                            
                             @if (!string.IsNullOrEmpty(Context.Session.GetString("username")))
                             {
-                                
+                                <li class="nav-item">
+                                    <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
+                                </li>
                                 <li class="nav-item" style="margin:7px 25px 7px 0;">
                                     <a class="notification dropdown-toggle" data-toggle="popover" title="Notification" data-placement="bottom" aria-haspopup="true" style="cursor:pointer;">
                                         <span hidden>Notification</span>
@@ -257,7 +257,7 @@
 
         
 
-        $(document).ready(function () {
+        @* $(document).ready(function () {
             
             var val = "";
             var a;
@@ -271,6 +271,7 @@
                     $(this).trigger('focusout');
                 
             });
+
             $('.file-upload-btn').on('click', function () {
                 $(".tag").each(function () {
                     a = $(this).text();
@@ -281,32 +282,50 @@
                 alert(val);
             });
             
-        });
+        }); *@
 
         $('.image-tag').on('click', '.tag', function () {
             $(this).remove();
         });
 
-        $('.crebtn').click( function () {
-            $.ajax({
-                type: "POST",
-                url: "@Url.Action("createCollection", "Collection")",
-                dataType:"json",
-                data: JSON.stringify({
-                    colname: $('.colname').val(),
-                    coldes: $('.coldes').val()
-                }),           
-                success: function (item) {
-                    //console.log(item["success"] + " " + item["message"]);
-                    $('<p></p>').insertAfter(".collection-item")
-                    $('.collection-list').show();
-                    $('.collection-create').hide();
-                },
-                error: function (req, status, error) {
-                    console.log(error);
-                    console.log(req);
-                    console.log(status);
-                }
+        $(document).ready(function () {
+            var colname = $('.colname').val();
+            $('.crebtn').on('click', function () {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("createCollection", "Collection")",
+                    data:{
+                        'colname':$('.colname').val(),
+                        'coldes':$('.coldes').val()
+                    },
+                    success: function (respone) {
+                        if (respone.result == 'Redirect') {
+                            window.location.href = "@Url.Action("Login", "Account")";
+                        }
+                        else {
+                            if (respone.result == 'false') {
+                                alert(respone.message)
+                            }
+                            else {
+                                $(''+'<li class="item-detail"><button class="btn addcol">'+
+                                    '<div class="item-name">'+
+                                        '<span>0photos</span>'+
+                                        '<h6>'+colname+'</h6>'+
+                                    '</div>'+
+                                    '<div class="addto" title="add to collection">'+
+                                        '<svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
+                                            '<path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />'+
+                                            '<path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />'+
+                                        '</svg>'+
+                                    '</div>'+
+                                        '</button >'+
+                                    '</li >').insertAfter('.collection-item');
+                                $('.collection-list').show();
+                                $('.collection-create').hide();
+                            }
+                        }
+                    }
+                });
             });
         });
 </script>

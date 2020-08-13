@@ -66,36 +66,6 @@
                                 </li>
                             @if (!string.IsNullOrEmpty(Context.Session.GetString("username")))
                             {
-                                
-                                <li class="nav-item" style="margin:7px 25px 7px 0;">
-                                    <a class="notification dropdown-toggle" data-toggle="popover" title="Notification" data-placement="bottom" aria-haspopup="true" style="cursor:pointer;">
-                                        <span hidden>Notification</span>
-                                        <svg class="bi bi-bell-fill" width="34" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" style="color:dimgray">
-                                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
-                                        </svg>
-                                    </a>
-                                    <div style="display:none;width:200px" class="alert_list">
-                                        <ul class="unstyled">
-                                            <li data-alert_id="1" class="alert_li">
-                                                <a href="#" class="alert_message">User1 liked your post</a> <br />
-                                                <span class="time">At 13:09</span>
-                                                <div class="clearfix"></div>
-                                            </li>
-                                            <li data-alert_id="2" class="alert_li">
-                                                <a href="#">User2 is following you</a> <br />
-                                                <span class="time">1 hour ago</span>
-                                                <div class="clearfix"></div>
-                                            </li>
-                                            <li data-alert_id="3" class="alert_li">
-                                                <a href="#">User1 liked your post </a> <br />
-                                                <span class="time">1 day ago</span>
-                                                <div class="clearfix"></div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-
-
                                 <li class="nav-item avatar">
                                     <a href="javascript:void(0);" class="btn-user media align-items-center dropdown-toggle" data-toggle="dropdown">
                                         <img class="mr-2" src="~/images/man.png" width="32" height="32" alt="avatar">
@@ -103,7 +73,7 @@
                                     <div class="dropdown-menu dropdown-menu-right dropdown-info">
                                         <a class="dropdown-item" href="/User/Details/@Context.Session.GetInt32("userid")">Profile</a>
                                         <a class="dropdown-item" href="/User/editprofile/@Context.Session.GetInt32("userid")">Account setting</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
+                                        <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Log out</a>
                                     </div>
                                 </li>
                             }
@@ -116,7 +86,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link " asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
+                                    <a class="nav-link " asp-controller="Account" asp-action="Login">Log in</a>
                                 </li>
 
                                 <li class="nav-item" style="margin-right:0px;">
@@ -262,18 +232,15 @@
                 // comma|space (add more keyCodes delimited with | pipe)
                 if (/(188|32)/.test(e.which))                    
                     $(this).trigger('focusout');
-                
             });
             $('.file-upload-btn').on('click', function () {
                 $(".tag").each(function () {
                     a = $(this).text();
-                    val = val + "," + a;
+                    val = a + " " + val;
                 });
-               
-                $('.image-tag-name').attr('value', val);
-                alert(val);
+
+                $('.image-tag-name').val(val);
             });
-            
         });
 
         $('.image-tag').on('click', '.tag', function () {
@@ -302,6 +269,11 @@
                 }
             });
         });
+
+
+    $('#profile').click(function () {
+        $('#mediaFile').click();
+    });
 </script>
 
 </body>

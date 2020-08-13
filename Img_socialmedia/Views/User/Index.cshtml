@@ -9,37 +9,35 @@
 <div class="user_container">
     <main>
         <div class="row">
-            <div class="left col-lg-4" style="margin-top:10px;max-height:450px;">
-
+            <div class="left col-lg-4">
                 <div class="photo-left">
                     <img class="photo" src="~/images/man.png" asp-append-version="true" />
 
                 </div>
                 <div class="info_edit">
-                    <h4 class="name">@(Model.Firstname+""+Model.Lastname)</h4>
-                    <a class="info_link" asp-action="editprofile" asp-controller="User" alt="edit your profile">
+                    <h4 class="name">@(Model.Firstname+" "+Model.Lastname)</h4>
+                    <a class="info_link" asp-action="editprofile" asp-controller="User"  alt="edit your profile">
                         <i class="fa fa-edit"></i>
                     </a>
                 </div>
-
                 <div class="stats row" style="margin:0;">
                     <div class="stat col-xs-4" style="padding-left: 50px;">
-                        <p class="number-stat">38</p>
+                        <p class="number-stat">@Model.Post.ToList().Count</p>
                         <p class="desc-stat">Uploads</p>
                     </div>
-                    <div class="stat col-xs-4" style="padding-right: 50px;">
-                        <p class="number-stat">1</p>
+                    <div class="stat col-xs-4" style="padding-right: 50px;margin-left: 10px;" >
+                        <p class="number-stat">@Model.Collection.ToList().Count</p>
                         <p class="desc-stat">Colection</p>
                     </div>
                 </div>
                 <p class="desc">@Model.Bio</p>
                 <div class="social">
                     @*<i class="fa fa-facebook-square" aria-hidden="true"></i>
-            <i class="fa fa-twitter-square" aria-hidden="true"></i>*@
+                    <i class="fa fa-twitter-square" aria-hidden="true"></i>*@
 
                 </div>
             </div>
-             
+            <div class="container">
                 <div class="right col-lg-8">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#galery">Photos</a></li>
@@ -56,7 +54,7 @@
                                         <img src="@item.Photo.Url" />
                                     </div>
                                 }
-                                
+                                asdasd
                             </div>
                         </div>
                         <div id="collection" class="tab-pane fade">
@@ -70,7 +68,7 @@
                         </div>
 
                     </div>
-                
+                </div>
                 @*<span class="follow">Follow</span>*@
                 @*<ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#galery">Photos</a></li>

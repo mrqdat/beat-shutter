@@ -15,18 +15,18 @@
 
                 </div>
                 <div class="info_edit">
-                    <h4 class="name">@(Model.Firstname+""+Model.Lastname)</h4>
+                    <h4 class="name">@(Model.Firstname+" "+Model.Lastname)</h4>
                     <a class="info_link" asp-action="editprofile" asp-controller="User"  alt="edit your profile">
                         <i class="fa fa-edit"></i>
                     </a>
                 </div>
                 <div class="stats row" style="margin:0;">
                     <div class="stat col-xs-4" style="padding-left: 50px;">
-                        <p class="number-stat">38</p>
+                        <p class="number-stat">@Model.Post.ToList().Count</p>
                         <p class="desc-stat">Uploads</p>
                     </div>
-                    <div class="stat col-xs-4" style="padding-right: 50px;">
-                        <p class="number-stat">1</p>
+                    <div class="stat col-xs-4" style="padding-right: 50px;margin-left: 10px;" >
+                        <p class="number-stat">@Model.Collection.ToList().Count</p>
                         <p class="desc-stat">Colection</p>
                     </div>
                 </div>

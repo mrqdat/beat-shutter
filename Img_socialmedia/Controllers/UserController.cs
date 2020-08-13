@@ -158,14 +158,23 @@ namespace Img_socialmedia.Controllers
                     }
 
                     var user = await _context.User
-                        .Include(p => p.Post)
-                            .ThenInclude(photo => photo.Photo)
                         .FirstOrDefaultAsync(m => m.Id == id);
+                    var model = new EditUserViewModel
+                    {
+                        ProfileImg = user.ProfileImg,
+                        Firstname=user.Firstname,
+                        Lastname=user.Lastname,
+                        Bio=user.Bio,
+                        Email=user.Email,
+                        Phone=user.Phone,
+                        Tags=user.Tags,
+                        CreateAt=user.CreateAt
+                    };
                     if (user == null)
                     {
                         return View("Error");;
                     }
-                    return View("editprofile", user);
+                    return View("editprofile", model);
                 }
                 else
                 {
@@ -183,45 +192,32 @@ namespace Img_socialmedia.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> editprofile(int id, [Bind("Id,Firstname,Lastname,Email,Password,Phone,Bio")] UserViewModel userViewModel)
+        public async Task<IActionResult> editprofile(EditUserViewModel model)
         {
-            int sessionID = (int)HttpContext.Session.GetInt32("userid");
-            if (sessionID == id)
+            int userId;
+            try
             {
-               
-                if (id != userViewModel.Id)
-                {
-                    //return Ok(userViewModel.Id + " " + id + " " + userViewModel.Firstname + " " + userViewModel.Bio + " " + userViewModel.Lastname + " " + userViewModel.Phone);
-                    return View("Error");;
-                }
-               // var errors = ModelState.Values.SelectMany(v => v.Errors);
-               // return Ok(errors);            
-                if (ModelState.IsValid)
-                {                  
-                    try
-                    {
-                        
-                        _context.Update(userViewModel);
-                        await _context.SaveChangesAsync();
-                    }
-                    catch (DbUpdateConcurrencyException)
-                    {
-                        if (!UserExists(userViewModel.Id))
-                        {
-                            return View("Error");;
-                        }
-                        else
-                        {
-                            throw;
-                        }
-                    }
-                }
+                userId = HttpContext.Session.GetInt32("userid").Value;
             }
-            else
+            catch
             {
-                //
+                return View("Error");
             }
-            return View(userViewModel);
+            var user = _context.User.Find(userId);
+            if (!user.Email.Equals(model.Email))
+            {
+                return View("Error");
+            }
+
+            user.Bio = model.Bio;
+            user.Firstname = model.Firstname;
+            user.Lastname = model.Lastname;
+            user.Phone = model.Phone;
+            user.Tags = model.Tags;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id = user.Id });
         }
 
         // GET: Users/Delete/5

@@ -1,4 +1,4 @@
-﻿@model Img_socialmedia.Models.UserViewModel
+﻿@model EditUserViewModel
 @using Microsoft.AspNetCore.Http
 @{
     ViewData["Title"] = "Edit Profile";
@@ -18,7 +18,7 @@
                 </div>
                 <!--<img src="~/images/man.png" alt="Daniel Adams">-->
                 <div class="author-card-details">
-                    <h5 class="author-card-name text-lg">@(Model.Firstname + " " + Model.Lastname)</h5><span>Joined at @Model.CreateAt.ToString()</span>
+                    <h5 class="author-card-name text-lg">@(Model.Firstname + " " + Model.Lastname)</h5><span>Joined at @Model.CreateAt.ToString("dd/MM/yyyy")</span>
                 </div>
 
             </div>
@@ -46,7 +46,6 @@
         <!-- Profile Settings-->
         <div class="col-lg-8 pb-5">
             <form class="row" asp-action="editprofile" method="post" id="form1">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="Firstname" for="account-fn">First Name</label>
@@ -76,14 +75,13 @@
                     <div class="form-group">
                         <label asp-for="Bio" for="account-phone">Bio</label>
                         <input asp-for="Bio" class="form-control" type="text" id="bio" value="@Model.Bio" name="Bio" style="height:100px;">
-                        <input asp-for="Password" type="password" name="Password" value="@Model.Password" style="display:none;" readonly="readonly" />
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Tags</label>
                         <input asp-for="Tags" class="form-control" type="text" name="Tags" value="@Model.Tags" />
-                        <input asp-for="CreateAt" name="CreateAt" type="datetime" value="@Model.CreateAt" readonly="readonly" style="display:none;" />
+                        <input value="@Model.CreateAt" asp-for="@Model.CreateAt" hidden/>
                     </div>
                 </div>
                 <div class="col-12">
@@ -94,10 +92,7 @@
                 </div>
 
             </form>
-            <span asp-validation-for="Email" class="text-danger"></span>
-            <span asp-validation-for="Phone" class="text-danger"></span>
-            <span asp-validation-for="Firstname" class="text-danger"></span>
-            <span asp-validation-for="Lastname" class="text-danger"></span>
+            <div asp-validation-summary="All"></div>
         </div>
     </div>
 </div>

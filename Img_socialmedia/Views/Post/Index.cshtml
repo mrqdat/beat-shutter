@@ -343,7 +343,7 @@
                 </div>
                 <div class="iPhotoVi iPa230x">
                     <span class="iPhoto-title">Focal length</span>
-                    @*<span>@((Model.Photo.FocalLength)!=0?Model.Photo.FocalLength + " mm":"--")</span>*@
+                    <span>@(string.IsNullOrEmpty(Model.Photo.FocalLength)?Model.Photo.FocalLength + " mm":"--")</span>
                 </div>
                 <div class="iPhotoVi iPa230x">
                     <span class="iPhoto-title">ISO</span>
@@ -589,19 +589,7 @@
                                 alert(respone.message)
                             }
                             else {
-                                $(''+'<li class="item-detail"><button class="btn addcol">'+
-                                    '<div class="item-name">'+
-                                        '<span>0photos</span>'+
-                                        '<h6>'+colname+'</h6>'+
-                                    '</div>'+
-                                    '<div class="addto" title="add to collection">'+
-                                        '<svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
-                                            '<path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />'+
-                                            '<path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />'+
-                                        '</svg>'+
-                                    '</div>'+
-                                        '</button >'+
-                                    '</li >').insertAfter('.collection-item');
+                                CreateNewListCollection(respone.message);
                                 $('.collection-list').show();
                                 $('.collection-create').hide();
                             }
@@ -657,7 +645,7 @@
                 "<a class='btn addcol' href='/Collection/AddtoCollection?collectionid="+item["id"]+"&postid="+@Model.Id+"'>" +
                     "<div class='item-name'>" +
                         "<span></span>" +
-                        "<h6>"+item["name"]+"</h6>" +
+                        "<h4>"+item["name"]+"</h4>" +
                     "</div>" +
                     "<div class='addto' title='add to collection'>" +
                         "<svg class='bi bi-plus' width='1em' height='1em' viewBox='2 4 12 12' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>" +

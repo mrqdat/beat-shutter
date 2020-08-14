@@ -8,7 +8,6 @@ namespace Img_socialmedia.Models
     {
         public PhotoViewModel()
         {
-            CollectionDetail = new HashSet<CollectionDetailViewModel>();
             Post = new HashSet<PostViewModel>();
         }
 
@@ -23,8 +22,6 @@ namespace Img_socialmedia.Models
         public string Location { get; set; }
         public DateTime CreateAt { get; set; }
         public string FocalLength { get; set; }
-
-        public virtual ICollection<CollectionDetailViewModel> CollectionDetail { get; set; }
         public virtual ICollection<PostViewModel> Post { get; set; }
     }
 }

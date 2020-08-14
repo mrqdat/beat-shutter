@@ -74,18 +74,12 @@ namespace Img_socialmedia.Models
 
                 entity.Property(e => e.CollectionId).HasColumnName("collection_id");
 
-                entity.Property(e => e.PhotoId).HasColumnName("photo_id");
+                entity.Property(e => e.PostId).HasColumnName("post_id");
 
                 entity.HasOne(d => d.Collection)
                     .WithMany(p => p.CollectionDetail)
                     .HasForeignKey(d => d.CollectionId)
                     .HasConstraintName("FK_collection_detail_collection");
-
-                entity.HasOne(d => d.Photo)
-                    .WithMany(p => p.CollectionDetail)
-                    .HasForeignKey(d => d.PhotoId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_collection_detail_photo");
 
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.CollectionDetails)

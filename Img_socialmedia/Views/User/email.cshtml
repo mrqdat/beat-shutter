@@ -12,14 +12,7 @@
             <!-- Account Sidebar-->
             <div class="author-card pb-3">
                 <div id="profile">
-                    @if (Model.ProfileImg.Length > 0)
-                    {
-                        <img id="profileimg3" width="200" height="200" src="@Url.Content(Model.ProfileImg)" asp-append-version="true" style="border-radius:100%">
-                    }
-                    else
-                    {
-                        <img id="profileimg3" width="200" height="200" src="~/images/man.png" asp-append-version="true" />
-                    }
+                    <img class="photo" src="@Url.Content(Model.ProfileImg??"/images/man.png")" asp-append-version="true" />
                 </div>
                 <!--<img src="~/images/man.png" alt="Daniel Adams">-->
                 <div class="author-card-details">
@@ -41,10 +34,6 @@
                         <i class="fe-icon-map-pin text-muted"></i>Change Password
                     </a>
 
-
-                    <a class="list-group-item" asp-controller="User" asp-action="close">
-                        <i class="fe-icon-map-pin text-muted"></i>Close account
-                    </a>
                 </nav>
             </div>
         </div>

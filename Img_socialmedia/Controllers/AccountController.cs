@@ -1,10 +1,13 @@
 ﻿using Img_socialmedia.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -94,22 +97,37 @@ namespace Img_socialmedia.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Signup(UserViewModel model)
+        public async Task<IActionResult> Signup(string firstname, string lastname, string email, string password, string confirmpassword)
         {
-            var result = _context.User.Where(m => m.Email.Equals(model.Email)).First();
-            if (result != null)
-            {
-                ViewBag.ErrorMessage = "Email have been used, please choose another";
-                return View(model);
+            if (string.IsNullOrEmpty(confirmpassword)){
+                ModelState.AddModelError("", "Confirm password invalid");
+                return View();
             }
-
+            if (!password.Equals(confirmpassword))
+            {
+                ModelState.AddModelError("", "Password and confirm password don't match");
+                return View();
+            }
+            if(password.Length < 8 || password.Length > 15)
+            {
+                ModelState.AddModelError("", "Password must have 8 - 15 char");
+                return View();
+            }
+            var model = new UserViewModel
+            {
+                Firstname=firstname,
+                Lastname=lastname,
+                Email=email,
+                Password=password,
+                CreateAt=DateTime.Now
+            };
             if (ModelState.IsValid)
             {
                 _context.Add(model);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Login", "Account");
             }
-            return View(model);
+            return View();
         }
 
         public IActionResult Logout()

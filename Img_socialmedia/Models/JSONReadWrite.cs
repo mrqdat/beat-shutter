@@ -76,11 +76,13 @@ namespace Img_socialmedia.Models
             location,
             fileName);
 
-            string jsonResult;
-
-            using (StreamReader streamReader = new StreamReader(path))
+            string jsonResult="";
+            if (File.Exists(path))
             {
-                jsonResult = streamReader.ReadToEnd();
+                using (StreamReader streamReader = new StreamReader(path))
+                {
+                    jsonResult = streamReader.ReadToEnd();
+                }
             }
             return jsonResult;
         }

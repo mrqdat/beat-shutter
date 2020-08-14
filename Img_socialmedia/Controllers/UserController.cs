@@ -42,6 +42,8 @@ namespace Img_socialmedia.Controllers
             var user = await _context.User
                 .Include(p=>p.Post)
                     .ThenInclude(photo=>photo.Photo)
+                .Include(p=>p.Collection)
+                    .ThenInclude(p=>p.CollectionDetail)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {

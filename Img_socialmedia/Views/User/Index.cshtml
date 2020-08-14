@@ -17,12 +17,12 @@
                     </div>
                     <div class="info_edit">
                         <h4 class="name">@(Model.Firstname+" "+Model.Lastname)</h4>
-                        <a class="info_link" asp-action="editprofile" asp-controller="User" alt="edit your profile">
+                        <a class="info_link" asp-action="editprofile" asp-controller="User" asp-route-id="@Model.Id" alt="edit your profile">
                             <i class="fa fa-edit"></i>
                         </a>
                     </div>
                     <div class="stats row" style="margin:0;">
-                        <div class="stat col-xs-4" style="padding-left: 50px;">
+                        <div class="stat col-xs-4" style="padding-left: 50px;margin-right:7px">
                             <p class="number-stat">@Model.Post.ToList().Count</p>
                             <p class="desc-stat">Uploads</p>
                         </div>
@@ -35,8 +35,8 @@
                     <p class="desc">@Model.Bio</p>
                     <div class="social">
                         @*<i class="fa fa-facebook-square" aria-hidden="true"></i>
-                            <i class="fa fa-twitter-square" aria-hidden="true"></i>*@
-
+                    <i class="fa fa-twitter-square" aria-hidden="true"></i>*@
+                        Join at @Model.CreateAt.ToString("dd/MM/yyyy")
                     </div>
                 </div>
             </div>
@@ -49,78 +49,55 @@
                 </ul>
 
                 <div class="tab-content">
-                    <div id="gallery" class="tab-pane" style="padding-top: 20px;">
+                    <div id="gallery" class="tab-pane" style="padding-top: 20px;display:block;">
                         <div class="row gallery  info_edit ">
                             @foreach (var item in Model.Post)
                             {
                                 <div class="col-md-4">
-                                    <img src="@item.Photo.Url" />
+                                    <a asp-route="PostDetail" asp-route-id="@item.Id">
+                                        <img src="@item.Photo.Url" asp-append-version="true" />
+                                    </a>
                                 </div>
                             }
                         </div>
                     </div>
-
                 </div>
 
                 <div class="tab-content">
                     <div id="collection" class="tab-pane" style="padding-top: 20px;">
                         <div class="row info_edit ">
                             <div class="col-row collection-card">
-                                <div class="column">
-                                    <div class="card">
-                                        <q>Collection name</q>
-
+                                @foreach (var item in Model.Collection)
+                                {
+                                    <div class="column">
+                                        <div class="card" onclick="GetCollectionDetail(@item.Id)">
+                                            <q>@item.Name</q>
+                                        </div>
+                                        <p>@item.CollectionDetail.Count photos</p>
                                     </div>
-                                    <p>3 photos</p>
-                                </div>
-
-                                <div class="column">
-                                    <div class=" card">
-                                        <q>Collection name</q>
-
-                                    </div>
-                                    <p>3 photos</p>
-                                </div>
-
-
-                                <div class="column">
-                                    <div class=" card">
-                                        <q>Collection name</q>
-
-                                    </div>
-                                    <p>3 photos</p>
-                                </div>
-
-                                <div class="column">
-                                    <div class=" card">
-                                        <q>Collection name</q>
-
-                                    </div>
-                                    <p>3 photos</p>
-                                </div>
-
-
-                                <div class="column">
-                                    <div class=" card">
-                                        <q>Collection name</q>
-
-                                    </div>
-                                    <p>3 photos</p>
-                                </div>
-
+                                }
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="tab-content">
+                    <div id="collection-detail" class="tab-pane" style="padding-top: 20px;">
+                        <div class="row gallery info_edit grid-collection">
 
+                        </div>
+                    </div>
                 </div>
             </div>
+
+           
+
             @*<span class="follow">Follow</span>*@
             @*<ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#galery">Photos</a></li>
+            <li class="active"><a data-toggle="tab" href="#galery">Photos</a></li>
 
-                    <li><a data-toggle="tab" href="#collection">Collections </a></li>
+            <li><a data-toggle="tab" href="#collection">Collections </a></li>
 
-                </ul>*@
+        </ul>*@
 
 
         </div>
@@ -132,11 +109,45 @@
             $("#gal").click(function () {
                 $('#gallery').show();
                 $('#collection').hide();
+                $("#collection-detail").hide()
             });
             $("#col").click(function () {
                 $('#collection').show();
                 $('#gallery').hide();
+                $("#collection-detail").hide()
             });
         });
+        function GetCollectionDetail(ide) {
+              $.ajax(
+                {
+                    type: "GET",
+                    url: "@Url.Action("GetCollectionDetail","Collection")",
+                      data: { id: ide },
+                      dataType:"json",
+                      success: function (response) {
+                        console.log(response);
+                          if (response != null) {
+                            $(".grid-collection").empty();
+                              response.forEach(function (item, index) {
+                                CreateNewListCollection(item);
+                            });
+                            $("#collection-detail").show();
+                            $('#collection').hide();
+                            $('#gallery').hide();
+                        }
+                    },
+                    error: function (error) {
+                         console.log(error);
+                    }
+                 });
+        }
+        function CreateNewListCollection(item) {
+            $(".grid-collection").append(
+               "<div class='col-md-4'>" +
+                    "<a href='/post/" + item["postId"]+"'>" +
+                        "<img src='" + item["postPhoto"]+"'/>"+
+                    "</a>"+
+                "</div>");
+        }
     </script>
 }

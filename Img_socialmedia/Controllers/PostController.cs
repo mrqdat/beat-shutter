@@ -95,9 +95,9 @@ namespace Img_socialmedia.Controllers
                     }
                 }
             }
-                result.TotalViews =+ 1;
+            result.TotalViews += 1;
             shutterContext.Post.Update(result);
-            shutterContext.SaveChangesAsync();
+            shutterContext.SaveChanges();
             result.Liked = liked;
             return View("Index", result);
         }

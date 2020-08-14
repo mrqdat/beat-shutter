@@ -24,15 +24,13 @@
                         <div class="float-right">
                             @if (Model.Liked)
                             {
-                                <a class="btn btn-danger btn-hw pos-button modal-btns" style="color:white;" title="like this photo" @*onclick="LikedPost(this,@Model.Id)"*@ onclick="ChangeLike(this,@Model.Id)">
-                                    @*The <a> + xu ly like*@
+                                <a class="btn btn-danger btn-hw pos-button modal-btns" style="color:white;" title="like this photo" onclick="ChangeLike(this,@Model.Id)">
                                     <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
                                 </a>
                             }
                             else
                             {
-                                <a class="btn btn-light btn-hw pos-button modal-btns" title="like this photo" @*onclick="LikedPost(this,@Model.Id)"*@ onclick="ChangeLike(this,@Model.Id)">
-                                    @*The <a> + xu ly like*@
+                                <a class="btn btn-light btn-hw pos-button modal-btns" title="like this photo" onclick="ChangeLike(this,@Model.Id)">
                                     <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
                                 </a>
                             }

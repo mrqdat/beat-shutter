@@ -82,22 +82,21 @@ namespace Img_socialmedia.Controllers
                 return View("Error");
             }
             bool liked = false;
-            //if (HttpContext.Session.GetInt32("userid").HasValue)
-            //{
-            //    string filename = HttpContext.Session.GetInt32("userid").ToString() + ".json";
-            //    JSONReadWrite j = new JSONReadWrite();
-            //    JArray jsonArray = JArray.Parse("[" + j.Read(filename,"json") + "]");
-            //    var a = JObject.Parse(jsonArray[0].ToString());
-            //    foreach(var a in jsonArray)
-            //    {  ,
-            //        if (Convert.ToInt32(a["id"][i]).Equals(id))
-            //        {
-            //            liked = true;
-            //        }
-            //    }
-                
-            //}
-            result.TotalViews += 1;
+            if (HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                string filename = HttpContext.Session.GetInt32("userid").ToString() + ".json";
+                JSONReadWrite j = new JSONReadWrite();
+                JArray jsonArray = JArray.Parse("[" + j.Read(filename, "json") + "]");
+                foreach (var a in jsonArray)
+                {  
+                    if (Convert.ToInt32(a["id"]).Equals(id))
+                    {
+                        liked = true;
+                    }
+                }
+
+              }
+                result.TotalViews =+ 1;
             shutterContext.Post.Update(result);
             shutterContext.SaveChangesAsync();
             result.Liked = liked;
@@ -109,22 +108,6 @@ namespace Img_socialmedia.Controllers
             var result = shutterContext.Post.Find(id);
             return 1;
         }
-
-        //public IEnumerable<LikeViewModel> dd()  
-        //{
-        //    List<LikeViewModel> people = new List<LikeViewModel>();
-        //    JSONReadWrite readWrite = new JSONReadWrite();
-        //    people = JsonConvert.DeserializeObject<List<LikeViewModel>>(readWrite.Read("like.json"));
-        //    LikeViewModel person = new LikeViewModel { Id = 1, PostId = 10009 };
-        //    if (person == null)
-        //    {
-        //        people.Add(person);
-        //    }
-        //    string jSONString = JsonConvert.SerializeObject(people);
-        //   // readWrite.Write("like.json", jSONString);
-        //    return people;
-        //}
-
         public object aa(int id)
         {
             string filename = "1001.json";

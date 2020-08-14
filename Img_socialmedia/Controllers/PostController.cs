@@ -94,8 +94,7 @@ namespace Img_socialmedia.Controllers
                         liked = true;
                     }
                 }
-
-              }
+            }
                 result.TotalViews =+ 1;
             shutterContext.Post.Update(result);
             shutterContext.SaveChangesAsync();
@@ -210,7 +209,6 @@ namespace Img_socialmedia.Controllers
             var url = Url.Action("Index", "Post", new { id = id});
             return Redirect(url);
         }
-
         public IActionResult Search(string tags)
         {
             {

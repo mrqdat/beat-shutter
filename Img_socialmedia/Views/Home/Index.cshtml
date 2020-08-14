@@ -44,7 +44,7 @@
     </div>
 </div>
 
-<div id="grid-layout">
+<div class="grid-layout">
     <div class="grid-photos">
         <div id="col1">
             @foreach (var related in Model)
@@ -63,9 +63,18 @@
                                     <div class="img-hover-background i-animation"></div>
                                     <div class="img-button-top img-button-display i-animation">
                                         <div class="img-button">
-                                            <button class="btn btn-light pos-button">
-                                                <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span> @*Like*@
-                                            </button>
+                                            @if (related.Liked)
+                                            {
+                                                <a class="btn btn-danger btn-hw pos-button modal-btns" style="color:white;" title="like this photo" onclick="ChangeLike(this,@related.Id)">
+                                                    <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-light btn-hw pos-button modal-btns" title="like this photo" onclick="ChangeLike(this,@related.Id)">
+                                                    <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+                                                </a>
+                                            }
                                             <button class="btn btn-light">
                                                 <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
@@ -119,9 +128,18 @@
                                     <div class="img-hover-background i-animation"></div>
                                     <div class="img-button-top img-button-display i-animation">
                                         <div class="img-button">
-                                            <button class="btn btn-light pos-button">
-                                                <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span> @*Like*@
-                                            </button>
+                                            @if (related.Liked)
+                                            {
+                                                <a class="btn btn-danger btn-hw pos-button modal-btns" style="color:white;" title="like this photo" onclick="ChangeLike(this,@related.Id)">
+                                                    <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-light btn-hw pos-button modal-btns" title="like this photo" onclick="ChangeLike(this,@related.Id)">
+                                                    <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+                                                </a>
+                                            }
                                             <button class="btn btn-light">
                                                 <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
@@ -175,9 +193,18 @@
                                     <div class="img-hover-background i-animation"></div>
                                     <div class="img-button-top img-button-display i-animation">
                                         <div class="img-button">
-                                            <button class="btn btn-light pos-button">
-                                                <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span> @*Like*@
-                                            </button>
+                                            @if (related.Liked)
+                                            {
+                                                <a class="btn btn-danger btn-hw pos-button modal-btns" style="color:white;" title="like this photo" onclick="ChangeLike(this,@related.Id)">
+                                                    <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-light btn-hw pos-button modal-btns" title="like this photo" onclick="ChangeLike(this,@related.Id)">
+                                                    <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+                                                </a>
+                                            }
                                             <button class="btn btn-light">
                                                 <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
@@ -450,7 +477,7 @@
     function ChangeLike(e,ide) {
         $.ajax({
         type: "POST",
-        url: "@Url.Action("Like")",
+        url: "@Url.Action("Like","Post")",
         data: {id:ide},
         success: function (msg) {
             if (msg["status"]) {

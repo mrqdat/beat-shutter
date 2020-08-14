@@ -82,7 +82,7 @@
 /*Table*/
 @media (min-width: 768px) and (max-width:1023.98px) {
     .grid-photos {
-        /*display: grid;*/
+        display: grid;
         grid-template-columns: auto auto auto;
         grid-gap: 10px;
     }
@@ -125,7 +125,7 @@
 
 @media(min-width:1024px) {
     .grid-photos {
-        /*display: grid;*/
+        display: grid;
         grid-template-columns: auto auto auto;
         grid-gap: 20px;
     }
@@ -178,9 +178,10 @@
 }
 
 .grid-layout {
+    display: grid;
     margin-top: 32px;
     margin-right: 22px;
-    margin-left: 22px;
+    margin-left: 22px
 }
 
 

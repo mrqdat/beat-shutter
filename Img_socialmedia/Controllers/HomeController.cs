@@ -58,10 +58,10 @@ namespace Img_socialmedia.Controllers
                           }).Take(15).ToList();
             if (HttpContext.Session.GetInt32("userid").HasValue)
             {
-                string filename = HttpContext.Session.GetInt32("userid").ToString() + ".json";
-                if (System.IO.File.Exists(filename))
-                {                 
+                string filename = HttpContext.Session.GetInt32("userid").ToString() + ".json";         
                     JSONReadWrite j = new JSONReadWrite();
+                try
+                {
                     JArray jsonArray = JArray.Parse("[" + j.Read(filename, "json") + "]");
                     foreach (var b in jsonArray)
                     {
@@ -75,8 +75,10 @@ namespace Img_socialmedia.Controllers
                         }
                     }
                 }
-                else { }
-
+                catch
+                {
+                    return View(result);
+                }
             }
             return View(result);
         }

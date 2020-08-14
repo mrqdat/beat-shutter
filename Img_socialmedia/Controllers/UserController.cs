@@ -133,6 +133,7 @@ namespace Img_socialmedia.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 _context.Add(userViewModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

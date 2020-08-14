@@ -140,10 +140,16 @@ namespace Img_socialmedia.Controllers
             JSONReadWrite j = new JSONReadWrite();
             int a= j.IsFileExist(filename, jsonStr);
             if (a == 0) {
+                var total = shutterContext.Post.Find(id);
+                total.TotalLike = total.TotalLike + 1;
+                shutterContext.SaveChanges();
                 return Json(new { status = true }) ;
             }
             else
             {
+                var total = shutterContext.Post.Find(id);
+                total.TotalLike = total.TotalLike - 1;
+                shutterContext.SaveChanges();
                 return Json(new { status = false });
             }
         }
@@ -204,5 +210,76 @@ namespace Img_socialmedia.Controllers
             var url = Url.Action("Index", "Post", new { id = id});
             return Redirect(url);
         }
+
+        public IActionResult Search(string tags)
+        {
+            {
+                if (string.IsNullOrEmpty(tags)) if (HttpContext.Session.GetInt32("userid").HasValue)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                var result = (from photo in shutterContext.Photo
+                              join post in shutterContext.Post on photo.Id equals post.PhotoId
+                              join user in shutterContext.User on post.UserId equals user.Id
+                              where post.Tags.Contains(tags)
+                              select new PostViewModel
+                              {
+                                  Id = post.Id,
+                                  PhotoId = photo.Id,
+                                  TotalLike = post.TotalLike,
+                                  TotalViews = post.TotalViews,
+                                  CreateAt = post.CreateAt,
+                                  Tags = post.Tags,
+                                  UserId = user.Id,
+                                  User = user,
+                                  Photo = photo,
+                              }).Take(15).ToList();
+                if (result == null)
+                {
+                    var result2 = (from photo in shutterContext.Photo
+                                   join post in shutterContext.Post on photo.Id equals post.PhotoId
+                                   join user in shutterContext.User on post.UserId equals user.Id
+                                   orderby Guid.NewGuid()
+                                   select new PostViewModel
+                                   {
+                                       Id = post.Id,
+                                       PhotoId = photo.Id,
+                                       TotalLike = post.TotalLike,
+                                       TotalViews = post.TotalViews,
+                                       CreateAt = post.CreateAt,
+                                       Tags = post.Tags,
+                                       UserId = user.Id,
+                                       User = user,
+                                       Photo = photo,
+                                   }).Take(15).ToList();
+                    return View(result2);
+                }
+                else if (result.Count < 15)
+                {
+                    {
+                        var result3 = (from photo in shutterContext.Photo
+                                       join post in shutterContext.Post on photo.Id equals post.PhotoId
+                                       join user in shutterContext.User on post.UserId equals user.Id
+                                       orderby Guid.NewGuid()
+                                       select new PostViewModel
+                                       {
+                                           Id = post.Id,
+                                           PhotoId = photo.Id,
+                                           TotalLike = post.TotalLike,
+                                           TotalViews = post.TotalViews,
+                                           CreateAt = post.CreateAt,
+                                           Tags = post.Tags,
+                                           UserId = user.Id,
+                                           User = user,
+                                           Photo = photo,
+                                       }).Take(15 - result.Count).ToList();
+                        result.AddRange(result3);
+                    }
+                }
+                return View(result);
+            }
+        }
+
+
     }
 }

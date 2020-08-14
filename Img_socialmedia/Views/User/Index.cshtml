@@ -12,7 +12,7 @@
             <div class="left col-lg-4" style="position: relative;">
                 <div class="profile">
                     <div class="photo-left">
-                        <img class="photo" src="~/images/man.png" asp-append-version="true" />
+                        <img class="photo" src="@Url.Content(Model.ProfileImg??"/images/man.png")" asp-append-version="true" />
 
                     </div>
                     <div class="info_edit">
@@ -23,11 +23,11 @@
                     </div>
                     <div class="stats row" style="margin:0;">
                         <div class="stat col-xs-4" style="padding-left: 50px;">
-                            <p class="number-stat">38</p>
+                            <p class="number-stat">@Model.Post.ToList().Count</p>
                             <p class="desc-stat">Uploads</p>
                         </div>
                         <div class="stat col-xs-4" style="padding-right: 50px;">
-                            <p class="number-stat">1</p>
+                            <p class="number-stat">@Model.Collection.ToList().Count</p>
                             <p class="desc-stat">Colection</p>
                         </div>
                     </div>

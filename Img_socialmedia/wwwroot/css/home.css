@@ -621,8 +621,44 @@
     width: 100%;
     padding: 10px;
 }
-/*======                        ================end collection modal*/
 
+.column {
+    max-width:250px;
+     
+    float: left;
+    padding:10px;
+    cursor: pointer;
+}
+
+ 
+
+    .col-row:after {        
+        display: table;
+        clear: both;
+    }
+
+
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+}
+/*======                        ================end collection modal*/
+.profile{
+    max-height: 350px;
+    margin-top:20px;
+    top:0px;
+    position: absolute;
+
+}
 
 
 

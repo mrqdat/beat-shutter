@@ -23,6 +23,17 @@ namespace Img_socialmedia.Controllers
         //    return View();
         //}
 
+        [HttpGet]
+        public IActionResult GetCollection()
+        {
+            if (HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                var userid = HttpContext.Session.GetInt32("userid").Value;
+                var model = _context.Collection.Where(d => d.UserId == userid).ToList();
+                return Json(model);
+            }
+            return Json(new { status=false});
+        }
 
         [HttpPost]
         public IActionResult createCollection(string colname, string coldes)
@@ -67,14 +78,46 @@ namespace Img_socialmedia.Controllers
             });            
         }
 
-       
-        [HttpGet]
-        public ActionResult addtoCollection()
-        {
-            var userid = HttpContext.Session.GetInt32("userid");
-            CollectionDetailViewModel detailViewModel = new CollectionDetailViewModel();
 
-            return View();
+        [HttpGet]
+        public ActionResult AddtoCollection(int collectionid, int postid)
+        {
+            try
+            {
+                if (!(collectionid > 0) || !(postid > 0))
+                {
+                    return View("Error");
+                }
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            var collection = _context.Collection.Find(collectionid);
+            var post = _context.Post.Where(p => p.hasban == false)
+                                    .Where(p => p.Id == postid)
+                                    .First();
+
+            if(post==null || collection ==null)
+            {
+                return View("Error");
+            }
+
+            if (HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                CollectionDetailViewModel model = new CollectionDetailViewModel
+                {
+                    PhotoId=postid,
+                    CollectionId=collectionid,
+                };
+                _context.Add(model);
+                _context.SaveChanges();
+                var url = Url.Action("Index", "Post", new { id = postid });
+                return Redirect(url);
+            }
+
+            return View("Error");
         }        
         
     }

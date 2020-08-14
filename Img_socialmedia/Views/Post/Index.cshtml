@@ -34,7 +34,7 @@
                                     <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
                                 </a>
                             }
-                            <button class="btn btn-light btn-hw pos-button modal-btns" data-target="#collection_modal" data-toggle="modal" title="add to collection">
+                            <button class="btn btn-light btn-hw pos-button modal-btns" data-target="#collection_modal" data-toggle="modal" title="add to collection" onclick="GetCollection()">
                                 <svg class="bi bi-plus" width="1em" height="1em" margin-bottom: 2px; viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"></path>
                                     <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"></path>
@@ -377,7 +377,6 @@
                                     <h6>Create a new collection</h6>
                                 </button>
                                 <ul class="collection-item">
-
                                     <li class="item-detail">
                                         <button class="btn addcol" >
                                             <div class="item-name">
@@ -392,7 +391,6 @@
                                             </div>
                                         </button>
                                     </li>
-
                                 </ul>
                             </div>
                         </div>
@@ -634,7 +632,42 @@
                         }
                  });
             }
+         function GetCollection() {
+                $.ajax(
+                {
+                    type: "GET",
+                    url: "@Url.Action("GetCollection","Collection")",
+                    success: function (respone) {
+                        if (respone != null) {
+                            $(".collection-item").empty();
+                            respone.forEach(function (item, index) {
+                                CreateNewListCollection(item);
+                            });
+                        }
+                    },
+                    error: function (error) {
+                         console.log(error);
+                    }
+                 });
+         }
 
-
+        function CreateNewListCollection(item) {
+            $(".collection-item").append(
+                "<li class= 'item-detail'>" +
+                "<a class='btn addcol' href='/Collection/AddtoCollection?collectionid="+item["id"]+"&postid="+@Model.Id+"'>" +
+                    "<div class='item-name'>" +
+                        "<span></span>" +
+                        "<h6>"+item["name"]+"</h6>" +
+                    "</div>" +
+                    "<div class='addto' title='add to collection'>" +
+                        "<svg class='bi bi-plus' width='1em' height='1em' viewBox='2 4 12 12' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>" +
+                            "<path fill-rule='evenodd' d='M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z' />" +
+                            "<path fill-rule='evenodd' d='M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z' />" +
+                        "</svg>" +
+                    "</div>" +
+                "</a>" +
+                "</li >"
+            );
+        }
     </script>
 }

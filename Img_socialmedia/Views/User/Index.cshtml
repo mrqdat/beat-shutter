@@ -11,7 +11,7 @@
         <div class="row">
             <div class="left col-lg-4">
                 <div class="photo-left">
-                    <img class="photo" src="~/images/man.png" asp-append-version="true" />
+                    <img class="photo" src="@Url.Content(Model.ProfileImg??"/images/man.png")" asp-append-version="true" />
 
                 </div>
                 <div class="info_edit">
@@ -37,7 +37,7 @@
 
                 </div>
             </div>
-            <div class="container">
+            
                 <div class="right col-lg-8">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#galery">Photos</a></li>
@@ -54,19 +54,10 @@
                                         <img src="@item.Photo.Url" />
                                     </div>
                                 }
-                                asdasd
+                                 
                             </div>
                         </div>
-                        <div id="collection" class="tab-pane fade">
-                            <div class="row gallery info_edit ">
-                                @foreach (var item in Model.Collection)
-                                {
-                                    
-                                }
-
-                            </div>
-                        </div>
-
+                       
                     </div>
                 </div>
                 @*<span class="follow">Follow</span>*@
@@ -76,20 +67,8 @@
                     <li><a data-toggle="tab" href="#collection">Collections </a></li>
 
                 </ul>*@
-                @*<div class="tab-content">
-                    
-                    <div id="collection" class="row gallery info_edit tab-pane fade in active">
-                        @foreach (var item in Model.Post)
-                        {
-                            <div class="col-md-4">
-                                <img src="@item.Photo.Url" />
-                            </div>
-                        }
-
-                    </div>
-
-                </div>*@
-            </div>
+                
+             
         </div>
     </main>
 </div>

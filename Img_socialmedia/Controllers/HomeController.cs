@@ -43,6 +43,7 @@ namespace Img_socialmedia.Controllers
             var result = (from photo in shutterContext.Photo
                           join post in shutterContext.Post on photo.Id equals post.PhotoId
                           join user in shutterContext.User on post.UserId equals user.Id
+                          orderby post.Id descending
                           select new PostViewModel
                           {
                               Id = post.Id,
@@ -58,19 +59,24 @@ namespace Img_socialmedia.Controllers
             if (HttpContext.Session.GetInt32("userid").HasValue)
             {
                 string filename = HttpContext.Session.GetInt32("userid").ToString() + ".json";
-                JSONReadWrite j = new JSONReadWrite();
-                JArray jsonArray = JArray.Parse("[" + j.Read(filename, "json") + "]");
-                foreach (var b in jsonArray)
-                {
-                    foreach(var p in result)
+                if (System.IO.File.Exists(filename))
+                {                 
+                    JSONReadWrite j = new JSONReadWrite();
+                    JArray jsonArray = JArray.Parse("[" + j.Read(filename, "json") + "]");
+                    foreach (var b in jsonArray)
                     {
-                        if (Convert.ToInt32(b["id"]).Equals(p.Id))
+                        foreach(var p in result)
                         {
-                            p.Liked = true;
-                            break;
+                            if (Convert.ToInt32(b["id"]).Equals(p.Id))
+                            {
+                                p.Liked = true;
+                                break;
+                            }
                         }
                     }
                 }
+                else { }
+
             }
             return View(result);
         }
@@ -99,6 +105,7 @@ namespace Img_socialmedia.Controllers
             var result = from photo in shutterContext.Photo
                          join post in shutterContext.Post on photo.Id equals post.PhotoId
                          join user in shutterContext.User on post.UserId equals user.Id
+                         orderby post.Id descending
                          select new PostViewModel
                          {
                              Id = post.Id,
@@ -127,6 +134,7 @@ namespace Img_socialmedia.Controllers
             var result = (from photo in shutterContext.Photo
                          join post in shutterContext.Post on photo.Id equals post.PhotoId
                          join user in shutterContext.User on post.UserId equals user.Id
+                         orderby post.Id descending
                          select new PostViewModel
                          {
                              Id = post.Id,
@@ -156,6 +164,7 @@ namespace Img_socialmedia.Controllers
                          join post in shutterContext.Post on photo.Id equals post.PhotoId
                          join user in shutterContext.User on post.UserId equals user.Id
                          where post.Id == id
+                         orderby post.Id descending
                          select new PostViewModel
                          {
                              Id = post.Id,

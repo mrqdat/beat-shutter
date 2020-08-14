@@ -10,16 +10,20 @@ using Img_socialmedia.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.Extensions.FileProviders;
 
 namespace Img_socialmedia.Controllers
 {
     public class UserController : Controller
     {
         private readonly db_shutterContext _context;
-     
-        public UserController(db_shutterContext context)
+        private IWebHostEnvironment environment;
+        public UserController(db_shutterContext context, IWebHostEnvironment environment)
         {
             this._context = context;
+            this.environment = environment;
         }
 
         public IActionResult Index()
@@ -207,6 +211,30 @@ namespace Img_socialmedia.Controllers
             if (!user.Email.Equals(model.Email))
             {
                 return View("Error");
+            };
+            if (HttpContext.Request.Form.Files.Count > 0)
+            {
+                var files = HttpContext.Request.Form.Files;
+                foreach (var file in files)
+                {
+                    var extensions = Path.GetExtension(file.FileName);
+                    if (extensions.Contains(".jpg") || extensions.Contains(".png"))
+                    {
+                        var filename = Path.GetFileName(file.FileName);
+                        var myUniqueFileName = Guid.NewGuid() + "_" + HttpContext.Session.GetInt32("userid");
+                        var fileExtension = Path.GetExtension(filename);
+                        var newFileName = String.Concat(myUniqueFileName, fileExtension);
+                        var filePath = new PhysicalFileProvider(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "images")).Root + $@"\{ newFileName}";
+                        // full path to file in temp location
+                        //var filePath = Path.GetTempFileName(); //we are using Temp file name just for the example. Add your own file path.
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+                        user.ProfileImg = "\\images\\" + newFileName;
+                    }
+                }
+
             }
 
             user.Bio = model.Bio;

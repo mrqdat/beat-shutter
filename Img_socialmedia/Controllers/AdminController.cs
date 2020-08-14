@@ -20,6 +20,7 @@ namespace Img_socialmedia.Controllers
             var user = _context.User.ToList();
             return View(user); 
         }
+
         public IActionResult report()
         {
             

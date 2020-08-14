@@ -23,6 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\images\fd09be5c-43c9-426f-bacb-d00fcd261003_1000000.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\css\assets-admin\demo\chart-area-demo.js" />
     <None Include="wwwroot\css\assets-admin\demo\chart-bar-demo.js" />
     <None Include="wwwroot\css\assets-admin\demo\chart-pie-demo.js" />

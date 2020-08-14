@@ -12,9 +12,16 @@
             <!-- Account Sidebar-->
             <div class="author-card pb-3">
                 <div id="profile">
-                    <div class="dashes"></div>
-                    <label id="lb_img">Click to browse or drag an image here</label>
-                    <input type="file" id="mediaFile" accept="image/*" value="" onchange="" />
+                    @if (Model.ProfileImg.Length > 0)
+                    {
+                        <img onclick="ClickImg()" id="profileimg3" width="200" height="200" src="@Url.Content(Model.ProfileImg)" asp-append-version="true" style="border-radius:100%">
+                        <input type="file" id="mediaFile" accept="image/*" form="form1" name="profileimg" />
+                    }
+                    else
+                    {
+                        <label id="lb_img" for="mediaFile">Click to browse or drag an image here</label>
+                        <input type="file" id="mediaFile" accept="image/*" form="form1" name="profileimg" />
+                    }
                 </div>
                 <!--<img src="~/images/man.png" alt="Daniel Adams">-->
                 <div class="author-card-details">
@@ -45,7 +52,7 @@
         </div>
         <!-- Profile Settings-->
         <div class="col-lg-8 pb-5">
-            <form class="row" asp-action="editprofile" method="post" id="form1">
+            <form class="row" asp-action="editprofile" method="post" id="form1" enctype="multipart/form-data">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="Firstname" for="account-fn">First Name</label>
@@ -125,10 +132,8 @@
 
 
 </footer>
-
-@section Scripts{
-    <script type="text/javascript">
-        $(function () {
+    <script>
+        $(document).ready(function () {
             $('#profile').addClass('dragging').removeClass('dragging');
         });
 
@@ -160,20 +165,23 @@
         });
 
 
-
-        $('#profile').click(function () {
+        function ClickImg() {
             $('#mediaFile').click();
-        });
+        }
 
-        window.addEventListener("dragover", function (e) {
-            e = e || event;
-            e.preventDefault();
-        }, false);
+        //$('#profile').click(function () {
+        //    $('#mediaFile').click();
+        //});
 
-        window.addEventListener("drop", function (e) {
-            e = e || event;
-            e.preventDefault();
-        }, false);
+        //window.addEventListener("dragover", function (e) {
+        //    e = e || event;
+        //    e.preventDefault();
+        //}, false);
+
+        //window.addEventListener("drop", function (e) {
+        //    e = e || event;
+        //    e.preventDefault();
+        //}, false);
 
 
 
@@ -195,4 +203,4 @@
             //    }
             //}
     </script>
-}
+        

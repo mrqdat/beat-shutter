@@ -10,16 +10,20 @@ using Img_socialmedia.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.Extensions.FileProviders;
 
 namespace Img_socialmedia.Controllers
 {
     public class UserController : Controller
     {
         private readonly db_shutterContext _context;
-     
-        public UserController(db_shutterContext context)
+        private IWebHostEnvironment environment;
+        public UserController(db_shutterContext context, IWebHostEnvironment environment)
         {
             this._context = context;
+            this.environment = environment;
         }
 
         public IActionResult Index()
@@ -32,7 +36,7 @@ namespace Img_socialmedia.Controllers
         {
             if (id.ToString() == null)
             {
-                return NotFound();
+                return View("Error");;
             }
 
             var user = await _context.User
@@ -41,26 +45,80 @@ namespace Img_socialmedia.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
-                return NotFound();
+                return View("Error");;
             }
 
             return View("Index", user);
         }
        
-
+        [HttpGet]
         public IActionResult password()
         {
-            return View();
+            if (!HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                return View("Error");
+            }
+            var user = _context.User.Find(HttpContext.Session.GetInt32("userid").Value);
+            return View(user);
+        }
+
+        [HttpPost]
+        public IActionResult password(string Password, string NewPassword, string ConfirmPassword)
+        {
+            if (!HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                return View("Error");
+            }
+
+            var user = _context.User.Find(HttpContext.Session.GetInt32("userid").Value);
+
+            if (string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(NewPassword) || string.IsNullOrEmpty(ConfirmPassword))
+            {
+                ModelState.AddModelError("", "Password, new password, confirm password must not null or empty");
+                return View(user);
+            }
+
+            if (!user.Password.Equals(Password))
+            {
+                ModelState.AddModelError("", "Password invalid");
+                return View(user);
+            }
+
+            if(NewPassword.Length<8 || NewPassword.Length > 15)
+            {
+                ModelState.AddModelError("", "New password must have 8 - 15 char");
+                return View(user);
+            }
+
+            if (NewPassword.Equals(ConfirmPassword))
+            {
+                user.Password = NewPassword;
+                _context.SaveChanges();
+                return View("editprofile",user);
+            }
+
+            ModelState.AddModelError("", "New password & confirm password don't match");
+            return View(user);
         }
 
         public IActionResult email()
         {
-            return View();
+            if (!HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                return View("Error");
+            }
+            var user = _context.User.Find(HttpContext.Session.GetInt32("userid").Value);
+            return View(user);
         }
 
         public IActionResult close()
         {
-            return View();
+            if (!HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                return View("Error");
+            }
+            var user = _context.User.Find(HttpContext.Session.GetInt32("userid").Value);
+            return View(user);
         }
 
         // GET: Users/Create
@@ -69,9 +127,6 @@ namespace Img_socialmedia.Controllers
             return View();
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,username,password,PasswordConfirm,email,name,first_name,last_name,phone,create_at")] UserViewModel userViewModel)
@@ -85,7 +140,7 @@ namespace Img_socialmedia.Controllers
             return View(userViewModel);
         }
 
-       
+        [HttpGet]
         public async Task<IActionResult> editprofile(int id)
         {
             int sessionID;
@@ -95,7 +150,7 @@ namespace Img_socialmedia.Controllers
             }
             catch
             {
-                return NotFound();
+                return View("Error");
             }
             if (!String.IsNullOrEmpty(sessionID.ToString()))
             {
@@ -103,22 +158,31 @@ namespace Img_socialmedia.Controllers
                 {
                     if (id.ToString() == null)
                     {
-                        return NotFound();
+                        return View("Error");
                     }
 
                     var user = await _context.User
-                        .Include(p => p.Post)
-                            .ThenInclude(photo => photo.Photo)
                         .FirstOrDefaultAsync(m => m.Id == id);
+                    var model = new EditUserViewModel
+                    {
+                        ProfileImg = user.ProfileImg,
+                        Firstname=user.Firstname,
+                        Lastname=user.Lastname,
+                        Bio=user.Bio,
+                        Email=user.Email,
+                        Phone=user.Phone,
+                        Tags=user.Tags,
+                        CreateAt=user.CreateAt
+                    };
                     if (user == null)
                     {
-                        return NotFound();
+                        return View("Error");;
                     }
-                    return View("editprofile", user);
+                    return View("editprofile", model);
                 }
                 else
                 {
-                    return NotFound();
+                    return View("Error");;
                 }
             }
             else
@@ -132,45 +196,56 @@ namespace Img_socialmedia.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> editprofile(int id, [Bind("Id,Firstname,Lastname,Email,Password,Phone,Bio")] UserViewModel userViewModel)
+        public async Task<IActionResult> editprofile(EditUserViewModel model)
         {
-            int sessionID = (int)HttpContext.Session.GetInt32("userid");
-            if (sessionID == id)
+            int userId;
+            try
             {
-               
-                if (id != userViewModel.Id)
+                userId = HttpContext.Session.GetInt32("userid").Value;
+            }
+            catch
+            {
+                return View("Error");
+            }
+            var user = _context.User.Find(userId);
+            if (!user.Email.Equals(model.Email))
+            {
+                return View("Error");
+            };
+            if (HttpContext.Request.Form.Files.Count > 0)
+            {
+                var files = HttpContext.Request.Form.Files;
+                foreach (var file in files)
                 {
-                    //return Ok(userViewModel.Id + " " + id + " " + userViewModel.Firstname + " " + userViewModel.Bio + " " + userViewModel.Lastname + " " + userViewModel.Phone);
-                    return NotFound();
-                }
-               // var errors = ModelState.Values.SelectMany(v => v.Errors);
-               // return Ok(errors);            
-                if (ModelState.IsValid)
-                {                  
-                    try
+                    var extensions = Path.GetExtension(file.FileName);
+                    if (extensions.Contains(".jpg") || extensions.Contains(".png"))
                     {
-                        
-                        _context.Update(userViewModel);
-                        await _context.SaveChangesAsync();
-                    }
-                    catch (DbUpdateConcurrencyException)
-                    {
-                        if (!UserExists(userViewModel.Id))
+                        var filename = Path.GetFileName(file.FileName);
+                        var myUniqueFileName = Guid.NewGuid() + "_" + HttpContext.Session.GetInt32("userid");
+                        var fileExtension = Path.GetExtension(filename);
+                        var newFileName = String.Concat(myUniqueFileName, fileExtension);
+                        var filePath = new PhysicalFileProvider(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "images")).Root + $@"\{ newFileName}";
+                        // full path to file in temp location
+                        //var filePath = Path.GetTempFileName(); //we are using Temp file name just for the example. Add your own file path.
+                        using (var stream = new FileStream(filePath, FileMode.Create))
                         {
-                            return NotFound();
+                            await file.CopyToAsync(stream);
                         }
-                        else
-                        {
-                            throw;
-                        }
+                        user.ProfileImg = "\\images\\" + newFileName;
                     }
                 }
+
             }
-            else
-            {
-                //
-            }
-            return View(userViewModel);
+
+            user.Bio = model.Bio;
+            user.Firstname = model.Firstname;
+            user.Lastname = model.Lastname;
+            user.Phone = model.Phone;
+            user.Tags = model.Tags;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id = user.Id });
         }
 
         // GET: Users/Delete/5
@@ -178,14 +253,14 @@ namespace Img_socialmedia.Controllers
         {
             if (id.ToString() == null)
             {
-                return NotFound();
+                return View("Error");;
             }
 
             var userViewModel = await _context.User
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (userViewModel == null)
             {
-                return NotFound();
+                return View("Error");;
             }
 
             return View(userViewModel);

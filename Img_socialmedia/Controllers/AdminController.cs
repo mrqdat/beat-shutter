@@ -24,7 +24,7 @@ namespace Img_socialmedia.Controllers
         public IActionResult report()
         {
             
-            var result  = _context.Post.Where(u => u.hasban==false).ToList();
+            var result  = _context.Post.Where(u => u.hasban==true).ToList();
             return View(result);
         //    var path = Path.Combine(Directory.GetCurrentDirectory(),$"wwwroot\\{"rp\\report.json"}");
         //     var json = System.IO.File.ReadAllText(path);

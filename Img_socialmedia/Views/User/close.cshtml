@@ -7,23 +7,31 @@
 }
 <div class="container mt-5">
     <div class="row">
+
         <div class="col-lg-4 pb-5">
             <!-- Account Sidebar-->
-            <div class="author-card pb-3">               
-
-                    <div class="author-card-avatar">
-                        <img src="~/images/man.png" alt="Daniel Adams">
-                    </div>
-                    <div class="author-card-details">
-                        <h5 class="author-card-name text-lg">Daniel Adams</h5><span class="author-card-position">Joined February 06, 2017</span>
-                    </div>
+            <div class="author-card pb-3">
+                <div id="profile">
+                    @if (Model.ProfileImg.Length > 0)
+                    {
+                        <img onclick="ClickImg()" id="profileimg3" width="200" height="200" src="@Url.Content(Model.ProfileImg)" asp-append-version="true" style="border-radius:100%">
+                    }
+                    else
+                    {
+                        <img id="profileimg3" width="200" height="200" src="~/images/@Model.ProfileImg" asp-append-version="true" />
+                    }
+                </div>
+                <!--<img src="~/images/man.png" alt="Daniel Adams">-->
+                <div class="author-card-details">
+                    <h5 class="author-card-name text-lg">@(Model.Firstname + " " + Model.Lastname)</h5><span>Joined at @Model.CreateAt.ToString("dd/MM/yyyy")</span>
+                </div>
 
             </div>
             <div class="wizard">
                 <nav class="list-group list-group-flush">
 
-                    <a class="list-group-item" asp-controller="User" asp-action="editprofile">
-                        <i class="fe-icon-user text-muted"></i>Profile Settings>
+                    <a class="list-group-item" asp-controller="User" asp-action="editprofile" asp-route-id="@Model.Id">
+                        <i class="fe-icon-user text-muted"></i>Profile Settings
                     </a>
                     <a class="list-group-item" asp-controller="User" asp-action="email">
                         <i class="fe-icon-map-pin text-muted"></i>Change Email
@@ -34,7 +42,7 @@
                     </a>
 
 
-                    <a class="list-group-item  active" asp-controller="User" asp-action="close">
+                    <a class="list-group-item active" asp-controller="User" asp-action="close">
                         <i class="fe-icon-map-pin text-muted"></i>Close account
                     </a>
                 </nav>
@@ -63,8 +71,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label   for="account-phone">Phone Number</label>
-                        <input   class="form-control" type="text" id="account-phone" value="+7 (805) 348 95 72" required="">
+                        <label for="account-phone">Phone Number</label>
+                        <input class="form-control" type="text" id="account-phone" value="+7 (805) 348 95 72" required="">
                     </div>
                 </div>
 

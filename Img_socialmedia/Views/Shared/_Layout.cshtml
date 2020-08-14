@@ -40,10 +40,10 @@
                         <form asp-controller="Post" asp-action="Search" method="get">
                             <div id="nav-item" class="nav-item justify-content-start">
                                 <div class="nav-search">
-                                    <button type="submit" class="navsearchButton">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                    <input type="text" class="navsearchTerm" placeholder="Search for free photo and images" name="tags">
+                                        <button type="submit" class="navsearchButton">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                        <input type="text" class="navsearchTerm" placeholder="Search for free photo and images" name="tags">
                                 </div>
                             </div>
                         </form>
@@ -61,43 +61,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Home" asp-action="About" style="cursor:pointer;">About</a>
                             </li>
-
-
-                            @if (!string.IsNullOrEmpty(Context.Session.GetString("username")))
-                            {
-
-                                <li class="nav-item">
+                            <li class="nav-item">
                                     <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
                                 </li>
-                                <li class="nav-item" style="margin:7px 25px 7px 0;">
-                                    <a class="notification dropdown-toggle" data-toggle="popover" title="Notification" data-placement="bottom" aria-haspopup="true" style="cursor:pointer;">
-                                        <span hidden>Notification</span>
-                                        <svg class="bi bi-bell-fill" width="34" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" style="color:dimgray">
-                                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
-                                        </svg>
-                                    </a>
-                                    <div style="display:none;width:200px" class="alert_list">
-                                        <ul class="unstyled">
-                                            <li data-alert_id="1" class="alert_li">
-                                                <a href="#" class="alert_message">User1 liked your post</a> <br />
-                                                <span class="time">At 13:09</span>
-                                                <div class="clearfix"></div>
-                                            </li>
-                                            <li data-alert_id="2" class="alert_li">
-                                                <a href="#">User2 is following you</a> <br />
-                                                <span class="time">1 hour ago</span>
-                                                <div class="clearfix"></div>
-                                            </li>
-                                            <li data-alert_id="3" class="alert_li">
-                                                <a href="#">User1 liked your post </a> <br />
-                                                <span class="time">1 day ago</span>
-                                                <div class="clearfix"></div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-
-
+                            @if (!string.IsNullOrEmpty(Context.Session.GetString("username")))
+                            {
                                 <li class="nav-item avatar">
                                     <a href="javascript:void(0);" class="btn-user media align-items-center dropdown-toggle" data-toggle="dropdown">
                                         <img class="mr-2" src="~/images/man.png" width="32" height="32" alt="avatar">
@@ -127,57 +95,57 @@
                             }
 
                         </ul>
-                        </div>
-                    </div>
-                </nav>
-
-                @*
-                    upload modal
-                *@
-
-                <div id="myModal" class="modal">
-                    <div class="modal-content">
-                        <form method="post" enctype="multipart/form-data" asp-controller="Photos" asp-action="Create">
-                            <div class="file-upload">
-                                <input class="file-upload-input custom-file-input" name="files" type='file' onchange="readURL(this);" accept="image/*" />
-                                <div class="image-upload-wrap">
-                                    <div class="drag-text">
-                                        <h3>Drag and drop a file or select add Image</h3>
-                                    </div>
-                                    <div class="file-upload-content">
-                                        <div class="image" style="position: relative;">
-                                            <img class="file-upload-image img-responsive" src="#" alt="your image" asp-append-version="true" />
-                                            <div class="image-title-wrap">
-                                                <button type="button" class="remove-image fa fa-remove" onclick="removeUpload()"></button>
-                                            </div>
-                                        </div>
-                                        <div class="image-tag">
-                                            <input class="image-tag-name" type="text" name="tags" placeholder="Add your tags!" />
-                                        </div>
-                                        <div class="image-tag">
-                                            <input class="image-location" type="text" name="location" placeholder="Add location" />
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer" style="padding:0;">
-                                <button class="close" type="button" data-dismiss="modal">Cancel</button>
-                                <button class="file-upload-btn">Publish to Shutter</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
-            </header>
-        }
+            </nav>
 
-                            <div class="container-fluid">
-                                <main role="main" class="pb-3" style="padding-bottom:0px !important;">
-                                    @RenderBody()
-                                </main>
+            @*
+                upload modal
+            *@
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <form method="post" enctype="multipart/form-data" asp-controller="Photos" asp-action="Create">
+                        <div class="file-upload">
+                            <input class="file-upload-input custom-file-input" name="files" type='file' onchange="readURL(this);" accept="image/*" />
+                            <div class="image-upload-wrap">
+                                <div class="drag-text">
+                                    <h3>Drag and drop a file or select add Image</h3>
+                                </div>
+                                <div class="file-upload-content">
+                                    <div class="image" style="position: relative;">
+                                        <img class="file-upload-image img-responsive" src="#" alt="your image" asp-append-version="true" />
+                                        <div class="image-title-wrap">
+                                            <button type="button" class="remove-image fa fa-remove" onclick="removeUpload()"></button>
+                                        </div>
+                                    </div>
+                                    <div class="image-tag">
+                                        <input class="image-tag-name" type="text" name="tags" placeholder="Add your tags!" />
+                                    </div>
+                                    <div class="image-tag">
+                                        <input class="image-location" type="text" name="location" placeholder="Add location" />
+                                    </div>
+
+                                </div>
                             </div>
+                        </div>
+                        <div class="modal-footer" style="padding:0;">
+                            <button class="close" type="button" data-dismiss="modal">Cancel</button>
+                            <button class="file-upload-btn">Publish to Shutter</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </header>
+    }
 
-                            @RenderSection("Scripts", required: false)
+    <div class="container-fluid">
+        <main role="main" class="pb-3" style="padding-bottom:0px !important;">
+            @RenderBody()
+        </main>
+    </div>
+
+    @RenderSection("Scripts", required: false)
 
 
 <script>
@@ -250,10 +218,10 @@
         });
 
 
+        
 
-
-          $(document).ready(function () {
-
+        $(document).ready(function () {
+            
             var val = "";
             var a;
             $('.image-tag-name').on('focusout', function () {
@@ -262,10 +230,9 @@
                 this.value = "";
             }).on('keyup', function (e) {
                 // comma|space (add more keyCodes delimited with | pipe)
-                if (/(188|32)/.test(e.which))
+                if (/(188|32)/.test(e.which))                    
                     $(this).trigger('focusout');
             });
-
             $('.file-upload-btn').on('click', function () {
                 $(".tag").each(function () {
                     a = $(this).text();
@@ -274,55 +241,38 @@
 
                 $('.image-tag-name').val(val);
             });
-
         });
 
         $('.image-tag').on('click', '.tag', function () {
             $(this).remove();
         });
 
-    $('.crebtn').click(function () {
-        $.ajax({
-            type: "POST",
-            url: "@Url.Action("createCollection", "Collection")",
-            dataType: "json",
-            data: JSON.stringify({
-                colname: $('.colname').val(),
-                coldes: $('.coldes').val()
-            }),
-            success: function (respone) {
-                if (respone.result == 'Redirect') {
-                    window.location.href = "@Url.Action("Login", "Account")";
+        @*$('.crebtn').click( function () {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("createCollection", "Collection")",
+                dataType:"json",
+                data: JSON.stringify({
+                    colname: $('.colname').val(),
+                    coldes: $('.coldes').val()
+                }),           
+                success: function (item) {
+                    //console.log(item["success"] + " " + item["message"]);
+                    $('<p></p>').insertAfter(".collection-item")
+                    $('.collection-list').show();
+                    $('.collection-create').hide();
+                },
+                error: function (req, status, error) {
+                    console.log(error);
+                    console.log(req);
+                    console.log(status);
                 }
-                else {
-                    if (respone.result == 'false') {
-                        alert(respone.message)
-                    }
-                    else {
-                        $('' + '<li class="item-detail"><button class="btn addcol">' +
-                            '<div class="item-name">' +
-                            '<span>0photos</span>' +
-                            '<h6>' + colname + '</h6>' +
-                            '</div>' +
-                            '<div class="addto" title="add to collection">' +
-                            '<svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">' +
-                            '<path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />' +
-                            '<path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />' +
-                            '</svg>' +
-                            '</div>' +
-                            '</button >' +
-                            '</li >').insertAfter('.collection-item');
-                        $('.collection-list').show();
-                        $('.collection-create').hide();
-                    }
-                }
-            },
-            error: function (req, status, error) {
-                console.log(error);
-                console.log(req);
-                console.log(status);
-            }
-        });
+            });
+        });*@
+
+
+    $('#profile').click(function () {
+        $('#mediaFile').click();
     });
 </script>
 

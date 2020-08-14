@@ -13,14 +13,13 @@ namespace Img_socialmedia.Models
             Comment = new HashSet<CommentViewModel>();
             ExternalLogin = new HashSet<ExternalLoginViewModel>();
             Notification = new HashSet<NotificationViewModel>();
-            //string Username = Firstname + Lastname;
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
-        //[DataType(DataType.Password)]
+        [DataType(DataType.Password)]
  
         public string Password { get; set; }
 
@@ -43,11 +42,8 @@ namespace Img_socialmedia.Models
         public string TokenId { get; set; }
         public string ProfileImg { get; set; }
         [StringLength(1000)]
-        public string Bio { get; set; }        
-
-        [DataType(DataType.Date)]
-        public DateTime? CreateAt { get; set; }
-        public int? FollowerCount { get; set; }
+        public string Bio { get; set; }
+        public DateTime CreateAt { get; set; }
         public string Tags { get; set; }
         public virtual IEnumerable<PostViewModel> Post { get; set; }
         public virtual ICollection<CollectionViewModel> Collection { get; set; }

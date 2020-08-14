@@ -13,15 +13,9 @@
     <link href="~/css/home.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="~/fonts/Linearicons-Free-v1.0.0/icon-font.min.css" />
-    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css" />
-    <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css" />
-    <link rel="stylesheet" type="text/css" href="~/vendor/animsition/css/animsition.min.css" />
-    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script scr="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <meta property="og:url" content="https://localhost:44340/" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="dream" />
@@ -46,10 +40,10 @@
                         <form asp-controller="Post" asp-action="Search" method="get">
                             <div id="nav-item" class="nav-item justify-content-start">
                                 <div class="nav-search">
-                                        <button type="submit" class="navsearchButton">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                        <input type="text" class="navsearchTerm" placeholder="Search for free photo and images" name="tags">
+                                    <button type="submit" class="navsearchButton">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <input type="text" class="navsearchTerm" placeholder="Search for free photo and images" name="tags">
                                 </div>
                             </div>
                         </form>
@@ -67,9 +61,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Home" asp-action="About" style="cursor:pointer;">About</a>
                             </li>
-                            
+
+
                             @if (!string.IsNullOrEmpty(Context.Session.GetString("username")))
                             {
+
                                 <li class="nav-item">
                                     <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
                                 </li>
@@ -109,7 +105,7 @@
                                     <div class="dropdown-menu dropdown-menu-right dropdown-info">
                                         <a class="dropdown-item" href="/User/Details/@Context.Session.GetInt32("userid")">Profile</a>
                                         <a class="dropdown-item" href="/User/editprofile/@Context.Session.GetInt32("userid")">Account setting</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
+                                        <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Log out</a>
                                     </div>
                                 </li>
                             }
@@ -122,7 +118,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link " asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
+                                    <a class="nav-link " asp-controller="Account" asp-action="Login">Log in</a>
                                 </li>
 
                                 <li class="nav-item" style="margin-right:0px;">
@@ -131,61 +127,60 @@
                             }
 
                         </ul>
+                        </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
 
-            @*
-                upload modal
-            *@
+                @*
+                    upload modal
+                *@
 
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <form method="post" enctype="multipart/form-data" asp-controller="Photos" asp-action="Create">
-                        <div class="file-upload">
-                            <input class="file-upload-input custom-file-input" name="files" type='file' onchange="readURL(this);" accept="image/*" />
-                            <div class="image-upload-wrap">
-                                <div class="drag-text">
-                                    <h3>Drag and drop a file or select add Image</h3>
-                                </div>
-                                <div class="file-upload-content">
-                                    <div class="image" style="position: relative;">
-                                        <img class="file-upload-image img-responsive" src="#" alt="your image" asp-append-version="true" />
-                                        <div class="image-title-wrap">
-                                            <button type="button" class="remove-image fa fa-remove" onclick="removeUpload()"></button>
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <form method="post" enctype="multipart/form-data" asp-controller="Photos" asp-action="Create">
+                            <div class="file-upload">
+                                <input class="file-upload-input custom-file-input" name="files" type='file' onchange="readURL(this);" accept="image/*" />
+                                <div class="image-upload-wrap">
+                                    <div class="drag-text">
+                                        <h3>Drag and drop a file or select add Image</h3>
+                                    </div>
+                                    <div class="file-upload-content">
+                                        <div class="image" style="position: relative;">
+                                            <img class="file-upload-image img-responsive" src="#" alt="your image" asp-append-version="true" />
+                                            <div class="image-title-wrap">
+                                                <button type="button" class="remove-image fa fa-remove" onclick="removeUpload()"></button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="image-tag">
-                                        <input class="image-tag-name" type="text" name="tags" placeholder="Add your tags!" />
-                                    </div>
-                                    <div class="image-tag">
-                                        <input class="image-location" type="text" name="location" placeholder="Add location" />
-                                    </div>
+                                        <div class="image-tag">
+                                            <input class="image-tag-name" type="text" name="tags" placeholder="Add your tags!" />
+                                        </div>
+                                        <div class="image-tag">
+                                            <input class="image-location" type="text" name="location" placeholder="Add location" />
+                                        </div>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer" style="padding:0;">
-                            <button class="close" type="button" data-dismiss="modal">Cancel</button>
-                            <button class="file-upload-btn">Publish to Shutter</button>
-                        </div>
-                    </form>
+                            <div class="modal-footer" style="padding:0;">
+                                <button class="close" type="button" data-dismiss="modal">Cancel</button>
+                                <button class="file-upload-btn">Publish to Shutter</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </header>
-    }
+            </header>
+        }
 
-    <div class="container-fluid">
-        <main role="main" class="pb-3" style="padding-bottom:0px !important;">
-            @RenderBody()
-        </main>
-    </div>
+                            <div class="container-fluid">
+                                <main role="main" class="pb-3" style="padding-bottom:0px !important;">
+                                    @RenderBody()
+                                </main>
+                            </div>
 
-    @RenderSection("Scripts", required: false)
+                            @RenderSection("Scripts", required: false)
 
 
-<script>
-
+                            <script>
         var modal = document.getElementById("myModal");
         var btn = document.getElementById("upload_modal");
         var span = document.getElementsByClassName("close")[0];
@@ -255,10 +250,10 @@
         });
 
 
-        
 
-        @* $(document).ready(function () {
-            
+
+          $(document).ready(function () {
+
             var val = "";
             var a;
             $('.image-tag-name').on('focusout', function () {
@@ -267,65 +262,45 @@
                 this.value = "";
             }).on('keyup', function (e) {
                 // comma|space (add more keyCodes delimited with | pipe)
-                if (/(188|32)/.test(e.which))                    
+                if (/(188|32)/.test(e.which))
                     $(this).trigger('focusout');
-                
             });
 
             $('.file-upload-btn').on('click', function () {
                 $(".tag").each(function () {
                     a = $(this).text();
-                    val = val + "," + a;
+                    val = a + " " + val;
                 });
-               
-                $('.image-tag-name').attr('value', val);
-                alert(val);
+
+                $('.image-tag-name').val(val);
             });
-            
-        }); *@
+
+        });
 
         $('.image-tag').on('click', '.tag', function () {
             $(this).remove();
         });
 
-        $(document).ready(function () {
-            var colname = $('.colname').val();
-            $('.crebtn').on('click', function () {
-                $.ajax({
-                    type: "POST",
-                    url: "@Url.Action("createCollection", "Collection")",
-                    data:{
-                        'colname':$('.colname').val(),
-                        'coldes':$('.coldes').val()
-                    },
-                    success: function (respone) {
-                        if (respone.result == 'Redirect') {
-                            window.location.href = "@Url.Action("Login", "Account")";
-                        }
-                        else {
-                            if (respone.result == 'false') {
-                                alert(respone.message)
-                            }
-                            else {
-                                $(''+'<li class="item-detail"><button class="btn addcol">'+
-                                    '<div class="item-name">'+
-                                        '<span>0photos</span>'+
-                                        '<h6>'+colname+'</h6>'+
-                                    '</div>'+
-                                    '<div class="addto" title="add to collection">'+
-                                        '<svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'+
-                                            '<path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />'+
-                                            '<path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />'+
-                                        '</svg>'+
-                                    '</div>'+
-                                        '</button >'+
-                                    '</li >').insertAfter('.collection-item');
-                                $('.collection-list').show();
-                                $('.collection-create').hide();
-                            }
-                        }
-                    }
-                });
+        $('.crebtn').click( function () {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("createCollection", "Collection")",
+                dataType:"json",
+                data: JSON.stringify({
+                    colname: $('.colname').val(),
+                    coldes: $('.coldes').val()
+                }),
+                success: function (item) {
+                    //console.log(item["success"] + " " + item["message"]);
+                    $('<p></p>').insertAfter(".collection-item")
+                    $('.collection-list').show();
+                    $('.collection-create').hide();
+                },
+                error: function (req, status, error) {
+                    console.log(error);
+                    console.log(req);
+                    console.log(status);
+                }
             });
         });
 </script>

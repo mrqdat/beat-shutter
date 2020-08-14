@@ -14,11 +14,11 @@
                 <div id="profile">
                     @if (Model.ProfileImg.Length > 0)
                     {
-                        <img onclick="ClickImg()" id="profileimg3" width="200" height="200" src="@Url.Content(Model.ProfileImg)" asp-append-version="true" style="border-radius:100%">
+                        <img id="profileimg3" width="200" height="200" src="@Url.Content(Model.ProfileImg)" asp-append-version="true" style="border-radius:100%">
                     }
                     else
                     {
-                        <img id="profileimg3" width="200" height="200" src="~/images/@Model.ProfileImg" asp-append-version="true" />
+                        <img id="profileimg3" width="200" height="200" src="~/images/man.png" asp-append-version="true" />
                     }
                 </div>
                 <!--<img src="~/images/man.png" alt="Daniel Adams">-->
@@ -50,7 +50,7 @@
         </div>
         <!-- Profile Settings-->
         <div class="col-lg-8 pb-5">
-            <form class="row" asp-action="email" asp-controller="User">
+            <form class="row" asp-action="email" asp-controller="User" method="post">
                 <div class="col-md-12">
                     <div class="form-group">
                         <label asp-for="Email" for="account-email">E-mail Address</label>

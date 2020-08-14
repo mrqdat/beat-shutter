@@ -227,7 +227,7 @@ namespace Img_socialmedia.Controllers
         }
 
 
-         [HttpGet]
+        [HttpGet]
         public IEnumerable<CollectionViewModel> getCollection( )
         {
             var userid = HttpContext.Session.GetInt32("userid");

@@ -86,6 +86,11 @@ namespace Img_socialmedia.Models
                     .HasForeignKey(d => d.PhotoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_collection_detail_photo");
+
+                entity.HasOne(d => d.Post)
+                    .WithMany(p => p.CollectionDetails)
+                    .HasForeignKey(d => d.CollectionId)
+                    .HasConstraintName("FK_collection_detail_post");
             });
 
             modelBuilder.Entity<CommentViewModel>(entity =>

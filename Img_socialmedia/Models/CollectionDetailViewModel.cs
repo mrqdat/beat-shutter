@@ -11,5 +11,6 @@ namespace Img_socialmedia.Models
 
         public virtual CollectionViewModel Collection { get; set; }
         public virtual PhotoViewModel Photo { get; set; }
+        public virtual PostViewModel Post { get; set; }
     }
 }

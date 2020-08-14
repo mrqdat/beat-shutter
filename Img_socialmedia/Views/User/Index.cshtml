@@ -1,74 +1,142 @@
 ﻿@model Img_socialmedia.Models.UserViewModel
- 
+
 @{
     ViewData["Title"] = "Profile";
     ViewBag.showsearchbar = false;
 }
 
-
+ 
 <div class="user_container">
     <main>
         <div class="row">
-            <div class="left col-lg-4">
-                <div class="photo-left">
-                    <img class="photo" src="~/images/man.png" asp-append-version="true" />
+            <div class="left col-lg-4" style="position: relative;">
+                <div class="profile">
+                    <div class="photo-left">
+                        <img class="photo" src="~/images/man.png" asp-append-version="true" />
+
+                    </div>
+                    <div class="info_edit">
+                        <h4 class="name">@(Model.Firstname+" "+Model.Lastname)</h4>
+                        <a class="info_link" asp-action="editprofile" asp-controller="User" alt="edit your profile">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                    <div class="stats row" style="margin:0;">
+                        <div class="stat col-xs-4" style="padding-left: 50px;">
+                            <p class="number-stat">38</p>
+                            <p class="desc-stat">Uploads</p>
+                        </div>
+                        <div class="stat col-xs-4" style="padding-right: 50px;">
+                            <p class="number-stat">1</p>
+                            <p class="desc-stat">Colection</p>
+                        </div>
+                    </div>
+
+                    <p class="desc">@Model.Bio</p>
+                    <div class="social">
+                        @*<i class="fa fa-facebook-square" aria-hidden="true"></i>
+                            <i class="fa fa-twitter-square" aria-hidden="true"></i>*@
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="right col-lg-8">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a id="gal" data-toggle="tab" href="#gallery">Photos</a></li>
+                    <li><a id="col" data-toggle="tab" href="#collection">Collections</a></li>
+
+                </ul>
+
+                <div class="tab-content">
+                    <div id="gallery" class="tab-pane" style="padding-top: 20px;">
+                        <div class="row gallery  info_edit ">
+                            @foreach (var item in Model.Post)
+                            {
+                                <div class="col-md-4">
+                                    <img src="@item.Photo.Url" />
+                                </div>
+                            }
+                        </div>
+                    </div>
 
                 </div>
-                <div class="info_edit">
-                    <h4 class="name">@(Model.Firstname+" "+Model.Lastname)</h4>
-                    <a class="info_link" asp-action="editprofile" asp-controller="User"  alt="edit your profile">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                </div>
-                <div class="stats row" style="margin:0;">
-                    <div class="stat col-xs-4" style="padding-left: 50px;">
-                        <p class="number-stat">38</p>
-                        <p class="desc-stat">Uploads</p>
+
+                <div class="tab-content">
+                    <div id="collection" class="tab-pane" style="padding-top: 20px;">
+                        <div class="row info_edit ">
+                            <div class="col-row collection-card">
+                                <div class="column">
+                                    <div class="card">
+                                        <q>Collection name</q>
+
+                                    </div>
+                                    <p>3 photos</p>
+                                </div>
+
+                                <div class="column">
+                                    <div class=" card">
+                                        <q>Collection name</q>
+
+                                    </div>
+                                    <p>3 photos</p>
+                                </div>
+
+
+                                <div class="column">
+                                    <div class=" card">
+                                        <q>Collection name</q>
+
+                                    </div>
+                                    <p>3 photos</p>
+                                </div>
+
+                                <div class="column">
+                                    <div class=" card">
+                                        <q>Collection name</q>
+
+                                    </div>
+                                    <p>3 photos</p>
+                                </div>
+
+
+                                <div class="column">
+                                    <div class=" card">
+                                        <q>Collection name</q>
+
+                                    </div>
+                                    <p>3 photos</p>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="stat col-xs-4" style="padding-right: 50px;">
-                        <p class="number-stat">1</p>
-                        <p class="desc-stat">Colection</p>
-                    </div>
-                </div>
-                <p class="desc">@Model.Bio</p>
-                <div class="social">
-                    @*<i class="fa fa-facebook-square" aria-hidden="true"></i>
-                    <i class="fa fa-twitter-square" aria-hidden="true"></i>*@
 
                 </div>
             </div>
-            
-                <div class="right col-lg-8">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#galery">Photos</a></li>
-                        <li><a data-toggle="tab" href="#collection">Collections</a></li>
-
-                    </ul>
-
-                    <div class="tab-content">
-                        <div id="galery" class="tab-pane fade in active">
-                            <div class="row gallery info_edit ">
-                                @foreach (var item in Model.Post)
-                                {
-                                    <div class="col-md-4">
-                                        <img src="@item.Photo.Url" />
-                                    </div>
-                                }
-                                 
-                            </div>
-                        </div>
-                       
-                    </div>
-                </div>
-                @*<span class="follow">Follow</span>*@
-                @*<ul class="nav nav-tabs">
+            @*<span class="follow">Follow</span>*@
+            @*<ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#galery">Photos</a></li>
 
                     <li><a data-toggle="tab" href="#collection">Collections </a></li>
 
                 </ul>*@
-                
-             
+
+
         </div>
     </main>
 </div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#gal").click(function () {
+                $('#gallery').show();
+                $('#collection').hide();
+            });
+            $("#col").click(function () {
+                $('#collection').show();
+                $('#gallery').hide();
+            });
+        });
+    </script>
+}

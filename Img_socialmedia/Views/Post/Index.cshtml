@@ -381,7 +381,7 @@
                                 <ul class="collection-item">
 
                                     <li class="item-detail">
-                                        <button class="btn" style="display:flex;width:100%;">
+                                        <button class="btn addcol" >
                                             <div class="item-name">
                                                 <span>0 photos</span>
                                                 <h6></h6>
@@ -574,7 +574,8 @@
 
 
 
-    $(document).ready(function () {
+        $(document).ready(function () {
+            var colname = $('.colname').val();
             $('.crebtn').on('click', function () {
                 $.ajax({
                     type: "POST",
@@ -592,7 +593,7 @@
                                 alert(respone.message)
                             }
                             else {
-                                $(''+'<li class="item-detail"><button class="btn" style ="display:flex;width:100%;">'+
+                                $(''+'<li class="item-detail"><button class="btn addcol">'+
                                     '<div class="item-name">'+
                                         '<span>0photos</span>'+
                                         '<h6>'+colname+'</h6>'+

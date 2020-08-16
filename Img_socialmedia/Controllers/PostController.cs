@@ -30,7 +30,6 @@ namespace Img_socialmedia.Controllers
         [Route("post/{id}",Name = "PostDetail")]
         public IActionResult Index(int id)
         {
-
             var result = (from photo in shutterContext.Photo
                           join post in shutterContext.Post on photo.Id equals post.PhotoId
                           join user in shutterContext.User on post.UserId equals user.Id
@@ -45,6 +44,7 @@ namespace Img_socialmedia.Controllers
                               Tags = post.Tags,
                               UserId = user.Id,
                               UserImg = user.ProfileImg,
+                              hasban=post.hasban,
                               Comment = (from comment in shutterContext.Comment
                                          where comment.PostId == id
                                          select new CommentViewModel
@@ -78,6 +78,11 @@ namespace Img_socialmedia.Controllers
                                              }).Take(15).ToList()
                           }).First();
             if (result == null)
+            {
+                return View("Error");
+            }
+
+            if (result.hasban)
             {
                 return View("Error");
             }
@@ -157,10 +162,9 @@ namespace Img_socialmedia.Controllers
         {
             if(HttpContext.Session.GetInt32("userid").HasValue)
             {
-                var userid = HttpContext.Session.GetInt32("userid");
-                PostViewModel rp = new PostViewModel();
-                rp.Id = id;
-                rp.hasban = true;
+                var userid = HttpContext.Session.GetInt32("userid").Value;
+                var rp = shutterContext.Post.Find(id);
+                
                 rp.triggeredBy = userid;
                 shutterContext.SaveChanges();
                 //string data = JsonConvert.SerializeObject(rp);
@@ -173,7 +177,8 @@ namespace Img_socialmedia.Controllers
             }
             else{
                 return Json(new{
-                    status = false
+                    status = false,
+                    message = "Your session has expried, please login again to continue working."
                 });
             }          
         
@@ -212,6 +217,7 @@ namespace Img_socialmedia.Controllers
         public IActionResult Search(string tags)
         {
             {
+                ViewBag.title = tags;
                 if (string.IsNullOrEmpty(tags)) if (HttpContext.Session.GetInt32("userid").HasValue)
                     {
                         return RedirectToAction("Index", "Home");
@@ -278,6 +284,11 @@ namespace Img_socialmedia.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult hidePost(int id)
+        {
 
+            return Json(new { status = true });
+        }
     }
 }

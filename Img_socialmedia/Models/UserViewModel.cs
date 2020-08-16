@@ -44,6 +44,8 @@ namespace Img_socialmedia.Models
         [StringLength(1000)]
         public string Bio { get; set; }
         public DateTime CreateAt { get; set; }
+        public bool isAdmin { get; set; }
+        public bool hasBlocked { get; set; }
         public string Tags { get; set; }
         public virtual IEnumerable<PostViewModel> Post { get; set; }
         public virtual ICollection<CollectionViewModel> Collection { get; set; }

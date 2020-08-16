@@ -21,7 +21,7 @@ namespace Img_socialmedia.Controllers
             var data = from m in _context.Post select m;
             if (string.IsNullOrEmpty(searchString))
             {
-                data = data.Where(m => m.Tags.Contains(searchString));
+                data = data.Where(m => m.Tags.Contains(searchString) && m.hasban == false);
             }
             return View(await data.ToArrayAsync());
         }

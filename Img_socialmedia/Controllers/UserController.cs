@@ -40,7 +40,7 @@ namespace Img_socialmedia.Controllers
             }
 
             var user = await _context.User
-                .Include(p=>p.Post)
+                .Include(p=>p.Post.Where(s=>s.hasban==false))
                     .ThenInclude(photo=>photo.Photo)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)

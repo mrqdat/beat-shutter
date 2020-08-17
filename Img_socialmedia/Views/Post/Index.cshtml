@@ -17,7 +17,7 @@
                                     </a>
                                 </span>
                                 <a asp-action="Details" asp-controller="User" asp-route-id="@Model.UserId" class="modal-header-textn">
-                                    <h6 class="modal-title" id="exampleModalLabel">@Model.Username</h6>
+                                    <h6 class="modal-title" id="exampleModalLabel" style="font-family: Arial, Helvetica, sans-serif;">@Model.Username</h6>
                                 </a>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                                 <div class="btn-footer">
                                     <div class="photo-location l"><span><i class="fa fa-map-marker"></i></span> @Model.Photo.Location</div>
                                     <div class="f">
-                                        <button class="" id="report" type="button" data-toggle="popover" title="report this photo" data-placement="bottom"  onclick="report(@Model.Id)"><span><i class="fa fa-flag-o"></i></span></button>
+                                        <button class="" id="report" type="button" data-toggle="tooltip" title="report this photo" data-placement="bottom"  onclick="report(@Model.Id)" style=" margin-right: 5px;"><span><i class="fa fa-flag-o"></i></span></button>
                                         <button class="btn btn-light pos-button modal-btns" data-toggle="modal" data-target="#share_modal" type="button" title="share this photo">Share</button>
                                         <button class="btn btn-light pos-button modal-btns" data-toggle="modal" data-target="#infoPhoto" type="button" title="info">Info</button>
 
@@ -85,7 +85,7 @@
                     <div class="user-comment-layout">
                         @foreach (var comment in Model.Comment)
                         {
-                            <div class="user-comment">
+                            <div class="user-comment" style="font-family: Arial, Helvetica, sans-serif;">
                                 <div class="user-layout">
                                     <span>
                                         <a asp-route-id="@comment.UserId" asp-action="Details" asp-controller="User">
@@ -93,17 +93,23 @@
                                         </a>
                                     </span>
                                 </div>
-                                <span class="comment-content">
+                                <span class="comment-content" >
                                     <span class="c-content">
-                                        <a asp-route-id="@comment.UserId" asp-action="Details" asp-controller="User" class="user-name">
+                                        <a asp-route-id="@comment.UserId" asp-action="Details" asp-controller="User" class="user-name" >
                                             @comment.Username
                                         </a>
                                         <span class="comment-time">@comment.CreateAt.ToString("dd/MM/yyyy h:m")</span><br />
+
                                         <span>
                                             @comment.Contents
                                         </span>
+
                                     </span>
                                 </span>
+
+                            </div>
+                            <div class="c-del">
+                                <button id="c-del" title="Delete your comment">Delete</button>
                             </div>
                         }
 
@@ -134,7 +140,7 @@
                 </div>
             </div>
             <div>
-                <div class="text">Related photos</div>
+                <div class="text" style="margin-left:14px;margin-right:14px">Related photos</div>
                 <div class="modal-footer">
                     <div class="grid-photos">
                         <div>
@@ -432,7 +438,7 @@
                         <div class="fb-share-button" data-href="https://localhost:44340/" data-layout="button" data-size="large">
                             <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A44340%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a>
                         </div>*@
-                    <div class="share-option" id="fb-root" data-href="https://localhost:44340/">
+                    @*<div class="share-option" id="fb-root" data-href="https://localhost:44340/">
                         <a class="btn btn-light btn-share" title="Share on facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A44340%2F&amp;src=sdkpreparse">
                             <svg class="fb-logo" version="1.1" fill="#1778f2" viewBox="0 0 32 32" width="32" height="32" aria-hidden="false"><path d="M32 16.1c0-8.9-7.2-16-16-16S0 7.2 0 16.1c0 8 5.9 14.6 13.5 15.8V20.7H9.4v-4.6h4.1v-3.5c0-4 2.4-6.2 6-6.2 1.8 0 3.6.3 3.6.3v3.9h-2c-2 0-2.6 1.2-2.6 2.5v3h4.4l-.7 4.6h-3.7v11.2C26.1 30.7 32 24.1 32 16.1"></path></svg>
                             <span style="font-size:12px;">Facebook</span>
@@ -444,7 +450,13 @@
                             <svg class="fb-logo" fill="#1da1f2" version="1.1" viewBox="0 0 32 32" width="32" height="32" aria-hidden="false"><path d="M10.2 28.9c12 0 18.6-9.9 18.6-18.6v-.8c1.2-1 2.3-2.1 3.2-3.4-1.2.5-2.5.9-3.8 1 1.4-.8 2.4-2.1 2.9-3.6-1.3.8-2.7 1.3-4.2 1.6-2.5-2.6-6.6-2.8-9.2-.3-1.7 1.6-2.4 4-1.9 6.3-5.2-.3-10-2.8-13.4-6.9-1.7 3-.9 6.8 2 8.7-1 0-2.1-.3-3-.8v.1c0 3.1 2.2 5.8 5.3 6.4-1 .3-2 .3-3 .1.9 2.7 3.3 4.5 6.1 4.6-2.3 1.8-5.2 2.8-8.1 2.8-.5 0-1 0-1.6-.1 3.1 1.9 6.6 2.9 10.1 2.9"></path></svg>
                             <span style="font-size:12px;">Twitter</span>
                         </a>
-                    </div>
+                    </div>*@
+                    <input id="url" type="text" name="url" value="" readonly />
+                    <span>
+                        <button type="button" name="url" onclick="geturl()" style=" margin-top: 6px;" title="copy post url"/>
+                        <svg id="clipboard" aria-hidden="true" focusable="false" data-prefix="far"  width="20px"  data-icon="clipboard" class="svg-inline--fa fa-clipboard fa-w-12" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M336 64h-80c0-35.3-28.7-64-64-64s-64 28.7-64 64H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM192 40c13.3 0 24 10.7 24 24s-10.7 24-24 24-24-10.7-24-24 10.7-24 24-24zm144 418c0 3.3-2.7 6-6 6H54c-3.3 0-6-2.7-6-6V118c0-3.3 2.7-6 6-6h42v36c0 6.6 5.4 12 12 12h168c6.6 0 12-5.4 12-12v-36h42c3.3 0 6 2.7 6 6z"></path></svg>
+                    </span>
+
                     <div class="share-option"></div>
 
                 </div>
@@ -460,7 +472,7 @@
 
     
     <script>
-
+        var url = window.location.href;
         $("[data-toggle=popover]")
             .popover({ html: true })
 
@@ -479,10 +491,23 @@
     <script>
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
+            $('#url').val(url);
+          
         });
     //Get the button
     var ontop = document.getElementById("btn_ontop");
     window.onscroll = function () { scrollFunction() };
+
+
+    function geturl() { 
+        var copyText = document.getElementById("url");      
+        copyText.select();
+       
+        copyText.setSelectionRange(0, 99999); 
+        document.execCommand("copy");
+        alert("your url has copied to clipboard")
+
+        }
 
     function scrollFunction() {
         if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {

@@ -81,6 +81,105 @@ namespace Img_socialmedia.Controllers
             }
 
         }
+
+        [HttpPost]
+        public ActionResult unblockuser(int id)
+        {
+            if (HttpContext.Session.GetInt32("userid").HasValue)
+            {
+
+                var user = _context.User.Find(id);
+                user.hasBlocked = false;
+                _context.SaveChanges();
+
+                return Json(new
+                {
+                    status = true
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    status = false,
+                    message = "Your session has expried, please login again to continue working."
+                });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult blockuser(int id)
+        {
+            if (HttpContext.Session.GetInt32("userid").HasValue)
+            {
+
+                var user = _context.User.Find(id);
+                user.hasBlocked = true;
+                _context.SaveChanges();
+
+                return Json(new
+                {
+                    status = true
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    status = false,
+                    message = "Your session has expried, please login again to continue working."
+                });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult blockadmin(int id)
+        {
+            if (HttpContext.Session.GetInt32("userid").HasValue)
+            {
+
+                var user = _context.User.Find(id);
+                user.isAdmin = false;
+                _context.SaveChanges();
+
+                return Json(new
+                {
+                    status = true
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    status = false,
+                    message = "Your session has expried, please login again to continue working."
+                });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult isadmin(int id)
+        {
+            if (HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                var user = _context.User.Find(id);
+                user.isAdmin = true;
+                _context.SaveChanges();
+
+                return Json(new
+                {
+                    status = true
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    status = false,
+                    message = "Your session has expried, please login again to continue working."
+                });
+            }
+        }
     }
 
 }

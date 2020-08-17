@@ -8,7 +8,7 @@
     <main>
         <div class="container-fluid">
             <h1 class="mt-4">Dashboard</h1>
-            <div class="card mb-4">
+            <div class="card mb-4" style="float:left;padding:0;">
                 <div class="card-header">
                     <i class="fa fa-table mr-1"></i>
                     All User
@@ -51,27 +51,14 @@
                                             @user.CreateAt.ToString("dd/MM/yyyy")
                                         </td>
                                         <td>
-                                            <div class="label">
-                                                <div class="toggle">
-                                                    <input class="toggle-state" type="checkbox" name="check" value="check" />
-                                                    <div class="indicator"></div>
-                                                </div>
-                                            </div>
+                                            <input id="admin" type="checkbox" name="isAdmin" @(user.isAdmin ? "checked=\"checked\"" : "") onchange="change(@user.Id)" />
                                         </td>
                                         <td>
-                                            <div class="label">
-                                                <div class="toggle">
-                                                    <input class="toggle-state" type="checkbox" name="check" value="check" />
-                                                    <div class="indicator"></div>
-                                                </div>
-
-                                            </div>
-
+                                            <input id="block" type="checkbox" name="hasBlocked" @(user.hasBlocked ? "checked=\"checked\"" : "") onchange="blockuser(@user.Id)" />
                                         </td>
 
                                     </tr>
-
-                                 }
+                                }
                             </tbody>
 
                         </table>
@@ -102,10 +89,112 @@
             $('#search').on('keyup', function () {
                 var value = $(this).val().toLowerCase();
                 $('#datatable tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) >-1)
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
             });
+
         });
+
+        function change(userid)
+        {
+            if ($('input[name=isAdmin]').is(":checked"))
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("isadmin", "Admin")",
+                    data: { id: userid },
+                    dataType: 'json',
+                    success: function (respone) {
+                        if (respone.status == true) {
+                            alert("success");
+                            console.log("success");
+                        }
+                        else {
+                            alert(respone.message);
+                            window.location.href = "@Url.Action("Login","Account")";
+                            console.log("session expried");
+                            }
+                        },
+                    error: function () {
+                        console.log(error);
+                    }
+                });
+            }
+            else if ($('input[name=isAdmin]').is(":not(:checked)"))
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("blockadmin", "Admin")",
+                    data: { id: userid },
+                    dataType: 'json',
+                    success: function (respone) {
+                        if (respone.status == true) {
+                            alert("success");
+                            console.log("success");
+                        }
+                        else {
+                            alert(respone.message);
+                            window.location.href = "@Url.Action("Login","Account")";
+                            console.log("session expried");
+                        }
+                    },
+                    error: function () {
+                        console.log(error);
+                    }
+                });
+            }
+        }
+
+
+        function blockuser(userid)
+        {
+            if ($('input[name=hasBlocked]').is(":checked"))
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("blockuser", "Admin")",
+                    data: { id: userid },
+                    dataType: 'json',
+                    success: function (respone) {
+                        if (respone.status == true) {
+                            alert("success");
+                            console.log("success");
+                        }
+                        else {
+                            alert(respone.message);
+                            window.location.href = "@Url.Action("Login","Account")";
+                            console.log("session expried");
+                            }
+                        },
+                    error: function () {
+                        console.log(error);
+                    }
+                });
+            }
+            else if ($('input[name=hasBlocked]').is(":not(:checked)"))
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("unblockuser", "Admin")",
+                    data: { id: userid },
+                    dataType: 'json',
+                    success: function (respone) {
+                        if (respone.status == true) {
+                            alert("success");
+                            console.log("success");
+                        }
+                        else {
+                            alert(respone.message);
+                            window.location.href = "@Url.Action("Login","Account")";
+                            console.log("session expried");
+                        }
+                    },
+                    error: function () {
+                        console.log(error);
+                    }
+                });
+            }
+        }
 
     </script>
 }

@@ -130,7 +130,7 @@ namespace Img_socialmedia.Controllers
         public IEnumerable<PostViewModel> TestB(int page)
         {
             var data = shutterContext.Post.ToList();
-            int start = (int)(page - 1) * 1;
+            int start = page * 15; //2 3 4
             int totalPage = data.Count();
             
             if (start < totalPage)
@@ -151,8 +151,7 @@ namespace Img_socialmedia.Controllers
                              UserImg = user.ProfileImg,
                              Username = user.Lastname + " " + user.Firstname,
                              Photo = photo,
-
-                         }).Skip(start).Take(6);
+                         }).Skip(start).Take(15);
                 return result.ToList();
             }
             else

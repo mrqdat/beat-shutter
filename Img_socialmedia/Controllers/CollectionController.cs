@@ -105,6 +105,13 @@ namespace Img_socialmedia.Controllers
                 return View("Error");
             }
 
+            //var collectionIsExist = _context.CollectionDetail.Where(p=>p.PostId==postid).First();
+            //if(collectionIsExist != null)
+            //{
+            //    return Json(new { status = false });
+            //}
+
+
             if (HttpContext.Session.GetInt32("userid").HasValue)
             {
                 var model = new CollectionDetailViewModel

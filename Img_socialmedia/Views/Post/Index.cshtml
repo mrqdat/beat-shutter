@@ -334,24 +334,24 @@
             <hr />
             <div class="iPhoto">
                 <div class="iPhotoVi iPa230x">
-                    <span class="iPhoto-title">Camera make</span>
-                    <span>@(string.IsNullOrEmpty(Model.Photo.CameraModel)?"--":Model.Photo.CameraModel)</span>
+                    <span class="iPhoto-title">Camera model</span>
+                    <span>@(string.IsNullOrEmpty(Model.Photo.CameraModel) ? "--" : Model.Photo.CameraModel)</span>
                 </div>
                 <div class="iPhotoVi iPa230x">
                     <span class="iPhoto-title">Aperture</span>
-                    <span>@(string.IsNullOrEmpty(Model.Photo.Aperture)?"--":Model.Photo.Aperture)</span>
+                    <span>@((string.IsNullOrWhiteSpace(Model.Photo.Aperture) )? "--" : Model.Photo.Aperture)</span>
                 </div>
                 <div class="iPhotoVi iPa230x">
                     <span class="iPhoto-title">Focal length</span>
-                    <span>@(string.IsNullOrEmpty(Model.Photo.FocalLength)?Model.Photo.FocalLength + " mm":"--")</span>
+                    <span>@((Model.Photo.FocalLength.Length>0 )? Model.Photo.FocalLength + " mm":"--")</span>
                 </div>
                 <div class="iPhotoVi iPa230x">
                     <span class="iPhoto-title">ISO</span>
-                    <span>@(Model.Photo.Iso == 0 ? Model.Photo.Iso : 0) </span>
+                    <span>@((Model.Photo.Iso == 0 )? Model.Photo.Iso : 0) </span>
                 </div>
                 <div class="iPhotoVi iPa230x">
                     <span class="iPhoto-title">Shutter speed</span>
-                    <span>@(string.IsNullOrEmpty(Model.Photo.ShutterSpeed)?"--":Model.Photo.ShutterSpeed)</span>
+                    <span>@((string.IsNullOrWhiteSpace(Model.Photo.ShutterSpeed))? "--" : Model.Photo.ShutterSpeed)</span>
                 </div>
                 <div class="iPhotoVi iPa230x">
                     <span class="iPhoto-title">Dimensions</span>
@@ -496,14 +496,11 @@
     $('#create-item').on('click', function () {
         $('.collection-list').hide();
         $('.collection-create').show();
-
-
     });
 
     $('.craete-cancel').on('click', function () {
         $('.collection-list').show();
         $('.collection-create').hide();
-
     });
 
         $(document).ready(function () {

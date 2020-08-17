@@ -113,6 +113,12 @@ namespace Img_socialmedia.Controllers
                 ModelState.AddModelError("", "Password must have 8 - 15 char");
                 return View();
             }
+            var user = _context.User.Where(c => c.Email.Equals(email)).FirstOrDefault();
+            if (user != null)
+            {
+                ModelState.AddModelError("", "Email already exists");
+                return View();
+            }
             var model = new UserViewModel
             {
                 Firstname=firstname,

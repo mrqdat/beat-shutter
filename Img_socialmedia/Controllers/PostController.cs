@@ -229,7 +229,8 @@ namespace Img_socialmedia.Controllers
                                   CreateAt = post.CreateAt,
                                   Tags = post.Tags,
                                   UserId = user.Id,
-                                  User = user,
+                                  UserImg = user.ProfileImg,
+                                  Username = user.Firstname + " " + user.Lastname,
                                   Photo = photo,
                               }).Take(15).ToList();
                 if (result == null)
@@ -247,7 +248,8 @@ namespace Img_socialmedia.Controllers
                                        CreateAt = post.CreateAt,
                                        Tags = post.Tags,
                                        UserId = user.Id,
-                                       User = user,
+                                       UserImg = user.ProfileImg,
+                                       Username = user.Firstname + " " + user.Lastname,
                                        Photo = photo,
                                    }).Take(15).ToList();
                     return View(result2);
@@ -268,7 +270,8 @@ namespace Img_socialmedia.Controllers
                                            CreateAt = post.CreateAt,
                                            Tags = post.Tags,
                                            UserId = user.Id,
-                                           User = user,
+                                           UserImg = user.ProfileImg,
+                                           Username = user.Firstname + " " + user.Lastname,
                                            Photo = photo,
                                        }).Take(15 - result.Count).ToList();
                         result.AddRange(result3);

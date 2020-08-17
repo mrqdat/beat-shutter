@@ -15,7 +15,8 @@ namespace Img_socialmedia.Controllers
     {
         private readonly db_shutterContext _context;
 
-        public CollectionController(db_shutterContext context) {
+        public CollectionController(db_shutterContext context)
+        {
             _context = context;
         }
 
@@ -33,7 +34,7 @@ namespace Img_socialmedia.Controllers
                 var model = _context.Collection.Where(d => d.UserId == userid).ToList();
                 return Json(model);
             }
-            return Json(new { status=false});
+            return Json(new { status = false });
         }
 
         [HttpPost]
@@ -62,21 +63,26 @@ namespace Img_socialmedia.Controllers
                 }
                 else
                 {
-                    return Json(new 
-                    { 
+                    return Json(new
+                    {
                         result = "false",
-                        message = "fail" 
+                        message = "fail"
                     });
                 }
             }
             else
             {
-                return Json(new 
-                { 
+                return Json(new
+                {
                     result = "Redirect",
-                    url = Url.Action("Login", "Account") 
+                    url = Url.Action("Login", "Account")
                 });
             }
+            return Json(new
+            {  
+                result = "success",
+                message = "success"
+            });            
         }
 
 
@@ -100,7 +106,7 @@ namespace Img_socialmedia.Controllers
                                     .Where(p => p.Id == postid)
                                     .First();
 
-            if(post==null || collection ==null)
+            if (post == null || collection == null)
             {
                 return View("Error");
             }

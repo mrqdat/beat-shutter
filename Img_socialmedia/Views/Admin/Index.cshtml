@@ -8,10 +8,13 @@
     <main>
         <div class="container-fluid">
             <h1 class="mt-4">Dashboard</h1>
-            <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-table mr-1"></i>
+            <div class="card mb-4" style="padding: 0;" >
+                <div class="card-header" >
+                    <i class="fa fa-table mr-1" style="float:left;"></i>
                     All User
+                    <div class="" style="float:right;">
+                        <input id="search" type="text" placeholder="Search..">
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -19,25 +22,23 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Lastname</th>
-                                    <th>Firstname</th>
+                                    <th>Username</th>
                                     <th>Phone</th>
                                     <th>Email</th>
                                     <th>Day joined</th>
+                                    <th>Is Admin</th>
+                                    <th>Has blocked</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach(var user in Model)
+                            <tbody id="datatable">
+                                @foreach (var user in Model)
                                 {
                                     <tr>
                                         <td>
                                             @Html.DisplayFor(modelitem => user.Id)
                                         </td>
                                         <td>
-                                            @user.Lastname
-                                        </td>
-                                        <td>
-                                            @user.Firstname
+                                            @user.Lastname @user.Firstname
                                         </td>
                                         <td>
                                             @user.Phone
@@ -46,12 +47,20 @@
                                             @user.Email
                                         </td>
                                         <td>
-                                            @user.CreateAt
+
+                                            @user.CreateAt.ToString("dd/MM/yyyy")
                                         </td>
-                                    </tr>                                           
+                                        <td>
+                                            <input id="admin" type="checkbox" name="isAdmin" @(user.isAdmin ? "checked" : "") onchange="change(@user.Id)" />
+                                        </td>
+                                        <td>
+                                            <input id="block" type="checkbox" name="hasBlocked" @(user.hasBlocked ? "checked" : "") onchange="blockuser(@user.Id)" />
+                                        </td>
+
+                                    </tr>
                                 }
-                            </tbody>    
-                             
+                            </tbody>
+
                         </table>
                     </div>
                 </div>
@@ -77,7 +86,115 @@
 
         $(document).ready(function () {
             $('#dash').addClass("active");
+            $('#search').on('keyup', function () {
+                var value = $(this).val().toLowerCase();
+                $('#datatable tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
         });
+
+        function change(userid)
+        {
+            if ($('input[name=isAdmin]').is(":checked")) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("isadmin", "Admin")",
+                    data: { id: userid },
+                    dataType: 'json',
+                    success: function (respone) {
+                        if (respone.status == true) {
+                            alert("success");
+                            console.log("success");
+                        }
+                        else {
+                            alert(respone.message);
+                            window.location.href = "@Url.Action("Login","Account")";
+                            console.log("session expried");
+                        }
+                    },
+                    error: function () {
+                        console.log(error);
+                    }
+                });
+            }
+            else if ($('input[name=isAdmin]').is(":not(:checked)"))
+                {
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("blockadmin", "Admin")",
+                        data: { id: userid },
+                        dataType: 'json',
+                        success: function (respone) {
+                            if (respone.status == true) {
+                                alert("success");
+                                console.log("success");
+                            }
+                            else {
+                                alert(respone.message);
+                                window.location.href = "@Url.Action("Login","Account")";
+                                console.log("session expried");
+                            }
+                        },
+                        error: function () {
+                            console.log(error);
+                        }
+                    });
+                }
+            }
+        
+
+
+        function blockuser(userid)
+        {
+            if ($('input[name=hasBlocked]').is(":checked"))
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("blockuser", "Admin")",
+                    data: { id: userid },
+                    dataType: 'json',
+                    success: function (respone) {
+                        if (respone.status == true) {
+                            alert("success");
+                            console.log("success");
+                        }
+                        else {
+                            alert(respone.message);
+                            window.location.href = "@Url.Action("Login","Account")";
+                            console.log("session expried");
+                            }
+                        },
+                    error: function () {
+                        console.log(error);
+                    }
+                });
+            }
+            else if ($('input[name=hasBlocked]').is(":not(:checked)"))
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("unblockuser", "Admin")",
+                    data: { id: userid },
+                    dataType: 'json',
+                    success: function (respone) {
+                        if (respone.status == true) {
+                            alert("success");
+                            console.log("success");
+                        }
+                        else {
+                            alert(respone.message);
+                            window.location.href = "@Url.Action("Login","Account")";
+                            console.log("session expried");
+                        }
+                    },
+                    error: function () {
+                        console.log(error);
+                    }
+                });
+            }
+        }
 
     </script>
 }

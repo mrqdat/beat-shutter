@@ -8,35 +8,40 @@
     <main>
         <div class="container-fluid">
             <h1 class="mt-4">Report dashboard</h1>
-            <div class="card mb-4">
+            <div class="card mb-4" style="padding: 0;">
                 <div class="card-header">
-                    <i class="fas fa-table mr-1"></i>
-                     
+                    <i class="fa fa-table mr-1" style="float:left;"></i>
+                    <div class="" style="float:right;">
+                        <input id="search" type="text" placeholder="Search..">
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered"  width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>User ID</th>
-                                    <th>Triggered By</th>
                                     <th>Time</th>
+                                    <th>TriggeredBY</th>
                                     <th>Action</th>
+
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="dataTable">
                                 @foreach(var item in Model)
                                 {
                                     <tr>
                                         <td>@item.Id</td>
-                                        <td>@item.UserId</td>
+                                        <td>@item.UserId</td>                                       
+                                        <td>@item.CreateAt.ToString("dd / MM /  yyyy")</td>
                                         <td>@item.triggeredBy</td>
-                                        <td>@item.CreateAt</td>
                                         <td>
-                                            <form asp-action="hidepost" method="post">
-                                                <input class="btn btn-danger" type="button" name="name" value="hide" />
-                                            </form>
+                                            @if(item.hasban){
+                                                <input class="btn btn-success" id="hidepost" type="button" value="has hidden" onclick="undoreport(@item.Id);" title="Click to unhide this photo"/>
+                                            }else{
+                                                <input class="btn btn-danger" id="hidepost" type="button" value="hide" onclick="report(@item.Id);" title="Click to hide this photo"/>
+                                            }
                                         </td>
 
                                     </tr>
@@ -63,8 +68,63 @@
 </div>
 
 @section Scripts{
-    <script >
+    <script>
+        $(document).ready(function () {
+            $('#report').addClass("active");
+        });
 
-      
+        function report(postid) {
+        $.ajax(
+            {
+                type:"POST",
+                url: "@Url.Action("doreport","Admin")",
+                data: { id: postid },
+                dataType: 'json',
+                success: function (respone) {
+                    if (respone.status == true) {
+                            window.location.href = "@Url.Action("report")";
+                    }
+                    else {
+                        alert(respone.message);
+                        window.location.href = "@Url.Action("Login","Account")";
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function undoreport(postid) {
+            $.ajax(
+            {
+                type:"POST",
+                url: "@Url.Action("undoreport","Admin")",
+                data: { id: postid },
+                dataType: 'json',
+                success: function (respone) {
+                    if (respone.status == true) {
+                            window.location.href = "@Url.Action("undoreport")";
+                    }
+                    else {                    
+                        alert(respone.message);
+                        window.location.href = "@Url.Action("Login","Account")";
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+
+        $(document).ready(function () {
+            $('#search').on('keyup', function () {
+                var value = $(this).val().toLowerCase();
+                $('#dataTable tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
     </script>
 }

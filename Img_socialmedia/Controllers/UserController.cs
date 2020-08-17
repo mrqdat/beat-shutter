@@ -32,19 +32,19 @@ namespace Img_socialmedia.Controllers
         }
 
         // GET: Users/Details/5
-        public async Task<IActionResult> Details(int id)
+        public  IActionResult Details(int id)
         {
             if (id.ToString() == null)
             {
                 return View("Error");;
             }
 
-            var user = await _context.User
-                .Include(p=>p.Post)
-                    .ThenInclude(photo=>photo.Photo)
-                .Include(p=>p.Collection)
-                    .ThenInclude(p=>p.CollectionDetail)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var user = _context.User
+                .Include(p => p.Post)
+                    .ThenInclude(photo => photo.Photo)
+                .Include(d => d.Collection)
+                    .ThenInclude(d => d.CollectionDetail)
+                .Where(d => d.Id == id).First();
             if (user == null)
             {
                 return View("Error");;

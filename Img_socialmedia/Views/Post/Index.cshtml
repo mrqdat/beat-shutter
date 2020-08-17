@@ -65,7 +65,7 @@
                                 <div class="btn-footer">
                                     <div class="photo-location l"><span><i class="fa fa-map-marker"></i></span> @Model.Photo.Location</div>
                                     <div class="f">
-                                        <button class=" " id="report" type="button" name="" data-toggle="tooltip" data-placement="bottom" title="Report this photo" onclick="report(@Model.Id)"><span><i class="fa fa-flag-o"></i></span></button>
+                                        <button class="" id="report" type="button" data-toggle="popover" title="report this photo" data-placement="bottom"  onclick="report(@Model.Id)"><span><i class="fa fa-flag-o"></i></span></button>
                                         <button class="btn btn-light pos-button modal-btns" data-toggle="modal" data-target="#share_modal" type="button" title="share this photo">Share</button>
                                         <button class="btn btn-light pos-button modal-btns" data-toggle="modal" data-target="#infoPhoto" type="button" title="info">Info</button>
 
@@ -115,7 +115,7 @@
                             <form class="form-comment" asp-action="Comment" asp-controller="Post">
                                 <input asp-for="Id" hidden readonly/>
                                 <div class="comment-box">
-                                    <textarea class="comment-content" name="content"></textarea>
+                                    <textarea class="comment-content" name="content" style="font-family: 'Roboto', sans-serif;"></textarea>
                                 </div>
                                 <button class="btn btn-send" type="submit">Submit</button>
                             </form>
@@ -125,7 +125,7 @@
                         <form class="form-comment">
                             
                             <div class="comment-box">
-                                <textarea class="comment-content" name="content" disabled></textarea>
+                                <textarea class="comment-content" name="content" disabled style="font-family: 'Roboto', sans-serif;"></textarea>
                             </div>
                             <button class="btn btn-send" type="button" disabled>Submit</button>
                         </form>
@@ -460,6 +460,10 @@
 
     
     <script>
+
+        $("[data-toggle=popover]")
+            .popover({ html: true })
+
         (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
@@ -597,13 +601,12 @@
         });
 
         function report(postid) {
-                debugger
                 $.ajax(
                 {
                     type: "POST",
-                    url: "@Url.Action("report")",
+                    url: "@Url.Action("report","Post")",
                     data: { id: postid },
-                    dataType: JSON,
+                    dataType: 'json',
                     success: function (respone) {
                         if (respone.status == true) {
                             alert("Are you sure to report this post");

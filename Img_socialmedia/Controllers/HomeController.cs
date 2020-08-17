@@ -44,6 +44,7 @@ namespace Img_socialmedia.Controllers
                           join post in shutterContext.Post on photo.Id equals post.PhotoId
                           join user in shutterContext.User on post.UserId equals user.Id
                           orderby post.Id descending
+                          where post.hasban==false
                           select new PostViewModel
                           {
                               Id = post.Id,
@@ -109,7 +110,9 @@ namespace Img_socialmedia.Controllers
             var result = from photo in shutterContext.Photo
                          join post in shutterContext.Post on photo.Id equals post.PhotoId
                          join user in shutterContext.User on post.UserId equals user.Id
+                         where post.hasban == false
                          orderby post.Id descending
+                         
                          select new PostViewModel
                          {
                              Id = post.Id,
@@ -138,7 +141,8 @@ namespace Img_socialmedia.Controllers
             var result = (from photo in shutterContext.Photo
                          join post in shutterContext.Post on photo.Id equals post.PhotoId
                          join user in shutterContext.User on post.UserId equals user.Id
-                         orderby post.Id descending
+                          where post.hasban == false
+                          orderby post.Id descending
                          select new PostViewModel
                          {
                              Id = post.Id,
@@ -166,7 +170,7 @@ namespace Img_socialmedia.Controllers
             var result = from photo in shutterContext.Photo
                          join post in shutterContext.Post on photo.Id equals post.PhotoId
                          join user in shutterContext.User on post.UserId equals user.Id
-                         where post.Id == id
+                         where post.Id == id && post.hasban == false
                          orderby post.Id descending
                          select new PostViewModel
                          {

@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -61,11 +62,12 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Home" asp-action="About" style="cursor:pointer;">About</a>
                             </li>
-                            <li class="nav-item">
-                                    <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
-                                </li>
+
                             @if (!string.IsNullOrEmpty(Context.Session.GetString("username")))
                             {
+                                <li class="nav-item">
+                                    <a class="nav-link" id="upload_modal" style="cursor:pointer;">Upload</a>
+                                </li>
                                 <li class="nav-item avatar">
                                     <a href="javascript:void(0);" class="btn-user media align-items-center dropdown-toggle" data-toggle="dropdown">
                                         <img class="mr-2" src="~/images/man.png" width="32" height="32" alt="avatar">

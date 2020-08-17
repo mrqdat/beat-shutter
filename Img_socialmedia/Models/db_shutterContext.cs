@@ -81,6 +81,12 @@ namespace Img_socialmedia.Models
                     .HasForeignKey(d => d.CollectionId)
                     .HasConstraintName("FK_collection_detail_collection");
 
+                entity.HasOne(d => d.Photo)
+                    .WithMany(p => p.CollectionDetail)
+                    .HasForeignKey(d => d.PostId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_collection_detail_photo");
+
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.CollectionDetails)
                     .HasForeignKey(d => d.CollectionId)
@@ -95,7 +101,7 @@ namespace Img_socialmedia.Models
 
                 entity.Property(e => e.Contents)
                     .HasColumnName("contents")
-                    .IsUnicode(false);
+                    .IsUnicode(true);
 
                 entity.Property(e => e.CreateAt)
                     .HasColumnName("create_at")
@@ -297,7 +303,7 @@ namespace Img_socialmedia.Models
 
                 entity.Property(e => e.Bio)
                     .HasColumnName("bio")
-                    .IsUnicode(false);
+                    .IsUnicode(true);
 
                 entity.Property(e => e.CreateAt)
                     .HasColumnName("create_at")
@@ -329,12 +335,19 @@ namespace Img_socialmedia.Models
 
                 entity.Property(e => e.Tags)
                     .HasColumnName("tags")
-                    .IsUnicode(false);
+                    .IsUnicode(true);
 
                 entity.Property(e => e.TokenId)
                     .HasColumnName("token_id")
                     .IsUnicode(false);
 
+                entity.Property(e => e.isAdmin)
+                   .HasColumnName("isAdmin");
+
+
+                entity.Property(e => e.hasBlocked)
+                    .HasColumnName("hasBLocked");
+                    
                 //entity.Property(e => e.Username)
                 //    .IsRequired()
                 //    .HasColumnName("username")

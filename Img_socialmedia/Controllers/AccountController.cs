@@ -31,7 +31,7 @@ namespace Img_socialmedia.Controllers
         {
             //return Json(new { status = true, message = "login successfully" });
             var user = _context.User.Where(u => u.Email == email);
-            if (user.Any())
+            if (!user.Any( u => u.hasBlocked ))
             {
                 if (user.First().Password == password)
                 {
@@ -39,21 +39,21 @@ namespace Img_socialmedia.Controllers
                     HttpContext.Response.Cookies.Append("username", username);
                     HttpContext.Session.SetInt32("userid", user.First().Id);
                     HttpContext.Session.SetString("username", username);
-                    if (username == "admin ")
+                    if (user.Any(x=>x.isAdmin))
                     {
                         return Json(new
                         {
                             status = true,
                             name = "admin"
-                        });
+                        });                       
                     }
-                    else 
+                    else
                     {
                         return Json(new
                         {
                             status = true,
-                            name = "user"                           
-                        }) ;
+                            name = "user"
+                        });
                     }
                 }
                 else

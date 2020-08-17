@@ -55,6 +55,8 @@ namespace Img_socialmedia.Controllers
                               Tags = post.Tags,
                               UserId = user.Id,
                               User = user,
+                              Username=user.Firstname + " " + user.Lastname,
+                              UserImg = user.ProfileImg,
                               Photo = photo,
                           }).Take(15).ToList();
             if (HttpContext.Session.GetInt32("userid").HasValue)
@@ -154,7 +156,7 @@ namespace Img_socialmedia.Controllers
                              Username = user.Lastname + " " + user.Firstname,
                              Photo = photo,
 
-                         }).Skip(start).Take(1);
+                         }).Skip(start).Take(6);
                 return result.ToList();
             }
             else

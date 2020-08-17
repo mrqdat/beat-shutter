@@ -18,13 +18,21 @@ namespace Img_socialmedia.Controllers
         }
         [HttpGet]
         public IActionResult Index(){
+            if (!HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                return View("Error");
+            }
             var user = _context.User.ToList();
             return View(user); 
         }
 
         public IActionResult report()
         {
-            
+            if (!HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                return View("Error");
+            }
+
             var result  = _context.Post.Where(u => u.triggeredBy>0).ToList();
             return View(result);
 
@@ -133,14 +141,13 @@ namespace Img_socialmedia.Controllers
         }
 
         [HttpPost]
-        public ActionResult blockadmin(int id)
+        public async Task<ActionResult> blockadmin(int id)
         {
             if (HttpContext.Session.GetInt32("userid").HasValue)
             {
-
                 var user = _context.User.Find(id);
                 user.isAdmin = false;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 return Json(new
                 {

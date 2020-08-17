@@ -27,19 +27,19 @@
                 </div>
 
                 <div class="wrap-input100 validate-input">
-                    <input asp-for="Firstname" class="input100" type="text" name="firstname" required>
+                    <input class="input100" type="text" name="firstname" required>
                     <span class="focus-input100"></span>
                     <span asp-validation-for="Firstname" class="label-input100">First name</span>
                 </div>
 
                 <div class="wrap-input100 validate-input">
-                    <input asp-for="Lastname" class="input100" type="text" name="lastname" required>
+                    <input class="input100" type="text" name="lastname" required>
                     <span class="focus-input100"></span>
                     <span asp-validation-for="Lastname" class="label-input100">Last Name</span>
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                    <input asp-for="Email" class="input100" type="text" name="email">
+                    <input class="input100" type="email" name="email">
                     <span class="focus-input100"></span>
                     <span asp-validation-for="Email" class="label-input100">Email</span>
                 </div>
@@ -51,14 +51,14 @@
        </div>-->
 
                 <div class="wrap-input100 validate-input" data-validate="Password is required">
-                    <input asp-for="Password" class="input100" type="password" name="Password">
+                    <input  class="input100" type="password" name="password">
                     <span class="focus-input100"></span>
                     <span asp-validation-for="Password" class="label-input100">Password</span>
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Confirm password doesn't match">
 
-                    <input class="input100" type="password" name="confirm_pass">
+                    <input class="input100" type="password" name="confirmpassword">
                     <span class="focus-input100"></span>
                     @*@Html.LabelFor(model => model.PasswordConfirm, htmlAttributes: new { @class = "label-input100" })*@
                     <span class="label-input100">Confirm password</span>

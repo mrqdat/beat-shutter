@@ -32,17 +32,19 @@ namespace Img_socialmedia.Controllers
         }
 
         // GET: Users/Details/5
-        public async Task<IActionResult> Details(int id)
+        public  IActionResult Details(int id)
         {
             if (id.ToString() == null)
             {
                 return View("Error");;
             }
 
-            var user = await _context.User
-                .Include(p=>p.Post.Where(s=>s.hasban==false))
-                    .ThenInclude(photo=>photo.Photo)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var user = _context.User
+                .Include(p => p.Post)
+                    .ThenInclude(photo => photo.Photo)
+                .Include(d => d.Collection)
+                    .ThenInclude(d => d.CollectionDetail)
+                .Where(d => d.Id == id).First();
             if (user == null)
             {
                 return View("Error");;
@@ -100,7 +102,7 @@ namespace Img_socialmedia.Controllers
             ModelState.AddModelError("", "New password & confirm password don't match");
             return View(user);
         }
-
+        [HttpGet]
         public IActionResult email()
         {
             if (!HttpContext.Session.GetInt32("userid").HasValue)
@@ -110,15 +112,17 @@ namespace Img_socialmedia.Controllers
             var user = _context.User.Find(HttpContext.Session.GetInt32("userid").Value);
             return View(user);
         }
-
-        public IActionResult close()
+        [HttpPost]
+        public async Task<IActionResult> email(string email)
         {
             if (!HttpContext.Session.GetInt32("userid").HasValue)
             {
                 return View("Error");
             }
             var user = _context.User.Find(HttpContext.Session.GetInt32("userid").Value);
-            return View(user);
+            user.Email = email;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Details", new { id = user.Id });
         }
 
         // GET: Users/Create

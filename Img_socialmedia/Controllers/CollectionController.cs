@@ -109,7 +109,7 @@ namespace Img_socialmedia.Controllers
             {
                 CollectionDetailViewModel model = new CollectionDetailViewModel
                 {
-                    PhotoId = postid,
+                    PostId = postid,
                     CollectionId = collectionid,
                 };
                 _context.Add(model);

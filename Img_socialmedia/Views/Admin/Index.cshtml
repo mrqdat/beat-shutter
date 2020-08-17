@@ -51,10 +51,10 @@
                                             @user.CreateAt.ToString("dd/MM/yyyy")
                                         </td>
                                         <td>
-                                            <input id="admin" type="checkbox" name="isAdmin" @(user.isAdmin ? "checked=\"checked\"" : "") onchange="change(@user.Id)" />
+                                            <input id="admin" type="checkbox" name="isAdmin" @(user.isAdmin ? "checked" : "") onchange="change(@user.Id)" />
                                         </td>
                                         <td>
-                                            <input id="block" type="checkbox" name="hasBlocked" @(user.hasBlocked ? "checked=\"checked\"" : "") onchange="blockuser(@user.Id)" />
+                                            <input id="block" type="checkbox" name="hasBlocked" @(user.hasBlocked ? "checked" : "") onchange="blockuser(@user.Id)" />
                                         </td>
 
                                     </tr>
@@ -119,9 +119,7 @@
                     }
                 });
             }
-            else
-            {
-                if ($('input[name=isAdmin]').is(":not(:checked)"))
+            else if ($('input[name=isAdmin]').is(":not(:checked)"))
                 {
                     $.ajax({
                         type: "POST",
@@ -145,7 +143,7 @@
                     });
                 }
             }
-        }
+        
 
 
         function blockuser(userid)

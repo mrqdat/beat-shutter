@@ -7,6 +7,7 @@ using Img_socialmedia.Models;
 using Microsoft.AspNetCore.Http;
 using System.Collections.ObjectModel;
 using System.Dynamic;
+using Microsoft.EntityFrameworkCore;
 
 namespace Img_socialmedia.Controllers
 {
@@ -54,6 +55,11 @@ namespace Img_socialmedia.Controllers
                     model.UserId = userid;
                     _context.Add(model);
                     _context.SaveChanges();
+                    return Json(new
+                    {
+                        result = "success",
+                        message = model
+                    });
                 }
                 else
                 {
@@ -73,10 +79,10 @@ namespace Img_socialmedia.Controllers
                 });
             }
             return Json(new
-            {
+            {  
                 result = "success",
                 message = "success"
-            });
+            });            
         }
 
 
@@ -107,7 +113,7 @@ namespace Img_socialmedia.Controllers
 
             if (HttpContext.Session.GetInt32("userid").HasValue)
             {
-                CollectionDetailViewModel model = new CollectionDetailViewModel
+                var model = new CollectionDetailViewModel
                 {
                     PostId = postid,
                     CollectionId = collectionid,
@@ -119,12 +125,30 @@ namespace Img_socialmedia.Controllers
             }
 
             return View("Error");
-        }
-
-
-        public ActionResult collectionDetails()
+        }        
+        public IActionResult GetCollectionDetail(int id)
         {
-            return View();
+            try
+            {
+                if (id  >0)
+                {
+                    var model = from cd in _context.CollectionDetail
+                                where cd.CollectionId == id
+                                select new CollectionDetailViewModel
+                                {
+                                    Id = cd.Id,
+                                    PostId = cd.PostId,
+                                    PostPhoto = _context.Post.Include(p => p.Photo).FirstOrDefault(d => d.Id == cd.PostId).Photo.Url,
+                                    CollectionId = cd.CollectionId
+                                };
+                    return Json(model.ToList());
+                }
+            }
+            catch
+            {
+
+            }
+            return Json(new { status=false});
         }
     }
 }

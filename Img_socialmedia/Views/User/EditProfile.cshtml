@@ -12,7 +12,7 @@
             <!-- Account Sidebar-->
             <div class="author-card pb-3">
                 <div id="profile">
-                    @if(string.IsNullOrEmpty(Model.ProfileImg))
+                    @if (!string.IsNullOrEmpty(Model.ProfileImg))
                     {
                         <img onclick="ClickImg()" id="profileimg3" width="200" height="200" src="@Url.Content(Model.ProfileImg)" asp-append-version="true" style="border-radius:100%">
                         <input type="file" id="mediaFile" accept="image/*" form="form1" name="profileimg" />
@@ -43,10 +43,6 @@
                         <i class="fe-icon-map-pin text-muted"></i>Change Password
                     </a>
 
-
-                    <a class="list-group-item" asp-controller="User" asp-action="close">
-                        <i class="fe-icon-map-pin text-muted"></i>Close account
-                    </a>
                 </nav>
             </div>
         </div>

@@ -102,7 +102,7 @@ namespace Img_socialmedia.Controllers
             ModelState.AddModelError("", "New password & confirm password don't match");
             return View(user);
         }
-
+        [HttpGet]
         public IActionResult email()
         {
             if (!HttpContext.Session.GetInt32("userid").HasValue)
@@ -112,15 +112,17 @@ namespace Img_socialmedia.Controllers
             var user = _context.User.Find(HttpContext.Session.GetInt32("userid").Value);
             return View(user);
         }
-
-        public IActionResult close()
+        [HttpPost]
+        public async Task<IActionResult> email(string email)
         {
             if (!HttpContext.Session.GetInt32("userid").HasValue)
             {
                 return View("Error");
             }
             var user = _context.User.Find(HttpContext.Session.GetInt32("userid").Value);
-            return View(user);
+            user.Email = email;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Details", new { id = user.Id });
         }
 
         // GET: Users/Create

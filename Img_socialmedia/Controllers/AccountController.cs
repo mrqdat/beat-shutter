@@ -31,6 +31,14 @@ namespace Img_socialmedia.Controllers
         {
             //return Json(new { status = true, message = "login successfully" });
             var user = _context.User.Where(u => u.Email == email);
+            if (user.First() == null)
+            {
+                return Json(new
+                {
+                    status = false,
+                    message = "Invalid Email"
+                });
+            }
             if (!user.Any( u => u.hasBlocked ))
             {
                 if (user.First().Password == password)
@@ -70,7 +78,7 @@ namespace Img_socialmedia.Controllers
                 return Json(new 
                 { 
                     status = false,
-                    message = "isvalid email" 
+                    message = "Your account has been locked. Contact khiet.nguyen2@gmail.com for more information!" 
                 });
             }
         }

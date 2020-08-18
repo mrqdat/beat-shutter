@@ -214,6 +214,24 @@ namespace Img_socialmedia.Controllers
             var url = Url.Action("Index", "Post", new { id = id});
             return Redirect(url);
         }
+        [HttpPost]
+        public IActionResult DeleteComment(int id)
+        {
+            if (!HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                return View("Error");
+            } 
+            var comment = shutterContext.Comment.Find(id);
+            if (comment == null)
+            {
+                return View("Error");
+            }
+            int ide = comment.PostId;
+            shutterContext.Comment.Remove(comment);
+            shutterContext.SaveChanges();
+            var url = Url.Action("Index", "Post", new { id = ide });
+            return Redirect(url);
+        }
         public IActionResult Search(string tags)
         {
             {

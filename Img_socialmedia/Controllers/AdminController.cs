@@ -16,9 +16,23 @@ namespace Img_socialmedia.Controllers
         public AdminController(db_shutterContext context){
             _context = context;
         }
+        public bool ValidateIsAdmin(int id)
+        {
+            var user = _context.User.Find(id).isAdmin;
+            if (user)
+            {
+                return true;
+            }
+            return false;
+        }
+
         [HttpGet]
         public IActionResult Index(){
             if (!HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                return View("Error");
+            }
+            if (!ValidateIsAdmin(HttpContext.Session.GetInt32("userid").Value))
             {
                 return View("Error");
             }
@@ -32,7 +46,10 @@ namespace Img_socialmedia.Controllers
             {
                 return View("Error");
             }
-
+            if (!ValidateIsAdmin(HttpContext.Session.GetInt32("userid").Value))
+            {
+                return View("Error");
+            }
             var result  = _context.Post.Where(u => u.triggeredBy>0).ToList();
             return View(result);
 

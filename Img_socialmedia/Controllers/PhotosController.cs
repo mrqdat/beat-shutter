@@ -172,6 +172,10 @@ namespace Img_socialmedia.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(List<IFormFile> files)
         {
+            if (!HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                return View("Error");
+            }
             if (files.Count != 0)
             {
                 long size = files.Sum(f => f.Length);
@@ -184,7 +188,8 @@ namespace Img_socialmedia.Controllers
                         if (extensions.Contains(".jpg") || extensions.Contains(".png"))
                         {
                             var filename = Path.GetFileName(formFile.FileName);
-                            var myUniqueFileName = Convert.ToString(Guid.NewGuid()) + "_" + HttpContext.Session.GetInt32("userid");
+                            var username = _context.User.Find(HttpContext.Session.GetInt32("userid").Value);
+                            var myUniqueFileName = username.Firstname + "_" + username.Lastname + "_" + Convert.ToString(Guid.NewGuid());
                             var fileExtension = Path.GetExtension(filename);
                             var newFileName = String.Concat(myUniqueFileName, fileExtension);
                             var filePath = new PhysicalFileProvider(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "images")).Root + $@"\{ newFileName}";

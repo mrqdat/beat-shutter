@@ -81,7 +81,7 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="modal-comment">
+                <div class="modal-comment" style="display:block;">
                     <div class="user-comment-layout">
                         @foreach (var comment in Model.Comment)
                         {
@@ -89,7 +89,7 @@
                                 <div class="user-layout">
                                     <span>
                                         <a asp-route-id="@comment.UserId" asp-action="Details" asp-controller="User">
-                                            <img src="@(comment.UserImg??"images/man.png")" class="owner-img" />
+                                            <img src="@(comment.UserImg??"/images/man.png")" class="owner-img" />
                                         </a>
                                     </span>
                                 </div>

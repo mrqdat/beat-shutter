@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Photo by " + @Model.Username;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var userid = Context.Session.GetInt32("userid");
 }
 <div class="post-main" id="uPhoto">
     <div class=" modal-maxw" style="margin:0;">
@@ -85,32 +86,33 @@
                     <div class="user-comment-layout">
                         @foreach (var comment in Model.Comment)
                         {
-                            <div class="user-comment" style="font-family: Arial, Helvetica, sans-serif;">
-                                <div class="user-layout">
-                                    <span>
-                                        <a asp-route-id="@comment.UserId" asp-action="Details" asp-controller="User">
-                                            <img src="@(comment.UserImg??"/images/man.png")" class="owner-img" />
-                                        </a>
-                                    </span>
-                                </div>
-                                <span class="comment-content" >
-                                    <span class="c-content">
-                                        <a asp-route-id="@comment.UserId" asp-action="Details" asp-controller="User" class="user-name" >
-                                            @comment.Username
-                                        </a>
-                                        <span class="comment-time">@comment.CreateAt.ToString("dd/MM/yyyy h:m")</span><br />
-
-                                        <span>
-                                            @comment.Contents
-                                        </span>
-
-                                    </span>
+                        <div class="user-comment" style="font-family: Arial, Helvetica, sans-serif;">
+                            <div class="user-layout">
+                                <span>
+                                    <a asp-route-id="@comment.UserId" asp-action="Details" asp-controller="User">
+                                        <img src="@(comment.UserImg??"/images/man.png")" class="owner-img" />
+                                    </a>
                                 </span>
-
                             </div>
-                            <div class="c-del">
-                                <button id="c-del" title="Delete your comment">Delete</button>
-                            </div>
+                            <span class="comment-content">
+                                <span class="c-content">
+                                    <a asp-route-id="@comment.UserId" asp-action="Details" asp-controller="User" class="user-name">
+                                        @comment.Username
+                                    </a>
+                                    <span class="comment-time">@comment.CreateAt.ToString("dd/MM/yyyy hh:mm")</span><br />
+                                    <span>
+                                        @comment.Contents
+                                    </span>
+                                    @if (userid == comment.UserId)
+                                    {
+                                        <span class="c-del">
+                                            <button id="c-del" title="Delete your comment" alt="Delete your comment" onclick="DeleteComment(this,@comment.Id)">Delete</button>
+                                        </span>
+                                    }
+                                </span>
+                            </span>
+                        </div>
+                          
                         }
 
                     </div>
@@ -492,18 +494,18 @@
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
             $('#url').val(url);
-          
+
         });
     //Get the button
     var ontop = document.getElementById("btn_ontop");
     window.onscroll = function () { scrollFunction() };
 
 
-    function geturl() { 
-        var copyText = document.getElementById("url");      
+    function geturl() {
+        var copyText = document.getElementById("url");
         copyText.select();
-       
-        copyText.setSelectionRange(0, 99999); 
+
+        copyText.setSelectionRange(0, 99999);
         document.execCommand("copy");
         alert("your url has copied to clipboard")
 
@@ -681,6 +683,25 @@
                 "</a>" +
                 "</li >"
             );
+        }
+
+        function DeleteComment(e,ide) {
+              $.ajax(
+                {
+                    type: "POST",
+                      url: "@Url.Action("DeleteComment", "Post")",
+                      data: { id: ide },
+                      dataType: "json",
+                      success: function (data) {
+                          if (data.status) {
+                              $(e).parent().parent().parent().parent().remove();
+                          }
+                          console.log(data);
+                    },
+                    error: function (error) {
+                         console.log(error);
+                    }
+                 });
         }
     </script>
 }

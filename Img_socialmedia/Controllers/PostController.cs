@@ -219,18 +219,17 @@ namespace Img_socialmedia.Controllers
         {
             if (!HttpContext.Session.GetInt32("userid").HasValue)
             {
-                return View("Error");
+                return Json(new { status = false });
             } 
             var comment = shutterContext.Comment.Find(id);
             if (comment == null)
             {
-                return View("Error");
+                return Json(new { status = false });
             }
             int ide = comment.PostId;
             shutterContext.Comment.Remove(comment);
             shutterContext.SaveChanges();
-            var url = Url.Action("Index", "Post", new { id = ide });
-            return Redirect(url);
+            return Json(new { status = true });
         }
         public IActionResult Search(string tags)
         {

@@ -481,9 +481,9 @@
 
 .c-del {
     font-size: 10px;
-    width: 17%;
-    margin-top: -5px;
-    float: right;
+    position: absolute;
+    bottom: 2px;
+    right: 5px;
 }
 #infoPhoto {
     position: fixed;

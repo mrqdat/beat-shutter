@@ -25,7 +25,6 @@
                                     <th>Time</th>
                                     <th>TriggeredBY</th>
                                     <th>Action</th>
-
                                 </tr>
                             </thead>
                             <tbody id="dataTable">
@@ -34,14 +33,20 @@
                                     <tr>
                                         <td>@item.Id</td>
                                         <td>@item.UserId</td>                                       
-                                        <td>@item.CreateAt.ToString("dd / MM /  yyyy")</td>
+                                        <td>@item.CreateAt.ToString("dd / MM / yyyy")</td>
                                         <td>@item.triggeredBy</td>
                                         <td>
-                                            @if(item.hasban){
-                                                <input class="btn btn-success" id="hidepost" type="button" value="has hidden" onclick="undoreport(@item.Id);" title="Click to unhide this photo"/>
-                                            }else{
-                                                <input class="btn btn-danger" id="hidepost" type="button" value="hide" onclick="report(@item.Id);" title="Click to hide this photo"/>
+                                            @if (item.hasban)
+                                            {
+                                                <input class="btn btn-success" id="hidepost" type="button" value="has hidden" onclick="undoreport(@item.Id);" title="Click to unhide this photo" />
                                             }
+                                            else
+                                            {
+                                                <input class="btn btn-warning" id="hidepost" type="button" value="hide" onclick="report(@item.Id);" title="Click to hide this photo" />
+                                            }
+
+                                            @* <input class="btn btn-danger" id="deletepost" type="button" value="delete" onclick="report(@item.Id);" title="Click to delete this photo" /> *@
+
                                         </td>
 
                                     </tr>
@@ -106,7 +111,7 @@
                     if (respone.status == true) {
                             window.location.href = "@Url.Action("undoreport")";
                     }
-                    else {                    
+                    else {
                         alert(respone.message);
                         window.location.href = "@Url.Action("Login","Account")";
                     }
@@ -116,6 +121,29 @@
                 }
             });
         }
+
+
+        @* function deletepost(postid) {
+            $.ajax(
+            {
+                type:"POST",
+                url: "@Url.Action("deletepost", "Admin")",
+                data: { id: postid },
+                dataType: 'json',
+                success: function (respone) {
+                    if (respone.status == true) {
+                            window.location.href = "@Url.Action("deletepost")";
+                    }
+                    else {
+                        alert(respone.message);
+                        window.location.href = "@Url.Action("Login","Account")";
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        } *@
 
 
         $(document).ready(function () {

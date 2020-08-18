@@ -362,7 +362,7 @@
     position: relative;
     right: 0;
     top: 0;
-    display: none;
+    display: block;
     max-height:500px;
 
 }
@@ -525,6 +525,11 @@
     border: 2px solid rgb(219, 219, 219);
     border-radius: 10px;
     height:7vh;
+}
+
+.iPhoto-x {
+    flex-wrap: wrap;
+    display: flex;
 }
 
 #url {

@@ -40,7 +40,7 @@ namespace Img_socialmedia.Controllers
         [HttpPost]
         public IActionResult createCollection(string colname, string coldes)
         {
-            var userid = HttpContext.Session.GetInt32("userid");
+            var userid = HttpContext.Session.GetInt32("userid").Value;
             if (userid != null)
             {
                 // var colname = Request.Form["colname"].ToString();
@@ -78,11 +78,11 @@ namespace Img_socialmedia.Controllers
                     url = Url.Action("Login", "Account")
                 });
             }
-            return Json(new
-            {  
-                result = "success",
-                message = "success"
-            });            
+            //return Json(new
+            //{  
+            //    result = "success",
+            //    message = "success"
+            //});            
         }
 
 
@@ -138,7 +138,6 @@ namespace Img_socialmedia.Controllers
                                 {
                                     Id = cd.Id,
                                     PostId = cd.PostId,
-                                    PostPhoto = _context.Post.Include(p => p.Photo).FirstOrDefault(d => d.Id == cd.PostId).Photo.Url,
                                     CollectionId = cd.CollectionId
                                 };
                     return Json(model.ToList());

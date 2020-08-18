@@ -830,6 +830,7 @@ a.list-group-item, .list-group-item-action {
 .info_edit {
     display:flex;
     color: #777;
+    justify-content: center;
 }
 
     .info_edit i {

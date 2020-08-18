@@ -10,7 +10,6 @@ namespace Img_socialmedia.Models
         public int CollectionId { get; set; }
 
         public virtual CollectionViewModel Collection { get; set; }
-        public virtual PhotoViewModel Photo { get; set; }
         public virtual PostViewModel Post { get; set; }
     }
 }

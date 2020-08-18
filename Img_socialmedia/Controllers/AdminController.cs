@@ -56,6 +56,41 @@ namespace Img_socialmedia.Controllers
         }
 
         [HttpPost]
+        public ActionResult deletepost(int id)
+        {
+            if (HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                var x = (from post in _context.Post
+                          where post.Id == id
+                          select post).First();
+                if (x != null) {
+                    _context.Remove(x);
+                    _context.SaveChanges();
+                    return Json(new
+                    {
+                        status = true
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        status = false,
+                        message = "This post doesnt exist or something else ¯_(ツ)_/¯  "
+                    });
+                }
+            }
+            else
+            {
+                return Json(new
+                {
+                    status = false,
+                    message = "Your session has expried, please login again to continue working."
+                });
+            }
+
+        }
+        [HttpPost]
         public ActionResult doreport(int id)
         {
             if (HttpContext.Session.GetInt32("userid").HasValue)
@@ -158,13 +193,13 @@ namespace Img_socialmedia.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> blockadmin(int id)
+        public ActionResult blockadmin(int id)
         {
             if (HttpContext.Session.GetInt32("userid").HasValue)
             {
                 var user = _context.User.Find(id);
                 user.isAdmin = false;
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
 
                 return Json(new
                 {

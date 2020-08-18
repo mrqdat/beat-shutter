@@ -11,7 +11,6 @@
             <div class="card mb-4" style="padding: 0;" >
                 <div class="card-header" >
                     <i class="fa fa-table mr-1" style="float:left;"></i>
-                    All User
                     <div class="" style="float:right;">
                         <input id="search" type="text" placeholder="Search..">
                     </div>
@@ -33,6 +32,7 @@
                             <tbody id="datatable">
                                 @foreach (var user in Model)
                                 {
+                                    var id = @user.Id;
                                     <tr>
                                         <td>
                                             @Html.DisplayFor(modelitem => user.Id)
@@ -51,10 +51,10 @@
                                             @user.CreateAt.ToString("dd/MM/yyyy")
                                         </td>
                                         <td>
-                                            <input id="admin" type="checkbox" name="isAdmin" @(user.isAdmin ? "checked" : "") onchange="change(@user.Id)" />
+                                            <input id="admin" type="checkbox" name="isAdmin" @(user.isAdmin ? "checked" : "") onchange="change(@id)" />
                                         </td>
                                         <td>
-                                            <input id="block" type="checkbox" name="hasBlocked" @(user.hasBlocked ? "checked" : "") onchange="blockuser(@user.Id)" />
+                                            <input id="block" type="checkbox" name="hasBlocked" @(user.hasBlocked ? "checked" : "") onchange="blockuser(@id)" />
                                         </td>
 
                                     </tr>
@@ -142,6 +142,8 @@
                         }
                     });
                 }
+                
+                            console.log(userid);
             }
         
 

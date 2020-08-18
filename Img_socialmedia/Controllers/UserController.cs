@@ -38,7 +38,29 @@ namespace Img_socialmedia.Controllers
             {
                 return View("Error");;
             }
+           
+            if (HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                var us = _context.User
+                .Include(p => p.Post)
+                    .ThenInclude(photo => photo.Photo)
+                .Include(d => d.Collection)
+                    .ThenInclude(d => d.CollectionDetail)
+                .Where(d => d.Id == id).First();
+                var follow = _context.Follow.Where(d =>
+                                                    d.UserId == HttpContext.Session.GetInt32("userid").Value &&
+                                                    d.FollowingUserId == us.Id).FirstOrDefault();
+                if (follow != null)
+                {
+                    us.hasFollowed = true;
+                }
+                if (us == null)
+                {
+                    return View("Error"); ;
+                }
 
+                return View("Index", us);
+            }
             var user = _context.User
                 .Include(p => p.Post)
                     .ThenInclude(photo => photo.Photo)
@@ -196,9 +218,6 @@ namespace Img_socialmedia.Controllers
             }
         }
 
-        // POST: Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> editprofile(EditUserViewModel model)
@@ -252,39 +271,46 @@ namespace Img_socialmedia.Controllers
 
             return RedirectToAction("Details", new { id = user.Id });
         }
-
-        // GET: Users/Delete/5
-        public async Task<IActionResult> Delete(int id)
+        /// <summary>
+        /// Check user login 
+        /// </summary>
+        /// <returns>true - false</returns>
+        public bool IsUserLogin()
         {
-            if (id.ToString() == null)
+            if(HttpContext.Session.GetInt32("userid").HasValue)
             {
-                return View("Error");;
+                return true; 
             }
-
-            var userViewModel = await _context.User
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (userViewModel == null)
+            return false;
+        }
+        [HttpPost]
+        public IActionResult Follow(int id)
+        {
+            if (!IsUserLogin())
             {
-                return View("Error");;
+                return Json(new { status = false });
             }
-
-            return View(userViewModel);
-        }
-
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var userViewModel = await _context.User.FindAsync(id);
-            _context.User.Remove(userViewModel);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool UserExists(int id)
-        {
-            return _context.User.Any(e => e.Id == id);
+            var user = _context.User.Find(id);
+            if (user == null)
+            {
+                return Json(new { status = false });
+            }
+            var userid = HttpContext.Session.GetInt32("userid").Value;
+            var follow = _context.Follow.FirstOrDefault(d => d.UserId == userid && d.FollowingUserId == id);
+            if (follow != null)
+            {
+                _context.Follow.Remove(follow);
+                _context.SaveChanges();
+                return Json(new { status = true,msg=1 });
+            }
+            var model = new FollowViewModel
+            {
+                UserId = userid,
+                FollowingUserId = id
+            };
+            _context.Follow.Add(model);
+            _context.SaveChanges();
+            return Json(new { status = true,msg=2 });
         }
     }
 }

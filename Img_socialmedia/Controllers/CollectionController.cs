@@ -140,19 +140,22 @@ namespace Img_socialmedia.Controllers
                 if (id  >0)
                 {
                     var model = from cd in _context.CollectionDetail
+                                join a in _context.Post on cd.PostId equals a.Id
+                                join p in _context.Photo on a.PhotoId equals p.Id
                                 where cd.CollectionId == id
                                 select new CollectionDetailViewModel
                                 {
                                     Id = cd.Id,
                                     PostId = cd.PostId,
-                                    CollectionId = cd.CollectionId
+                                    CollectionId = cd.CollectionId,
+                                    PostPhoto = p.Url
                                 };
                     return Json(model.ToList());
                 }
             }
             catch
             {
-
+                return Json(new { status = false });
             }
             return Json(new { status=false});
         }

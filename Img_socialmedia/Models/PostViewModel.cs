@@ -9,7 +9,6 @@ namespace Img_socialmedia.Models
         public PostViewModel()
         {
             Comment = new HashSet<CommentViewModel>();
-            Notification = new HashSet<NotificationViewModel>();
             CollectionDetails = new HashSet<CollectionDetailViewModel>();
         }
 
@@ -35,7 +34,6 @@ namespace Img_socialmedia.Models
         public virtual UserViewModel User { get; set; }
         public virtual PhotoViewModel Photo { get; set; }
         public virtual IEnumerable<CommentViewModel> Comment { get; set; }
-        public virtual IEnumerable<NotificationViewModel> Notification { get; set; }
         public virtual IEnumerable<CollectionDetailViewModel> CollectionDetails { get; set; }
         [NotMapped]
         public virtual IEnumerable<PostViewModel> RelatedPost { get; set; }

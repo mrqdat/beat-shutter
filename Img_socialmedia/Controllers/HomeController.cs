@@ -237,6 +237,44 @@ namespace Img_socialmedia.Controllers
             return result;
         }
         
-        
+        [HttpGet]
+        public IActionResult Following()
+        {
+            if (!HttpContext.Session.GetInt32("userid").HasValue)
+            {
+                return View("Index","Home");
+            }
+
+            int userid = HttpContext.Session.GetInt32("userid").Value;
+
+            List<PostViewModel> postList = new List<PostViewModel>();
+
+            var follow = shutterContext.Follow.Where(d => d.UserId == userid).ToList();
+
+            foreach (var item in follow)
+            {
+                var result = from photo in shutterContext.Photo
+                                join post in shutterContext.Post on photo.Id equals post.PhotoId
+                                join user in shutterContext.User on post.UserId equals user.Id
+                                where post.hasban == false && post.PhotoId == userid
+                                orderby post.Id descending
+                                select new PostViewModel
+                                {
+                                    Id = post.Id,
+                                    PhotoId = photo.Id,
+                                    TotalLike = post.TotalLike,
+                                    TotalViews = post.TotalViews,
+                                    CreateAt = post.CreateAt,
+                                    Tags = post.Tags,
+                                    UserId = user.Id,
+                                    UserImg = user.ProfileImg,
+                                    Username = user.Lastname + " " + user.Firstname,
+                                    Photo = photo,
+                                    hasban=post.hasban,
+                                };
+                return View(result);
+            }
+            return View(postList);
+        }
     }
 }

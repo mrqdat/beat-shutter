@@ -11,15 +11,12 @@
         <div class="row">
             <div class="left col-lg-4" style="position: relative;">
                 <div class="profile">
-                    <div class="photo-left">
+                    <div class="photo-left" style="text-align:center;">
                         <img class="photo" src="@Url.Content(Model.ProfileImg??"/images/man.png")" asp-append-version="true" />
 
                     </div>
                     <div class="info_edit">
                         <h4 class="name">@(Model.Firstname+" "+Model.Lastname)</h4>
-                        <a class="info_link" asp-action="editprofile" asp-controller="User" asp-route-id="@Model.Id" alt="edit your profile">
-                            <i class="fa fa-edit"></i>
-                        </a>
                     </div>
                     <div class="stats row" style="margin:0;">
                         <div class="stat col-xs-4" style="padding-left: 50px;margin-right:7px">
@@ -35,8 +32,20 @@
                     <p class="desc">@Model.Bio</p>
                     <div class="social">
                         @*<i class="fa fa-facebook-square" aria-hidden="true"></i>
-                    <i class="fa fa-twitter-square" aria-hidden="true"></i>*@
+        <i class="fa fa-twitter-square" aria-hidden="true"></i>*@
                         Join at @Model.CreateAt.ToString("dd/MM/yyyy")
+                        <br /><br />
+                        @if (Model.Id != Context.Session.GetInt32("userid"))
+                        {
+                            if (Model.hasFollowed)
+                            {
+                                <button class="btn btn-outline-danger" onclick=Follow(this,@Model.Id)>Unfollow</button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-outline-primary" onclick=Follow(this,@Model.Id)>Follow</button>
+                            }
+                        }
                     </div>
                 </div>
             </div>
@@ -89,9 +98,6 @@
                 </div>
             </div>
 
-           
-
-            @*<span class="follow">Follow</span>*@
             @*<ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#galery">Photos</a></li>
 
@@ -148,6 +154,29 @@
                         "<img src='" + item["postPhoto"]+"'/>"+
                     "</a>"+
                 "</div>");
+        }
+
+        function Follow(ed,ide) {
+                  $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Follow","User")",
+                      data: { id: ide },
+                      dataType:"json",
+                      success: function (response) {
+                          if (response["msg"] == 2) {
+                              ed.classList.remove("btn-outline-primary");
+                              ed.classList.add("btn-outline-danger");
+                              $(ed).html("Unfollow");
+                          } else {
+                              ed.classList.remove("btn-outline-danger");
+                              ed.classList.add("btn-outline-primary");
+                              $(ed).html("Follow");
+                          }
+                    },
+                    error: function (error) {
+                         console.log(error);
+                    }
+                 });
         }
     </script>
 }

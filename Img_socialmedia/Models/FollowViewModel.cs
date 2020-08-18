@@ -5,9 +5,8 @@ namespace Img_socialmedia.Models
 {
     public partial class FollowViewModel
     {
-        public int? FollowerId { get; set; }
-        public int? Followed { get; set; }
-
-        public virtual UserViewModel Follower { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public int FollowingUserId { get; set; }
     }
 }

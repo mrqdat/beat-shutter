@@ -18,10 +18,8 @@ namespace Img_socialmedia.Models
         public virtual DbSet<CollectionViewModel> Collection { get; set; }
         public virtual DbSet<CollectionDetailViewModel> CollectionDetail { get; set; }
         public virtual DbSet<CommentViewModel> Comment { get; set; }
-        public virtual DbSet<EventTypeViewModel> EventType { get; set; }
         public virtual DbSet<ExternalLoginViewModel> ExternalLogin { get; set; }
         public virtual DbSet<FollowViewModel> Follow { get; set; }
-        public virtual DbSet<NotificationViewModel> Notification { get; set; }
         public virtual DbSet<PhotoViewModel> Photo { get; set; }
         public virtual DbSet<PostViewModel> Post { get; set; }
         public virtual DbSet<UserViewModel> User { get; set; }
@@ -125,17 +123,7 @@ namespace Img_socialmedia.Models
                     .HasConstraintName("FK_comment_user");
             });
 
-            modelBuilder.Entity<EventTypeViewModel>(entity =>
-            {
-                entity.ToTable("event_type");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasColumnName("description")
-                    .IsUnicode(false);
-            });
+    
 
             modelBuilder.Entity<ExternalLoginViewModel>(entity =>
             {
@@ -159,59 +147,17 @@ namespace Img_socialmedia.Models
 
             modelBuilder.Entity<FollowViewModel>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("follow");
-
-                entity.Property(e => e.Followed).HasColumnName("followed");
-
-                entity.Property(e => e.FollowerId).HasColumnName("follower_id");
-
-                entity.HasOne(d => d.Follower)
-                    .WithMany()
-                    .HasForeignKey(d => d.FollowerId)
-                    .HasConstraintName("FK_follow_user");
-            });
-
-            modelBuilder.Entity<NotificationViewModel>(entity =>
-            {
-                entity.ToTable("notification");
-
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.CreateAt)
-                    .HasColumnName("create_at")
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.UserId).HasColumnName("UserId");
 
-                entity.Property(e => e.EventId).HasColumnName("event_id");
+                entity.Property(e => e.FollowingUserId).HasColumnName("followingUserId");
 
-                entity.Property(e => e.PostId).HasColumnName("post_id");
 
-                entity.Property(e => e.Status).HasColumnName("status");
-
-                entity.Property(e => e.TriggerUserId).HasColumnName("trigger_user_id");
-
-                entity.Property(e => e.UserId).HasColumnName("user_id");
-
-                entity.HasOne(d => d.Event)
-                    .WithMany(p => p.Notification)
-                    .HasForeignKey(d => d.EventId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_notification_event_type");
-
-                entity.HasOne(d => d.Post)
-                    .WithMany(p => p.Notification)
-                    .HasForeignKey(d => d.PostId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_notification_post");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Notification)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_notification_user");
             });
+
+      
 
             modelBuilder.Entity<PhotoViewModel>(entity =>
             {

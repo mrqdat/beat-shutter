@@ -12,7 +12,6 @@ namespace Img_socialmedia.Models
             Collection = new HashSet<CollectionViewModel>();
             Comment = new HashSet<CommentViewModel>();
             ExternalLogin = new HashSet<ExternalLoginViewModel>();
-            Notification = new HashSet<NotificationViewModel>();
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -47,10 +46,11 @@ namespace Img_socialmedia.Models
         public bool isAdmin { get; set; }
         public bool hasBlocked { get; set; }
         public string Tags { get; set; }
+        [NotMapped]
+        public bool hasFollowed { get; set; }
         public virtual IEnumerable<PostViewModel> Post { get; set; }
         public virtual ICollection<CollectionViewModel> Collection { get; set; }
         public virtual ICollection<CommentViewModel> Comment { get; set; }
         public virtual ICollection<ExternalLoginViewModel> ExternalLogin { get; set; }
-        public virtual ICollection<NotificationViewModel> Notification { get; set; }
     }
 }

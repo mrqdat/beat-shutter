@@ -1,0 +1,318 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+    ViewData["Title"] = "Following";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<PostViewModel>
+<div style="margin:66px 1em 0 1em;">
+    <h3>Following</h3>
+    <hr />
+    <div class="grid-photos">
+        <div>
+            @foreach (var related in Model)
+            {
+                @if (@related.Id % 3 == 0)
+                {
+                    <div class="img-x">
+                        <figure>
+                            <div class="img-content">
+                                <a class="a-cursor" asp-controller="Post" asp-route-id="@related.Id" asp-action="Index">
+                                    <div class="img-rel">
+                                        <img class="photo-content" src="@related.Photo.Url" asp-append-version="true" alt="@related.Tags" />
+                                    </div>
+                                </a>
+                                <div class="img-icon">
+                                    <div class="img-hover-background i-animation"></div>
+                                    <div class="img-button-top img-button-display i-animation">
+                                        <div class="img-button">
+                                            <button class="btn btn-light pos-button">
+                                                <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span> @*Like*@
+                                            </button>
+                                            <button class="btn btn-light" data-target="#collection_modal" data-toggle="modal" onclick="GetCollection(@related.Id)">
+                                                <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="img-button-bottom img-button-display i-animation">
+                                        <div class="owner-photo">
+                                            <span>
+                                                <a asp-controller="User" asp-action="Details" asp-route-id="@related.UserId">
+                                                    <img class="owner-img" src="@(related.UserImg??"/images/man.png")" asp-append-version="true" />
+                                                </a>
+                                            </span>
+                                            <a class="owner-name" asp-controller="User" asp-action="Details" asp-route-id="@related.UserId">
+                                                @related.Username
+                                            </a>
+                                        </div>
+                                        <div class="img-button">
+                                            <a class="btn btn-light" href="@related.Photo.Url" download>
+                                                <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                                    <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                }
+            }
+        </div>
+        <div>
+            @foreach (var related in Model)
+            {
+                @if (@related.Id % 3 == 1)
+                {
+                    <div class="img-x">
+                        <figure>
+                            <div class="img-content">
+                                <a class="a-cursor" asp-controller="Post" asp-route-id="@related.Id" asp-action="Index">
+                                    <div class="img-rel">
+                                        <img class="photo-content" src="@related.Photo.Url" asp-append-version="true" alt="@related.Tags" />
+                                    </div>
+                                </a>
+                                <div class="img-icon">
+                                    <div class="img-hover-background i-animation"></div>
+                                    <div class="img-button-top img-button-display i-animation">
+                                        <div class="img-button">
+                                            <button class="btn btn-light pos-button">
+                                                <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span> @*Like*@
+                                            </button>
+                                            <button class="btn btn-light" data-target="#collection_modal" data-toggle="modal" onclick="GetCollection(@related.Id)">
+                                                <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="img-button-bottom img-button-display i-animation">
+                                        <div class="owner-photo">
+                                            <span>
+                                                <a asp-controller="User" asp-action="Details" asp-route-id="@related.UserId">
+                                                    <img class="owner-img" src="@(related.UserImg??"/images/man.png")" asp-append-version="true" />
+                                                </a>
+                                            </span>
+                                            <a class="owner-name" asp-controller="User" asp-action="Details" asp-route-id="@related.UserId">
+                                                @related.Username
+                                            </a>
+                                        </div>
+                                        <div class="img-button">
+                                            <a class="btn btn-light" href="@related.Photo.Url" download>
+                                                <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                                    <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                }
+            }
+        </div>
+        <div>
+            @foreach (var related in Model)
+            {
+                @if (@related.Id % 3 == 2)
+                {
+                    <div class="img-x">
+                        <figure>
+                            <div class="img-content">
+                                <a class="a-cursor" asp-controller="Post" asp-route-id="@related.Id" asp-action="Index">
+                                    <div class="img-rel">
+                                        <img class="photo-content" src="@related.Photo.Url" asp-append-version="true" alt="@related.Tags" />
+                                    </div>
+                                </a>
+                                <div class="img-icon">
+                                    <div class="img-hover-background i-animation"></div>
+                                    <div class="img-button-top img-button-display i-animation">
+                                        <div class="img-button">
+                                            <button class="btn btn-light pos-button">
+                                                <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span> @*Like*@
+                                            </button>
+                                            <button class="btn btn-light" data-target="#collection_modal" data-toggle="modal" onclick="GetCollection(@related.Id)">
+                                                <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="img-button-bottom img-button-display i-animation">
+                                        <div class="owner-photo">
+                                            <span>
+                                                <a asp-controller="User" asp-action="Details" asp-route-id="@related.UserId">
+                                                    <img class="owner-img" src="@(related.UserImg??"/images/man.png")" asp-append-version="true" />
+                                                </a>
+                                            </span>
+                                            <a class="owner-name" asp-controller="User" asp-action="Details" asp-route-id="@related.UserId">
+                                                @related.Username
+                                            </a>
+                                        </div>
+                                        <div class="img-button">
+                                            <a class="btn btn-light" href="@related.Photo.Url" download>
+                                                <svg class="bi bi-download" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
+                                                    <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />
+                                                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+
+
+    @* collection modal *@
+    <div class="fade bgiPhoto" id="collection_modal" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="cursor: auto;min-height: 400px;">
+                <div class="collection-content">
+                    <div class="collection">
+                        <div class=collection-bg style="background-image: url('./images/f686c873-8cc3-4963-b74c-65d76401d22a-shutter.jpg');"></div>
+                        <div class="collection-all">
+                            <div class="collection-list">
+                                <div class="collection-list-item">
+                                    <h3>Add to Collection</h3>
+                                    <button class="btn create-item" id="create-item">
+                                        <h6>Create a new collection</h6>
+                                    </button>
+                                    <ul class="collection-item">
+                                        <li class="item-detail">
+                                            <button class="btn addcol">
+                                                <div class="item-name">
+                                                    <span>0 photos</span>
+                                                    <h6></h6>
+                                                </div>
+                                                <div class="addto" title="add to collection">
+                                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                    </svg>
+                                                </div>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="collection-create">
+                                <div class="">
+                                    <h3>Create new collection</h3>
+                                    <form id="newcollection" method="post">
+                                        <div class="create-item">
+                                            <input class="colname" type="text" name="colname" value="" placeholder="Collection name" required />
+                                        </div>
+                                        <div class="create-item">
+                                            <input class="coldes" type="text" name="coldes" placeholder="Description" value="" />
+                                        </div>
+                                        <div class=collection-action>
+                                            <button class="btn craete-cancel" type="button"><u>Cancel</u></button>
+                                            <button class="btn crebtn" type="button"><u>Create</u></button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $('#create-item').on('click', function () {
+        $('.collection-list').hide();
+        $('.collection-create').show();
+    });
+
+    $('.craete-cancel').on('click', function () {
+        $('.collection-list').show();
+        $('.collection-create').hide();
+    });
+      $(document).ready(function () {
+            var colname = $('.colname').val();
+            $('.crebtn').on('click', function () {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("createCollection", "Collection")",
+                    data:{
+                        'colname':$('.colname').val(),
+                        'coldes':$('.coldes').val()
+                    },
+                    success: function (respone) {
+                        if (respone.result == 'Redirect') {
+                            window.location.href = "@Url.Action("Login", "Account")";
+                        }
+                        else {
+                            if (respone.result == 'false') {
+                                alert(respone.message)
+                            }
+                            else {
+                                CreateNewListCollection(respone.message);
+                                $('.collection-list').show();
+                                $('.collection-create').hide();
+                            }
+                        }
+                    }
+                });
+            });
+      });
+
+          function GetCollection(postid) {
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("GetCollection","Collection")",
+                        success: function (respone) {
+                            if (respone!=null)
+                            $(".collection-item").empty();
+                            respone.forEach(function (item, index) {
+                                CreateNewListCollection(item, postid);
+                            });
+                        },
+                    error: function (error) {
+                         console.log(error);
+                    }
+                 });
+         }
+
+          function CreateNewListCollection(item,postid) {
+            $(".collection-item").append(
+                "<li class= 'item-detail'>" +
+                "<a class='btn addcol' href='/Collection/AddtoCollection?collectionid="+item["id"]+"&postid="+postid+"'>" +
+                    "<div class='item-name'>" +
+                        "<span></span>" +
+                        "<h4>"+item["name"]+"</h4>" +
+                    "</div>" +
+                    "<div class='addto' title='add to collection'>" +
+                        "<svg class='bi bi-plus' width='1em' height='1em' viewBox='2 4 12 12' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>" +
+                            "<path fill-rule='evenodd' d='M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z' />" +
+                            "<path fill-rule='evenodd' d='M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z' />" +
+                        "</svg>" +
+                    "</div>" +
+                "</a>" +
+                "</li >"
+            );
+        }
+</script>

@@ -8,7 +8,10 @@
 }
 @model IEnumerable<PostViewModel>
     <div style="margin:66px 1em 0 1em;">
-        <h3>Search</h3>
+        <br />
+        <h3>
+        @Context.Request.Query["tags"].ToString()
+        </h3>
         <hr />
         <div class="grid-photos">
             <div>

@@ -32,7 +32,7 @@
                             <tbody id="datatable">
                                 @foreach (var user in Model)
                                 {
-                                    var id = @user.Id;
+                                    
                                     <tr>
                                         <td>
                                             @Html.DisplayFor(modelitem => user.Id)
@@ -51,10 +51,10 @@
                                             @user.CreateAt.ToString("dd/MM/yyyy")
                                         </td>
                                         <td>
-                                            <input id="admin" type="checkbox" name="isAdmin" @(user.isAdmin ? "checked" : "") onchange="change(@id)" />
+                                            <input id="admin" type="checkbox" name="isAdmin" @(user.isAdmin ? "checked" : "") onchange="change(@user.Id)" />
                                         </td>
                                         <td>
-                                            <input id="block" type="checkbox" name="hasBlocked" @(user.hasBlocked ? "checked" : "") onchange="blockuser(@id)" />
+                                            <input id="block" type="checkbox" name="hasBlocked" @(user.hasBlocked ? "checked" : "") onchange="blockuser(@user.Id)" />
                                         </td>
 
                                     </tr>

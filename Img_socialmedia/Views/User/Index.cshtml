@@ -49,15 +49,15 @@
                 </ul>
 
                 <div class="tab-content">
-                    <div id="gallery" class="tab-pane fade in active show" style="padding-top: 20px;">
-                        <div class="row gallery ">
+                    <div id="gallery " class="tab-pane fade in active show" style="padding-top: 20px;">
+                        <div class="gallery" id="photos">
                             @foreach (var item in Model.Post)
                             {
-                                <div class="col-md-4">
+                               
                                     <a asp-route="PostDetail" asp-route-id="@item.Id">
                                         <img src="@item.Photo.Url" asp-append-version="true" />
                                     </a>
-                                </div>
+                                
                             }
                         </div>
                     </div>

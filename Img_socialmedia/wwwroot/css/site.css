@@ -949,7 +949,7 @@ a.list-group-item, .list-group-item-action {
 }
 
 .gallery {
-    margin-top: 35px;
+    padding-top: 35px;
 }
 
     .gallery div {
@@ -1169,3 +1169,21 @@ a.alert_message {
     max-width: 97%;
 }
 /*=======================================      end postmain*/
+
+#photos {
+    
+    line-height: 0;
+    -webkit-column-count: 3;
+    -webkit-column-gap: 10px;
+    -moz-column-count: 3;
+    -moz-column-gap: 10px;
+    column-count: 3;
+    column-gap: 10px;
+}
+
+    #photos img {
+
+        width: 100% !important;
+        height: auto !important;
+        margin-bottom :10px;
+    }

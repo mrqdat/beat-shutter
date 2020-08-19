@@ -188,20 +188,14 @@ namespace Img_socialmedia.Controllers
                             var fileExtension = Path.GetExtension(filename);
                             var newFileName = String.Concat(myUniqueFileName, fileExtension);
                             var filePath = new PhysicalFileProvider(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "images")).Root + $@"\{ newFileName}";
-                            // full path to file in temp location
-                            //var filePath = Path.GetTempFileName(); //we are using Temp file name just for the example. Add your own file path.
+                            
                             filePaths.Add(filePath);
                             using (var stream = new FileStream(filePath, FileMode.Create))
                             {
                                 await formFile.CopyToAsync(stream);
                             }
                             Image image = Image.FromFile(filePath);
-                            //var directories = Encoding.UTF8.GetString(image.GetPropertyItem(0x010F).Value);
-                            //var focal = Encoding.UTF8.GetString(image.GetPropertyItem(0x920A).Value);
-                            //var equip = Encoding.UTF8.GetString(image.GetPropertyItem(0x0110).Value);
-                            //var aperture = Encoding.UTF8.GetString(image.GetPropertyItem(0x9202).Value);
-                            //var height = Encoding.UTF8.GetString(image.GetPropertyItem(0x0101).Value);
-                            //var width = Encoding.UTF8.GetString(image.GetPropertyItem(0x0100).Value);
+                            
 
                             string focal = "";
                             int ISO = 0;

@@ -233,7 +233,6 @@ namespace Img_socialmedia.Controllers
             var result = (from col in shutterContext.Collection 
                           where  col.UserId == userid
                           select col).ToList();
-            
             return result;
         }
 

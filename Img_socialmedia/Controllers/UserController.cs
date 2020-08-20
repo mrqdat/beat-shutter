@@ -55,8 +55,8 @@ namespace Img_socialmedia.Controllers
 
                     var follower = _context.Follow.Where(d => d.UserId == id).Count();
                     var following = _context.Follow.Where(d => d.FollowingUserId == id).Count();
-                ViewBag.Follower = follower;
-                ViewBag.Following = following;
+                ViewData["Following"] = following;
+                ViewData["Follower"] = follower;
                     if (follow != null)
                         {
                             us.hasFollowed = true;
@@ -85,8 +85,8 @@ namespace Img_socialmedia.Controllers
                 }
             var following1 = _context.Follow.Where(d => d.UserId == id).Count();
             var follower1 = _context.Follow.Where(d => d.FollowingUserId == id).Count();
-            ViewData["Following"] = follower1;
-            ViewData["Follower"] = following1;
+            ViewData["Following"] = following1;
+            ViewData["Follower"] = follower1;
 
             return View("Index", user);
         }
@@ -330,7 +330,7 @@ namespace Img_socialmedia.Controllers
         }
 
         [HttpGet]
-        public IActionResult Following(int id)
+        public IActionResult Follower(int id)
         {
            // int userid = HttpContext.Session.GetInt32("userid").Value;
 
@@ -356,7 +356,7 @@ namespace Img_socialmedia.Controllers
         }
 
         [HttpGet]
-        public IActionResult Follower(int id)
+        public IActionResult Following(int id)
         {
 
             //int userid = HttpContext.Session.GetInt32("userid").Value;

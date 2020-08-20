@@ -155,10 +155,9 @@
         var btn = document.getElementById("upload_modal");
         var span = document.getElementsByClassName("close")[0];
 
-
-        btn.onclick = function () {
-            modal.style.display = "block";
-        };
+    $("#upload_modal").on('click',function () {
+        $("#myModal").css("display", "block");
+    });
 
 
         span.onclick = function () {
@@ -170,7 +169,7 @@
                 modal.style.display = "none";
             }
         };
-
+    
         function readURL(input) {
             if (input.files && input.files[0]) {
 

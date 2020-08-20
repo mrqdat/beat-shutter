@@ -34,43 +34,59 @@ namespace Img_socialmedia.Controllers
         // GET: Users/Details/5
         public  IActionResult Details(int id)
         {
-            if (id.ToString() == null)
-            {
-                return View("Error");;
-            }
-           
-            if (HttpContext.Session.GetInt32("userid").HasValue)
-            {
-                var us = _context.User
-                .Include(p => p.Post)
-                    .ThenInclude(photo => photo.Photo)
-                .Include(d => d.Collection)
-                    .ThenInclude(d => d.CollectionDetail)
-                .Where(d => d.Id == id).First();
-                var follow = _context.Follow.Where(d =>
-                                                    d.UserId == HttpContext.Session.GetInt32("userid").Value &&
-                                                    d.FollowingUserId == us.Id).FirstOrDefault();
-                if (follow != null)
+                if (id.ToString() == null)
                 {
-                    us.hasFollowed = true;
-                }
-                if (us == null)
-                {
-                    return View("Error"); ;
+                    return View("Error");;
                 }
 
-                return View("Index", us);
-            }
-            var user = _context.User
-                .Include(p => p.Post)
-                    .ThenInclude(photo => photo.Photo)
-                .Include(d => d.Collection)
-                    .ThenInclude(d => d.CollectionDetail)
-                .Where(d => d.Id == id).First();
-            if (user == null)
-            {
-                return View("Error");;
-            }
+                if (HttpContext.Session.GetInt32("userid").HasValue)
+                {
+              
+                        var us = _context.User
+                        .Include(p => p.Post)
+                            .ThenInclude(photo => photo.Photo)
+                        .Include(d => d.Collection)
+                            .ThenInclude(d => d.CollectionDetail)
+                        .Where(d => d.Id == id).First();
+
+                        var follow = _context.Follow.Where(d =>
+                                                            d.UserId == HttpContext.Session.GetInt32("userid").Value &&
+                                                            d.FollowingUserId == us.Id).FirstOrDefault();
+
+                    var follower = _context.Follow.Where(d => d.UserId == id).Count();
+                    var following = _context.Follow.Where(d => d.FollowingUserId == id).Count();
+                ViewBag.Follower = follower;
+                ViewBag.Following = following;
+                    if (follow != null)
+                        {
+                            us.hasFollowed = true;
+                        }
+                        else
+                        {
+                            us.hasFollowed = false;
+                        }
+                        if (us == null)
+                        {
+                            return View("Error"); ;
+                        }
+
+                        return View("Index", us);
+                }
+                var user = _context.User
+                    .Include(p => p.Post)
+                        .ThenInclude(photo => photo.Photo)
+                    .Include(d => d.Collection)
+                        .ThenInclude(d => d.CollectionDetail)
+                    .Where(d => d.Id == id).First();
+
+                if (user == null)
+                {
+                    return View("Error");;
+                }
+            var following1 = _context.Follow.Where(d => d.UserId == id).Count();
+            var follower1 = _context.Follow.Where(d => d.FollowingUserId == id).Count();
+            ViewData["Following"] = follower1;
+            ViewData["Follower"] = following1;
 
             return View("Index", user);
         }
@@ -311,6 +327,59 @@ namespace Img_socialmedia.Controllers
             _context.Follow.Add(model);
             _context.SaveChanges();
             return Json(new { status = true,msg=2 });
+        }
+
+        [HttpGet]
+        public IActionResult Following(int id)
+        {
+           // int userid = HttpContext.Session.GetInt32("userid").Value;
+
+            List<UserViewModel> userList = new List<UserViewModel>();
+
+            var follow = _context.Follow.Where(d => d.UserId == id).ToList();
+
+
+            foreach (var item in follow)
+            {
+                var result = _context.User
+                                            .Where(d => d.Id == item.FollowingUserId)
+                                            .Select(d => new UserViewModel
+                                            {
+                                                Id = d.Id,
+                                                Firstname = d.Firstname,
+                                                Lastname = d.Lastname,
+                                                ProfileImg = d.ProfileImg
+                                            }).First();
+                userList.Add(result);
+            }
+            return Ok(userList);
+        }
+
+        [HttpGet]
+        public IActionResult Follower(int id)
+        {
+
+            //int userid = HttpContext.Session.GetInt32("userid").Value;
+
+            List<UserViewModel> userList = new List<UserViewModel>();
+
+            var follow = _context.Follow.Where(d => d.FollowingUserId == id).ToList();
+
+
+            foreach (var item in follow)
+            {
+                var result = _context.User
+                                            .Where(d => d.Id == item.UserId)
+                                            .Select(d => new UserViewModel
+                                            {
+                                                Id = d.Id,
+                                                Firstname = d.Firstname,
+                                                Lastname = d.Lastname,
+                                                ProfileImg = d.ProfileImg
+                                            }).First();
+                userList.Add(result);
+            }
+            return Ok(userList);
         }
     }
 }

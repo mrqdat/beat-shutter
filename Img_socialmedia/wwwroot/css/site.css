@@ -1181,9 +1181,25 @@ a.alert_message {
     column-gap: 10px;
 }
 
-    #photos img {
+#photos-cd {
+    line-height: 0;
+    -webkit-column-count: 3;
+    -webkit-column-gap: 10px;
+    -moz-column-count: 3;
+    -moz-column-gap: 10px;
+    column-count: 3;
+    column-gap: 10px;
+}
 
-        width: 100% !important;
-        height: auto !important;
-        margin-bottom :10px;
-    }
+#photos img {
+    width: 100% !important;
+    height: auto !important;
+    margin-bottom :10px;
+}
+
+#photos-cd img {
+    width: 100% !important;
+    height: auto !important;
+    margin-bottom: 10px;
+}
+

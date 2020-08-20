@@ -27,56 +27,58 @@ namespace Img_socialmedia.Controllers
             hostEnvironment = _hostEnvironment;
         }
 
-        [Route("post/{id}",Name = "PostDetail")]
+        [Route("post/{id}", Name = "PostDetail")]
         public IActionResult Index(int id)
         {
-            var result = (from photo in shutterContext.Photo
-                          join post in shutterContext.Post on photo.Id equals post.PhotoId
-                          join user in shutterContext.User on post.UserId equals user.Id
-                          where post.Id == id
-                          select new PostViewModel
-                          {
-                              Id = post.Id,
-                              PhotoId = photo.Id,
-                              TotalLike = post.TotalLike,
-                              TotalViews = post.TotalViews,
-                              CreateAt = post.CreateAt,
-                              Tags = post.Tags,
-                              UserId = user.Id,
-                              UserImg = user.ProfileImg,
-                              hasban=post.hasban,
-                              Comment = (from comment in shutterContext.Comment
-                                         where comment.PostId == id
-                                         select new CommentViewModel
-                                         {
-                                             Id = comment.Id,
-                                             PostId = post.Id,
-                                             Contents = comment.Contents,
-                                             UserId = comment.UserId,
-                                             UserImg = shutterContext.User.Where(u => u.Id == comment.UserId).Select(u => u.ProfileImg).FirstOrDefault(),
-                                             Username = shutterContext.User.Where(u => u.Id == comment.UserId).Select(u => (u.Lastname + " " + u.Firstname)).FirstOrDefault(),
-                                             CreateAt = comment.CreateAt
-                                         }
-                                        ).ToList(),
-                              Username = user.Lastname + " " + user.Firstname,
-                              Photo = photo,
-                              RelatedPost = (from pp in shutterContext.Photo
-                                             join p in shutterContext.Post on pp.Id equals p.PhotoId
-                                             join u in shutterContext.User on p.UserId equals u.Id
-                                             select new PostViewModel
+            try
+            {
+                var result = (from photo in shutterContext.Photo
+                              join post in shutterContext.Post on photo.Id equals post.PhotoId
+                              join user in shutterContext.User on post.UserId equals user.Id
+                              where post.Id == id
+                              select new PostViewModel
+                              {
+                                  Id = post.Id,
+                                  PhotoId = photo.Id,
+                                  TotalLike = post.TotalLike,
+                                  TotalViews = post.TotalViews,
+                                  CreateAt = post.CreateAt,
+                                  Tags = post.Tags,
+                                  UserId = user.Id,
+                                  UserImg = user.ProfileImg,
+                                  hasban = post.hasban,
+                                  Comment = (from comment in shutterContext.Comment
+                                             where comment.PostId == id
+                                             select new CommentViewModel
                                              {
-                                                 Id = p.Id,
-                                                 PhotoId = pp.Id,
-                                                 TotalLike = p.TotalLike,
-                                                 TotalViews = p.TotalViews,
-                                                 CreateAt = p.CreateAt,
-                                                 Tags = p.Tags,
-                                                 UserId = u.Id,
-                                                 UserImg = u.ProfileImg,
-                                                 Username = u.Lastname + " " + u.Firstname,
-                                                 Photo = pp,
-                                             }).Take(15).ToList()
-                          }).First();
+                                                 Id = comment.Id,
+                                                 PostId = post.Id,
+                                                 Contents = comment.Contents,
+                                                 UserId = comment.UserId,
+                                                 UserImg = shutterContext.User.Where(u => u.Id == comment.UserId).Select(u => u.ProfileImg).FirstOrDefault(),
+                                                 Username = shutterContext.User.Where(u => u.Id == comment.UserId).Select(u => (u.Lastname + " " + u.Firstname)).FirstOrDefault(),
+                                                 CreateAt = comment.CreateAt
+                                             }
+                                            ).ToList(),
+                                  Username = user.Lastname + " " + user.Firstname,
+                                  Photo = photo,
+                                  RelatedPost = (from pp in shutterContext.Photo
+                                                 join p in shutterContext.Post on pp.Id equals p.PhotoId
+                                                 join u in shutterContext.User on p.UserId equals u.Id
+                                                 select new PostViewModel
+                                                 {
+                                                     Id = p.Id,
+                                                     PhotoId = pp.Id,
+                                                     TotalLike = p.TotalLike,
+                                                     TotalViews = p.TotalViews,
+                                                     CreateAt = p.CreateAt,
+                                                     Tags = p.Tags,
+                                                     UserId = u.Id,
+                                                     UserImg = u.ProfileImg,
+                                                     Username = u.Lastname + " " + u.Firstname,
+                                                     Photo = pp,
+                                                 }).Take(15).ToList()
+                              }).First();
             if (result == null)
             {
                 return View("Error");
@@ -105,6 +107,11 @@ namespace Img_socialmedia.Controllers
             shutterContext.SaveChanges();
             result.Liked = liked;
             return View("Index", result);
+            }
+            catch
+            {
+                return View("Error");
+            }
         }
 
         public int Likes(int id)

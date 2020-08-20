@@ -19,14 +19,22 @@
                         <h4 class="name">@(Model.Firstname+" "+Model.Lastname)</h4>
                     </div>
                     <div class="stats row" style="margin:0;">
-                        <div class="stat col-xs-4" style="padding-left: 50px;margin-right:7px">
+                        <div class="stat col-xs-4">
                             <p class="number-stat">@Model.Post.ToList().Count</p>
                             <p class="desc-stat">Uploads</p>
                         </div>
-                        <div class="stat col-xs-4" style="margin: auto;">
+                        <div class="stat col-xs-4" style="margin-left: 5px;">
                             <p class="number-stat">@Model.Collection.ToList().Count</p>
                             <p class="desc-stat">Colection</p>
                         </div>
+                        <button class="stat col-xs-4" style="margin-left: 5px;" data-toggle="modal" data-target="#followModal" onclick="GetFollower(@Model.Id)">
+                            <p class="number-stat">@(ViewData["Follower"] ?? 0)</p>
+                            <p class="desc-stat">Follower</p>
+                        </button>
+                        <button class="stat col-xs-4" style="margin-left: 5px;" data-toggle="modal" data-target="#followModal" onclick="GetFollowing(@Model.Id)">
+                            <p class="number-stat">@(ViewData["Following"] ?? 0)</p>
+                            <p class="desc-stat">Following</p>
+                        </button>      
                     </div>
 
                     <p class="desc">@Model.Bio</p>
@@ -35,15 +43,18 @@
         <i class="fa fa-twitter-square" aria-hidden="true"></i>*@
                         Join at @Model.CreateAt.ToString("dd/MM/yyyy")
                         <br /><br />
-                        @if (Model.Id != Context.Session.GetInt32("userid"))
+                        @if (Context.Session.GetInt32("userid").HasValue)
                         {
-                            if (Model.hasFollowed)
+                            @if (Model.Id != Context.Session.GetInt32("userid"))
                             {
-                                <button class="btn btn-outline-danger" onclick=Follow(this,@Model.Id)>Unfollow</button>
-                            }
-                            else
-                            {
-                                <button class="btn btn-outline-primary" onclick=Follow(this,@Model.Id)>Follow</button>
+                                if (Model.hasFollowed)
+                                {
+                                    <button class="btn btn-outline-danger" onclick=Follow(this,@Model.Id)>Unfollow</button>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-outline-primary" onclick=Follow(this,@Model.Id)>Follow</button>
+                                }
                             }
                         }
                     </div>
@@ -54,19 +65,16 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a id="gal" data-toggle="tab" href="#gallery">Photos</a></li>
                     <li><a id="col" data-toggle="tab" href="#collection">Collections</a></li>
-
                 </ul>
 
                 <div class="tab-content">
-                    <div id="gallery " class="tab-pane fade in active show" style="padding-top: 20px;">
+                    <div id="gallery" class="tab-pane fade in active show" style="padding-top: 20px;">
                         <div class="gallery" id="photos">
                             @foreach (var item in Model.Post)
                             {
-                               
-                                    <a asp-route="PostDetail" asp-route-id="@item.Id">
-                                        <img src="@item.Photo.Url" asp-append-version="true" />
-                                    </a>
-                                
+                                <a asp-route="PostDetail" asp-route-id="@item.Id">
+                                    <img src="@item.Photo.Url" asp-append-version="true" />
+                                </a>
                             }
                         </div>
                     </div>
@@ -91,7 +99,7 @@
                 </div>
                 <div class="tab-content">
                     <div id="collection-detail" class="tab-pane" style="padding-top: 20px;">
-                        <div class="row gallery info_edit grid-collection">
+                        <div class="gallery" id="photos-cd">
 
                         </div>
                     </div>
@@ -107,8 +115,28 @@
 
 
         </div>
+
     </main>
+
 </div>
+<div class="modal" tabindex="-1" role="dialog" id="followModal">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Following</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body-content" style="padding:5px;overflow:auto;max-height:430px;">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 @section Scripts{
     <script>
         $(document).ready(function () {
@@ -133,7 +161,7 @@
                       success: function (response) {
                         console.log(response);
                           if (response != null) {
-                            $(".grid-collection").empty();
+                              $("#photos-cd").empty();
                               response.forEach(function (item, index) {
                                 CreateNewListCollection(item);
                             });
@@ -148,12 +176,10 @@
                  });
         }
         function CreateNewListCollection(item) {
-            $(".grid-collection").append(
-               "<div class='col-md-4'>" +
+            $("#photos-cd").append(
                     "<a href='/post/" + item["postId"]+"'>" +
                         "<img src='" + item["postPhoto"]+"'/>"+
-                    "</a>"+
-                "</div>");
+                    "</a>");
         }
 
         function Follow(ed,ide) {
@@ -177,6 +203,66 @@
                          console.log(error);
                     }
                  });
+        }
+
+        function GetFollower(ide) {
+                   $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("Following","User")",
+                      data: { id: ide },
+                      dataType:"json",
+                       success: function (response) {
+                           $(".modal-body-content").empty();
+                           $(".modal-title").empty();
+                           $(".modal-title").text("Follower");
+                          if (response != null) {
+                              response.forEach(function (item, index) {
+                                  FollowAppend(item);
+                              });
+                          }
+                          else {
+                              $(".modal-body-content").append("<p>Not following someone yet</p>");
+                          }
+                    },
+                    error: function (error) {
+                         console.log(error);
+                    }
+                 });
+        }
+
+        function GetFollowing(ide) {
+                   $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("Follower","User")",
+                      data: { id: ide },
+                      dataType:"json",
+                       success: function (response) {
+                           $(".modal-body-content").empty();
+                           $(".modal-title").empty();
+                           $(".modal-title").text("Following");
+                          if (response != null) {
+                              response.forEach(function (item, index) {
+                                  FollowAppend(item);
+                              });
+                          }
+                          else {
+                              $(".modal-body-content").append("<p>Not following someone yet</p>");
+                          }
+                    },
+                    error: function (error) {
+                         console.log(error);
+                    }
+                 });
+        }
+
+        function FollowAppend(item) {
+            $(".modal-body-content").append(
+               "<div style='margin-bottom:5px;'>" +
+                    "<a href='/User/Details/"+item["id"]+"'>" +
+                        "<img src='" + (item["profileImg"]??"/images/man.png")+"' width='50' height='50' style='border-radius:100%'>" +
+                        "<span style='margin-left:7px;font-size:120%'>"+item["firstname"] + " " + item["lastname"] + "</span>" +
+                    "</a>" +
+                "</div>");
         }
     </script>
 }

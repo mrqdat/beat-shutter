@@ -70,7 +70,7 @@
                                 </li>
                                 <li class="nav-item avatar">
                                     <a href="javascript:void(0);" class="btn-user media align-items-center dropdown-toggle" data-toggle="dropdown">
-                                        <img class="mr-2" src="~/images/man.png" width="32" height="32" alt="avatar">
+                                        <img class="mr-2" src="@(Context.Session.GetString("profileimg"))" width="35" height="35" alt="avatar" style="border-radius:100%">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-info">
                                         <a class="dropdown-item" href="/User/Details/@Context.Session.GetInt32("userid")">Profile</a>

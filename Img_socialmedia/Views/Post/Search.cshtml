@@ -284,8 +284,7 @@
       });
 
           function GetCollection(postid) {
-                $.ajax(
-                {
+                $.ajax({
                     type: "GET",
                     url: "@Url.Action("GetCollection","Collection")",
                         success: function (respone) {
@@ -294,8 +293,7 @@
                             respone.forEach(function (item, index) {
                                 CreateNewListCollection(item, postid);
                             });
-                        }
-                    },
+                        },
                     error: function (error) {
                          console.log(error);
                     }

@@ -47,6 +47,7 @@ namespace Img_socialmedia.Controllers
                     HttpContext.Response.Cookies.Append("username", username);
                     HttpContext.Session.SetInt32("userid", user.First().Id);
                     HttpContext.Session.SetString("username", username);
+                    HttpContext.Session.SetString("profileimg", user.First().ProfileImg??"/images/man.png");
                     if (user.Any(x=>x.isAdmin))
                     {
                         return Json(new

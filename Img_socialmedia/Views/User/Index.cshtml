@@ -28,11 +28,11 @@
                             <p class="desc-stat">Colection</p>
                         </div>
                         <button class="stat col-xs-4" style="margin-left: 5px;" data-toggle="modal" data-target="#followModal" onclick="GetFollower(@Model.Id)">
-                            <p class="number-stat">@(ViewData["Follower"] ?? 0)</p>
+                            <p class="number-stat" id="followerc">@(ViewData["Follower"] ?? 0)</p>
                             <p class="desc-stat">Follower</p>
                         </button>
                         <button class="stat col-xs-4" style="margin-left: 5px;" data-toggle="modal" data-target="#followModal" onclick="GetFollowing(@Model.Id)">
-                            <p class="number-stat">@(ViewData["Following"] ?? 0)</p>
+                            <p class="number-stat" id="followingc">@(ViewData["Following"] ?? 0)</p>
                             <p class="desc-stat">Following</p>
                         </button>      
                     </div>
@@ -193,10 +193,16 @@
                               ed.classList.remove("btn-outline-primary");
                               ed.classList.add("btn-outline-danger");
                               $(ed).html("Unfollow");
+                              var d = $("#followingc").text();
+                              $("#followingc").empty();
+                              $("#followingc").text(parseInt(d,10) + 1);
                           } else {
                               ed.classList.remove("btn-outline-danger");
                               ed.classList.add("btn-outline-primary");
                               $(ed).html("Follow");
+                              var d = $("#followingc").text();
+                              $("#followingc").empty();
+                              $("#followingc").text(parseInt(d, 10) - 1);
                           }
                     },
                     error: function (error) {
@@ -208,7 +214,7 @@
         function GetFollower(ide) {
                    $.ajax({
                     type: "GET",
-                    url: "@Url.Action("Following","User")",
+                    url: "@Url.Action("Follower", "User")",
                       data: { id: ide },
                       dataType:"json",
                        success: function (response) {
@@ -219,10 +225,10 @@
                               response.forEach(function (item, index) {
                                   FollowAppend(item);
                               });
-                          }
+                           }
                           else {
                               $(".modal-body-content").append("<p>Not following someone yet</p>");
-                          }
+                           }
                     },
                     error: function (error) {
                          console.log(error);
@@ -233,7 +239,7 @@
         function GetFollowing(ide) {
                    $.ajax({
                     type: "GET",
-                    url: "@Url.Action("Follower","User")",
+                    url: "@Url.Action("Following","User")",
                       data: { id: ide },
                       dataType:"json",
                        success: function (response) {

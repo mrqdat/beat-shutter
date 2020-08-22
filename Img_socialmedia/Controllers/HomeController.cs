@@ -136,13 +136,13 @@ namespace Img_socialmedia.Controllers
             int start = page * 15; //2 3 4
             int totalPage = data.Count();
             
-            if (start < totalPage)
+            if (start < totalPage+8)
             {
             var result = (from photo in shutterContext.Photo
                          join post in shutterContext.Post on photo.Id equals post.PhotoId
                          join user in shutterContext.User on post.UserId equals user.Id
-                          where post.hasban == false
-                          orderby post.Id descending
+                         where post.hasban == false
+                         orderby post.Id descending
                          select new PostViewModel
                          {
                              Id = post.Id,
@@ -155,8 +155,34 @@ namespace Img_socialmedia.Controllers
                              UserImg = user.ProfileImg,
                              Username = user.Lastname + " " + user.Firstname,
                              Photo = photo,
-                         }).Skip(start).Take(15);
-                return result.ToList();
+                         }).Skip(start).Take(15).ToList();
+
+                if (HttpContext.Session.GetInt32("userid").HasValue)
+                {
+                    string filename = HttpContext.Session.GetInt32("userid").ToString() + ".json";
+                    JSONReadWrite j = new JSONReadWrite();
+                    try
+                    {
+                        JArray jsonArray = JArray.Parse("[" + j.Read(filename, "json") + "]");
+                        foreach (var b in jsonArray)
+                        {
+                            foreach (var p in result)
+                            {
+                                if (Convert.ToInt32(b["id"]).Equals(p.Id))
+                                {
+                                    p.Liked = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        return result;
+                    }
+                }
+
+                return result;
             }
             else
             {

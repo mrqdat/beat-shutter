@@ -40,9 +40,9 @@ namespace Img_socialmedia.Controllers
         [HttpPost]
         public IActionResult createCollection(string colname, string coldes)
         {
-            var userid = HttpContext.Session.GetInt32("userid").Value;
-            if (userid != null)
+            if (HttpContext.Session.GetInt32("userid").HasValue)
             {
+                var userid = HttpContext.Session.GetInt32("userid").Value;
                 // var colname = Request.Form["colname"].ToString();
                 // var coldes = Request.Form["coldes"].ToString();
                 CollectionViewModel model = new CollectionViewModel();

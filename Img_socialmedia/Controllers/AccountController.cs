@@ -31,7 +31,7 @@ namespace Img_socialmedia.Controllers
         {
             //return Json(new { status = true, message = "login successfully" });
             var user = _context.User.Where(u => u.Email == email);
-            if (user.First() == null)
+            if (user.FirstOrDefault() == null)
             {
                 return Json(new
                 {

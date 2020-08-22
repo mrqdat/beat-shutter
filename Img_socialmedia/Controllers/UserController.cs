@@ -83,8 +83,8 @@ namespace Img_socialmedia.Controllers
                 {
                     return View("Error");;
                 }
-            var following1 = _context.Follow.Where(d => d.UserId == id).Count();
-            var follower1 = _context.Follow.Where(d => d.FollowingUserId == id).Count();
+            var follower1 = _context.Follow.Where(d => d.UserId == id).Count();
+            var following1 = _context.Follow.Where(d => d.FollowingUserId == id).Count();
             ViewData["Following"] = following1;
             ViewData["Follower"] = follower1;
 

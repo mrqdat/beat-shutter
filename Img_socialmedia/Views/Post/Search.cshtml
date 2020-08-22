@@ -10,11 +10,11 @@
     <div style="margin:66px 1em 0 1em;">
         <br />
         <h3>
-        @Context.Request.Query["tags"].ToString()
+            @Context.Request.Query["tags"].ToString()
         </h3>
         <hr />
         <div class="grid-photos">
-            <div>
+            <div id="col1">
                 @foreach (var related in Model)
                 {
                     @if (@related.Id % 3 == 0)
@@ -24,22 +24,43 @@
                                 <div class="img-content">
                                     <a class="a-cursor" asp-controller="Post" asp-route-id="@related.Id" asp-action="Index">
                                         <div class="img-rel">
-                                            <img class="photo-content" src="@related.Photo.Url" asp-append-version="true" alt="@related.Tags" />
+                                            <img class="photo-content" src="@related.Photo.Url" asp-append-version="true" alt="@related.Tags" title="@related.Tags" />
                                         </div>
                                     </a>
                                     <div class="img-icon">
                                         <div class="img-hover-background i-animation"></div>
                                         <div class="img-button-top img-button-display i-animation">
                                             <div class="img-button">
-                                                <button class="btn btn-light pos-button">
-                                                    <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span> @*Like*@
-                                                </button>
-                                                <button class="btn btn-light"  data-target="#collection_modal" data-toggle="modal" onclick="GetCollection(@related.Id)">
-                                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                                                    </svg>
-                                                </button>
+                                                @if (related.Liked)
+                                                {
+                                                    <a class="btn btn-danger btn-hw pos-button modal-btns" style="color:white;" title="like this photo" onclick="ChangeLike(this,@related.Id)">
+                                                        <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="btn btn-light btn-hw pos-button modal-btns" title="like this photo" onclick="ChangeLike(this,@related.Id)">
+                                                        <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+                                                    </a>
+                                                }
+                                                @if (Context.Session.GetInt32("userid").HasValue)
+                                                {
+                                                    <button class="btn btn-light btn-hw pos-button modal-btns" data-target="#collection_modal" data-toggle="modal" title="add to collection" onclick="GetCollection(@related.Id)">
+                                                        <svg class="bi bi-plus" width="1em" height="1em" margin-bottom: 2px; viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"></path>
+                                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"></path>
+                                                        </svg>
+                                                    </button>
+                                                }
+                                                else
+                                                {
+                                                    <button class="btn btn-light">
+                                                        <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                        </svg>
+                                                    </button>
+                                                }
                                             </div>
                                         </div>
                                         <div class="img-button-bottom img-button-display i-animation">
@@ -70,7 +91,7 @@
                     }
                 }
             </div>
-            <div>
+            <div id="col2">
                 @foreach (var related in Model)
                 {
                     @if (@related.Id % 3 == 1)
@@ -80,22 +101,44 @@
                                 <div class="img-content">
                                     <a class="a-cursor" asp-controller="Post" asp-route-id="@related.Id" asp-action="Index">
                                         <div class="img-rel">
-                                            <img class="photo-content" src="@related.Photo.Url" asp-append-version="true" alt="@related.Tags" />
+                                            <img class="photo-content" src="@related.Photo.Url" asp-append-version="true" alt="@related.Tags" title="@related.Tags" />
                                         </div>
                                     </a>
                                     <div class="img-icon">
                                         <div class="img-hover-background i-animation"></div>
                                         <div class="img-button-top img-button-display i-animation">
                                             <div class="img-button">
-                                                <button class="btn btn-light pos-button">
-                                                    <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span> @*Like*@
-                                                </button>
-                                                <button class="btn btn-light"  data-target="#collection_modal" data-toggle="modal" onclick="GetCollection(@related.Id)">
-                                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                                                    </svg>
-                                                </button>
+                                                @if (related.Liked)
+                                                {
+                                                    <a class="btn btn-danger btn-hw pos-button modal-btns" style="color:white;" title="like this photo" onclick="ChangeLike(this,@related.Id)">
+                                                        <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="btn btn-light btn-hw pos-button modal-btns" title="like this photo" onclick="ChangeLike(this,@related.Id)">
+                                                        <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+                                                    </a>
+                                                }
+                                                @if (Context.Session.GetInt32("userid").HasValue)
+                                                {
+                                                    <button class="btn btn-light btn-hw pos-button modal-btns" data-target="#collection_modal" data-toggle="modal" title="add to collection" onclick="GetCollection(@related.Id)">
+                                                        <svg class="bi bi-plus" width="1em" height="1em" margin-bottom: 2px; viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"></path>
+                                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"></path>
+                                                        </svg>
+                                                    </button>
+                                                }
+                                                else
+                                                {
+                                                    <button class="btn btn-light">
+                                                        <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                        </svg>
+                                                    </button>
+                                                }
+
                                             </div>
                                         </div>
                                         <div class="img-button-bottom img-button-display i-animation">
@@ -126,7 +169,7 @@
                     }
                 }
             </div>
-            <div>
+            <div id="col3">
                 @foreach (var related in Model)
                 {
                     @if (@related.Id % 3 == 2)
@@ -136,22 +179,43 @@
                                 <div class="img-content">
                                     <a class="a-cursor" asp-controller="Post" asp-route-id="@related.Id" asp-action="Index">
                                         <div class="img-rel">
-                                            <img class="photo-content" src="@related.Photo.Url" asp-append-version="true" alt="@related.Tags" />
+                                            <img class="photo-content" src="@related.Photo.Url" asp-append-version="true" alt="@related.Tags" title="@related.Tags" />
                                         </div>
                                     </a>
                                     <div class="img-icon">
                                         <div class="img-hover-background i-animation"></div>
                                         <div class="img-button-top img-button-display i-animation">
                                             <div class="img-button">
-                                                <button class="btn btn-light pos-button">
-                                                    <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span> @*Like*@
-                                                </button>
-                                                <button class="btn btn-light"  data-target="#collection_modal" data-toggle="modal" onclick="GetCollection(@related.Id)">
-                                                    <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                                                    </svg>
-                                                </button>
+                                                @if (related.Liked)
+                                                {
+                                                    <a class="btn btn-danger btn-hw pos-button modal-btns" style="color:white;" title="like this photo" onclick="ChangeLike(this,@related.Id)">
+                                                        <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="btn btn-light btn-hw pos-button modal-btns" title="like this photo" onclick="ChangeLike(this,@related.Id)">
+                                                        <span id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+                                                    </a>
+                                                }
+                                                @if (Context.Session.GetInt32("userid").HasValue)
+                                                {
+                                                    <button class="btn btn-light btn-hw pos-button modal-btns" data-target="#collection_modal" data-toggle="modal" title="add to collection" onclick="GetCollection(@related.Id)">
+                                                        <svg class="bi bi-plus" width="1em" height="1em" margin-bottom: 2px; viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"></path>
+                                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"></path>
+                                                        </svg>
+                                                    </button>
+                                                }
+                                                else
+                                                {
+                                                    <button class="btn btn-light">
+                                                        <svg class="bi bi-plus" width="1em" height="1em" viewBox="2 4 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                                        </svg>
+                                                    </button>
+                                                }
                                             </div>
                                         </div>
                                         <div class="img-button-bottom img-button-display i-animation">
@@ -242,14 +306,19 @@
             </div>
         </div>
     </div>
-
-
+    <button onclick="topFunction()" id="btn_ontop" title="Go to top">
+        <i class="fa fa-2x fa-angle-up" style="color: #747474;"></i>
+    </button>
+    
     <script>
     $('#create-item').on('click', function () {
         $('.collection-list').hide();
         $('.collection-create').show();
     });
-
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
     $('.craete-cancel').on('click', function () {
         $('.collection-list').show();
         $('.collection-create').hide();
@@ -318,4 +387,35 @@
                 "</li >"
             );
         }
+
+
+             function ChangeLike(e,ide) {
+             $.ajax({
+                type: "POST",
+                 url: "@Url.Action("Like")",
+                 data: {id:ide},
+                 success: function (msg) {
+                     if (msg["status"]) {
+                         e.classList.remove("btn-light");
+                         e.classList.add("btn-danger");
+                         $(e).css("color", "white");
+                     }
+                     else if (!msg["status"]){
+                         e.classList.remove("btn-danger");
+                         e.classList.add("btn-light");
+                         $(e).css("color", "black");
+
+                     }
+                     else {
+                       //  window.location.href = "@Url.Action("Login", "Account")";
+                     }
+                     //console.log(msg["url"]);
+                     //console.log(msg["status"]);
+                },
+                error: function (req, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+
     </script>

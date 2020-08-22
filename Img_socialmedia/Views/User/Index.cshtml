@@ -29,11 +29,11 @@
                         </div>
                         <button class="stat col-xs-4" style="margin-left: 5px;" data-toggle="modal" data-target="#followModal" onclick="GetFollower(@Model.Id)">
                             <p class="number-stat" id="followerc">@(ViewData["Follower"] ?? 0)</p>
-                            <p class="desc-stat">Follower</p>
+                            <p class="desc-stat">Following</p>
                         </button>
                         <button class="stat col-xs-4" style="margin-left: 5px;" data-toggle="modal" data-target="#followModal" onclick="GetFollowing(@Model.Id)">
                             <p class="number-stat" id="followingc">@(ViewData["Following"] ?? 0)</p>
-                            <p class="desc-stat">Following</p>
+                            <p class="desc-stat">Followers</p>
                         </button>      
                     </div>
 
@@ -220,7 +220,7 @@
                        success: function (response) {
                            $(".modal-body-content").empty();
                            $(".modal-title").empty();
-                           $(".modal-title").text("Follower");
+                           $(".modal-title").text("Following");
                           if (response != null) {
                               response.forEach(function (item, index) {
                                   FollowAppend(item);
@@ -245,7 +245,7 @@
                        success: function (response) {
                            $(".modal-body-content").empty();
                            $(".modal-title").empty();
-                           $(".modal-title").text("Following");
+                           $(".modal-title").text("Followers");
                           if (response != null) {
                               response.forEach(function (item, index) {
                                   FollowAppend(item);

@@ -65,6 +65,7 @@ namespace Img_socialmedia.Controllers
                                   RelatedPost = (from pp in shutterContext.Photo
                                                  join p in shutterContext.Post on pp.Id equals p.PhotoId
                                                  join u in shutterContext.User on p.UserId equals u.Id
+                                                 orderby Guid.NewGuid()
                                                  select new PostViewModel
                                                  {
                                                      Id = p.Id,
@@ -262,7 +263,7 @@ namespace Img_socialmedia.Controllers
                                   UserImg = user.ProfileImg,
                                   Username = user.Firstname + " " + user.Lastname,
                                   Photo = photo,
-                              }).Take(15).ToList();
+                              }).Take(21).ToHashSet();
                 if (result == null)
                 {
                     var result2 = (from photo in shutterContext.Photo
@@ -281,10 +282,10 @@ namespace Img_socialmedia.Controllers
                                        UserImg = user.ProfileImg,
                                        Username = user.Firstname + " " + user.Lastname,
                                        Photo = photo,
-                                   }).Take(15).ToList();
+                                   }).Take(21).ToList();
                     return View(result2);
                 }
-                else if (result.Count < 15)
+                else if (result.Count() < 21)
                 {
                     {
                         var result3 = (from photo in shutterContext.Photo
@@ -303,8 +304,36 @@ namespace Img_socialmedia.Controllers
                                            UserImg = user.ProfileImg,
                                            Username = user.Firstname + " " + user.Lastname,
                                            Photo = photo,
-                                       }).Take(15 - result.Count).ToList();
-                        result.AddRange(result3);
+                                       }).Take(21 - result.Count()).ToHashSet();
+                        foreach(var item in result3)
+                        {
+                            result.Add(item);
+                        }
+                    }
+                }
+
+                if (HttpContext.Session.GetInt32("userid").HasValue)
+                {
+                    string filename = HttpContext.Session.GetInt32("userid").ToString() + ".json";
+                    JSONReadWrite j = new JSONReadWrite();
+                    try
+                    {
+                        JArray jsonArray = JArray.Parse("[" + j.Read(filename, "json") + "]");
+                        foreach (var b in jsonArray)
+                        {
+                            foreach (var p in result)
+                            {
+                                if (Convert.ToInt32(b["id"]).Equals(p.Id))
+                                {
+                                    p.Liked = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        return View(result);
                     }
                 }
                 return View(result);

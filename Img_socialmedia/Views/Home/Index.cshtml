@@ -8,17 +8,19 @@
     <div class="scrollmenu">
         <a href="/Post/Search?tags=Night">Night</a>
         <a href="#news">News</a>
-        <a href="#contact">Nature</a>
-        <a href="#about">Friend</a>
-        <a href="#support">Animals</a>
-        <a href="#blog">Health & Wellness</a>
-        <a href="#tools">Tools</a>
-        <a href="#base">Girls</a>
-        <a href="#custom">Portrait</a>
-        <a href="#more">Travel</a>
-        <a href="#logo">Technology</a>
-        <a href="#blog">Film</a>
-        <a href="#tools">Architecture</a>
+        <a href="/Post/Search?tags=Night">Nature</a>
+        <a href="/Post/Search?tags=Friend">Friend</a>
+        <a href="/Post/Search?tags=Animal">Animal</a>
+        <a href="/Post/Search?tags=Health">Health</a>
+        <a href="/Post/Search?tags=Tools">Tools</a>
+        <a href="/Post/Search?tags=Girls">Girls</a>
+        <a href="/Post/Search?tags=Portrait">Portrait</a>
+        <a href="/Post/Search?tags=Travel">Travel</a>
+        <a href="/Post/Search?tags=Technology">Technology</a>
+        <a href="/Post/Search?tags=Film">Film</a>
+        <a href="/Post/Search?tags=Architecture">Architecture</a>
+        <a href="/Post/Search?tags=Car">Car</a>
+        <a href="/Post/Search?tags=Fashion">Fashion</a>
     </div>
 </div>
 
@@ -372,7 +374,7 @@
     </div>
 </div>
 <div id="test-modal"></div>
-<div class=" test" style="padding-bottom:400px;"></div>
+<div class=" test" style="padding-bottom:200px;"></div>
 
 <button onclick="topFunction()" id="btn_ontop" title="Go to top">
     <i class="fa fa-2x fa-angle-up" style="color: #747474;"></i>
@@ -437,7 +439,7 @@
                 success: function (msg) {
                     if (msg != null) {
                         msg.forEach(function (item, index) {
-                            pageSize++;
+                           
                             if (item["id"] % 3 == 0) {
                                 AppendToGrid(item, "#col1");
                             }
@@ -445,9 +447,10 @@
                                 AppendToGrid(item, "#col2");
                             }
                             else {
-                                AppendToGrid(item, "col3");
+                                AppendToGrid(item, "#col3");
                             }
                         });
+                        pageSize++;
                     }
                     else {
                         //nothing
@@ -536,7 +539,7 @@
                 $(e).css("color", "black");
             }
                 else {
-                          //  window.location.href = "Url.Action("Login", "Account")";
+                     //window.location.href = "Url.Action("Login", "Account")";
                 }
             },
                 error: function (req, status, error) {
@@ -613,5 +616,34 @@
                 "</a>" +
                 "</li >"
             );
-        }
+    }
+
+          $(document).ready(function () {
+            var colname = $('.colname').val();
+            $('.crebtn').on('click', function () {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("createCollection", "Collection")",
+                    data:{
+                        'colname':$('.colname').val(),
+                        'coldes':$('.coldes').val()
+                    },
+                    success: function (respone) {
+                        if (respone.result == 'Redirect') {
+                            window.location.href = "@Url.Action("Login", "Account")";
+                        }
+                        else {
+                            if (respone.result == 'false') {
+                                alert(respone.message)
+                            }
+                            else {
+                                CreateNewListCollection(respone.message);
+                                $('.collection-list').show();
+                                $('.collection-create').hide();
+                            }
+                        }
+                    }
+                });
+            });
+        });
 </script>
